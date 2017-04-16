@@ -1,0 +1,5 @@
+Revision control for my undergraduate thesis.
+
+The LaTeX document may be compiled after installing the `abntex` [1] package.
+
+[1] https://aur.archlinux.org/packages/abntex/
