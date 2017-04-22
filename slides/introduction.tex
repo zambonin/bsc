@@ -1,0 +1,211 @@
+\documentclass{beamer}
+
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, tikz-qtree}
+
+\usetheme{CambridgeUS}
+\usecolortheme{seagull}
+\setbeamertemplate{title page}[default][shadow=false]
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Esquemas de assinatura digital\\baseados em funções de resumo}
+\author{Gustavo Zambonin}
+\institute{
+  Universidade Federal de Santa Catarina \\
+  Departamento de Informática e Estatística \\
+  INE5453 - Introdução ao Trabalho de Conclusão de Curso
+}
+\date{}
+
+\tikzset{every tree node/.style={align=center,anchor=north,font=\tiny}}
+
+\newcommand{\concat}{\, \vert \vert \,}
+
+\begin{document}
+
+\begin{frame}[noframenumbering, plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Funções de resumo criptográfico}
+  \begin{equation*}
+    \mathcal{H} : \{0, 1\}^{*} \longrightarrow \{0, 1\}^{n}
+  \end{equation*}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \node at (-6.5, 0) {entrada $\longrightarrow$};
+      \foreach \sgn in {+, -}
+        \draw plot[domain=1:5] (-\x, {\sgn 1/20*(3+\x*\x)});
+      \foreach \r in {1, 2.3333, ..., 5}
+        \draw (-\r, 0) ellipse[x radius=(\r+.5)/20, y radius=1/20*(3+\r*\r)];
+      \node at (0.25, 0) {$\longrightarrow$ resumo};
+    \end{tikzpicture}
+  \end{figure}
+
+  \begin{itemize}
+    \item RIPEMD: $n \in \{128, 160, 256, 320\}$
+    \item SHA-2, SHA-3, BLAKE: $n \in \{224, 256, 384, 512\}$
+    \item Keccak: $n$ arbitrário
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Árvore de Merkle \cite{Merkle1982}}
+  \begin{itemize}
+    \item $\mathcal{H}(m)$ é uma função de resumo aplicada sobre uma
+      mensagem $m$
+    \item $\vert \vert$ é o operador de concatenação de palavras
+    \item $\mathcal{D}_{n}$ é um bloco de dados qualquer
+  \end{itemize}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \Tree
+        [.\node{$T_{r}$ \\ $\mathcal{H}(T_{0} \concat T_{1})$};
+          [.\node{$T_{0}$ \\ $\mathcal{H}(T_{0, 0} \concat T_{0, 1})$};
+            [.\node{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$};
+              [.\node[draw]{$\mathcal{D}_{0}$}; ]
+            ]
+            [.\node{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$};
+              [.\node[draw]{$\mathcal{D}_{1}$}; ]
+            ]
+          ]
+          [.\node{$T_{1}$ \\ $\mathcal{H}(T_{1, 0} \concat T_{1, 1})$};
+            [.\node{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$};
+              [.\node[draw]{$\mathcal{D}_{2}$}; ]
+            ]
+            [.\node{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$};
+              [.\node[draw]{$\mathcal{D}_{3}$}; ]
+            ]
+          ]
+        ]
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assinatura digital}
+  \begin{itemize}
+    \item busca prover autenticação, integridade e não-repúdio
+    \item baseada em criptografia assimétrica
+    \begin{itemize}
+      \item chaves pública ($P_{k}$) e privada ($S_{k}$) para uma entidade
+    \end{itemize}
+    \item consiste de uma tripla de algoritmos \cite{Goldreich2004}
+    \begin{itemize}
+      \item geração de chaves ($\mathcal{G}$)
+      \item assinatura de mensagens ($\mathcal{S}$)
+      \item verificação da assinatura ($\mathcal{V}$)
+    \end{itemize}
+  \end{itemize}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \node (sk) at (-1, 0) {$S_{k}$};
+      \node (pk) at (4, -1) {$P_{k}$};
+      \node (hm) at (0, -1) {$\mathcal{H}(m)$};
+      \node[draw] (sig) at (0, 0) {$\mathcal{S}$};
+      \node (ds) at (2, 0) {\scriptsize{$m \concat
+        \mathcal{S}(\mathcal{H}(m))$}};
+      \node[draw] (ver) at (4, 0) {$\mathcal{V}$};
+      \node (res) at (5.5, 0) {\{0, 1\}};
+      \draw[-latex] (sk) -- (sig);
+      \draw[-latex] (hm) -- (sig);
+      \draw[-latex] (sig) -- (ds);
+      \draw[-latex] (ds) -- (ver);
+      \draw[-latex] (pk) -- (ver);
+      \draw[-latex] (ver) -- (res);
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquema de assinatura de Lamport--Diffie \cite{Lamport1979}}
+  \begin{itemize}
+    \item acredita-se ser seguro o suficiente em computadores quânticos
+    \item par de chaves deve ser utilizado uma única vez
+    \begin{itemize}
+      \item cada uso posterior divide o nível de segurança pela
+        \href{https://crypto.stackexchange.com/a/2642}{metade}
+    \end{itemize}
+    \item descrição do algoritmo
+    \begin{itemize}
+      \item $\mathcal{G}$: $S_{k} = \{y_{i, j} : 1 \leq i \leq n$ e
+        $j \in \{0, 1\}\}$ gerados aleatoriamente \\
+        \hspace{1.3em}$P_{k} = \{\mathcal{H}(y) : y \in S_{k}\}$
+    \item $\mathcal{S}$: $\mathcal{H}(m)
+        = h_{1}, \dots h_{k} \in \{0, 1\}^{n}$ \\
+        \hspace{1.3em}$\mathcal{S}(h_{1}, \dots, h_{k})
+          = (y_{1, h_{1}}, \dots, y_{k, h_{k}})$
+      \item $\mathcal{V}$: $\mathcal{H}(y_{i, h_{i}})
+        = P_{k_{i}}, 1 \leq i \leq n$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquema de assinatura de Merkle}
+  \begin{itemize}
+    \item árvore de Merkle + esquema de assinatura única (e.g. Lamport)
+    \item assina um número limitado ($t \leq 25$) de mensagens
+      $\{m_{1}, \dots, m_{2^{t}}\}$
+    \item definição do algoritmo para uma árvore $T$
+      \begin{itemize}
+        \item $\mathcal{G}$: $\mathbf{S_{k}}
+            = \{(S_{k_{i}}, P_{k_{i}}) : 1 \leq i \leq 2^{t}\}$ \\
+          \hspace{1.3em}$\mathbf{P_{k}} = \mathcal{H}(T_{r})$,
+            com $\{\mathcal{H}(P_{k_{i}}) : 1 \leq i \leq 2^{t}\}$
+            como folhas da árvore
+        \item $\mathcal{S}$: escolha de um par não utilizado
+          $(S_{k_{i}}, P_{k_{i}})$, produz $\mathcal{S}'$ \\
+          \hspace{1.3em}$A =$ nodos para chegar à raiz + seus irmãos \\
+          \hspace{1.3em}$\mathcal{S}(m_{i})
+            = \{\mathcal{S}' \concat P_{k_{i}} \concat A\}$
+        \item $\mathcal{V}$: verifica $\mathcal{S}'$ e constrói a sub-árvore
+          $T'$; $\mathcal{H}(T'_{r}) = \mathbf{P_{k}}$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquemas mais complexos}
+  \begin{itemize}
+      \item Winternitz (1989, \cite{Dods2005})
+    \begin{itemize}
+      \item baseado em aplicações repetidas de $\mathcal{H}$
+      \item chave pública muito menor
+      \item processo de verificação mais eficiente
+    \end{itemize}
+    \item CMSS (2005, \cite{Buchmann2006})
+    \begin{itemize}
+      \item encadeamento de árvores
+      \item $2^{40}$ mensagens
+      \item guarda apenas a semente do PRNG em $P_{k}$
+    \end{itemize}
+    \item GMSS (2007, \cite{Buchmann2007})
+    \begin{itemize}
+      \item \emph{Generalized Merkle Signature Scheme}
+      \item $2^{80}$ mensagens
+    \end{itemize}
+    \item XMSS (2011, \cite{Buchmann2011})
+    \begin{itemize}
+      \item \emph{eXtended Merkle Signature Scheme}
+      \item uma mensagem comprometida não expõe outras (\emph{forward secrecy})
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+  \frametitle{Referências}
+  \bibliography{slides}
+  \bibliographystyle{abbrv}
+\end{frame}
+
+\end{document}
