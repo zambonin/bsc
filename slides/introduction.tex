@@ -100,22 +100,26 @@
     \end{itemize}
     \item consiste de uma tripla de algoritmos \cite{Goldreich2004}
     \begin{itemize}
-      \item geração de chaves ($\mathcal{G}$)
-      \item assinatura de mensagens ($\mathcal{S}$)
-      \item verificação da assinatura ($\mathcal{V}$)
+      \item geração de chaves ($\mathcal{G}$),
+          assinatura de mensagens ($\mathcal{S}$), \\
+          verificação da assinatura ($\mathcal{V}$)
     \end{itemize}
+    \item deve existir uma maneira de ligar o assinante à chave
   \end{itemize}
 
   \begin{figure}
     \begin{tikzpicture}
-      \node (sk) at (-1, 0) {$S_{k}$};
+      \node (sk) at (0, -1) {$S_{k}$};
       \node (pk) at (4, -1) {$P_{k}$};
-      \node (hm) at (0, -1) {$\mathcal{H}(m)$};
+      \node (hm) at (-1, 0) {$m$};
       \node[draw] (sig) at (0, 0) {$\mathcal{S}$};
       \node (ds) at (2, 0) {\scriptsize{$m \concat
         \mathcal{S}(\mathcal{H}(m))$}};
+      \node[draw, circle] (ger) at (2, -2) {$\mathcal{G}$};
       \node[draw] (ver) at (4, 0) {$\mathcal{V}$};
       \node (res) at (5.5, 0) {\{0, 1\}};
+      \draw[-latex] (ger) to (0, -2) to (sk);
+      \draw[-latex] (ger) to (4, -2) to (pk);
       \draw[-latex] (sk) -- (sig);
       \draw[-latex] (hm) -- (sig);
       \draw[-latex] (sig) -- (ds);
@@ -137,15 +141,16 @@
     \end{itemize}
     \item descrição do algoritmo
     \begin{itemize}
-      \item $\mathcal{G}$: $S_{k} = \{y_{i, j} : 1 \leq i \leq n$ e
-        $j \in \{0, 1\}\}$ gerados aleatoriamente \\
+      \item $\mathcal{G}$: $S_{k} = \{y_{i, j} : 1 \leq i \leq n, \;
+        j \in \{0, 1\}\}$ gerados aleatoriamente \\
         \hspace{1.3em}$P_{k} = \{\mathcal{H}(y) : y \in S_{k}\}$
     \item $\mathcal{S}$: $\mathcal{H}(m)
-        = h_{1}, \dots h_{k} \in \{0, 1\}^{n}$ \\
-        \hspace{1.3em}$\mathcal{S}(h_{1}, \dots, h_{k})
-          = (y_{1, h_{1}}, \dots, y_{k, h_{k}})$
-      \item $\mathcal{V}$: $\mathcal{H}(y_{i, h_{i}})
-        = P_{k_{i}}, 1 \leq i \leq n$
+        = h_{1}, \dots h_{n} \in \{0, 1\}$ \\
+        \hspace{1.3em}$\mathcal{S}(\mathcal{H}(m))
+          = (y_{1, h_{1}}, \dots, y_{n, h_{n}})$
+      \item $\mathcal{V}$:
+          $\forall y_{i, h_{i}} \in \mathcal{S}(\mathcal{H}(m)), \;
+            \mathcal{H}(y_{i, h_{i}}) = P_{k_{i, h_{i}}}, 1 \leq i \leq n$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -204,7 +209,7 @@
 
 \begin{frame}[allowframebreaks]
   \frametitle{Referências}
-  \bibliography{slides}
+  \bibliography{introduction}
   \bibliographystyle{abbrv}
 \end{frame}
 
