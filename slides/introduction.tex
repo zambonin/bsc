@@ -136,8 +136,7 @@
     \item acredita-se ser seguro o suficiente em computadores quânticos
     \item par de chaves deve ser utilizado uma única vez
     \begin{itemize}
-      \item cada uso posterior divide o nível de segurança pela
-        \href{https://crypto.stackexchange.com/a/2642}{metade}
+      \item cada uso posterior divide o nível de segurança pela metade
     \end{itemize}
     \item descrição do algoritmo
     \begin{itemize}
@@ -170,9 +169,11 @@
             como folhas da árvore
         \item $\mathcal{S}$: escolha de um par não utilizado
           $(S_{k_{i}}, P_{k_{i}})$, produz $\mathcal{S}'$ \\
-          \hspace{1.3em}$A =$ nodos para chegar à raiz + seus irmãos \\
+              \hspace{1.3em}$A = a_0, \dots, a_n$
+              (irmãos dos nodos do caminho até à raiz) \\
           \hspace{1.3em}$\mathcal{S}(m_{i})
-            = \{\mathcal{S}' \concat P_{k_{i}} \concat A\}$
+            = \{\mathcal{S}' \concat P_{k_{i}}
+              \concat a_0 \concat \dots \concat a_n\}$
         \item $\mathcal{V}$: verifica $\mathcal{S}'$ e constrói a sub-árvore
           $T'$; $\mathcal{H}(T'_{r}) = \mathbf{P_{k}}$
       \end{itemize}
@@ -185,7 +186,7 @@
       \item Winternitz (1989, \cite{Dods2005})
     \begin{itemize}
       \item baseado em aplicações repetidas de $\mathcal{H}$
-      \item chave pública muito menor
+      \item assinaturas muito menores
       \item processo de verificação mais eficiente
     \end{itemize}
     \item CMSS (2005, \cite{Buchmann2006})
