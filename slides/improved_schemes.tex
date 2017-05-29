@@ -93,6 +93,39 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{\emph{eXtended Merkle Signature Scheme} -- XMSS
+    \cite{Buchmann:2011:XPF:2184003.2184011}}
+  \begin{itemize}
+    \item chave privada muda a cada assinatura
+    \item necessidade apenas de $\mathcal{H}$ resistente à segunda pré-imagem
+    \item encadeamento de árvores
+  \end{itemize}
+
+  \begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{xmss-example.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{XMSS -- particularidades}
+  \begin{itemize}
+    \item máscaras de bits pseudo-aleatórias entre pais e filhos
+    \item cada folha da árvore principal é uma L-tree
+    \item folhas desta são os elementos de $P_k$ de Winternitz
+  \end{itemize} \\
+
+  \begin{itemize}
+    \item $P_k$ contém as máscaras e a raiz da árvore
+    \item $S_k$ contém a semente de um PRNG utilizado para gerar as $S_k$
+      de Winternitz, e o índice da última assinatura feita
+    \item $\mathcal{S}_i = (i, \sigma, A)$,
+      onde $A$ é o caminho de autenticação
+    \item verificação similar ao esquema de Merkle
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[allowframebreaks]
   \frametitle{Referências}
   \bibliography{\jobname}
