@@ -1,0 +1,366 @@
+\documentclass{ufsctex/ufsctex}
+
+\usepackage[table]{xcolor}
+\usepackage{mdframed, enumitem, multirow, hhline, amssymb}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}m{#1}}
+
+\newcommand{\thatcell}[3]{
+  \multicolumn{#1}{#2}{\cellcolor{lightgray} \textbf{#3}}
+}
+
+\begin{document}
+
+\instituicao[a]{Universidade Federal de Santa Catarina}
+\departamento[o]{Departamento de Informática e Estatística}
+\curso[o]{Programa de Graduação em Ciência da Computação}
+\documento[a]{Monografia}
+\titulo{Esquemas de assinatura digital baseados
+  em funções de resumo criptográficas}
+\autor{Gustavo Zambonin}
+\grau{Bacharel em Ciência da Computação}
+\local{Florianópolis}
+\data{12}{junho}{2017}
+\orientador[Orientador]{Prof. Dr. Ricardo Felipe Custódio}
+\coorientador[Coorientador]{Prof. Dr. Daniel Panario}
+\coordenador[Coordenador]{Prof. Dr. Rafael Luiz Cancian}
+
+\textoResumo{
+  Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
+  e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
+  grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
+  um computador quântico suficientemente poderoso, utilizando algoritmos já
+  conhecidos (e.g. algoritmo de Shor). Deste modo, para manter o ecossistema de
+  assinaturas digitais continuamente seguro, é necessário oferecer alternativas
+  pós-quânticas, ou seja, resistentes a computadores quânticos. Este trabalho
+  busca apresentar esquemas baseados apenas em funções de resumo
+  criptográficas, cuja segurança baseia-se apenas na resistência à colisão da
+  função escolhida, com o objetivo de mostrar que a construção de esquemas de
+  assinatura seguros independe de problemas considerados difíceis em teoria de
+  números ou álgebra, levando em conta apenas algoritmos quânticos, como o
+  algoritmo de Grover. Ademais, apresentam-se soluções para alguns problemas
+  deste tipo de esquema, como o tamanho e possibilidade de reutilização das
+  chaves pública e privada, assim como uma variada gama de algoritmos com estas
+  características, particularmente os baseados em árvores de Merkle e variantes
+  do esquema Winternitz.
+}
+\palavrasChave{criptografia, Merkle, assinatura digital, pós-quântico}
+
+\capa
+\folhaderosto
+
+\clearpage
+
+\begin{mdframed}[backgroundcolor=lightgray, linewidth=0pt]
+    \centering
+    \textbf{FOLHA DE APROVAÇÃO DE PROPOSTA DE TCC}
+\end{mdframed}
+
+\vspace{-5mm}
+\begin{table}[h]
+  \begin{tabular}{|>{\bfseries}l|p{6.57cm}|}
+    \hline
+    Acadêmico(s)            & Gustavo Zambonin                      \\ \hline
+    Título do trabalho      & Esquemas de assinatura digital baseados
+                              em funções de resumo criptográficas   \\ \hline
+    Curso                   & Ciência da Computação/INE/UFSC        \\ \hline
+    Área de Concentração    & Matemática da Computação              \\ \hline
+  \end{tabular}
+\end{table}
+
+\vspace{-2mm}
+{\footnotesize\noindent\textbf{
+  Instruções para preenchimento pelo \underline{ORIENTADOR DO TRABALHO}:} \\
+  \begin{itemize}[leftmargin=3.6mm,label=-]
+    \vspace{-4mm}
+    \item Para cada critério avaliado, assinale um X na coluna SIM apenas
+        se considerado aprovado. Caso contrário, indique as alterações
+        necessárias na coluna Observação.
+  \end{itemize}
+}
+
+\vspace{-3mm}
+\begin{table}[hbpt]
+  \begin{tabular}{|>{\tiny}m{4.3cm}*{4}{|>{\columncolor{lightgray}\tiny}c}|c|}
+    \hline
+    \rowcolor{lightgray} & \multicolumn{4}{c|}{\textbf{Aprovado}} & \\
+    \hhline{|>{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|
+        |---->{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|}
+    \rowcolor{lightgray}
+    \multicolumn{1}{|c|}{\multirow{-2}{*}{\normalsize\textbf{Critérios}}}
+      & \textbf{Sim} & \textbf{Parcial} & \textbf{Não} & \textbf{Não se aplica}
+      & \multirow{-2}{*}{\textbf{Observação}} \\ \hline
+    1. O trabalho é adequado para um TCC no CCO/SIN
+      (relevância / abrangência)?                         & & & & & \\ \hline
+    2. O título do trabalho é adequado?                   & & & & & \\ \hline
+    3. O tema de pesquisa está claramente descrito?       & & & & & \\ \hline
+    4. O problema/hipóteses de pesquisa do trabalho
+      está claramente identificado?                       & & & & & \\ \hline
+    5. A relevância da pesquisa é justificada?            & & & & & \\ \hline
+    6. Os objetivos descrevem completa e claramente
+      o que se pretende alcançar neste trabalho?          & & & & & \\ \hline
+    7. É definido o método a ser adotado no trabalho?
+      O método condiz com os objetivos e é adequado
+      para um TCC?                                        & & & & & \\ \hline
+    8. Foi definido um cronograma coerente com o método
+      definido (indicando todas as atividades) e com as
+      datas das entregas (p.ex. Projeto I, II, Defesa)?   & & & & & \\ \hline
+    9. Foram identificados custos relativos à execução
+      deste trabalho (se houver)? Haverá financiamento
+      para estes custos?                                  & & & & & \\ \hline
+    10. Foram identificados todos os envolvidos neste
+      trabalho?                                           & & & & & \\ \hline
+    11. As formas de comunicação foram definidas
+      (ex.: horários para orientação)?                    & & & & & \\ \hline
+    12. Riscos potenciais que podem causar desvios do
+      plano foram identificados?                          & & & & & \\ \hline
+    13. Caso o TCC envolva a produção de um software ou
+      outro tipo de produto e seja desenvolvido também
+      como uma atividade realizada numa empresa ou
+      laboratório, consta da proposta uma declaração
+      (Anexo 3) de ciência e concordância com a entrega
+      do código fonte e/ou documentação produzidos?       & & & & & \\ \hline
+  \end{tabular}
+
+  \vspace{2mm}
+  {\footnotesize
+  \begin{tabular}{|>{\bfseries}p{3cm}|l|l|l|}
+    \hline Avaliação & \multicolumn{2}{l}{\bf $\square$ Aprovado}
+      & \textbf{$\square$ Não Aprovado} \\
+    \hline Professor Responsável & Ricardo Felipe Custódio & 12/06/2017 & \\
+    \hline
+  \end{tabular}}
+\end{table}
+
+\paginaresumo
+
+\sumario
+
+\chapter{Introdução}
+
+Funções de resumo criptográficas são essenciais em diversas aplicações de
+segurança da informação, como códigos de autenticação de mensagens (MACs),
+identificação de arquivos a partir de uma `'impressão digital`' única, detecção
+de perda de informações em uma transmissão volátil etc.  Principalmente, é
+possível identificar o uso extensivo dessa classe de funções em esquemas de
+assinatura digital, onde é possível demonstrar matematicamente a autenticidade
+de uma mensagem recebida por uma entidade, confiável ou não, possivelmente
+utilizando tais funções. O cerne da maioria absoluta dos esquemas utilizados na
+prática consiste de criptossistemas de chave pública baseados em problemas de
+teoria de números que, atualmente, não podem ser computados em tempo polinomial
+(ou seja, se seu tempo de execução é limitado por uma expressão polinomial
+relacionada com o tamanho da entrada do algoritmo). Entretanto, utilizando-se
+de um computador quântico, tais problemas podem ser resolvidos em tempo
+polinomial \cite{shor1999polynomial}.
+
+Assim, a criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
+criptográficos cuja complexidade independe de problemas futuramente
+solucionáveis em teoria de números. Este campo pode ser subdividido em diversas
+abordagens; neste trabalho, foca-se na criptografia baseada em funções de
+resumo criptográficas e na construção de esquemas de assinatura digital
+baseados nestas, visto que seus requisitos de segurança são mínimos e sua
+variabilidade permite a construção de diversos esquemas adaptados para casos de
+uso distintos. Como visto em \cite{Merkle1990}, uma definição de
+criptossistema de chaves públicas pode ser independente da função de resumo
+criptográfica utilizada, assim possibilitando a exploração de diversas
+combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
+influenciam na segurança do esquema.
+
+\section{Objetivos}
+
+\noindent \emph{Objetivos específicos.} Deseja-se, ao final deste trabalho,
+apresentar um estudo detalhado sobre esquemas de assinatura digital baseados
+em funções de resumo criptográficas, partindo de esquemas de assinatura única
+\cite{Lamport1979}, observando o refinamento destes, até o estado da arte, onde
+não é necessário saber quantas assinaturas foram geradas anteriormente
+\cite{Bernstein2015}, bem como implementações em linguagem de alto nível
+para a fácil compreensão destes esquemas. \\
+
+\noindent \emph{Escopo do trabalho.} Não se aplica ao conteúdo deste trabalho
+a análise profunda de provas de segurança definidas por um modelo adversarial
+teórico -- ou seja, demonstrar que um atacante deve resolver um problema muito
+difícil para tornar o algoritmo inseguro, bem como algoritmos de criptografia
+pós-quânticos baseados em outras estruturas matemáticas (reticulados, teoria
+de códigos etc.) ou algoritmos clássicos (RSA, DSA, ECDSA etc.). \\
+
+\noindent \emph{Critérios de aceitação.} Estudo e implementação de pelo menos
+dois esquemas de assinatura digital única (Lamport-Diffie, Winternitz),
+a estrutura de dados chamada de árvore de Merkle e um esquema de assinatura
+digital composto da união destes elementos, como o XMSS \cite{Buchmann2011}. \\
+
+\noindent \emph{Entregas do projeto.} Relatórios referentes às disciplinas de
+Trabalho de Conclusão de Curso do INE/UFSC, incluindo monografia completa ao
+final da disciplina de Trabalho de Conclusão de Curso II, bem como
+implementação documentada em linguagem de programação de alto nível dos
+esquemas descritos no trabalho. \\
+
+\noindent \emph{Restrições e premissas.} As premissas consistem no
+fornecimento de um período, preferencialmente quinzenal, para reuniões
+referentes ao projeto, bem como a infraestrutura necessária para o
+desenvolvimento do projeto. As restrições consistem na finalização do projeto
+até o prazo de entrega final da disciplina de Trabalho de Conclusão de Curso II
+do INE/UFSC, utilização de software livre e de código aberto, normatização dos
+documentos referentes ao projeto de acordo com órgãos especializados (ABNT,
+BU/UFSC) e disponibilização de artigos e livros pagos e/ou gratuitos referentes
+aos esquemas abordados.
+
+\section{Procedimentos metodológicos}
+
+O trabalho será desenvolvido utilizando a infraestrutura e recursos do
+Laboratório de Segurança em Computação (LabSEC/UFSC), onde será estudada
+bibliografia referente aos temas abordados nesta pesquisa buscando encontrar
+as vantagens e desvantagens entre cada um dos esquemas de assinatura digital
+escolhidos, bem como observar seu desempenho e tamanho de elementos como
+par de chaves e assinatura, ao utilizar funções de resumo criptográficas
+distintas em implementações produzidas ou fornecidas.
+
+\chapter{Cronograma}
+
+\begin{figure}[htbp]
+  \begin{tabular}{|p{4.04cm}|*{6}{c|}}
+    \hline \rowcolor{lightgray}
+      & \multicolumn{6}{c|}{\textbf{Meses -- 2017}} \\
+    \hhline{|>{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|
+      |------>{\arrayrulecolor{lightgray}}>{\arrayrulecolor{black}}|}
+    \rowcolor{lightgray}
+      \multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Etapas}}}
+      & \textbf{jul.} & \textbf{ago.} & \textbf{set.}
+      & \textbf{out.} & \textbf{nov.} & \textbf{dez.} \\
+    \hline Fundamentação teórica & \cellcolor{lightgray} & & & & & \\
+    \hline Revisão do estado da arte & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & & & & \\
+      \hline Desenvolvimento do TCC & & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & \cellcolor{lightgray} & & \\
+    \hline Implementação & & & & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+    \hline Relatório de TCC I & & & & & \cellcolor{lightgray} & \\
+    \hline
+    \hline \rowcolor{lightgray}
+      & \multicolumn{6}{c|}{\textbf{Meses -- 2018}} \\
+    \hhline{|>{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|
+      |------>{\arrayrulecolor{lightgray}}>{\arrayrulecolor{black}}|}
+    \rowcolor{lightgray}
+      \multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Etapas}}}
+      & \textbf{jan.} & \textbf{fev.} & \textbf{mar.}
+      & \textbf{abr.} & \textbf{mai.} & \textbf{jun.} \\
+    \hline Ajustes na implementação & \cellcolor{lightgray} & & & & & \\
+    \hline Redação da monografia & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & \cellcolor{lightgray} & & & \\
+    \hline Ajustes na monografia & & & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & & \\
+    \hline Relatório de TCC II & & & & & \cellcolor{lightgray} & \\
+    \hline Defesa pública & & & & & & \cellcolor{lightgray} \\
+    \hline Ajustes finais do TCC & & & & & & \cellcolor{lightgray} \\
+    \hline
+  \end{tabular}
+\end{figure}
+
+\chapter{Custos}
+
+\begin{figure}[htbp]
+  \begin{tabular}{|p{1.69cm}|*{3}{l|}}
+    \hline \thatcell{1}{|c|}{Item} & \thatcell{1}{c|}{Quantidade}
+      & \thatcell{1}{c|}{Valor unitário (R\$)}
+      & \thatcell{1}{c|}{Valor Total (R\$)}                         \\
+    \hline \thatcell{4}{|l|}{Material permanente}                   \\
+    \hline Computador   & 1     & R\$ 3.000,00  & R\$ 3.000,00      \\
+    \hline Internet     & 1     & R\$ 1.000,00  & R\$ 1.000,00      \\
+    \hline Artigos      & 10    & R\$ 90,00     & R\$ 900,00        \\
+    \hline Livros       & 2     & R\$ 200,00    & R\$ 400,00        \\
+    \hline \thatcell{4}{|l|}{Material de consumo}                   \\
+    \hline Alimentação  & 264   & R\$ 10,00     & R\$ 2.640,00      \\
+    \hline CDs/DVDs     & 4     & R\$ 2,00      & R\$ 8,00          \\
+    \hline \thatcell{4}{|l|}{Outros recursos e serviços}            \\
+    \hline Impressões   & 200   & R\$ 1,00      & R\$ 200,00        \\
+    \hline
+  \end{tabular}
+\end{figure}
+
+\chapter{Recursos Humanos}
+
+\begin{figure}[htbp]
+  \begin{tabular}{|*{2}{p{4.96cm}|}}
+    \hline \rowcolor{lightgray}
+    \thatcell{1}{|c|}{Nome}       & \thatcell{1}{c|}{Função}    \\
+    \hline Gustavo Zambonin       & Autor                       \\
+    \hline Ricardo F. Custódio    & Orientador                  \\
+    \hline Daniel Panario         & Coorientador                \\
+    \hline Renato Cislaghi        & Coordenador de projetos     \\
+    \hline A definir              & Membro(s) da banca          \\
+    \hline
+  \end{tabular}
+\end{figure}
+
+\chapter{Comunicação}
+
+\begin{figure}[htbp]
+  \footnotesize
+  \begin{tabular}{|P{1.9cm}|P{0.7cm}|P{2.5cm}|P{1.5cm}|P{2cm}|}
+    \hline \rowcolor{lightgray}
+    \textbf{O que precisa ser comunicado} & \textbf{Por quem}
+      & \textbf{Para quem} & \textbf{Melhor forma de comunicação}
+      & \textbf{Quando e com que frequência} \\
+    \hline Enviar plano de projeto & Autor
+      & Orientador, coorientador, coordenador de projetos & Sistema de TCC
+      & Única vez, até dia 12/06/2017 \\
+    \hline Entrega de relatório de TCC I & Autor
+      & Orientador, coorientador, coordenador de projetos,
+      membro(s) da banca & Sistema de TCC
+      & Única vez, ao final do semestre 2017/2 \\
+    \hline Entrega de relatório de TCC II & Autor
+      & Orientador, coorientador, coordenador de projetos,
+      membros(s) da banca & Sistema de TCC
+      & Única vez, em meados do semestre 2018/1 \\
+    \hline Defesa do TCC & Autor
+      & Orientador, coorientador, coordenador de projetos,
+      membro(s) da banca & Pessoalmente
+      & Única vez, em meados do semestre 2018/1 \\
+    \hline Entrega final da monografia & Autor
+      & Orientador, coorientador, coordenador de projetos,
+      membro(s) da banca & Sistema de TCC
+      & Única vez, após a defesa, antes do término de 2018/1 \\
+    \hline Reuniões de acompanhamento da pesquisa & Autor
+      & Orientador, coorientador & Pessoalmente, webconferência
+      & Quinzenalmente \\
+    \hline Monitoramento do projeto & Autor
+      & Orientador, coorientador & E-mail & Esporadicamente \\
+    \hline Convite de membro(s) da banca & Autor & A definir
+      & Sistema de TCC & Única vez, em meados do semestre 2017/2 \\
+    \hline
+  \end{tabular}
+\end{figure}
+
+\chapter{Riscos}
+
+\begin{figure}[htbp]
+  \footnotesize
+    \begin{tabular}{|P{1.3cm}|*{3}{P{0.8cm}|}*{2}{P{2.24cm}|}}
+    \hline \rowcolor{lightgray}
+    \textbf{Risco} & \textbf{Proba\-bilidade} & \textbf{Impacto}
+      & \textbf{Priori\-dade} & \textbf{Estratégia de resposta}
+      & \textbf{Ações de prevenção} \\
+    \hline Paralisação de transporte público & Média & Médio & Baixa
+      & Transportar-se à Universidade utilizando meios alternativos
+      & Combinar transporte alternativo \\
+    \hline Paralisação de servidores públicos & Muito baixa & Alto & Média
+      & Produzir monografia e pesquisa utilizando recursos pessoais
+      & Não se aplica \\
+    \hline Problemas de saúde & Baixa & Alto & Alta
+      & Tratamento médico das condições identificadas
+      & Diminuição do fator de exposição em caso de doenças com fator
+        ambiental, e exames para verificar condições genéticas \\
+    \hline Perda de dados & Muito baixa & Alto & Média
+      & Recuperar cópia de segurança
+      & Cópias de segurança periódicas do material produzido \\
+    \hline Queima de equipamento(s) eletrônico(s) & Muito baixa & Alto & Média
+      & Comprar novo(s) equipamento(s)
+      & Evitar utilização do(s) equipamento(s) em más condições de tempo ou
+        por períodos muito prolongados \\
+    \hline
+  \end{tabular}
+\end{figure}
+
+\bibliographystyle{abnt-alf}
+\bibliography{\jobname}
+
+\end{document}
