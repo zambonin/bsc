@@ -141,40 +141,51 @@
 Funções de resumo criptográficas são essenciais em diversas aplicações de
 segurança da informação, como códigos de autenticação de mensagens (MACs),
 identificação de arquivos a partir de uma `'impressão digital`' única, detecção
-de perda de informações em uma transmissão volátil etc.  Principalmente, é
-possível identificar o uso extensivo dessa classe de funções em esquemas de
-assinatura digital, onde é possível demonstrar matematicamente a autenticidade
-de uma mensagem recebida por uma entidade, confiável ou não, possivelmente
-utilizando tais funções. O cerne da maioria absoluta dos esquemas utilizados na
-prática consiste de criptossistemas de chave pública baseados em problemas de
-teoria de números que, atualmente, não podem ser computados em tempo polinomial
-(ou seja, se seu tempo de execução é limitado por uma expressão polinomial
-relacionada com o tamanho da entrada do algoritmo). Entretanto, utilizando-se
-de um computador quântico, tais problemas podem ser resolvidos em tempo
-polinomial \cite{shor1999polynomial}.
+de perda de informações em uma transmissão volátil etc., e têm uso disseminado
+em esquemas de assinatura digital, os quais são o foco deste trabalho. Uma
+característica relevante destes é a possibilidade da demonstração matemática da
+autenticidade de uma mensagem transmitida entre entidades, sejam estas
+confiáveis ou não, utilizando as funções citadas anteriormente, para que seja
+estabelecida uma comunicação segura.
 
-Assim, a criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
+A maior parte dos esquemas de assinatura digital, na prática, utilizam
+criptossistemas de chave pública baseados em problemas de teoria de números --
+fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
+computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
+uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
+Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
+resolvidos em tempo polinomial \cite{shor1999polynomial}.
+
+A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
 criptográficos cuja complexidade independe de problemas futuramente
-solucionáveis em teoria de números. Este campo pode ser subdividido em diversas
-abordagens; neste trabalho, foca-se na criptografia baseada em funções de
-resumo criptográficas e na construção de esquemas de assinatura digital
-baseados nestas, visto que seus requisitos de segurança são mínimos e sua
-variabilidade permite a construção de diversos esquemas adaptados para casos de
-uso distintos. Como visto em \cite{Merkle1990}, uma definição de
-criptossistema de chaves públicas pode ser independente da função de resumo
-criptográfica utilizada, assim possibilitando a exploração de diversas
-combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
+solucionáveis em teoria de números. Como visto em \cite{Merkle1990}, um
+criptossistema de chaves públicas pode ser definido de forma independente da
+função de resumo criptográfica utilizada, assim possibilitando a exploração de
+diversas combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
 influenciam na segurança do esquema.
+
+Neste trabalho, utilizamos funções de resumo criptográficas para a construção
+de esquemas de assinatura digital, considerados seguros se e somente as funções
+forem resistentes à colisão (a inviabilidade computacional de encontrar duas
+mensagens distintas que, submetidas à mesma função, retornam a mesma saída),
+tornando os requisitos de segurança mínimos para os esquemas.
 
 \section{Objetivos}
 
-\noindent \emph{Objetivos específicos.} Deseja-se, ao final deste trabalho,
-apresentar um estudo detalhado sobre esquemas de assinatura digital baseados
-em funções de resumo criptográficas, partindo de esquemas de assinatura única
-\cite{Lamport1979}, observando o refinamento destes, até o estado da arte, onde
-não é necessário saber quantas assinaturas foram geradas anteriormente
-\cite{Bernstein2015}, bem como implementações em linguagem de alto nível
-para a fácil compreensão destes esquemas. \\
+\noindent \emph{Objetivo geral.} Apresentar um estudo detalhado sobre esquemas
+de assinatura digital baseados em funções de resumo criptográficas, partindo de
+esquemas de assinatura única \cite{Lamport1979}, observando o refinamento
+destes, até o estado da arte, onde não é necessário saber quantas assinaturas
+foram geradas anteriormente \cite{Bernstein2015}, bem como implementações em
+linguagem de alto nível para a fácil compreensão destes esquemas. \\
+
+\noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
+digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
+digital baseado em árvores de Merkle -- \emph{Merkle Signature Scheme},
+\emph{eXtended Merkle Signature Scheme}; implementar os esquemas supracitados;
+comparar o desempenho destes algoritmos entre si, utilizando funções de resumo
+criptográficas e parâmetros internos aos algoritmos distintos, onde aplicável.
+\\
 
 \noindent \emph{Escopo do trabalho.} Não se aplica ao conteúdo deste trabalho
 a análise profunda de provas de segurança definidas por um modelo adversarial
@@ -194,12 +205,11 @@ final da disciplina de Trabalho de Conclusão de Curso II, bem como
 implementação documentada em linguagem de programação de alto nível dos
 esquemas descritos no trabalho. \\
 
-\noindent \emph{Restrições e premissas.} As premissas consistem no
-fornecimento de um período, preferencialmente quinzenal, para reuniões
-referentes ao projeto, bem como a infraestrutura necessária para o
-desenvolvimento do projeto. As restrições consistem na finalização do projeto
-até o prazo de entrega final da disciplina de Trabalho de Conclusão de Curso II
-do INE/UFSC, utilização de software livre e de código aberto, normatização dos
+\noindent \emph{Restrições e premissas.} Espera-se reunir com os orientadores,
+de forma periódica, para a discussão dos resultados obtidos e a definição dos
+passos seguintes. As restrições consistem na finalização do projeto até o prazo
+de entrega final da disciplina de Trabalho de Conclusão de Curso II do
+INE/UFSC, utilização de software livre e de código aberto, normatização dos
 documentos referentes ao projeto de acordo com órgãos especializados (ABNT,
 BU/UFSC) e disponibilização de artigos e livros pagos e/ou gratuitos referentes
 aos esquemas abordados.
