@@ -21,6 +21,9 @@
 }
 \date{}
 
+\newcommand{\concat}{\, \vert \vert \,}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1}(#2)}
+
 \begin{document}
 
 \begin{frame}[noframenumbering, plain]
@@ -50,8 +53,7 @@
       \item $\stackrel{\$}{\longleftarrow}$: `'gerado aleatoriamente de`'
       \item $\Delta^{(x_1, x_2)}$: $x_2$ palavras de tamanho $x_1$ compostas
         pelo alfabeto $\Delta$
-      \item $\mathcal{H}^x(m) = \mathcal{H}(\mathcal{H}^{x-1}(m)),
-        \mathcal{H}^0(m) = m$
+      \item $\hash[x]{m} = \hash{\hash[x-1]{m}}, \hash[0]{m} = m$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -64,32 +66,30 @@
        t_2 = \lceil \frac{\lfloor log_2 t_1 \rfloor + 1 + w}{w} \rceil,
          t = t_1 + t_2$ \\
 
-      \hspace{1.3em}
+      \hspace{1.1em}
       $S_k = (y_{t - 1}, \dots, y_{0})
         \stackrel{\$}{\longleftarrow} \{0,1\}^{(n, t)}$ \\
 
-      \hspace{1.3em}
-      $P_k = (\mathcal{H}^{2^w - 1}(y_{t - 1}), \dots,
-        \mathcal{H}^{2^w - 1}(y_0))$
+      \hspace{1.1em}
+      $P_k = (\hash[2^w - 1]{y_{t - 1}}, \dots, \hash[2^w - 1]{y_0})$
 
     \item $\mathcal{S}$:
-      $\mathcal{H}(m)$ + padding
-        $= (p_{t - 1}, \dots, p_{t - t_1}) \in \{0, 1\}^{(w, t_1)}$ \\
+      $\hash{m} \concat 0^*
+        = (p_{t - 1}, \dots, p_{t - t_1}) \in \{0, 1\}^{(w, t_1)}$ \\
 
-      \hspace{1.3em}
-      $c = \sum_{i = t - 1}^{t - t_1} (2^w - p_i)$ \\
+      \hspace{1.1em}
+      $c = \sum_{i = t - t_1}^{t - 1} (2^w - p_i)$ \\
 
-      \hspace{1.3em}
-      $c \leq t_1 2^w, c$ + padding $= (p_{t_2 - 1}, \dots, p_{0})$ \\
+      \hspace{1.1em}
+      $c \concat 0^* = (p_{t_2 - 1}, \dots, p_{0}) \in \{0, 1\}^{(w, t_2)}$ \\
 
-      \hspace{1.3em}
-      $\mathcal{S}(\mathcal{H}(m)) = (\mathcal{H}^{p_{t - 1}}(y_{t - 1}),
+      \hspace{1.1em}
+      $\sigma = (\mathcal{H}^{p_{t - 1}}(y_{t - 1}),
         \dots, \mathcal{H}^{p_0}(y_0))$
 
     \item $\mathcal{V}$:
-      $\forall \sigma_i \in \mathcal{S}(\mathcal{H}(m)),
-        \mathcal{H}^{2^w - 1 - p_{i}}(\sigma_i)
-        = P_{k_i}, 0 \leq i \leq t - 1$
+      $\forall \sigma_i \in \sigma,
+        \hash[2^w - 1 - p_{i}]{\sigma_i} = P_{k_i}, 0 \leq i \leq t - 1$
   \end{itemize}
 \end{frame}
 

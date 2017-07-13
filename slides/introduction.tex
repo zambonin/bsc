@@ -70,19 +70,19 @@
       \Tree
         [.\node{$T_{r}$ \\ $\mathcal{H}(T_{0} \concat T_{1})$};
           [.\node{$T_{0}$ \\ $\mathcal{H}(T_{0, 0} \concat T_{0, 1})$};
-            [.\node{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$};
-              [.\node[draw]{$\mathcal{D}_{0}$}; ]
+            [.{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
+              \edge[dashed, style={<-}] node; $\mathcal{D}_{0}$
             ]
-            [.\node{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$};
-              [.\node[draw]{$\mathcal{D}_{1}$}; ]
+            [.{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
+              \edge[dashed, style={<-}] node; $\mathcal{D}_{1}$
             ]
           ]
           [.\node{$T_{1}$ \\ $\mathcal{H}(T_{1, 0} \concat T_{1, 1})$};
-            [.\node{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$};
-              [.\node[draw]{$\mathcal{D}_{2}$}; ]
+            [.{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
+              \edge[dashed, style={<-}] node; $\mathcal{D}_{2}$
             ]
-            [.\node{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$};
-              [.\node[draw]{$\mathcal{D}_{3}$}; ]
+            [.{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
+              \edge[dashed, style={<-}] node; $\mathcal{D}_{3}$
             ]
           ]
         ]
@@ -143,13 +143,13 @@
       \item $\mathcal{G}$: $S_{k} = \{y_{i, j} : 1 \leq i \leq n, \;
         j \in \{0, 1\}\}$ gerados aleatoriamente \\
         \hspace{1.3em}$P_{k} = \{\mathcal{H}(y) : y \in S_{k}\}$
-    \item $\mathcal{S}$: $\mathcal{H}(m)
+      \item $\mathcal{S}$: $\mathcal{H}(m)
         = h_{1}, \dots h_{n} \in \{0, 1\}$ \\
         \hspace{1.3em}$\mathcal{S}(\mathcal{H}(m))
           = (y_{1, h_{1}}, \dots, y_{n, h_{n}})$
       \item $\mathcal{V}$:
-          $\forall y_{i, h_{i}} \in \mathcal{S}(\mathcal{H}(m)), \;
-            \mathcal{H}(y_{i, h_{i}}) = P_{k_{i, h_{i}}}, 1 \leq i \leq n$
+        $\forall y_{i, h_{i}} \in \mathcal{S}(\mathcal{H}(m)), \;
+          \mathcal{H}(y_{i, h_{i}}) = P_{k_{i, h_{i}}}, 1 \leq i \leq n$
     \end{itemize}
   \end{itemize}
 \end{frame}
