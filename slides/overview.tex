@@ -1,0 +1,312 @@
+\documentclass[12pt]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx, tikz-qtree, caption, chronology}
+
+\usetheme{CambridgeUS}
+\usecolortheme{seagull}
+\setbeamertemplate{title page}[default][shadow=false]
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Overview of hash-based\\digital signature schemes}
+\author{Gustavo Zambonin}
+\institute{
+  \includegraphics[scale=0.15]{ufsc}            \\ \vspace{-4mm}
+  Federal University of Santa Catarina          \\
+  Department of Informatics and Statistics      \\ \vspace{2mm}
+  \texttt{gustavo.zambonin@grad.ufsc.br}
+}
+\date{}
+
+\newcommand{\concat}{\, \vert \vert \,}
+\newcommand{\hh}{$\mathcal{H}$}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1}(#2)}
+\newcommand{\pad}{\vert \vert \, 0^*}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivation}
+  \begin{itemize}
+    \setlength\itemsep{0.5em}
+    \item Independent from number theory or algebraic problems
+    \begin{itemize}
+      \item Possibly `'post-quantum secure`'
+    \end{itemize}
+    \item For every hash function, there is a correspondent digital signature
+      scheme
+    \begin{itemize}
+      \item Chosen according to specific needs (hardware, software)
+    \end{itemize}
+    \item One-way functions are necessary and sufficient for secure signatures
+      \cite{Rompel:1990:OFN:100216.100269, cryptoeprint:2005:328}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Foundations -- hash functions}
+  \begin{equation*}
+    \mathcal{H}: \{0, 1\}^{*} \longrightarrow \{0, 1\}^{n}
+  \end{equation*}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \node at (-6.5, 0) {input $\longrightarrow$};
+      \foreach \sgn in {+, -}
+        \draw plot[domain=1:5] (-\x, {\sgn 1/20*(3+\x*\x)});
+      \foreach \r in {1, 2.3333, ..., 5}
+        \draw (-\r, 0) ellipse[x radius=(\r+.5)/20, y radius=1/20*(3+\r*\r)];
+      \node at (0.25, 0) {$\longrightarrow$ digest};
+    \end{tikzpicture}
+  \end{figure}
+
+  \begin{itemize}
+    \item RIPEMD: $n \in \{128, 160, 256, 320\}$
+    \item SHA-2, SHA-3, BLAKE: $n \in \{224, 256, 384, 512\}$
+    \item Keccak: any $n$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Foundations -- digital signatures}
+  \begin{itemize}
+    \item Provide authentication, integrity and non-repudiation
+    \item Based on public-key cryptography
+    \item Triple of probabilistic polynomial time algorithms
+      \cite{Goldreich2004}
+    \begin{itemize}
+      \item Key generation ($\mathcal{G}$), signing ($\mathcal{S}$),
+          verifying ($\mathcal{V}$)
+    \end{itemize}
+    \item There should exist a way to bind a signer to its key
+  \end{itemize}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \node (hm) at (-1, 0) {$m$};
+      \node (sk) at (0, -1) {$S_{k}$};
+      \node (pk) at (4, -1) {$P_{k}$};
+      \node (ds) at (2, 0) {\scriptsize{$m \concat \mathcal{S}(\hash{m})$}};
+      \node (res) at (6, 0) {\scriptsize\{\texttt{true}, \texttt{false}\}};
+      \node[draw] (sig) at (0, 0) {$\mathcal{S}$};
+      \node[draw] (ger) at (2, -2) {$\mathcal{G}$};
+      \node[draw] (ver) at (4, 0) {$\mathcal{V}$};
+      \draw[-latex] (ger) to (0, -2) to (sk);
+      \draw[-latex] (ger) to (4, -2) to (pk);
+      \draw[-latex] (sk) -- (sig);
+      \draw[-latex] (hm) -- (sig);
+      \draw[-latex] (sig) -- (ds);
+      \draw[-latex] (ds) -- (ver);
+      \draw[-latex] (pk) -- (ver);
+      \draw[-latex] (ver) -- (res);
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Timeline}
+  \begin{center}
+    \begin{figure}
+      \scriptsize
+      \begin{chronology}[4]{1979}{2017}{90ex}
+        \event[1982]{1979}{LD-OTS, WOTS}
+        \event{1982}{MSS}
+        \event[1996]{1989}{\footnotesize Theoretical results}
+        \event{2002}{HORS}
+        \event[2007]{2006}{CMSS, GMSS}
+        \event{2011}{XMSS}
+        \event{2013}{XMSS$^{MT}$, WOTS+}
+        \event{2015}{SPHINCS}
+      \end{chronology}
+      \captionsetup{width=0.85\textwidth,font=scriptsize,skip=12pt}
+      \caption*{Outline of the most important moments in hash-based digital
+        signature schemes research, starting in 1979 with Lamport's one-time
+        scheme, and shortly after with the work of Merkle, allowing many-time
+        schemes through the use of hash trees. \vspace{2mm}
+
+        The years marked as productive for `'theoretical results`' consist
+        primarily of research about optimal one-time signature schemes and
+        creation of variants.}
+    \end{figure}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{One-time signature schemes}
+  \begin{itemize}
+    \item Key pair shall be used only once
+    \item Lamport-Diffie (LD-OTS)
+    \begin{itemize}
+      \item First hash-based scheme
+      \item Arbitrary-length messages can be signed, one bit at a time
+    \end{itemize}
+    \item Winternitz (WOTS)
+    \begin{itemize}
+      \item Multiple bits are signed simultaneously
+      \item Generalization of LD-OTS
+      \item Tradeoff between performance and signature size
+    \end{itemize}
+    \item HORS
+    \begin{itemize}
+      \item Few-time scheme, security decreases with each signature
+      \item HORST --- HORS with trees
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Winternitz OTS}
+  \framesubtitle{Key generation step}
+  Let $w \in \mathbb{N}, w > 1$ be the Winternitz tradeoff parameter. Then,
+   \begin{align*}
+       t_1 &= \left\lceil \frac{n}{w} \right\rceil \\
+       t_2 &= \left\lceil
+       \frac{\lfloor log_2 t_1 \rfloor + 1 + w}{w} \right\rceil \\
+         t &= t_1 + t_2
+   \end{align*}
+   The private and public keys are, respectively,
+   \begin{align*}
+     S_k &= (y_{t - 1}, \dots, y_{0})
+       \stackrel{\$}{\longleftarrow} \{0,1\}^n \\
+     P_k &= (\hash[2^w - 1]{y_{t - 1}}, \dots, \hash[2^w - 1]{y_0})
+   \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Winternitz OTS}
+  \framesubtitle{Signing step}
+  Consider $\pad{}$ as a simple zero padding to the left. The hash chain
+  exponents $p_i \in \{0, 1\}^w$ are generated as follows:
+  \begin{align*}
+    \hash{m} \concat 0^* &= (p_{t - 1}, \dots, p_{t - t_1}) \\
+    c &= \sum_{i = t - t_1}^{t - 1} (2^w - p_i) \\
+    c \concat 0^* &= (p_{t_2 - 1}, \dots, p_{0})
+  \end{align*}
+  Finally, the one-time signature is constructed.
+  \begin{align*}
+    \sigma &= (\mathcal{H}^{p_{t - 1}}(y_{t - 1}), \dots, \mathcal{H}^{p_0}(y_0))
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Winternitz OTS}
+  \framesubtitle{Verification step}
+  Recall that
+  \begin{align*}
+    P_k &= (\hash[2^w - 1]{y_{t - 1}}, \dots, \hash[2^w - 1]{y_0}) \text{ and} \\
+    \sigma &= (\mathcal{H}^{p_{t - 1}}(y_{t - 1}), \dots, \mathcal{H}^{p_0}(y_0))
+  \end{align*}
+  To verify $\sigma$, all $p_i$ are calculated and the hash chains are finished:
+  \begin{align*}
+    \forall \sigma_i \in \sigma, \hash[2^w - 1 - p_{i}]{\sigma_i} &= P_{k_i}
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Winternitz OTS}
+  \framesubtitle{Improvements}
+  \begin{itemize}
+    \item Shorter signature sizes in all improvements
+    \item Eliminate the need for a collision resistant \hh{}
+    \begin{itemize}
+      \item Use of a non-compressing function family $F_n$
+      \item Random walk through $F_n$ instead of simple iterations
+    \end{itemize}
+    \item Round-specific bitmasks on each hash iteration $i \in \mathbb{N}$
+    \begin{align*}
+      (b_0, \dots, b_j) &\in \{0,1\}^{n \times j}, j \geq i \\
+      c^0(x) &= x \\
+      c^i(x) &= \mathcal{H}(c^{i-1}(x) \oplus b_i)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Many-time signature schemes (Merkle)}
+  \begin{columns}[T]
+    \begin{column}{.45\textwidth}
+      \begin{itemize}
+        \item One-time signatures on each leaf, tree built from public keys
+        \item Size and traversal of the tree are common issues
+        \item Clever ways to store the key pair (e.g. seed of pseudorandom generator)
+        \item Generally stateful schemes, i.e. track which OTS pairs were used
+      \end{itemize}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \begin{figure}
+        \begin{tikzpicture}
+          \tikzset{every tree node/.style={align=center,anchor=north,font=\tiny}}
+          \Tree
+            [.\node{$T_{r}$ \\ $\hash{T_{0} \concat T_{1}}$};
+              [.\node{$T_{0}$ \\ $\mathcal{H}(T_{0, 0} \concat T_{0, 1})$};
+                [.{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
+                  \edge[dashed, style={<-}] node; $\mathcal{D}_{0}$
+                ]
+                [.{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
+                  \edge[dashed, style={<-}] node; $\mathcal{D}_{1}$
+                ]
+              ]
+              [.\node{$T_{1}$ \\ $\mathcal{H}(T_{1, 0} \concat T_{1, 1})$};
+                [.{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
+                  \edge[dashed, style={<-}] node; $\mathcal{D}_{2}$
+                ]
+                [.{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
+                  \edge[dashed, style={<-}] node; $\mathcal{D}_{3}$
+                ]
+              ]
+            ]
+        \end{tikzpicture}
+        \captionsetup{font=scriptsize}
+        \caption*{Take $\mathcal{D}_n$ as any data block. A Merkle tree
+          can be constructed recursively through the concatenation
+          of hashes of a node's children.}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{CMSS, GMSS}
+  \begin{itemize}
+    \item Main idea: Merkle trees with layers
+    \item Root of a child tree is signed with an OTS private key
+      corresponding to a leaf of its parent
+    \item CMSS as a special case of GMSS
+    \item Simple Winternitz as chosen OTS scheme
+    \item Amortized cost of key pair generation,
+      competitive with classical schemes such as RSA, ECDSA
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{XMSS, XMSS$^{MT}$}
+  \begin{itemize}
+    \item Bitmasks between levels of the tree
+    \item Sub-tree on each leaf called L-tree
+    \begin{itemize}
+      \item Stores each element of a WOTS public key in a balanced way
+      \item Bitmasks are the same for all L-trees
+      \item Only a second preimage resistant \hh{} is needed
+    \end{itemize}
+  \end{itemize}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[trim={0 0 0 2cm},clip,scale=0.18]{xmss-example}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+  \frametitle{Bibliography}
+  \bibliographystyle{alpha}
+  \bibliography{overview}
+\end{frame}
+
+\end{document}
