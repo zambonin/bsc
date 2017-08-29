@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
 import hashlib
+from datetime import datetime
 from math import ceil, floor, log2
 from random import getrandbits
 from sys import argv
 
 
 def chash(alg, msg, it):
+    dig = getattr(hashlib, alg)
     for _ in range(it):
-        m = hashlib.new(alg)
-        m.update(bytes(str(msg), 'utf-8'))
-        msg = m.hexdigest()
+        msg = dig(bytes(str(msg), 'utf-8')).hexdigest()
     return msg
 
 
@@ -37,19 +37,26 @@ def verify(alg, h, key, s):
     return all(chash(alg, si, pi) == k for pi, k, si in zip(missing, key, s))
 
 
-if __name__ == '__main__':
-    assert len(argv) == 3 and argv[1] in hashlib.algorithms_guaranteed
-
-    _, alg, message = argv
-    n = hashlib.new(alg).digest_size * 8
+def winternitz(alg, message):
     h = bin(int(chash(alg, message, 1), 16))[2:].zfill(n)
-
-    W = 16
-    T1 = ceil(n / W)
-    T2 = ceil((floor(log2(T1)) + 1 + W) / W)
-    T = T1 + T2
-
     sk, pk = keygen(alg, n)
     s = sign(alg, h, sk)
 
     assert verify(alg, h, pk, s)
+
+
+if __name__ == '__main__':
+    algs = hashlib.algorithms_guaranteed
+    assert len(argv) == 2
+    _, message = argv
+
+    W = 16
+    for alg in sorted(filter(lambda x: 'shake' not in x, algs)):
+        start = datetime.now()
+        n = hashlib.new(alg).digest_size * 8
+        T1 = ceil(n / W)
+        T2 = ceil((floor(log2(T1)) + 1 + W) / W)
+        T = T1 + T2
+        winternitz(alg, message)
+        end = datetime.now()
+        print("{:10} {}".format(alg, end - start))
