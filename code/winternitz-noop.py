@@ -29,34 +29,36 @@ def getexp(alg, h):
 
 
 def sign(alg, h, key):
-    return [chash(alg, k, p) for k, p in zip(key, getexp(alg, h))]
+    exp = getexp(alg, h)
+    return [chash(alg, k, p) for k, p in zip(key, exp)], exp
 
 
-def verify(alg, h, key, s):
-    missing = [(2**W - 1) - i for i in getexp(alg, h)]
-    return all(chash(alg, si, pi) == k for pi, k, si in zip(missing, key, s))
+def verify(alg, h, key, s, eee):
+    missing = [(2**W - 1) - i for i in eee]
+    return all(chash(alg, si, pi) == k for pi, k, si in zip(missing, key, s)), missing
 
 
 def winternitz(alg, message):
     h = bin(int(chash(alg, message, 1), 16))[2:].zfill(n)
     sk, pk = keygen(alg, n)
-    s = sign(alg, h, sk)
-
-    assert verify(alg, h, pk, s)
+    s_s = datetime.now()
+    s, es = sign(alg, h, sk)
+    print(datetime.now() - s_s, end=' ')
+    e_s = datetime.now()
+    v, vs = verify(alg, h, pk, s, es)
+    print(datetime.now() - e_s, end=' ')
+    print(sum(es), sum(vs))
+    assert v
 
 
 if __name__ == '__main__':
     algs = hashlib.algorithms_guaranteed
-    assert len(argv) == 2
-    _, message = argv
+    assert len(argv) == 3
+    _, alg, message = argv
 
     W = 16
-    for alg in sorted(filter(lambda x: 'shake' not in x, algs)):
-        start = datetime.now()
-        n = hashlib.new(alg).digest_size * 8
-        T1 = ceil(n / W)
-        T2 = ceil((floor(log2(T1)) + 1 + W) / W)
-        T = T1 + T2
-        winternitz(alg, message)
-        end = datetime.now()
-        print("{:10} {}".format(alg, end - start))
+    n = hashlib.new(alg).digest_size * 8
+    T1 = ceil(n / W)
+    T2 = ceil((floor(log2(T1)) + 1 + W) / W)
+    T = T1 + T2
+    winternitz(alg, message)
