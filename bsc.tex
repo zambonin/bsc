@@ -1,0 +1,92 @@
+\newcommand{\rfc}{Prof. Custódio}
+\newcommand{\dan}{Prof. Daniel Panario}
+\newcommand{\hh}{$\mathcal{H}$}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1}(#2)}
+
+\section*{Past meetings}
+
+\emph{29th of April, 2017.} Definition of the subject for the initial research
+and redaction of the monograph, as well as discussion about various related
+topics on post-quantum cryptography. Suggestions for the scope of the research
+at an undergraduate level. Possibility of future works given the popularity of
+the subject. It was asked by \rfc{} that a presentation containing details
+about the simpler schemes (Lamport-Diffie -- LD-OTS -- and Merkle) should be
+produced and given to himself and \dan{}.
+
+\emph{10th of May, 2017.} The presentation asked on the previous meeting was
+given, and it generated quite a few moments of discussion, specifically about
+the motivation behind Lamport-Diffie by \rfc{}. Other topics were also raised,
+such as its key pair size and newer schemes that do not make use of LD-OTS.
+\dan{} suggested that a pattern should be identified with regards to common
+optimisations and progress of newer schemes, i.e., what the researchers are
+heading towards. Further bibliography should be read to answer these questions
+and to ascertain the state of the art in hash-based schemes. No new
+presentations are needed, for the next meeting is only a few days away.
+
+\emph{15th of May, 2017.} An overview about recent bibliography covering newer
+schemes was given and it was asserted that security requirements, key pair and
+signature size, and key pair generation and signing time are being reduced. It
+is also important to consider whether a scheme is stateful or stateless, i.e.
+if it stores information after each signature. \dan{} suggested that high-level
+implementations for a handful of schemes should be studied and perhaps
+practised -- programming a scheme should help in understanding it and the code
+could be part of the final project. \rfc{} noted that it would be interesting
+to check if hash-based schemes are being standardised and asked to check drafts
+of RFCs.  Motivation of LD-OTS revolves around the dissociation between the
+message and the signature, that is composed only of random numbers' hashes
+chosen according to each bit of the desired message's hash. In lieu of its
+complexity, the proof of security for LD-OTS was demoted to low priority.
+Moving on to slightly harder schemes, a new presentation was asked by \rfc{}
+about the Winternitz scheme (WOTS) and a variant of Merkle's, eXtended Merkle
+Signature Scheme (XMSS).
+
+\emph{29th of May, 2017.} Last meeting, for now, with \dan{} \emph{in loco}. A
+previous meeting scheduled for the 22nd was cancelled due to undergraduate
+issues. Drafts of RFCs written by known authors were read, they present slight
+variations of schemes already described in various papers by these people.
+This shows that there is at least some push for standardisation, although
+perhaps without immediate meaning. Some bibliography was removed from the pool
+since it was only making things more confusing. It was discovered that
+high-level implementations are very sparse and generally unable to be used out
+of the box, hence it was decided that at least some code would be produced
+alongside the monograph. WOTS was presented and it went quite smoothly,
+generating lots of discussion and some tasks, such as uncovering more
+information about the trade-off parameter and the check-sum used in the scheme,
+presenting it with figures to help the reader's understanding, and if its
+performance is affected by the hash function used. These shall be written
+directly in the monograph. There was no time to discuss XMSS.
+
+\section*{Hash functions}
+
+A hash function \hh{} maps values deterministically from a set with possibly
+infinite size to another, strictly smaller set, with a fixed number of
+elements. It is desirable for \hh{} that these mappings happen in such a way
+that outputs are distinguished evenly, with no apparent relation between them.
+Hash functions with added properties that make them suitable for use in
+security applications are called \emph{cryptographic} hash functions;
+these can provide assurance of data integrity, even if the data is stored
+in an insecure place. Outputs of these functions are generally called
+message digests, or simply \emph{digests}. According to
+\cite{stinson2005cryptography}, for any \hh{} to be considered
+cryptographic, it should be difficult, i.e. computationally infeasible,
+to solve the three problems listed below:
+
+\begin{enumerate}[label=\roman*.]
+    \item Given a digest $h$, find the original
+    message $m$ that generated $h$ through $\hash{m} = h$.
+    \hh{} is said to be \emph{preimage} resistant if this cannot be solved efficiently.
+    \item Given a message $m_0$, find a message
+    $m_1$ such that $m_0 \neq m_1$ and $\hash{m_0} = \hash{m_1}$.
+    \hh{} is said to be \emph{second preimage} resistant if this cannot
+    be solved efficiently.
+    \item Given two distinct messages $m_0$ and $m_1$, then $\hash{m_0} = \hash{m_1}$.
+    \hh{} is said to be \emph{collision} resistant if this cannot be
+    solved efficiently.
+\end{enumerate}
+
+Note that ii. and iii. have a slight difference: in the former, an adversary
+may not choose the first message, whereas in the latter, it is free to choose
+any pair of messages. Another characteristic desired is the avalanche effect,
+based on the concept of diffusion (\cite{Stallings:2010:CNS:1824151}), stating
+that `'flipping`' a single bit in the message $m$ should change about half of
+its digest bits, and vice-versa.
