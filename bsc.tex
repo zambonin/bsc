@@ -3,7 +3,7 @@
 \usepackage[brazil]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts, enumitem, tikz, pdfpages, parskip}
+\usepackage{amsfonts, enumitem, tikz, pdfpages, parskip, hyperref}
 
 \newcommand{\hh}{$\mathcal{H}$}
 \newcommand{\pk}{$\mathcal{P}_k$}
@@ -440,10 +440,6 @@ um esquema de assinatura digital genérico. Note que $\sigma$ geralmente é
 composto da concatenação da mensagem original com a assinatura do resumo
 criptográfico desta, embora a saída do algoritmo \textsc{Sig} consista apenas
 da aplicação de uma função interna a este ao resumo.
-
-\anexo
-\chapter{Artigo submetido para PQCrypto 2018}
-\includepdf[pages=-]{tuning-winternitz}
 
 \bibliographystyle{alpha}
 \bibliography{ref}
