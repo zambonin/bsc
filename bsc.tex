@@ -1,5 +1,8 @@
-\documentclass{ufsctex/ufsctex}
+\documentclass[12pt]{memoir}
 
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{amsfonts, enumitem, tikz, pdfpages, parskip}
 
 \newcommand{\hh}{$\mathcal{H}$}
@@ -25,86 +28,6 @@
 }
 
 \begin{document}
-
-\instituicao[a]{Universidade Federal de Santa Catarina}
-\departamento[o]{Departamento de Informática e Estatística}
-\curso[o]{Programa de Graduação em Ciência da Computação}
-\documento[a]{Monografia}
-\titulo{
-  Esquemas de assinatura digital baseados
-  em funções de resumo criptográfico
-}
-\autor{Gustavo Zambonin}
-\grau{Bacharel em Ciência da Computação}
-\local{Florianópolis}
-\data{27}{novembro}{2017}
-\orientador[Orientador]{Prof. Dr. Ricardo Felipe Custódio}
-\coorientador[Coorientador]{Prof. Dr. Daniel Panario}
-\coordenador[Coordenador]{Prof. Dr. Rafael Luiz Cancian}
-
-\numerodemembrosnabanca{1}
-\orientadornabanca{nao}
-\coorientadornabanca{nao}
-\bancaMembroA{
-  Lucas Pandolfo Perin, M.Sc. \\
-  Universidade Federal de Santa Catarina
-}
-
-\dedicatoria{Às mulheres da minha vida}
-
-\agradecimento{...}
-
-\epigrafe{
-  \emph{Look at you, hacker: a pathetic creature of meat and bone,
-  panting and sweating as you run through my corridors.
-  How can you challenge a perfect, immortal machine?}
-}{SHODAN (System Shock 2, 1999)}
-
-\textoResumo{
-  Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
-  e ECDSA, têm sua segurança baseada na dificuldade de calcular a fatoração
-  de números muito grandes ou logaritmos discretos. Este tipo de cômputo pode
-  ser realizado por um computador quântico suficientemente poderoso, utilizando
-  algoritmos já conhecidos (e.g. algoritmo de Shor). Deste modo, para manter
-  o ambiente de assinaturas digitais continuamente seguro, é necessário oferecer
-  alternativas pós-quânticas, ou seja, resistentes a computadores quânticos.
-  Este trabalho busca apresentar esquemas baseados apenas em funções de resumo
-  criptográfico, cuja segurança baseia-se apenas na resistência à colisão da
-  função escolhida, com o objetivo de mostrar que a construção de esquemas de
-  assinatura seguros independe de problemas considerados difíceis em teoria de
-  números ou álgebra, levando em conta apenas algoritmos quânticos, como o
-  algoritmo de Grover. Ademais, discutem-se soluções para alguns problemas
-  deste tipo de esquema, como o tamanho e possibilidade de reutilização das
-  chaves pública e privada, assim como uma variada gama de algoritmos com estas
-  características, na forma de novos esquemas, particularmente os baseados em
-  árvores de Merkle e esquema Winternitz.
-}
-\palavrasChave{
-  criptografia pós-quântica, Merkle, assinatura digital, Winternitz,
-  resumo criptográfico, funções de resumo
-}
-
-\textAbstract{
-  Algorithms currently used in digital signature schemes, such as RSA and
-  ECDSA, base their security on the difficulty of calculating large integer
-  factorizations or discrete logarithms. This kind of computation can be
-  achieved through a sufficiently powerful quantum computer running already
-  known algorithms, such as Shor's. Hence, to keep digital signatures secure,
-  it is imperative to offer post-quantum alternatives, that is, resistant to
-  quantum computers.  This work explores hash-based digital signature schemes,
-  whose security is reduced to the collision resistance of a chosen hash
-  function, with the aim of showing that the construction of such secure
-  schemes is independent from hard problems from number theory or algebra,
-  considering only quantum algorithms, e.g. Grover's. Furthermore, some
-  problems for these schemes are introduced and discussed (some of which are
-  the size and repeated usage of the public and private keys), and also various
-  algorithms in the shape of new schemes, notably the ones based on Merkle
-  trees and variants of Winternitz.
-}
-\keywords{
-  post-quantum cryptography, Merkle, digital signature, Winternitz,
-  digest, hash functions
-}
 
 \chapter{Introdução}
 
@@ -522,7 +445,7 @@ da aplicação de uma função interna a este ao resumo.
 \chapter{Artigo submetido para PQCrypto 2018}
 \includepdf[pages=-]{tuning-winternitz}
 
-\bibliographystyle{abnt-alf}
+\bibliographystyle{alpha}
 \bibliography{ref}
 
 \end{document}
