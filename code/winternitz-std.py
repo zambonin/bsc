@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import hashlib
-from datetime import datetime
 from math import ceil, floor, log2
 from random import getrandbits
 from sys import argv
@@ -41,22 +40,19 @@ def verify(alg, h, key, s, eee):
 def winternitz(alg, message):
     h = bin(int(chash(alg, message, 1), 16))[2:].zfill(n)
     sk, pk = keygen(alg, n)
-    s_s = datetime.now()
     s, es = sign(alg, h, sk)
-    print(datetime.now() - s_s, end=' ')
-    e_s = datetime.now()
     v, vs = verify(alg, h, pk, s, es)
-    print(datetime.now() - e_s, end=' ')
-    print(sum(es), sum(vs))
+    print(sum(es[:T1]), sum(es[T1:]), sum(es),
+            sum(vs[:T1]), sum(vs[T1:]), sum(vs))
     assert v
 
 
 if __name__ == '__main__':
     algs = hashlib.algorithms_guaranteed
-    assert len(argv) == 3
-    _, alg, message = argv
+    assert len(argv) == 4
+    _, W, alg, message = argv
 
-    W = 16
+    W = int(argv[1])
     n = hashlib.new(alg).digest_size * 8
     T1 = ceil(n / W)
     T2 = ceil((floor(log2(T1)) + 1 + W) / W)
