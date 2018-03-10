@@ -1,0 +1,107 @@
+\documentclass[11pt]{letter}
+
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=1.5cm]{geometry}
+\usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
+\usepackage[utf8]{inputenc}
+
+\usepackage[table]{xcolor}
+\usepackage{mathptmx, multirow, hhline}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{center}
+  \textbf{
+    DEPARTAMENTO DE INFORMÁTICA E ESTATÍSTICA --- CTC --- UFSC \\
+    RATIFICAÇÃO DE PLANO DE TRABALHO DO SEMESTRE PARA DESENVOLVIMENTO DE TCC
+  }
+\end{center}
+
+\vspace{1em}
+\setlength\extrarowheight{5pt}
+\begin{tabular}{l l}
+  \textbf{Disciplina:}  & INE5434 --- Trabalho de Conclusão de Curso II \\
+  \textbf{Curso:}       & Ciência da Computação                         \\
+  \textbf{Autor:}       & Gustavo Zambonin                              \\
+  \textbf{Título:}      & Esquemas de assinatura digital baseados
+                          em funções de resumo criptográfico            \\
+  \textbf{Professor responsável:} & Ricardo Felipe Custódio             \\
+\end{tabular}
+
+
+\vspace{1em}
+{\large \textbf{Objetivos}}
+
+\noindent \emph{Objetivo geral.} Apresentar um estudo detalhado sobre esquemas
+de assinatura digital baseados em funções de resumo criptográfico, partindo de
+esquemas de assinatura única, observando o refinamento destes, até o estado da
+arte, nos quais não é necessário saber quantas assinaturas foram geradas
+anteriormente, bem como implementações em linguagem de alto nível para a fácil
+compreensão destes esquemas.
+
+\noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
+digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
+digital baseado em árvores de Merkle --- \emph{Merkle Signature Scheme},
+\emph{eXtended Merkle Signature Scheme} e SPHINCS; implementar alguns dos
+esquemas supracitados; comparar o desempenho destes algoritmos entre si,
+utilizando funções de resumo criptográficas e parâmetros internos aos
+algoritmos distintos, onde aplicável; otimizar a utilização da assinatura única
+de Winternitz no contexto destes esquemas baseados em árvores de Merkle.
+
+\vspace{1em}
+{\large \textbf{Cronograma}}
+
+\begin{center}
+  \begin{tabular}{|p{4.04cm}|*{12}{c|}}
+    \hline & \multicolumn{6}{c|}{\textbf{2017}}
+      & \multicolumn{6}{c|}{\textbf{2018}} \\ \cline{2-13}
+    \multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Etapas}}}
+      & \textbf{jul.} & \textbf{ago.} & \textbf{set.}
+      & \textbf{out.} & \textbf{nov.} & \textbf{dez.}
+      & \textbf{jan.} & \textbf{fev.} & \textbf{mar.}
+      & \textbf{abr.} & \textbf{mai.} & \textbf{jun.} \\
+    \hline Fundamentação teórica
+      & \cellcolor{lightgray} X & & & & & & & & & & & \\
+    \hline Revisão do estado da arte
+      & \cellcolor{lightgray} X & \cellcolor{lightgray} X & & & & & & & & & & \\
+      \hline Desenvolvimento do TCC
+      & & \cellcolor{lightgray} X & \cellcolor{lightgray} X
+      & \cellcolor{lightgray} X & & & & & & & & \\
+    \hline Relatório de TCC I
+      & & & & & \cellcolor{lightgray} X & & & & & & & \\
+      \hline Otimização do Winternitz & & & & & \cellcolor{lightgray} X
+      & \cellcolor{lightgray} X & \cellcolor{lightgray} X & & & & & \\
+    \hline Redação da monografia
+      & & & & & & \cellcolor{lightgray} X & \cellcolor{lightgray} X
+      & \cellcolor{lightgray} X & \cellcolor{lightgray} & \cellcolor{lightgray}
+      & \cellcolor{lightgray} & \\
+    \hline Relatório de TCC II
+      & & & & & & & & & & & \cellcolor{lightgray} & \\
+    \hline Ajustes na monografia
+      & & & & & & & & & & & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+    \hline Defesa pública
+      & & & & & & & & & & & & \cellcolor{lightgray} \\
+    \hline Ajustes finais do TCC
+      & & & & & & & & & & & & \cellcolor{lightgray} \\
+    \hline
+  \end{tabular}
+
+  \vspace*{\fill}
+  \fbox{
+    \begin{minipage}[c][6em][c]{0.7\textwidth}{
+      \center\textbf{
+        Preenchimento pelo professor responsável pelo TCC} \\
+      }
+      \vspace{3mm}
+      \qquad $(\quad)$ \ Ciente e de acordo.
+      \qquad Assinatura:
+
+      \qquad Data: \_\_ / \_\_ / \_\_\_\_
+    \end{minipage}
+  }
+\end{center}
+
+\end{document}
