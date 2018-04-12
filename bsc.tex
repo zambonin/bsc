@@ -64,29 +64,29 @@ algoritmos criptográficos cuja segurança é considerada suficiente mesmo
 utilizando-se de um computador quântico e ataques especializados, como o
 algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}. Esta área conta com
 diversas abordagens diferentes: a criptografia baseada em reticulados,
-polinômios de múltiplas variáveis sobre um corpo finito, códigos de correção de erros,
+polinômios de múltiplas variáveis sobre um corpo finito, teoria de códigos,
 morfismos entre curvas elípticas supersingulares e criptossistemas simétricos.
 Entretanto, reduções de segurança formais não existem para alguns destes
 métodos, e para outros, o tamanho das chaves impossibilita a utilização destes
-em aplicações práticas.
+em aplicações práticas~\cite{Bernstein2017}.
 
 Não obstante, uma abordagem distinta de esquema de assinatura digital
 resistente a computadores quânticos pode ser obtida apenas com funções de
-resumo criptográfico, construídas a partir de funções de mão única
-\cite{cryptoeprint:2005:328}. De fato, estas funções, desde que apresentem
+resumo criptográfico, construídas a partir de funções de mão
+única~\cite{cryptoeprint:2005:328}. De fato, estas funções, desde que apresentem
 requisitos de segurança como resistência à segunda pré-imagem e à colisões, são
 necessárias e suficientes para a construção de esquemas bem comportados e
-seguros \cite{Rompel:1990:OFN:100216.100269}. Visto que estas funções são
+seguros~\cite{Rompel:1990:OFN:100216.100269}. Visto que estas funções são
 estudadas exaustivamente por conta de sua vasta presença em diversos âmbitos da
 segurança da informação, reduções de segurança são mais comuns em relação a
 outras abordagens pós-quânticas, e tamanhos de chaves e assinaturas não são
 proibitivos.
 
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
-consistem da utilização de um esquema de assinatura digital única, onde apenas
-uma mensagem pode ser assinada de modo seguro, ou sua combinação com a
-estrutura de dados chamada de árvore de Merkle
-\cite{Merkle:1989:CDS:118209.118230}, que abriga diversos pares de chave do
+consistem da utilização de um esquema de assinatura digital \emph{única},
+onde apenas uma mensagem pode ser assinada de modo seguro,
+ou sua combinação com a estrutura de dados chamada de árvore de
+Merkle~\cite{Merkle:1989:CDS:118209.118230}, que abriga diversos pares de chave do
 esquema supracitado como suas folhas, e reduz a verificação destes para uma
 única chave, codificada em sua raiz. Esta árvore é construída com a
 concatenação de resumos criptográficos do conteúdo dos nós, habilitando assim a
