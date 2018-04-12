@@ -149,10 +149,13 @@ agregando estas noções.
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
 potencialmente grande para uma palavra pequena e identificável, podem possuir
 várias propriedades, apresentadas abaixo de acordo com~\cite{Menezes:1996:HAC:548089}.
-Tome uma função $\mathcal{H} : X \longrightarrow Y$.
+Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos da imagem
+de \hh{} são chamados de resumos.
 
-\begin{enumerate}[label=\roman(*)]
-    \item 
+\begin{enumerate}[label=(\roman*)]
+    \item A função deve apresentar \emph{compressão},
+        ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$.
+    \item Para toda entrada $x \in X$, esta deve ser obtida de maneira fácil.
 \end{enumerate}
 
 
