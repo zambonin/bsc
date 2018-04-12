@@ -155,20 +155,21 @@ computacionalmente impraticável, quando o tempo ou recursos gastos para esta
 computação excedem a validade ou utilidade da informação desejada.
 
 \begin{enumerate}[label=(\roman*)]
-    \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil}.
+    \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil};
     
     \item \hh{} pode apresentar \emph{compressão},
-        ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$.
+        ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$;
     
     \item \hh{} pode apresentar resistência à pré-imagem (\textsc{Pre}),
         caracterizada pelo seguinte comportamento: fornecido um resumo
         $h \in Y$, é computacionalmente inviável achar a mensagem
-        original $m \in X$ que gerou $h$ através de $\hash{m} = h$; \hh{} é considerada resistente à
-    pré-imagem (\textsc{Pre}) se isto não pode ser resolvido de maneira
-    eficiente.
+        original $m \in X$ que gerou $h$ através de $\hash{m} = h$;
 
-  \item Fornecida uma mensagem $m_0 \in X$, achar uma mensagem $m_1 \in X$ tal
-    que $m_0 \neq m_1$ e $\hash{m_0} = \hash{m_1}$. \hh{} é considerada
+    \item \hh{} pode apresentar resistência à segunda pré-imagem (\textsc{Sec}),
+        caracterizada pelo seguinte comportamento: fornecida uma
+        mensagem $m_0 \in X$, é computacionalmente inviável achar
+        uma mensagem $m_1 \in X$ tal que $m_0 \neq m_1$ e
+        $\hash{m_0} = \hash{m_1}$. \hh{} é considerada
     resistente à segunda pré-imagem (\textsc{Sec}) se isto não pode ser
     resolvido de maneira eficiente.
 
