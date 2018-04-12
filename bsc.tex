@@ -264,8 +264,8 @@ intercalados por aplicações de $f$.
     }
 }
 
-\path (8.5, -1) node {\bf Absorbing phase};
-\path (20, -1) node {\bf Squeezing phase};
+\path (5, -1) node {Fase de absorção};
+\path (20, -1) node {Fase de compressão};
 
 \begin{scope}[xshift=0cm]
     \draw[thick] (0,0) rectangle ++(1,10);
@@ -297,9 +297,9 @@ intercalados por aplicações de $f$.
 \end{scope}
   
 \begin{scope}[xshift=12cm]
-  \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-  \draw[edge,thick] (1,2) -- ++(3,0);
-  \draw[edge,thick] (1,8) -- ++(3,0);  
+    \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+    \draw[edge,thick] (1,2) -- ++(3,0);
+    \draw[edge,thick] (1,8) -- ++(3,0);  
 \end{scope}
 
 \begin{scope}[xshift=16cm]
@@ -312,17 +312,15 @@ intercalados por aplicações de $f$.
 \end{scope}
 
 \begin{scope}[xshift=20cm]
-  \draw[SpongePerm] 
-  		(0,0) rectangle node {\large$f$} ++(1,10);
-
-  \draw[edge,thick] (1,2) -- ++(3,0);
-  \draw[edge,thick] (1,8) -- ++(3,0);  
+    \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+    \draw[edge,thick] (1,2) -- ++(3,0);
+        \node[thick] (xm1) at (1+1.5,8) {$\dots$};
+    \draw[edge,thick] (1,8) -- ++(3,0);  
 \end{scope}
 
-%%  
 \begin{scope}[xshift=24cm]
-  \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-\draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
+    \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+    \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
 \end{scope}
 
 \end{tikzpicture}
