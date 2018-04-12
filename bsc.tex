@@ -15,6 +15,8 @@
 \newcommand{\binwds}[1]{\{0, 1\}^{#1}}
 \newcommand{\length}[1]{\vert #1 \vert}
 
+\usetikzlibrary{crypto.symbols}
+
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
 \def\colcircle{(1.75, 0) circle (0.75cm)}
@@ -254,6 +256,13 @@ intercalados por aplicações de $f$.
 \tikzset{SpongePerm/.style=rounded corners=4pt,};
 \tikzset{edge/.style=-latex new, arrow head=8pt, thick};
 \tikzset{edgee/.style=latex new-latex new, arrow head=8pt, thick};
+\tikzset{XOR/.style={draw,circle,append after command={
+        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+        (\tikzlastnode.north) edge (\tikzlastnode.south)
+        (\tikzlastnode.east) edge (\tikzlastnode.west)
+        }
+    }
+}
 
 \path (8.5, -1) node {\large\bf Absorbing phase};
 \path (25, -1) node {\large\bf Squeezing phase};
@@ -327,7 +336,6 @@ intercalados por aplicações de $f$.
 \end{scope}
 
 \end{tikzpicture}
-% TODO: imagem da construção esponja
 
 Ao término do processamento dos blocos, a fase de compressão é iniciada, onde
 $n$ blocos de tamanho $r$ compõem a saída da função, novamente intercalados por
