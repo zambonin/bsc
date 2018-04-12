@@ -268,21 +268,18 @@ intercalados por aplicações de $f$.
 \path (25, -1) node {\bf Squeezing phase};
 
 \begin{scope}[xshift=0cm]
-  \draw[thick] (0,0) rectangle ++(1,10);
-  \draw[thick] (0,3) -- ++(1,0);
-
-  \node[XOR,thick] (xm0) at (1+1.5,8) {};
-  \draw[edge,thick] (1,8) -- (xm0);
-  \draw[edge,thick] (1,2) -- ++(3,0);
-  \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{0}$} -- (xm0);  
-  \draw[edge,thick] (xm0) -- ++(1.5,0);
-
-	\draw[edgee,anchor=east] (-1,0) -- node[left] {$c$ bits} ++(0,4);
-	\draw[edgee,anchor=east] (-1,4) -- node[left] {$r$ bits} ++(0,6);
-
+    \draw[thick] (0,0) rectangle ++(1,10);
+    \draw[thick] (0,3) -- ++(1,0);
+    \node[XOR,thick] (xm0) at (1+1.5,8) {};
+    \draw[edge,thick] (1,8) -- (xm0);
+    \draw[edge,thick] (1,2) -- ++(3,0);
+    \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{0}$} -- (xm0);  
+    \draw[edge,thick] (xm0) -- ++(1.5,0);
+    \draw[edgee,anchor=east] (-1,0) -- node[left] {$c$ bits} ++(0,3);
+    \draw[edgee,anchor=east] (-1,4) -- node[left] {$r$ bits} ++(0,6);
 \end{scope}
   
-\foreach \z in {1, ..., 3} {
+\foreach \z in {1, ..., 2} {
   %%  
   \begin{scope}[xshift=\z*4cm]
     \draw[SpongePerm] 
@@ -297,7 +294,7 @@ intercalados por aplicações de $f$.
 } 
   
 %%  
-\begin{scope}[xshift=16cm]
+\begin{scope}[xshift=12cm]
   \draw[SpongePerm] 
   		(0,0) rectangle node {\large$f$} ++(1,10);
 
@@ -306,7 +303,7 @@ intercalados por aplicações de $f$.
 \end{scope}
 
 %%  
-\begin{scope}[xshift=20cm]
+\begin{scope}[xshift=16cm]
   \draw[thick] (0,0) rectangle ++(1,10);
   \draw[thick] (0,3) -- ++(1,0);
 
@@ -318,7 +315,7 @@ intercalados por aplicações de $f$.
 \end{scope}
 
 %%  
-\begin{scope}[xshift=24cm]
+\begin{scope}[xshift=20cm]
   \draw[SpongePerm] 
   		(0,0) rectangle node {\large$f$} ++(1,10);
 
@@ -328,7 +325,7 @@ intercalados por aplicações de $f$.
 \end{scope}
 
 %%  
-\begin{scope}[xshift=28cm]
+\begin{scope}[xshift=24cm]
   \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
 
   \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{2}$};
