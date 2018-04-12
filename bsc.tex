@@ -160,18 +160,20 @@ computação excedem a validade ou utilidade da informação desejada.
     \item \hh{} pode apresentar \emph{compressão},
         ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$;
     
-    \item \hh{} pode apresentar resistência à pré-imagem (\textsc{Pre}),
+    \item \hh{} pode apresentar \emph{resistência à pré-imagem} (\textsc{Pre}),
         caracterizada pelo seguinte comportamento: fornecido um resumo
         $h \in Y$, é computacionalmente inviável achar a mensagem
         original $m \in X$ que gerou $h$ através de $\hash{m} = h$;
 
-    \item \hh{} pode apresentar resistência à segunda pré-imagem (\textsc{Sec}),
-        caracterizada pelo seguinte comportamento: fornecida uma
-        mensagem $m_0 \in X$, é computacionalmente inviável achar
-        uma mensagem $m_1 \in X$ tal que $m_0 \neq m_1$ e
+    \item \hh{} pode apresentar \emph{resistência à segunda pré-imagem}
+        (\textsc{Sec}), caracterizada pelo seguinte comportamento:
+        fornecida uma mensagem $m_0 \in X$, é computacionalmente
+        inviável achar uma mensagem $m_1 \in X$ tal que $m_0 \neq m_1$ e
         $\hash{m_0} = \hash{m_1}$;
-
-    \item Para quaisquer duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq m_1$,
+        
+    \item \hh{} pode apresentar \emph{resistência à colisões} (\textsc{Col}),
+        caracterizada pelo seguinte comportamento: para quaisquer duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq m_1$, é computacionalmente inviável
+        encontrar
     $\hash{m_0} = \hash{m_1}$. \hh{} é considerada resistente à colisões
     (\textsc{Col}) se isto não pode ser resolvido de maneira eficiente.
 \end{enumerate}
