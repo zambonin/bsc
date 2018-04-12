@@ -100,20 +100,28 @@ eficiência de modo geral (e.g. o esquema de assinatura única de Lamport-Diffie
 simples), muitos resultados práticos demonstram a redução contínua do tempo de
 verificação da assinatura, tamanho e tempo para geração do par de chaves e
 assinatura, bem como avanços teóricos possibilitam a utilização de funções com
-requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
-\cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de uma chave não
+requisitos de segurança mínimos~\cite{cryptoeprint:2017:965},
+garantem o conceito de sigilo encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011}
+(i.e. comprometimento de uma chave não
 implica na segurança de mensagens que utilizaram esta chave anteriormente) e da
-ausência de estado \cite{Bernstein2015} (i.e. esquema não necessita registrar
+ausência de estado~\cite{Bernstein2015} (i.e. esquema não necessita registrar
 quais chaves de assinatura única já foram utilizadas).
 
-Neste trabalho, será estudada bibliografia referente aos temas abordados,
-buscando encontrar as vantagens e desvantagens de cada um dos esquemas
-de assinatura digital escolhidos, bem como observar seu desempenho e tamanho
-de elementos como par de chaves e assinatura, ao utilizar funções de resumo
-criptográfico distintas em implementações produzidas ou fornecidas.
-Elaborar-se-á uma comparação exaustiva dos esquemas de assinatura única e
-baseados em árvores de Merkle a fim de demonstrar a evolução recorrente
-destes algoritmos.
+Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
+apresenta-se uma customização para o esquema na forma de um parâmetro extra,
+que habilita a redução de tempos de verificação de assinatura em troca de
+mais computação na geração desta, ou vice-versa. Ademais, as consequências
+desta otimização são verificadas em esquemas mais complexos, como os baseados
+em árvores de Merkle.
+
+% Neste trabalho, será estudada bibliografia referente aos temas abordados,
+% buscando encontrar as vantagens e desvantagens de cada um dos esquemas
+% de assinatura digital escolhidos, bem como observar seu desempenho e tamanho
+% de elementos como par de chaves e assinatura, ao utilizar funções de resumo
+% criptográfico distintas em implementações produzidas ou fornecidas.
+% Elaborar-se-á uma comparação exaustiva dos esquemas de assinatura única e
+% baseados em árvores de Merkle a fim de demonstrar a evolução recorrente
+% destes algoritmos.
 
 \section{Objetivos}
 
