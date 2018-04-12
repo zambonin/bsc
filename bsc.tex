@@ -255,17 +255,19 @@ intercalados por aplicações de $f$.
 
 \tikzset{SpongePerm/.style=rounded corners=4pt,};
 \tikzset{edge/.style=->};
-\tikzset{edgee/.style=latex new-latex new, arrow head=8pt, thick};
-\tikzset{XOR/.style={draw,circle,append after command={
-        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
-        (\tikzlastnode.north) edge (\tikzlastnode.south)
-        (\tikzlastnode.east) edge (\tikzlastnode.west)
+\tikzset{edgee/.style=<->};
+\tikzset{
+    XOR/.style={
+        draw,circle,append after command={
+            [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+            (\tikzlastnode.north) edge (\tikzlastnode.south)
+            (\tikzlastnode.east) edge (\tikzlastnode.west)
         }
     }
 }
 
-\path (8.5, -1) node {\large\bf Absorbing phase};
-\path (25, -1) node {\large\bf Squeezing phase};
+\path (8.5, -1) node {\bf Absorbing phase};
+\path (25, -1) node {\bf Squeezing phase};
 
 %% 
 \begin{scope}[xshift=0cm]
@@ -283,7 +285,7 @@ intercalados por aplicações de $f$.
 
 \end{scope}
   
-\foreach \z in {1, ...,3} {
+\foreach \z in {1, ..., 3} {
   %%  
   \begin{scope}[xshift=\z*4cm]
     \draw[SpongePerm] 
