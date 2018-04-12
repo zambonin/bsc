@@ -264,11 +264,8 @@ intercalados por aplicações de $f$.
     }
 }
 
-\path (3.5, -1) node {Fase de absorção};
-\path (20, -1) node {Fase de compressão};
-
 \begin{scope}[xshift=0cm]
-    \draw[thick] (0,0) rectangle ++(1,10);
+    \draw[thick] (0,0) rectangle ++(1,10) node[pos=.] {$r$};
     \draw[thick] (0,3) -- ++(1,0);
     \node[XOR,thick] (xm0) at (1+1.5,8) {};
     \draw[edge,thick] (1,8) -- (xm0);
