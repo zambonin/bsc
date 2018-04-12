@@ -150,15 +150,20 @@ Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
 potencialmente grande para uma palavra pequena e identificável, podem possuir
 várias propriedades, apresentadas abaixo de acordo com~\cite{Menezes:1996:HAC:548089}.
 Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos da imagem
-de \hh{} são chamados de resumos.
+de \hh{} são chamados de resumos. É importante notar que um problema é considerado `'difícil`', ou
+computacionalmente impraticável, quando o tempo ou recursos gastos para esta
+computação excedem a validade ou utilidade da informação desejada.
 
 \begin{enumerate}[label=(\roman*)]
     \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil}.
-    \item A função pode apresentar \emph{compressão},
+    
+    \item \hh{} pode apresentar \emph{compressão},
         ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$.
     
-  \item Fornecido um resumo $h \in Y$, achar a mensagem original $m \in X$ que
-    gerou $h$ através de $\hash{m} = h$; \hh{} é considerada resistente à
+    \item \hh{} pode apresentar resistência à pré-imagem (\textsc{Pre}),
+        caracterizada pelo seguinte comportamento: fornecido um resumo
+        $h \in Y$, é computacionalmente inviável achar a mensagem
+        original $m \in X$ que gerou $h$ através de $\hash{m} = h$; \hh{} é considerada resistente à
     pré-imagem (\textsc{Pre}) se isto não pode ser resolvido de maneira
     eficiente.
 
@@ -196,9 +201,7 @@ Tome $X : \binwds{*}$ e $Y : \binwds{n}$, $n \in \mathbb{N}$. Então,
 $\mathcal{H} : X \longrightarrow Y$. De acordo com
 \cite{stinson2005cryptography}, para que qualquer \hh{} seja considerada
 criptográfica, deve ser difícil resolver os três problemas listados abaixo.
-É importante notar que um problema é considerado `'difícil`', ou
-computacionalmente impraticável, quando o tempo ou recursos gastos para esta
-computação excedem a validade ou utilidade da informação desejada.
+
 
 Note que \textsc{Sec} e \textsc{Col}. apresentam uma sutil diferença: no
 primeiro, um adversário não pode escolher $m_0$, enquanto no segundo, quaisquer
