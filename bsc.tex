@@ -15,8 +15,6 @@
 \newcommand{\binwds}[1]{\{0, 1\}^{#1}}
 \newcommand{\length}[1]{\vert #1 \vert}
 
-\usetikzlibrary{crypto.symbols}
-
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
 \def\colcircle{(1.75, 0) circle (0.75cm)}
@@ -269,7 +267,6 @@ intercalados por aplicações de $f$.
 \path (8.5, -1) node {\bf Absorbing phase};
 \path (25, -1) node {\bf Squeezing phase};
 
-%% 
 \begin{scope}[xshift=0cm]
   \draw[thick] (0,0) rectangle ++(1,10);
   \draw[thick] (0,3) -- ++(1,0);
