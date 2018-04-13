@@ -580,13 +580,13 @@ e discute-se algumas de suas características.
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(y_{0, m-1}), f(y_{1, m-1}), \dots, f(y_{0,0}), f(y_{1,0}))$.
+    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
 
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \pk{} operados por $f$: $\sigma = (f(y_{d_{m-1}, m-1}), \dots, f(y_{d_0, 0}))$.
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \sk{} operados por $f$: $\sigma = (f(x_{d_{m-1}, m-1}), \dots, f(x_{d_0, 0}))$.
     
     \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos de $\sigma$ precisam ser verificados separadamente através do recálculo de $d = d_{m-1} \dots d_0$, para que
     os elementos corretos de \pk{} sejam escolhidos. Assim, $\sigma$ está
-    correta se $(\sigma_{m-1}, \dots, \sigma_0) = (x_{d_{m-1}, m-1}, \dots, x_{d_{0}, 0})$.
+    correta se $(\sigma_{m-1}, \dots, \sigma_0) = (y_{d_{m-1}, m-1}, \dots, y_{d_{0}, 0})$.
     
 \end{enumerate}
 
@@ -595,6 +595,7 @@ forjadas, visto que é possível computar $f$ para os \emph{bits} da mensagem
 que são igual a zero. Assim, uma soma de verificação representando a
 quantidade de zeros na mensagem original também é assinada e enviada ao
 recipiente, adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.
+Esta característica será explicada em mais detalhes no próximo esquema.
 
 Ademais, uma otimização simples para reduzir o tamanho das chaves privadas pode ser
 implementada através da utilização de um gerador de números pseudoaleatórios
@@ -618,7 +619,7 @@ A partir destes, calcula-se
     $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil 
     \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
     t = t_1 + t_2,$$
-que representarão, respectivamente, a quantidade de palavras de tamanho $m$ na assinatura referente à mensagem, à soma de verificação, e a quantidade total.
+que representarão, respectivamente, a quantidade de palavras em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a quantidade total.
 Por fim, considere as funções de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$ e de resumo criptográfico
 $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
