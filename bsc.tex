@@ -582,9 +582,9 @@ e discute-se algumas de suas características.
 
     \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(y_{0, m-1}), f(y_{1, m-1}), \dots, f(y_{0,0}), f(y_{1,0}))$.
 
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \pk{}: $\sigma = (y_{b_{m-1}, m-1}, \dots, y_{b_0, 0})$.
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \pk{} resumidos por \hh{}: $\sigma = (\mathcal{H}(y_{b_{m-1}, m-1}), \dots, \mathcal{H}(y_{b_0, 0}))$.
     
-    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do recálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\text{\pk{}} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
+    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do recálculo de $d$.
     
 \end{enumerate}
 
