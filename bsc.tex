@@ -555,9 +555,14 @@ Neste capítulo, são apresentados os esquemas de assinatura digital única Lamp
 
 \section{O esquema Lamport}
 
-A utilização de funções de resumo criptográfico para a criação de esquemas de assinatura digital foi iniciada por Lamport~\cite{Lamport1979} e estendida em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um \emph{bit} de cada vez para uma dada mensagem. O par de chaves
-consiste de um par de palavras pseudoaleatórias $x_0, x_1$ como \sk{},
-e seus resumos como \pk{}. O assinante assina um \emph{bit} $b$ distribuindo $x_b$, e o recipiente verifica se $\hash{x_b}$ é o
+A utilização de funções de resumo criptográfico para a criação de 
+esquemas de assinatura digital foi iniciada por 
+Lamport~\cite{Lamport1979} e estendida 
+em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um 
+\emph{bit} de cada vez para uma dada mensagem. O par de chaves consiste 
+de um par de palavras pseudoaleatórias $x_0, x_1$ como \sk{}, e seus 
+resumos como \pk{}. O assinante assina um \emph{bit} $b$ distribuindo 
+$x_b$, e o recipiente verifica se $\hash{x_b}$ é o
 valor correto em \pk{}. Como parte de \sk{} é distribuída, não é
 recomendável reutilizar o par de chaves, e os elementos não
 distribuídos devem ser destruídos. Assinar mensagens mais longas
@@ -565,12 +570,11 @@ envolve o cálculo do resumo desta, visto que do contrário, o
 tamanho do par de chaves e assinaturas torna-se extremamente
 proibitivo.
 
+Formalmente, tome um parâmetro de segurança $m$, e considere as
+funções de mão única $f : \binwds{m} \longrightarrow \binwds{m}$
 
-By  extending  this  idea  to
-sign messages of arbitrary sizes, some drawbacks emerge, such
-as  large  sizes  for  the  cryptographic  key  pair  and  signature.
-These drawbacks have been the subject of research and several
-improvements  have  been  proposed  since  its  initial  design.
+
+
 
 \section{O esquema Winternitz}
 
