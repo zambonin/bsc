@@ -23,21 +23,18 @@
 \colorlet{circle area}{black!35}
 
 \tikzset{
-  filled/.style={fill=circle area, draw=circle edge, thick},
-  outline/.style={draw=circle edge, thick},
-  SpongePerm/.style={rounded corners=4pt}
+    filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick},
+    SpongePerm/.style={rounded corners=4pt},
+    XOR/.style={draw,circle,append after command={
+        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+        (\tikzlastnode.north) edge (\tikzlastnode.south)
+        (\tikzlastnode.east) edge (\tikzlastnode.west)}},
 }
 
 \tikzset{edge/.style=->}
 \tikzset{edgee/.style=<->}
 \tikzset{
-    XOR/.style={
-        draw,circle,append after command={
-            [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
-            (\tikzlastnode.north) edge (\tikzlastnode.south)
-            (\tikzlastnode.east) edge (\tikzlastnode.west)
-        }
-    }
 }
     
 
