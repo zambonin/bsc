@@ -198,8 +198,8 @@ em um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorr
 uma relação aparente entre entradas e saídas da função, tratando-se da
 do resumo por completo e subseções deste.  Outra característica desejada é o
 efeito avalanche, baseado no conceito de difusão~\cite{Stallings:2010:CNS:1824151}:
-trocar apenas um \emph{bit} da mensagem $m$
-deve modificar cerca de metade dos \emph{bits} do resumo, e vice-versa.
+trocar apenas um \emph{bit} da mensagem $m$ deve modificar cerca de metade
+dos \emph{bits} do resumo, e vice-versa.
 
 Adicionalmente, discute-se brevemente a relação da propriedade (vi) com
 funções de resumo. Funções de compressão de mão única não admitem o título
@@ -211,12 +211,11 @@ mensagens, por outro lado, geralmente englobam todas as seis propriedades,
 pois funções de resumo criptográfico são utilizadas em sua construção,
 e a parametrização habilita autenticação da mensagem junto à integridade já fornecida.
 
-Ademais, note que \textsc{Sec}
-e \textsc{Col} apresentam uma sutil diferença: na
+Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença: na
 primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
 pares de mensagens podem ser testados. A resistência à colisão, portanto,
 implica na resistência à segunda pré-imagem, visto que basta um adversário
-fixar $m_0$ para simular o cômputo de $m_1$. Finalmente, é enfatizada a
+fixar $m_0$ para simular o cômputo de $m_1$. 
 
 \begin{figure}[h]
   \centering
@@ -231,17 +230,17 @@ fixar $m_0$ para simular o cômputo de $m_1$. Finalmente, é enfatizada a
     \draw node[right=1.75cm, above=0.75cm] {\textsc{Sec}};
     \draw[outline] \colcircle node {\textsc{Col}};
   \end{tikzpicture}
-  \caption{Diagrama de Venn das resistências de uma função de resumo
-    criptográfico.}
+  \caption{Diagrama de Venn das resistências desejáveis para uma função de resumo
+    no contexto de assinaturas digitais.}
   \label{fig:1}
 \end{figure}
 
 Na Figura \ref{fig:1}, estão destacados os requisitos comuns para a utilização
-de funções de resumo criptográfico no contexto de esquemas de assinatura
+de funções de resumo no contexto de esquemas de assinatura
 digital, em vista da possibilidade de uma entidade maliciosa, geralmente
 chamada de adversário, desejar produzir assinaturas forjadas. É possível
 constatar que, embora exista uma divisão estrita entre \textsc{Pre} e
-\textsc{Sec}, observa-se que na prática, é possível assumir que a segunda
+\textsc{Sec}, observa-se que na prática, assume-se que a segunda
 implica a primeira resistência \cite[9.20]{Menezes:1996:HAC:548089}.
 
 Enumeram-se algumas aplicações comuns para estas funções: a verificação da
