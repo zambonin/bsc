@@ -34,10 +34,6 @@
     edgee/.style={<->}
 }
 
-\tikzset{
-}
-    
-
 \title{Otimização de desempenho do esquema de assinatura digital única Winternitz}
 \author{Gustavo Zambonin}
 \date{}
@@ -287,7 +283,7 @@ intercalados por aplicações de $f$.
 
 \begin{figure}[ht]
     \centering
-    \begin{tikzpicture}[scale=0.45]
+    \begin{tikzpicture}[scale=0.5]
 
     \begin{scope}[xshift=0cm]
         \draw[thick] (0,0) rectangle ++(1,10);
@@ -352,7 +348,8 @@ intercalados por aplicações de $f$.
     
     \end{tikzpicture}
     
-    \caption{Descrição gráfica da construção esponja, adaptado de~\cite{TikZ:for:Cryptographers}.}
+    \caption{Descrição gráfica da construção esponja,
+        adaptado de~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}.$}
     \label{fig:my_label}
 \end{figure}
 
@@ -478,7 +475,7 @@ quantidade de números relativamente primos a $x$.
   \item[] \emph{Decodificação.} O receptor da mensagem calcula $m = c^d
     \pmod{n}$.
 
-  \item[] \emph{Demonstração}. Para demonstrar $m^{ed} \equiv m \pmod{n}$, é
+  \item[] \emph{Demonstração.} Para demonstrar $m^{ed} \equiv m \pmod{n}$, é
     suficiente mostrar $m^{ed} \equiv m \pmod{p}$ e $m^{ed} \equiv m \pmod{q}$,
     pelo Teorema Chinês do Resto. Se $m \equiv 0 \pmod{p}$, então
     $gcd(m, p) = p$ e certamente $m^{ed} \equiv 0 \equiv m \pmod{n}$.
