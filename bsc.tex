@@ -149,7 +149,7 @@ agregando estas noções.
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
 de tamanho arbitrário para uma palavra pequena e identificável
 deterministicamente, podem possuir várias propriedades,
-apresentadas abaixo de acordo com~\cite{Menezes:1996:HAC:548089}.
+apresentadas abaixo de acordo com~\cite[9.2]{Menezes:1996:HAC:548089}.
 Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos de $Y$
 são chamados de resumos. É importante notar que um problema é considerado
 ``difícil'', ou computacionalmente inviável, quando o tempo ou recursos gastos
@@ -186,7 +186,7 @@ para esta computação excedem a validade ou utilidade da informação desejada.
 
 É possível classificar \hh{} de acordo com a presença destas
 propriedades. Uma função de resumo simples contém apenas (i) e (ii). Ao
-adicionar (iii), obtém-se uma função de mão única, onde o cálculo de
+adicionar (iii) e remover (i), obtém-se uma função de mão única, onde o cálculo de
 $\mathcal{H}^{-1}$ é computacionalmente inviável. Uma função de resumo
 de mão única é obtida adicionando a propriedade (iv). Por fim, uma
 função de resumo resistente à colisões, ou \emph{função de resumo
@@ -213,10 +213,10 @@ funções de resumo. Funções de compressão de mão única não admitem o tít
 de funções de resumo, visto que a propriedade de compressão não é respeitada
 -- embora seu nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem
 ser parametrizadas por uma chave, e são utilizadas para a construção de cifras
-de bloco~\cite{Merkle:1989:CDS:118209.118230}. Códigos de autenticação de mensagens, por outro lado, geralmente
-englobam todas as seis propriedades, pois funções de resumo criptográfico são
-utilizadas em sua construção, e a parametrização habilita autenticação da
-mensagem junto à integridade já fornecida.
+de bloco~\cite[9.25]{Menezes:1996:HAC:548089}. Códigos de autenticação de
+mensagens, por outro lado, geralmente englobam todas as seis propriedades,
+pois funções de resumo criptográfico são utilizadas em sua construção,
+e a parametrização habilita autenticação da mensagem junto à integridade já fornecida.
 
 \begin{figure}[h]
   \centering
@@ -242,7 +242,7 @@ digital, em vista da possibilidade de uma entidade maliciosa, geralmente
 chamada de adversário, desejar produzir assinaturas forjadas. É possível
 constatar que, embora exista uma divisão estrita entre \textsc{Pre} e
 \textsc{Sec}, observa-se que na prática, é possível assumir que a segunda
-implica a primeira resistência \cite{Menezes:1996:HAC:548089}.
+implica a primeira resistência \cite[9.20]{Menezes:1996:HAC:548089}.
 
 Enumeram-se algumas aplicações comuns para estas funções: a verificação da
 integridade de um arquivo, i.e. determinar se mudanças neste foram feitas ao
