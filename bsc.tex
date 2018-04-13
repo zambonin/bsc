@@ -201,13 +201,6 @@ efeito avalanche, baseado no conceito de difusão~\cite{Stallings:2010:CNS:18241
 trocar apenas um \emph{bit} da mensagem $m$
 deve modificar cerca de metade dos \emph{bits} do resumo, e vice-versa.
 
-Ademais, note que \textsc{Sec}
-e \textsc{Col} apresentam uma sutil diferença: na
-primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
-pares de mensagens podem ser testados. A resistência à colisão, portanto,
-implica na resistência à segunda pré-imagem, visto que basta um adversário
-fixar $m_0$ para simular o cômputo de $m_1$.
-
 Adicionalmente, discute-se brevemente a relação da propriedade (vi) com
 funções de resumo. Funções de compressão de mão única não admitem o título
 de funções de resumo, visto que a propriedade de compressão não é respeitada
@@ -217,6 +210,13 @@ de bloco~\cite[9.25]{Menezes:1996:HAC:548089}. Códigos de autenticação de
 mensagens, por outro lado, geralmente englobam todas as seis propriedades,
 pois funções de resumo criptográfico são utilizadas em sua construção,
 e a parametrização habilita autenticação da mensagem junto à integridade já fornecida.
+
+Ademais, note que \textsc{Sec}
+e \textsc{Col} apresentam uma sutil diferença: na
+primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
+pares de mensagens podem ser testados. A resistência à colisão, portanto,
+implica na resistência à segunda pré-imagem, visto que basta um adversário
+fixar $m_0$ para simular o cômputo de $m_1$. Finalmente, é enfatizada a
 
 \begin{figure}[h]
   \centering
