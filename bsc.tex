@@ -159,7 +159,7 @@ para esta computação excedem a validade ou utilidade da informação desejada.
 
     \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil};
     
-    \item \hh{} pode apresentar \emph{compressão},
+    \item \hh{} deve apresentar \emph{compressão},
         ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$;
     
     \item \hh{} pode apresentar \emph{resistência à pré-imagem} (\textsc{Pre}),
@@ -194,9 +194,12 @@ função de resumo resistente à colisões, ou \emph{função de resumo
 criptográfico}, conta com as cinco primeiras propriedades, que
 torna-a adequada para utilização no contexto de segurança da informação. 
 
-Estas possibilitam a certeza da integridade de dados, mesmo que
-armazenados em um dispositivo inseguro. Mostra-se desejável para estas que não ocorra uma relação aparente entre entradas
-e saídas da função. 
+O conceito (ii) pode ser desconsiderado, assim possibilitando a construção
+de funções de mão única sem compressão.
+
+Estas possibilitam a certeza da integridade de dados, mesmo que armazenados
+em um dispositivo inseguro. Mostra-se desejável para estas que não ocorra
+uma relação aparente entre entradas e saídas da função. 
 
 Note que \textsc{Sec} e \textsc{Col}. apresentam uma sutil diferença: no
 primeiro, um adversário não pode escolher $m_0$, enquanto no segundo, quaisquer
