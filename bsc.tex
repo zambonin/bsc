@@ -558,12 +558,10 @@ Neste capítulo, são apresentados os esquemas de assinatura digital única Lamp
 A utilização de funções de resumo criptográfico para a criação de esquemas de assinatura digital foi iniciada por Lamport~\cite{Lamport1979} e estendida em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um \emph{bit} de cada vez para uma dada mensagem. O par de chaves
 consiste de um par de palavras pseudoaleatórias $x_0, x_1$ como \sk{},
 e seus resumos como \pk{}. O assinante assina um \emph{bit} $b$ distribuindo $x_b$, e o recipiente verifica se $\hash{x_b}$ é o
-valor correto em \pk{}.
+valor correto em \pk{}. Como parte de \sk{} é distribuída, não é
+recomendável reutilizar o par de chaves, e os elementos não
+distribuídos devem ser destruídos.
 
-Consider a pair of random words as the private key and their hashes as
-the public key. The signer then signs a single bit of information
-by choosing to distribute as the signature one of two random
-private  key  strings  on  whether  the  bit  is  0  or  1.  The  verifier
 then computes the hash of this string, comparing it with part of
 the public key. Note that reusing the random strings drastically
 reduces  the  security  for  LD-OTS.  By  extending  this  idea  to
