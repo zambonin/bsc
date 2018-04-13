@@ -24,8 +24,22 @@
 
 \tikzset{
   filled/.style={fill=circle area, draw=circle edge, thick},
-  outline/.style={draw=circle edge, thick}
+  outline/.style={draw=circle edge, thick},
+  SpongePerm/.style={rounded corners=4pt}
 }
+
+\tikzset{edge/.style=->}
+\tikzset{edgee/.style=<->}
+\tikzset{
+    XOR/.style={
+        draw,circle,append after command={
+            [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+            (\tikzlastnode.north) edge (\tikzlastnode.south)
+            (\tikzlastnode.east) edge (\tikzlastnode.west)
+        }
+    }
+}
+    
 
 \title{Otimização de desempenho do esquema de assinatura digital única Winternitz}
 \author{Gustavo Zambonin}
@@ -278,19 +292,6 @@ intercalados por aplicações de $f$.
     \centering
     \begin{tikzpicture}[scale=0.45]
 
-    \tikzset{SpongePerm/.style=rounded corners=4pt,};
-    \tikzset{edge/.style=->};
-    \tikzset{edgee/.style=<->};
-    \tikzset{
-        XOR/.style={
-            draw,circle,append after command={
-                [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
-                (\tikzlastnode.north) edge (\tikzlastnode.south)
-                (\tikzlastnode.east) edge (\tikzlastnode.west)
-            }
-        }
-    }
-    
     \begin{scope}[xshift=0cm]
         \draw[thick] (0,0) rectangle ++(1,10);
         \draw[thick] (0,3) -- ++(1,0);
