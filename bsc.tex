@@ -209,8 +209,14 @@ implica na resistência à segunda pré-imagem, visto que basta um adversário
 fixar $m_0$ para simular o cômputo de $m_1$.
 
 Adicionalmente, discute-se brevemente a relação da propriedade (vi) com
-funções de resumo. Funções de compressão de mão única e admitem apenas
-entradas cujo tamanho é fixo, 
+funções de resumo. Funções de compressão de mão única não admitem o título
+de funções de resumo, visto que a propriedade de compressão não é respeitada
+-- embora seu nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem
+ser parametrizadas por uma chave, e são utilizadas para a construção de cifras
+de bloco. Códigos de autenticação de mensagens, por outro lado, geralmente
+englobam todas as seis propriedades, pois funções de resumo criptográfico são
+utilizadas em sua construção, e a parametrização habilita autenticação da
+mensagem junto à integridade já fornecida.
 
 
 Ao parametrizar uma destas funções, obtém-se uma função de
