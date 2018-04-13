@@ -538,7 +538,7 @@ mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 binário. De acordo com~\cite{Goldreich2004}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
 geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
-\textsc{Gen}^{\rightarrow}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
+\textsc{Gen}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
 \begin{equation}
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
