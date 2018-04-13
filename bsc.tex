@@ -531,7 +531,7 @@ que uma mensagem foi assinada e enviada, após este fato.
 Esquemas de assinatura digital são fortemente baseados em criptografia de
 chaves públicas, e consistem de três algoritmos: a geração de chaves
 $\textsc{Gen}(1^n)$, que gera um par de chaves aleatório $(\mathcal{P}_k,
-\mathcal{S}_k)$ com parâmetro de segurança $n$; o algoritmo de assinatura
+\mathcal{S}_k)$ com parâmetro de segurança $n \in \mathbb{N}^{*}$; o algoritmo de assinatura
 $\textsc{Sig}(\mathcal{S}_k, m)$, que produz uma assinatura $\sigma$ para uma
 mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 \sigma)$, que retorna o estado de validade da assinatura como um valor verdade
@@ -542,10 +542,10 @@ geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
 \begin{equation}
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
-
+É necessário apontar que esta definição não considera a segurança do esquema -- é possível construir trivialmente algoritmos que respeitam a equação acima, sem qualquer tipo de codificação a fim de ocultar mensagens. 
 Na Figura \ref{fig:2}, é possível visualizar um diagrama do comportamento de
 um esquema de assinatura digital genérico. Note que $\sigma$ geralmente é
-composto da concatenação da mensagem original com a assinatura do resumo
+composta da concatenação da mensagem original com a assinatura do resumo
 criptográfico desta, embora a saída do algoritmo \textsc{Sig} consista apenas
 da aplicação de uma função interna a este ao resumo.
 
