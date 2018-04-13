@@ -549,6 +549,72 @@ composta da concatenação da mensagem original com a assinatura do resumo
 criptográfico desta, embora a saída do algoritmo \textsc{Sig} consista apenas
 da aplicação de uma função interna a este ao resumo.
 
+\chapter{Assinatura digital baseada em funções de resumo criptográfico}
+
+\section{O esquema Winternitz}
+
+O esquema de assinatura digital única Winternitz (\textsc{Wots} --- \emph{Winternitz one-time signature}), em sua proposta original \cite{Merkle:1989:CDS:118209.118230},
+apresenta versatilidade em relação ao tamanho de chaves e da assinatura, e também pode
+ser configurado para utilizar diferentes funções de resumo criptográfico a fim de
+utilizar recursos possivelmente disponíveis no dispositivo alvo.
+
+Tome um parâmetro de segurança $m$, geralmente considerado como
+o tamanho da saída da função de resumo criptográfico escolhido. Um parâmetro
+$w \in \mathbb{N}, w > 1$ também deve ser definido, responsável por codificar a
+quantidade de bits a serem assinados simultaneamente, modificando assim o
+desempenho geral do esquema e o tamanho de chaves e assinatura. A partir destes,
+calcula-se
+    $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil 
+    \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
+    t = t_1 + t_2.$$
+Por fim, considere as funções\footnote{Na prática, o esquema pode ser instanciado utilizando \hh{} no lugar de $f$.} de mão única
+$f : \binwds{m} \longrightarrow \binwds{m}$
+e de resumo criptográfico
+$\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
+Descreve-se abaixo o funcionamento do esquema
+e discute-se algumas de suas características. 
+
+\begin{enumerate}
+    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{t-1}, \dots, x_0) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{t-1}, \dots, y_0)$ pode ser derivada de \sk{}, computando $f^{2^{w}-1}(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
+
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
+    Adicionalmente, uma soma de verificação é calculada usando a representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1}, \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots, f^{b_0}(x_0)).$
+    
+    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do cálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\text{\pk{}} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
+\end{enumerate}
+
+Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto implicaria em achar uma pré-imagem de $f$, o que é computacionalmente inviável em vista da restrição para $f$. Então, resta apenas a tentativa da falsificação de $\sigma$ incrementando algum valor $b_i$. A soma de verificação $c$ é necessária a fim de proteger o esquema contra este comportamento. Observe que, em sua ausência, é possível que uma entidade maliciosa crie assinaturas $\sigma'$ apenas calculando mais iterações de $f$ em blocos da assinatura $\sigma$. Entretanto, com a presença de $c$, e consequentemente $\mathcal{B}_2$, ao modificar um valor $b_j \in \mathcal{B}_1$, para que o valor correto de $\mathcal{B}_2$ seja mantido, é necessário que uma pré-imagem de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura impossível.
+
+\subsection{\textsc{Wots+}}
+
+O principal esquema variante do \textsc{Wots}, chamado de \textsc{Wots+}~\cite{cryptoeprint:2017:965}, tem como ideia principal a reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o processo de iterações sequenciais --- utilizando apenas uma função --- do esquema original. Esta característica também permite uma prova de segurança mais simples, mas não menos poderosa, que desconsidera a necessidade da resistência à colisões de $f$.
+
+Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem como a função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$ de maneira análoga ao esquema original. A família de funções que o \textsc{Wots+} utiliza é definida por $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e $\mathcal{K}_n$ é interpretado como o espaço de chaves. A partir desta família, e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, elabora-se a nova função de iteração $c^{i}_{k}(x, r)$, definida recursivamente como $c^{0}_{k}(x, r) = x, \; c^{i}_{k}(x, r) = f_k(c^{i-1}_{k}(x, r) \oplus r_i)$.
+
+\begin{enumerate}
+
+    \item[] \emph{Geração de chaves.} Defina \sk{} e $r$ como tuplas de inteiros pseudoaleatórios, discutidos anteriormente. O algoritmo também deve escolher uma chave de função $k \stackrel{\$}\longleftarrow \mathcal{K}$. Por fim, $\text{\pk{}} = (c^{2^w-1}_{k}(x_{t-1}, r), \dots, c^{0}_{k}(x, r))$.
+    
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu resumo $d = \mathcal{H}(M)$ e a soma de verificação $c$ correspondente, produzindo $\mathcal{B}$. As considerações sobre preenchimento de $m$ e $c$ ainda se aplicam. Aplicando a nova função de iteração, tem-se $\sigma = (c^{b_{t - 1}}_{k}(x_{t-1}, r), \dots, c^{b_{0}}_{k}(x_{0}, r))$.
+    
+    \item[] \emph{Verificação da assinatura.} Novamente, é necessário calcular $\mathcal{B}$ para obter as iterações restantes até \pk{}. Assim, $\sigma$ está correta se $\text{\pk{}} = (c^{2^{w} - 1 - b_{t - 1}}_{k}(\sigma_{t-1}, r), \dots, c^{2^{w} - 1 - b_{0}}_{k}(\sigma_{0}, r))$. Note que as primeiras $b_i$ palavras de $r$ não serão utilizadas.
+
+\end{enumerate}
+
+Note que é possível utilizar uma função conhecida, como o AES, para as iterações de $f$. Isto pode ser explicado por conta de implementações em hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da Intel, habilitando um grande ganho de desempenho no cômputo desta cifra. Porém, é necessário adaptar a cifra de blocos para que respeite as restrições impostas pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um nível de segurança suficiente, é possível empregar a construção Matyas-Meyer-Oseas (MMO, \cite[9.41]{Menezes:1996:HAC:548089}).
+
+Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que represente uma palavra $x$, e que sua inversibilidade seja computacionalmente inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X, \vert x_i \vert = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam elementos que desrespeitem esta regra. O resultado deste processo é definido recursivamente como $h_0 = IV, h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
+
+Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como forma de executar iterações para criar e verificar a assinatura, como sugerido por \cite[4.1]{cryptoeprint:2017:965}. Note que apenas esta versão do esquema pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração. Do contrário, o método pode introduzir multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total. % citation needed
+
+\subsection{Esquemas baseados em árvores de Merkle}
+
+A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
+
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida. Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
+
+O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas. Vários outros esquemas continuam utilizando assinatura única e compõem o estado da arte da literatura \cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}, demonstrando a utilidade destes esquemas e suas otimizações.
+
 \bibliographystyle{alpha}
 \bibliography{ref}
 
