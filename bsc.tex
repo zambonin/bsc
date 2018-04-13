@@ -213,19 +213,10 @@ funções de resumo. Funções de compressão de mão única não admitem o tít
 de funções de resumo, visto que a propriedade de compressão não é respeitada
 -- embora seu nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem
 ser parametrizadas por uma chave, e são utilizadas para a construção de cifras
-de bloco. Códigos de autenticação de mensagens, por outro lado, geralmente
+de bloco~\cite{Merkle:1989:CDS:118209.118230}. Códigos de autenticação de mensagens, por outro lado, geralmente
 englobam todas as seis propriedades, pois funções de resumo criptográfico são
 utilizadas em sua construção, e a parametrização habilita autenticação da
 mensagem junto à integridade já fornecida.
-
-
-Ao parametrizar uma destas funções, obtém-se uma função de
-compressão de mão única -- mas não de resumo, visto que $\length{X}$ é fixo --,
-utilizadas para a construção de cifras de bloco.
-
-Adicionalmente, o conceito de funções de mão única com compressão é
-destacado. Estas funções são parametrizadas por uma chave $k$
-
 
 \begin{figure}[h]
   \centering
