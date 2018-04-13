@@ -99,8 +99,8 @@ assinatura de diversas mensagens. Como uma função específica não é necessá
 destas abordagens.
 
 Embora os esquemas iniciais tenham sido construídos sem atenção particular à
-eficiência de modo geral (e.g. o esquema de assinatura única de Lamport-Diffie
-\cite{Lamport1979} assina apenas um \emph{bit} de informação em sua forma mais
+eficiência de modo geral (e.g. o esquema de assinatura única de Lamport~\cite{Lamport1979}
+assina apenas um \emph{bit} de informação em sua forma mais
 simples), muitos resultados práticos demonstram a redução contínua do tempo de
 verificação da assinatura, tamanho e tempo para geração do par de chaves e
 assinatura, bem como avanços teóricos possibilitam a utilização de funções com
@@ -131,7 +131,7 @@ do artigo a ser publicado como~\cite{Peri1806:Tuning}.
     verificação de uma assinatura.
     
 \item \emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
-    única Lamport-Diffie e Winternitz, e sua variante \textsc{Wots+}. Descrever
+    única Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever
     os esquemas de assinatura digital baseados em árvores de Merkle: \emph{Merkle
     Signature Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências
     da modificação do esquema Winternitz no contexto destes, e mensurar desempenho
@@ -551,11 +551,25 @@ da aplicação de uma função interna a este ao resumo.
 
 \chapter{Assinatura digital baseada em funções de resumo criptográfico}
 
-Neste capítulo, são apresentados os esquemas de assinatura digital única Lamport-Diffie, a fim de fundamentar o raciocínio por trás do esquema alvo. Winternitz e \textsc{Wots+} são definidos logo após, bem como os esquemas Merkle, XMSS (\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores XMSS$^{MT}$, SPHINCS e SPHINCS+, e a relação entre estes. Em especial, estes esquemas são escolhidos como os exemplos mais reconhecidos de suas respectivas categorias.
+Neste capítulo, são apresentados os esquemas de assinatura digital única Lamport, a fim de fundamentar o raciocínio por trás do esquema alvo. Winternitz e \textsc{Wots+} são definidos logo após, bem como os esquemas Merkle, XMSS (\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores XMSS$^{MT}$, SPHINCS e SPHINCS+, e a relação entre estes. Em especial, estes esquemas são escolhidos como os exemplos mais reconhecidos de suas respectivas categorias.
 
-\section{O esquema Lamport-Diffie}
+\section{O esquema Lamport}
 
-
+The  idea  of  using  only  hashes  to  sign  digital  messages  is
+not new. Lamport [13] proposed, in 1979, a very simple and
+secure  scheme  to  generate  and  verify  digital  signatures.  LD-
+OTS, or Lamport-Diffie one-time signature scheme, considers
+a pair of random words as the private key and their hashes as
+the public key. The signer then signs a single bit of information
+by choosing to distribute as the signature one of two random
+private  key  strings  on  whether  the  bit  is  0  or  1.  The  verifier
+then computes the hash of this string, comparing it with part of
+the public key. Note that reusing the random strings drastically
+reduces  the  security  for  LD-OTS.  By  extending  this  idea  to
+sign messages of arbitrary sizes, some drawbacks emerge, such
+as  large  sizes  for  the  cryptographic  key  pair  and  signature.
+These drawbacks have been the subject of research and several
+improvements  have  been  proposed  since  its  initial  design.
 
 \section{O esquema Winternitz}
 
