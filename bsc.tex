@@ -618,7 +618,7 @@ A partir destes, calcula-se
     $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil 
     \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
     t = t_1 + t_2,$$
-que representarão, respectivamente, a quantidade do bloco da assinatura referente à mensagem, à soma de verificação, e o tamanho total.
+que representarão, respectivamente, a quantidade de palavras de tamanho $m$ na assinatura referente à mensagem, à soma de verificação, e a adição destes valores.
 Por fim, considere as funções de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$ e de resumo criptográfico
 $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
