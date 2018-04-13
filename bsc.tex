@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
-\usepackage{amsmath, amsfonts, enumitem, tikz, parskip}
+\usepackage{amsmath, amsfonts, enumitem, parskip, tikz-qtree}
 
 \newcommand{\hh}{$\mathcal{H}$}
 \newcommand{\pk}{$\mathcal{P}_k$}
@@ -666,6 +666,35 @@ A criação de um par de chaves para cada mensagem, bem como a infraestrutura ne
 De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida. Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
 
 O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas. Vários outros esquemas continuam utilizando assinatura única e compõem o estado da arte da literatura \cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}, demonstrando a utilidade destes esquemas e suas otimizações.
+
+\begin{figure}
+\begin{tikzpicture}
+  \tikzset{every tree node/.style={align=center,anchor=north,font=\tiny}}
+  \Tree
+    [.\node{$T_{r}$ \\ $\hash{T_{0} \concat T_{1}}$};
+      [.\node{$T_{0}$ \\ $\mathcal{H}(T_{0, 0} \concat T_{0, 1})$};
+        [.{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
+          \edge[dashed, style={<-}] node {}; $\mathcal{D}_{0}$
+        ]
+        [.{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
+          \edge[dashed, style={<-}] node {}; $\mathcal{D}_{1}$
+        ]
+      ]
+      [.\node{$T_{1}$ \\ $\mathcal{H}(T_{1, 0} \concat T_{1, 1})$};
+        [.{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
+          \edge[dashed, style={<-}] node {}; $\mathcal{D}_{2}$
+        ]
+        [.{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
+          \edge[dashed, style={<-}] node {}; $\mathcal{D}_{3}$
+        ]
+      ]
+    ]
+\end{tikzpicture}
+\captionsetup{font=scriptsize}
+\caption*{Take $\mathcal{D}_n$ as any data block. A Merkle tree
+  can be constructed recursively through the concatenation
+  of hashes of a node's children.}
+\end{figure}
 
 \bibliographystyle{alpha}
 \bibliography{ref}
