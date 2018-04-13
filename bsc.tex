@@ -590,7 +590,13 @@ e discute-se algumas de suas características.
     
 \end{enumerate}
 
-Uma otimização simples para reduzir o tamanho das chaves privadas pode ser
+É necessário comentar que assinaturas produzidas por este esquema podem ser
+forjadas, visto que é possível computar $f$ para os \emph{bits} da mensagem
+que são igual a zero. Assim, uma soma de verificação representando a
+quantidade de zeros na mensagem original também é assinada e enviada ao
+recipiente, adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.
+
+Ademais, uma otimização simples para reduzir o tamanho das chaves privadas pode ser
 implementada através da utilização de um gerador de números pseudoaleatórios
 criptograficamente seguro. Assim, mostra-se necessário apenas guardar uma
 palavra de tamanho $m$ que age como a semente deste gerador. Reduzir
@@ -601,7 +607,9 @@ a generalização deste esquema permite estas otimizações.
 
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
-por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}
+por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.
+O esquema permite assinar múltiplos \emph{bits} a cada bloco da assinatura,
+generalizando a proposta de Lamport. Elabora-se a definição do esquema abaixo.
 
 Tome um parâmetro de segurança $m$, geralmente considerado como
 o tamanho da saída da função de resumo criptográfico escolhido. Um parâmetro
