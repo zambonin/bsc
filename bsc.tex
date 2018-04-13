@@ -147,12 +147,12 @@ agregando estas noções.
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
-potencialmente grande para uma palavra pequena e identificável
+de tamanho arbitrário para uma palavra pequena e identificável
 deterministicamente, podem possuir várias propriedades,
 apresentadas abaixo de acordo com~\cite{Menezes:1996:HAC:548089}.
-Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos da imagem
-de \hh{} são chamados de resumos. É importante notar que um problema é considerado
-``difícil'', ou computacionalmente impraticável, quando o tempo ou recursos gastos
+Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos de $Y$
+são chamados de resumos. É importante notar que um problema é considerado
+``difícil'', ou computacionalmente inviável, quando o tempo ou recursos gastos
 para esta computação excedem a validade ou utilidade da informação desejada.
 
 \begin{enumerate}[label=(\roman*)]
@@ -206,8 +206,8 @@ destacado. Estas funções são parametrizadas por uma chave $k$
 
 
 
-Note que \textsc{Sec} e \textsc{Col}. apresentam uma sutil diferença: no
-primeiro, um adversário não pode escolher $m_0$, enquanto no segundo, quaisquer
+Note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença: na
+primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
 pares de mensagens podem ser testados. A resistência à colisão, portanto,
 implica na resistência à segunda pré-imagem, visto que basta um adversário
 fixar $m_0$ para simular o cômputo de $m_1$. Outra característica desejada é o
