@@ -570,10 +570,24 @@ envolve o cálculo do resumo desta, visto que do contrário, o
 tamanho do par de chaves e assinaturas torna-se extremamente
 proibitivo.
 
-Formalmente, tome um parâmetro de segurança $m$, e considere as
-funções de mão única $f : \binwds{m} \longrightarrow \binwds{m}$
+Formalmente, tome um parâmetro de segurança $m$, geralmente considerado como
+o tamanho da saída da função de resumo criptográfico escolhido. Considere as funções\footnote{Na prática, o esquema pode ser instanciado utilizando \hh{} no lugar de $f$.} de mão única
+$f : \binwds{m} \longrightarrow \binwds{m}$
+e de resumo criptográfico
+$\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
+Descreve-se abaixo o funcionamento do esquema
+e discute-se algumas de suas características. 
 
+\begin{enumerate}
 
+    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{t-1}, \dots, x_0) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{t-1}, \dots, y_0)$ pode ser derivada de \sk{}, computando $f^{2^{w}-1}(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
+
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
+    Adicionalmente, uma soma de verificação é calculada usando a representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1}, \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots, f^{b_0}(x_0)).$
+    
+    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do cálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\text{\pk{}} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
+    
+\end{enumerate}
 
 
 \section{O esquema Winternitz}
@@ -600,12 +614,14 @@ Descreve-se abaixo o funcionamento do esquema
 e discute-se algumas de suas características. 
 
 \begin{enumerate}
+
     \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{t-1}, \dots, x_0) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{t-1}, \dots, y_0)$ pode ser derivada de \sk{}, computando $f^{2^{w}-1}(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
 
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
     Adicionalmente, uma soma de verificação é calculada usando a representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1}, \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots, f^{b_0}(x_0)).$
     
     \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do cálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\text{\pk{}} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
+    
 \end{enumerate}
 
 Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto implicaria em achar uma pré-imagem de $f$, o que é computacionalmente inviável em vista da restrição para $f$. Então, resta apenas a tentativa da falsificação de $\sigma$ incrementando algum valor $b_i$. A soma de verificação $c$ é necessária a fim de proteger o esquema contra este comportamento. Observe que, em sua ausência, é possível que uma entidade maliciosa crie assinaturas $\sigma'$ apenas calculando mais iterações de $f$ em blocos da assinatura $\sigma$. Entretanto, com a presença de $c$, e consequentemente $\mathcal{B}_2$, ao modificar um valor $b_j \in \mathcal{B}_1$, para que o valor correto de $\mathcal{B}_2$ seja mantido, é necessário que uma pré-imagem de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura impossível.
