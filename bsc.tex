@@ -608,17 +608,17 @@ a generalização deste esquema permite estas otimizações.
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
 por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.
-O esquema permite assinar múltiplos \emph{bits} a cada bloco da assinatura,
+O esquema permite assinar múltiplos \emph{bits} em cada bloco da assinatura,
 generalizando a proposta de Lamport. Elabora-se a definição do esquema abaixo.
 
 Um parâmetro de segurança $m$ é necessário, como acima. O parâmetro
-Winternitz, da forma $w \in \mathbb{N}, w > 1$ também deve ser definido, que
-representa a quantidade de \emph{bits} a serem assinados simultaneamente, modificando assim o
-desempenho geral do esquema e o tamanho de chaves e assinatura. A partir destes,
-calcula-se
+Winternitz, da forma $w \in \mathbb{N}, w > 1$, também deve ser definido, que
+representa a quantidade de \emph{bits} a serem assinados simultaneamente.
+A partir destes, calcula-se
     $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil 
     \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
-    t = t_1 + t_2.$$
+    t = t_1 + t_2,$$
+que representarão, respectivamente, o tamanho do bloco da assinatura referente à mensagem, à soma de verificação, e o tamanho total.
 Por fim, considere as funções\footnote{Na prática, o esquema pode ser instanciado utilizando \hh{} no lugar de $f$.} de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$
 e de resumo criptográfico
