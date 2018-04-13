@@ -555,12 +555,11 @@ Neste capítulo, são apresentados os esquemas de assinatura digital única Lamp
 
 \section{O esquema Lamport}
 
-A utilização de funções de resumo criptográfico para a criação de esquemas de assinatura digital foi iniciada por Lamport~\cite{Lamport1979}, permitindo assinar um \emph{bit} de
-cada vez para uma dada mensagem. Porém, 
-
-
-e estendida em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um \emph{bit} de cada
-vez para uma dada mensagem. 
+A utilização de funções de resumo criptográfico para a criação de esquemas de assinatura digital foi iniciada por Lamport~\cite{Lamport1979} e estendida em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um \emph{bit} de cada vez para uma dada mensagem. A ideia original
+consiste da geração de duas palavras pseudoaleatórias $x_1, x_2$
+e resumos $\hash{x_1}, \hash{x_2}$ para cada \emph{bit} de informação, bem como os resultados da
+aplicação de \hh{}. Para comunicar
+este \emph{bit}, a entidade disponibiliza a primeira palavra
 
 Consider a pair of random words as the private key and their hashes as
 the public key. The signer then signs a single bit of information
