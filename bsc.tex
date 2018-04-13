@@ -196,18 +196,24 @@ torna-a adequada para utilização no contexto de segurança da informação.
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados
 em um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorra
 uma relação aparente entre entradas e saídas da função, tratando-se da
-do resumo por completo e subseções deste. Ademais, note que \textsc{Sec}
-e \textsc{Col} apresentam uma sutil diferença: na
-primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
-pares de mensagens podem ser testados. A resistência à colisão, portanto,
-implica na resistência à segunda pré-imagem, visto que basta um adversário
-fixar $m_0$ para simular o cômputo de $m_1$. Outra característica desejada é o
+do resumo por completo e subseções deste.  Outra característica desejada é o
 efeito avalanche, baseado no conceito de difusão~\cite{Stallings:2010:CNS:1824151}:
 trocar apenas um \emph{bit} da mensagem $m$
 deve modificar cerca de metade dos \emph{bits} do resumo, e vice-versa.
 
+Ademais, note que \textsc{Sec}
+e \textsc{Col} apresentam uma sutil diferença: na
+primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
+pares de mensagens podem ser testados. A resistência à colisão, portanto,
+implica na resistência à segunda pré-imagem, visto que basta um adversário
+fixar $m_0$ para simular o cômputo de $m_1$.
+
 Adicionalmente, discute-se brevemente a relação da propriedade (vi) com
-funções de resumo. Ao parametrizar uma destas funções, obtém-se uma função de
+funções de resumo. Funções de compressão de mão única e admitem apenas
+entradas cujo tamanho é fixo, 
+
+
+Ao parametrizar uma destas funções, obtém-se uma função de
 compressão de mão única -- mas não de resumo, visto que $\length{X}$ é fixo --,
 utilizadas para a construção de cifras de bloco.
 
