@@ -560,11 +560,13 @@ consiste de um par de palavras pseudoaleatórias $x_0, x_1$ como \sk{},
 e seus resumos como \pk{}. O assinante assina um \emph{bit} $b$ distribuindo $x_b$, e o recipiente verifica se $\hash{x_b}$ é o
 valor correto em \pk{}. Como parte de \sk{} é distribuída, não é
 recomendável reutilizar o par de chaves, e os elementos não
-distribuídos devem ser destruídos.
+distribuídos devem ser destruídos. Assinar mensagens mais longas
+envolve o cálculo do resumo desta, visto que do contrário, o
+tamanho do par de chaves e assinaturas torna-se extremamente
+proibitivo.
 
-then computes the hash of this string, comparing it with part of
-the public key. Note that reusing the random strings drastically
-reduces  the  security  for  LD-OTS.  By  extending  this  idea  to
+
+By  extending  this  idea  to
 sign messages of arbitrary sizes, some drawbacks emerge, such
 as  large  sizes  for  the  cryptographic  key  pair  and  signature.
 These drawbacks have been the subject of research and several
