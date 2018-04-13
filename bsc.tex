@@ -191,7 +191,7 @@ $\mathcal{H}^{-1}$ é computacionalmente inviável. Uma função de resumo
 de mão única é obtida com as quatro primeiras propriedades. Por fim, uma
 função de resumo resistente à colisões, ou \emph{função de resumo
 criptográfico}, conta com as cinco primeiras propriedades, que
-torna-a adequada para utilização no contexto de segurança da informação. 
+tornam-a adequada para utilização no contexto de segurança da informação. 
 
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados
 em um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorra
@@ -211,12 +211,6 @@ mensagens, por outro lado, geralmente englobam todas as seis propriedades,
 pois funções de resumo criptográfico são utilizadas em sua construção,
 e a parametrização habilita autenticação da mensagem junto à integridade já fornecida.
 
-Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença: na
-primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
-pares de mensagens podem ser testados. A resistência à colisão, portanto,
-implica na resistência à segunda pré-imagem, visto que basta um adversário
-fixar $m_0$ para simular o cômputo de $m_1$. 
-
 \begin{figure}[h]
   \centering
   \begin{tikzpicture}
@@ -235,6 +229,12 @@ fixar $m_0$ para simular o cômputo de $m_1$.
   \label{fig:1}
 \end{figure}
 
+Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença: na
+primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
+pares de mensagens podem ser testados. A resistência à colisão, portanto,
+implica na resistência à segunda pré-imagem, visto que basta um adversário
+fixar $m_0$ para simular o cômputo de $m_1$. 
+
 Na Figura \ref{fig:1}, estão destacados os requisitos comuns para a utilização
 de funções de resumo no contexto de esquemas de assinatura
 digital, em vista da possibilidade de uma entidade maliciosa, geralmente
@@ -250,7 +250,7 @@ armazenamento de senhas em texto plano, é possível manter apenas o resumo
 criptográfico destas, e no momento da autenticação do usuário perante o
 serviço, comparar apenas estes resumos\footnote{É possível armazenar tabelas de
 resumos pré-computados a fim de atacar serviços que não empregam uma maneira
-mais elaborada de autenticação (por exemplo, um valor aleatório
+mais elaborada de autenticação (i.e. um valor pseudoaleatório
 concatenado ao resumo criptográfico da senha do usuário).}; resumos
 criptográficos são comumente empregados como identificadores únicos para um
 arquivo (e.g. \emph{commits} em um sistema de controle de versões); entre
@@ -267,7 +267,7 @@ capacidade $c$. Assim, a construção opera em um estado de $b = r + c$
 \emph{bits}.
 
 O estado inicial, análogo a um vetor de inicialização no contexto de algoritmos
-criptográficos, não necessita de valores especiais e é inicializado com valores
+criptográficos, não necessita de valores especiais e é ocupado com valores
 nulos. A entrada $m$ é preenchida com uma função de preenchimento \texttt{pad}
 de tal modo que $r \mid \length{m}$, e dividida em blocos de tamanho $r$. A
 fase de absorção de $m$ pela esponja procede da seguinte maneira: a operação de
