@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
+\usepackage[portuguese, onelanguage]{algorithm2e}
 \usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree}
 
 \newcommand{\hh}{$\mathcal{H}$}
@@ -463,6 +464,7 @@ Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado 
 representada pelo pseudocódigo abaixo.
 
 \begin{algorithm}[H]
+    \small
     \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
     \KwResult{$c$, o texto cifrado resultante}
 
@@ -503,6 +505,7 @@ Para que a cifra seja caracterizada como simétrica, é preciso criar uma funç�
 Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo. Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
 
 \begin{algorithm}[H]
+    \small
     \KwData{$c$, o texto cifrado; $K$, a chave desejada}
     \KwResult{$m$, o texto claro resultante}
 
