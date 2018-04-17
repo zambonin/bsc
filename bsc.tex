@@ -556,6 +556,8 @@ Neste capítulo, são apresentados os esquemas de assinatura digital única Lamp
 
 \section{Esquemas de assinatura única}
 
+Vários outros esquemas continuam utilizando assinatura única e compõem o estado da arte da literatura \cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}, demonstrando a utilidade destes esquemas e suas otimizações.
+
 \subsection{O esquema Lamport}
 
 A utilização de funções de resumo criptográfico para a criação de 
@@ -668,8 +670,6 @@ A criação de um par de chaves para cada mensagem, bem como a infraestrutura ne
 
 De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
 
-O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas. Vários outros esquemas continuam utilizando assinatura única e compõem o estado da arte da literatura \cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}, demonstrando a utilidade destes esquemas e suas otimizações.
-
 \begin{figure}
 \centering
 \begin{tikzpicture}
@@ -697,6 +697,10 @@ O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Mer
 \caption{Considere $\mathcal{D}_n, n \in \mathbb{N}$ como qualquer informação ou mensagem desejada. Acima, uma representação gráfica de uma árvore com quatro folhas.}
 \label{fig:4}
 \end{figure}
+
+\subsection{O esquema de Merkle}
+
+O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas. 
 
 \bibliographystyle{alpha}
 \bibliography{ref}
