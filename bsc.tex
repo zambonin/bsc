@@ -820,11 +820,14 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
 
 \end{enumerate}
 \begin{equation}
-a_{0} = \hash{\textsc{Ots}_\text{\pk{}}^{j}} \\
+\begin{split}
+a_{0} &= \hash{\textsc{Ots}_\text{\pk{}}^{j}} \\
+a_{h} &= 
 \begin{cases}
-  c(a_i) = a_{i+1} & \text{for }1\le i<l\\    
-  c(a_l) = a_1    
+\hash{a_{h - 1} \concat p_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 1 \pmod{2} \\
+\hash{p_{h - 1} \concat a_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 0 \pmod{2} \\
 \end{cases}
+\end{split}
 \end{equation}
 
 \bibliographystyle{alpha}
