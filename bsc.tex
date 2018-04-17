@@ -643,9 +643,8 @@ mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 binário. De acordo com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
 geradas por \textsc{Gen}. Formalmente,
-$\forall (p, s) \in
-\textsc{Gen}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
 \begin{equation}
+\forall (p, s) \in \textsc{Gen}(1^n) \te\forall w \in \{0, 1\}^{*}, \;
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
 É necessário apontar que esta definição não considera a segurança do esquema -- é possível construir trivialmente algoritmos que respeitam a equação acima, sem qualquer tipo de codificação a fim de ocultar mensagens. 
