@@ -774,7 +774,7 @@ Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
 
-De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na altura $i$, e uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, ou seja, \begin{equation}T_{h - 1, k} = \mathcal{H}(\mathcal{D}_k), 0 \leq k < 2^{h - 1}.\end{equation} Seus nós intermediários são construídos como \begin{equation}T_{i,j} = \mathcal{H}(T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}), 0 \leq i < h - 1, 0 \leq j < 2^{i}.\end{equation} Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na altura $i$, e uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, ou seja, \begin{equation}T_{h - 1, k} = \mathcal{H}(\mathcal{D}_k), 0 \leq k < 2^{h - 1}.\end{equation} Seus nós intermediários são construídos como \begin{equation}T_{i,j} = \mathcal{H}(T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}), h - 1 > i \geq 0, 0 \leq j < 2^{i}.\end{equation} Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
 
 \begin{figure}
     \centering
@@ -820,14 +820,16 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     
     \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_\text{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo.
     \begin{equation}
-    \begin{split}
-    a_{0} &= \hash{\textsc{Ots}_\text{\pk{}}^{j}} \text{ e, } 1 \leq k \leq h, \\
-    a_{k} &= 
-    \begin{cases}
-    \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}}, \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 0 \pmod{2} \\
-    \hash{\textsc{Auth}_{k - 1} \concat a_{k - 1}}, \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 1 \pmod{2} \\
-    \end{cases}
-    \end{split}
+        \begin{split}
+        a_{0} &= \hash{\textsc{Ots}_\text{\pk{}}^{j}} \text{ e, } 1 \leq k \leq h, \\
+        a_{k} &= 
+        \begin{cases}
+            \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}},
+                \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 0 \pmod{2} \\
+            \hash{\textsc{Auth}_{k - 1} \concat a_{k - 1}},
+                \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 1 \pmod{2} \\
+        \end{cases}
+        \end{split}
     \end{equation}
     Finalmente, se $a_{h} = \text{\pk{}}$, a assinatura está válida.
     
@@ -839,3 +841,4 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
 \end{document}
 
 % actually use \hash and stuff
+% write a few more about merkle
