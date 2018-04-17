@@ -772,7 +772,7 @@ Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
 
-De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h$ e uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$, seus nós são construídos como  $T_{i,j} = \mathcal{H}(T_{i - 1, 2j} \concat T{i - 1, 2j + 1}), 0 \leq i \leq h - 1, 0 \leq j \leq 2^{i} - 1$, e defina $T_{0,0}$ como a raiz desta. 
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h$ e uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$, seus nós são construídos como $$T_{i,j} = \mathcal{H}(T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}), 0 \leq i < h - 1, 0 \leq j \leq 2^{i} - 1,$$ e defina $T_{0,0}$ como a raiz desta. 
 
 Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
 
@@ -781,20 +781,20 @@ Esta estrutura também pode ser utilizada para verificação conjunta da integri
     \begin{tikzpicture}
       \tikzset{every tree node/.style={align=center,anchor=north}}
       \Tree
-        [.\node{$T_{r}$ \\ $\hash{T_{0} \concat T_{1}}$};
-          [.\node{$T_{0}$ \\ $\mathcal{H}(T_{0, 0} \concat T_{0, 1})$};
-            [.{$T_{0, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
+        [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
+          [.\node{$T_{1, 0}$ \\ $\mathcal{H}(T_{2, 0} \concat T_{2, 1})$};
+            [.{$T_{2, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{0}$
             ]
-            [.{$T_{0, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
+            [.{$T_{2, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{1}$
             ]
           ]
-          [.\node{$T_{1}$ \\ $\mathcal{H}(T_{1, 0} \concat T_{1, 1})$};
-            [.{$T_{1, 0}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
+          [.\node{$T_{1, 1}$ \\ $\mathcal{H}(T_{2, 2} \concat T_{2, 3})$};
+            [.{$T_{2, 2}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{2}$
             ]
-            [.{$T_{1, 1}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
+            [.{$T_{2, 3}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{3}$
             ]
           ]
