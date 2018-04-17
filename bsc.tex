@@ -810,11 +810,11 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} A chave privada é definida como uma $2^{h - 1}$-tupla
-    de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\text{\sk{}} = ((\textsc{Ots}_{\text{\sk{}}, 2^{h - 1}}, \textsc{Ots}_{\text{\pk{}}, 2^{h - 1}}), \dots, (\textsc{Ots}_{\text{\sk{}}, 0}, \textsc{Ots}_{\text{\pk{}}, 0}))$. As folhas de $T$ são preenchidas com as respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h - 1, j} = \hash{\textsc{Ots}_{\text{\pk{}}, j}}, 0 \leq j < 2^{h - 1}$, e $T$ é construída recursivamente. Finalmente, $\text{\pk{}} = T_{0,0}$.
+    \item[] \emph{Geração de chaves.} A chave privada é definida como uma $2^{h}$-tupla
+    de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\text{\sk{}} = ((\textsc{Ots}_{\text{\sk{}}, 2^{h} - 1}, \textsc{Ots}_{\text{\pk{}}, 2^{h} - 1}), \dots, (\textsc{Ots}_{\text{\sk{}}, 0}, \textsc{Ots}_{\text{\pk{}}, 0}))$. As folhas de $T$ são preenchidas com as respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h - 1, j} = \hash{\textsc{Ots}_{\text{\pk{}}, j}}, 0 \leq j < 2^{h}$, e $T$ é construída recursivamente. Finalmente, $\text{\pk{}} = T_{0,0}$.
     
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Escolha
-    uma folha $T_{h - 1, j}$ não utilizada anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é uma $h$-tupla necessária para recriar os resumos desejados a fim de compará-los com a raiz da árvore, e também deve ser incluído na assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375}, $\textsc{Auth} = (T_{0, a}, \dots, T_{h - 1, a}) \text { e } a = \sfrac{j}{2^h + 1 - 2 (\lfloor j/2^h \rfloor \pmod{2})}$
+    uma folha $T_{h - 1, j}$ não utilizada anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é uma $h$-tupla necessária para recriar os resumos desejados a fim de compará-los com a raiz da árvore, e também deve ser incluído na assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375}, $\textsc{Auth} = (T_{0, a}, \dots, T_{h - 1, a}) \text { e } a = \sfrac{j}{2^h + 1 - 2 (\lfloor j/2^h \rfloor \pmod{2})}$.
     
     \item[] \emph{Verificação da assinatura.} 
 
