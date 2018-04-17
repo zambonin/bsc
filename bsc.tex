@@ -772,8 +772,7 @@ Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
 
-De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}$, cujos nós são denotados como $T_{i,j}, 0 \leq i \leq h - 1, 0 \leq j \leq 2^{i} - 1$, e defina $T_{0,0}$ como a raiz desta.
-
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}$, cujos nós são denotados como $T_{i,j}, 0 \leq i \leq h - 1, 0 \leq j \leq 2^{i} - 1$, e defina $T_{0,0}$ como a raiz desta. Então, 
 
 Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
 
