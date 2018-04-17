@@ -660,6 +660,8 @@ Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo 
 
 Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como forma de executar iterações para criar e verificar a assinatura, como sugerido por \cite[4.1]{cryptoeprint:2017:965}. Note que apenas esta versão do esquema pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração. Do contrário, o método pode introduzir multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total. % citation needed
 
+\chapter{Assinatura digital baseada em árvores de Merkle}
+
 \subsection{Esquemas baseados em árvores de Merkle}
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
