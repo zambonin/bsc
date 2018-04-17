@@ -642,9 +642,9 @@ mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 \sigma)$, que retorna o estado de validade da assinatura como um valor verdade
 binário. De acordo com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
-geradas por \textsc{Gen}. Formalmente,
+geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
+\textsc{Gen}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
 \begin{equation}
-\forall (p, s) \in \textsc{Gen}(1^n) \te\forall w \in \{0, 1\}^{*}, \;
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
 É necessário apontar que esta definição não considera a segurança do esquema -- é possível construir trivialmente algoritmos que respeitam a equação acima, sem qualquer tipo de codificação a fim de ocultar mensagens. 
@@ -689,7 +689,21 @@ e discute-se algumas de suas características.
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
+\[
+\begin{pmatrix}
+    x_{11}       & x_{12} & x_{13} & \dots & x_{1n} \\
+    x_{21}       & x_{22} & x_{23} & \dots & x_{2n} \\
+    \hdotsfor{5} \\
+    x_{d1}       & x_{d2} & x_{d3} & \dots & x_{dn}
+\end{pmatrix}
+\]
+
+    \item[] \emph{Geração de chaves.} Defina \[
+    \text{\sk{}} = 
+    \]
+    
+    
+    $\text{\sk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
 
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \sk{} operados por $f$: $\sigma = (f(x_{d_{m-1}, m-1}), \dots, f(x_{d_0, 0}))$.
     
