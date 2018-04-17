@@ -811,10 +811,9 @@ Formalmente, seja uma árvore binária perfeita $T$ de altura $h \in \mathbb{N},
 \begin{enumerate}
 
     \item[] \emph{Geração de chaves.} A chave privada é definida como uma $2^{h - 1}$-tupla
-    de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\text{\sk{}} = ((\textsc{Ots}_{\text{\sk{}}, 2^{h - 1}}, \textsc{Ots}_{\text{\pk{}}, 2^{h - 1}}), \dots, (\textsc{Ots}_{\text{\sk{}}, 0}, \textsc{Ots}_{\text{\pk{}}, 0}))$
-    Executa-se o algoritmo $\textsc{Ots}_\mathcal{K}$ a
-    fim de preencher todas as folhas de $T$. Portanto, $T_{h - 1, j} = \mathcal{H}(\textsc{Ots}_\text{\pk{}}), 0 \leq j < 2^{h - 1}$, e $T$ é construída
-    recursivamente. Finalmente, $\text{\pk{}} = $
+    de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\text{\sk{}} = ((\textsc{Ots}_{\text{\sk{}}, 2^{h - 1}}, \textsc{Ots}_{\text{\pk{}}, 2^{h - 1}}), \dots, (\textsc{Ots}_{\text{\sk{}}, 0}, \textsc{Ots}_{\text{\pk{}}, 0}))$.
+    As folhas de $T$ são preenchidas com as respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h - 1, j} = \mathcal{H}(\textsc{Ots}_{\text{\pk{}}, j}), 0 \leq j < 2^{h - 1}$, e $T$ é construída
+    recursivamente. Finalmente, $\text{\pk{}} = \mathcal{H}(T_{0,0})$.
     
     \item[] \emph{Geração da assinatura.}
     
