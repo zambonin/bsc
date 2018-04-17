@@ -404,12 +404,10 @@ definida como
   \textsc{Keccak}[r, c](m, d)
     = \textsc{Sponge}[\textsc{Keccak}-f[r + c], \texttt{pad10*1}, r]
 \end{equation}
-
 onde $r$ tem um valor padrão de $1600 - c$. Assim,
 \begin{equation}
   \textsc{Keccak}[c] = \textsc{Keccak}[1600 - c, c].
 \end{equation}
-
 Finalmente, as funções padronizadas em~\cite{Dworkin2015} como a família SHA-3
 são definições de \textsc{Keccak} com parâmetros fixos, e.g.
 \begin{equation}
@@ -644,7 +642,8 @@ mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 \sigma)$, que retorna o estado de validade da assinatura como um valor verdade
 binário. De acordo com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
-geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
+geradas por \textsc{Gen}. Formalmente,
+$\forall (p, s) \in
 \textsc{Gen}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
 \begin{equation}
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
