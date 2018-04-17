@@ -427,7 +427,7 @@ como alicerce, é possível construir funções de resumo criptográfico: por
 exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2,
 utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
 bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
-    
+
 \subsection{AES --- \emph{Advanced Encryption Standard}}
 
 O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde $A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações \texttt{AND} e \texttt{XOR}, e coeficientes de polinômios são palavras binárias, tornando esta estrutura convidativa para operações computacionais.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192, 256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of Standards and Technology})~\cite{Standards2001} do algoritmo Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
