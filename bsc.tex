@@ -700,7 +700,8 @@ De modo genérico, folhas de uma árvore de Merkle são construídas a partir do
 
 \subsection{O esquema de Merkle}
 
-O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas. 
+O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} habilita a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas, e a assinatura consiste da
+mensagem assinada pela instância do esquema localizada em uma folha qualquer, bem como todos os nós necessários para calcular o conteúdo da raiz da árvore.
 
 \bibliographystyle{alpha}
 \bibliography{ref}
