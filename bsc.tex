@@ -690,20 +690,22 @@ e discute-se algumas de suas características.
 \begin{enumerate}
 
 \[
-\begin{pmatrix}
+\begin{bmatrix}
     x_{11}       & x_{12} & x_{13} & \dots & x_{1n} \\
     x_{21}       & x_{22} & x_{23} & \dots & x_{2n} \\
     \hdotsfor{5} \\
     x_{d1}       & x_{d2} & x_{d3} & \dots & x_{dn}
-\end{pmatrix}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    x_{11} & x_{12} & x_{13} & \dots  & x_{1n} \\
+    x_{21} & x_{22} & x_{23} & \dots  & x_{2n} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_{d1} & x_{d2} & x_{d3} & \dots  & x_{dn}
+\end{bmatrix}
 \]
 
-    \item[] \emph{Geração de chaves.} Defina \[
-    \text{\sk{}}
-    \]
-    
-    
-    $\text{\sk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
+    \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de \sk{}, computando $f(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
 
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de \sk{} operados por $f$: $\sigma = (f(x_{d_{m-1}, m-1}), \dots, f(x_{d_0, 0}))$.
     
