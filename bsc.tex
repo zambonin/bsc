@@ -817,14 +817,13 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     uma folha de índice $j$ não utilizada anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é uma $h$-tupla necessária para recriar os resumos desejados a fim de compará-los com a raiz da árvore, e também deve ser incluído na assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375}, $\textsc{Auth} = (T_{0, a}, \dots, T_{h - 1, a}) \text { e } a = \sfrac{j}{2^h + 1 - 2 (\lfloor j/2^h \rfloor \pmod{2})}$. A assinatura     final leva em conta todos estes itens. Portanto, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Ots}_\text{\pk{}}^{j}, \textsc{Auth})$.
     
     \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_\text{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo.
-
     \begin{equation}
     \begin{split}
     a_{0} &= \hash{\textsc{Ots}_\text{\pk{}}^{j}} \\
     a_{h} &= 
     \begin{cases}
-    \hash{a_{h - 1} \concat p_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 1 \pmod{2} \\
-    \hash{p_{h - 1} \concat a_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 0 \pmod{2} \\
+    \hash{a_{h - 1} \concat \textsc{Auth}_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 1 \pmod{2} \\
+    \hash{p_{h - 1} \concat \textsc{Auth}_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 0 \pmod{2} \\
     \end{cases}
     \end{split}
     \end{equation}
