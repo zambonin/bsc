@@ -554,7 +554,9 @@ da aplicação de uma função interna a este ao resumo.
 
 Neste capítulo, são apresentados os esquemas de assinatura digital única Lamport, a fim de fundamentar o raciocínio por trás do esquema alvo. Winternitz e \textsc{Wots+} são definidos logo após, bem como os esquemas Merkle, XMSS (\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores XMSS$^{MT}$, SPHINCS e SPHINCS+, e a relação entre estes. Em especial, estes esquemas são escolhidos como os exemplos mais reconhecidos de suas respectivas categorias.
 
-\section{O esquema Lamport}
+\section{Esquemas de assinatura única}
+
+\subsection{O esquema Lamport}
 
 A utilização de funções de resumo criptográfico para a criação de 
 esquemas de assinatura digital foi iniciada por 
@@ -605,7 +607,7 @@ palavra de tamanho $m$ que age como a semente deste gerador. Reduzir
 o tamanho de chaves públicas e assinaturas mostra-se mais difícil; entretanto,
 a generalização deste esquema permite estas otimizações.
 
-\section{O esquema Winternitz}
+\subsection{O esquema Winternitz}
 
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
