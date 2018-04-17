@@ -814,8 +814,7 @@ Formalmente, seja uma árvore de Merkle $T, \; h \geq 2$. Tome um esquema de ass
     de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\text{\sk{}} = ((\textsc{Ots}_{\text{\sk{}}, 2^{h - 1}}, \textsc{Ots}_{\text{\pk{}}, 2^{h - 1}}), \dots, (\textsc{Ots}_{\text{\sk{}}, 0}, \textsc{Ots}_{\text{\pk{}}, 0}))$. As folhas de $T$ são preenchidas com as respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h - 1, j} = \hash{\textsc{Ots}_{\text{\pk{}}, j}}, 0 \leq j < 2^{h - 1}$, e $T$ é construída recursivamente. Finalmente, $\text{\pk{}} = T_{0,0}$.
     
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Escolha
-    uma folha $T_{h - 1, j}$ não utilizada e produza a assinatura A
-    assinatura $\textsc{Ots}_\sigma = \textsc{Ots}_\mathcal{S}(M)$
+    uma folha $T_{h - 1, j}$ não utilizada e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$.
     
     \item[] \emph{Verificação da assinatura.} 
 
