@@ -810,8 +810,9 @@ Formalmente, seja uma árvore binária perfeita $T$ de altura $h \in \mathbb{N},
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Executa-se o algoritmo $\textsc{Ots}_\mathcal{K}$ por
-        $2^{h - 1}$ vezes. $T_{h - 1, j} = \mathcal{H}(\textsc{Ots}_\text{\pk{}}), 0 \leq j < 2^{h - 1}$.
+    \item[] \emph{Geração de chaves.} Executa-se o algoritmo $\textsc{Ots}_\mathcal{K}$ a
+    fim de preencher todas as folhas de $T$. Portanto, $T_{h - 1, j} = \mathcal{H}(\textsc{Ots}_\text{\pk{}}), 0 \leq j < 2^{h - 1}$, e $T$ é construída
+    recursivamente. Finalmente, $\text{\pk{}} = $
     
     \item[] \emph{Geração da assinatura.}
     
