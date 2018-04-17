@@ -771,8 +771,8 @@ Note que é possível utilizar uma função conhecida, como o AES, para as itera
 
 Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que represente uma palavra $x$, e que sua inversibilidade seja computacionalmente inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X, \vert x_i \vert = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam elementos que desrespeitem esta regra. O resultado deste processo é definido recursivamente como \begin{equation}
 \begin{split}
-    h_0 &= IV \text { e, } 
-    h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
+h_0 &= IV \text{ e, } 1 \leq i \leq t, \\
+h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i.
 \end{split}
 \end{equation}
 
