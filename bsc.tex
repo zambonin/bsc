@@ -44,6 +44,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \chapter{Introdução}
 
 A aplicação de protocolos criptográficos é essencial no contexto da validação e
@@ -820,10 +822,10 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     \begin{equation}
     \begin{split}
     a_{0} &= \hash{\textsc{Ots}_\text{\pk{}}^{j}} \\
-    a_{h} &= 
+    a_{k} &= 
     \begin{cases}
-    \hash{a_{h - 1} \concat \textsc{Auth}_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 1 \pmod{2} \\
-    \hash{p_{h - 1} \concat \textsc{Auth}_{h - 1}}, \text{ se } \lfloor \sfrac{s}{2^{h-1}} \rfloor \equiv 0 \pmod{2} \\
+    \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}}, \text{ se } \lfloor \sfrac{j}{2^{k-1}} \rfloor \equiv 1 \pmod{2} \\
+    \hash{p_{k - 1} \concat \textsc{Auth}_{k - 1}}, \text{ se } \lfloor \sfrac{j}{2^{k-1}} \rfloor \equiv 0 \pmod{2} \\
     \end{cases}
     \end{split}
     \end{equation}
