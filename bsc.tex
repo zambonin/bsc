@@ -127,21 +127,19 @@ do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
 \section{Objetivos}
 
-\item[] \emph{Objetivo geral.} Apresentar um estudo detalhado sobre o esquema de
-    assinatura digital única Winternitz, contextualizando-o junto ao estado da
-    arte, observando o refinamento e utilização deste em vários outros esquemas
-    a fim de habilitar o gerenciamento de múltiplas assinaturas, fundamentando
-    a criação de uma otimização que afeta os tempos de execução da criação e
-    verificação de uma assinatura.
+\emph{Objetivo geral.} Apresentar um estudo detalhado sobre o esquema de
+assinatura digital única Winternitz, contextualizando-o junto ao estado da
+arte, observando o refinamento e utilização deste em vários outros esquemas
+a fim de habilitar o gerenciamento de múltiplas assinaturas, fundamentando
+a criação de uma otimização que afeta os tempos de execução da criação e
+verificação de uma assinatura.
     
-\item[] \emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
-    única Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever
-    os esquemas de assinatura digital baseados em árvores de Merkle: \emph{Merkle
-    Signature Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências
-    da modificação do esquema Winternitz no contexto destes, e mensurar desempenho
-    onde aplicável.
-
-\end{enumerate}
+\emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
+única Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever
+os esquemas de assinatura digital baseados em árvores de Merkle: \emph{Merkle
+Signature Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências
+da modificação do esquema Winternitz no contexto destes, e mensurar desempenho
+onde aplicável.
 
 \chapter{Primitivas criptográficas}
 
@@ -452,6 +450,11 @@ Note que existe uma rodada adicional introdutória composta apenas de \textsc{Ad
 
 \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de 32 bits.
 Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar palavras suficientes para utilização em todas as rodadas do algoritmo, então $t = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina $rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$, inicialmente com valor $K^{e}_{i - 1}$, pode ser modificada de acordo com as restrições (mutualmente exclusivas) abaixo.
+\begin{equation}
+    \mathbf{k} = 
+        \begin{cases}
+        \end{cases}
+\end{equation}
 
 \begin{itemize}
     \item $i \equiv 0 \pmod{4} \rightarrow \mathbf{k}
