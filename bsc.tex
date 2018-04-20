@@ -191,14 +191,14 @@ para esta computação excedem a validade ou utilidade da informação desejada.
         que $\hash{m_0} = \hash{m_1}$;
         
     \item \hh{} pode ser parametrizada por uma chave $k$.
-        Este comportamento pode ser representado por $\mathcal{H}_k$.
+        Este comportamento pode ser representado por $\text{\hh{}}_k$.
         
 \end{enumerate}
 
 É possível classificar \hh{} de acordo com a presença destas
 propriedades. Uma função de resumo simples contém apenas (i) e (ii). Ao
 adicionar (iii) e remover (i), obtém-se uma função de mão única, onde o cálculo de
-$\mathcal{H}^{-1}$ é computacionalmente inviável. Uma função de resumo
+$\text{\hh{}}^{-1}$ é computacionalmente inviável. Uma função de resumo
 de mão única é obtida com as quatro primeiras propriedades. Por fim, uma
 função de resumo resistente à colisões, ou \emph{função de resumo
 criptográfico}, conta com as cinco primeiras propriedades, que
@@ -683,7 +683,7 @@ Formalmente, tome um parâmetro de segurança $m$, geralmente considerado como
 o tamanho da saída da função de resumo criptográfico escolhido. Considere as funções\footnote{Na prática, o esquema pode ser instanciado utilizando \hh{} no lugar de $f$.} de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$
 e de resumo criptográfico
-$\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
+$\text{\hh{}} : \binwds{*} \longrightarrow \binwds{m}$.
 Descreve-se abaixo o funcionamento do esquema
 e discute-se algumas de suas características. 
 
@@ -731,13 +731,13 @@ A partir destes, calcula-se
 que representarão, respectivamente, a quantidade de palavras em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a quantidade total.
 Por fim, considere as funções de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$ e de resumo criptográfico
-$\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
+$\text{\hh{}} : \binwds{*} \longrightarrow \binwds{m}$.
 
 \begin{enumerate}
 
     \item[] \emph{Geração de chaves.} Defina $\text{\sk{}} = (x_{t-1}, \dots, x_0) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave pública $\text{\pk{}} = (y_{t-1}, \dots, y_0)$ pode ser derivada de \sk{}, computando $f^{2^{w}-1}(x) \; \forall x \in  \text{\sk{}}$. Logo, $\text{\pk{}} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
 
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \mathcal{H}(M)$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
     Adicionalmente, uma soma de verificação é calculada usando a representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1}, \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots, f^{b_0}(x_0)).$
     
     \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do cálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\text{\pk{}} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
@@ -750,7 +750,7 @@ Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto 
 
 O principal esquema variante do \textsc{Wots}, chamado de \textsc{Wots+}~\cite{cryptoeprint:2017:965}, tem como ideia principal a reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o processo de iterações sequenciais --- utilizando apenas uma função --- do esquema original. Esta característica também permite uma prova de segurança mais simples, mas não menos poderosa, que desconsidera a necessidade da resistência à colisões de $f$.
 
-Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem como a função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$ de maneira análoga ao esquema original. A família de funções que o \textsc{Wots+} utiliza é definida por $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e $\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família, e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, elabora-se a nova função de iteração $c^{i}_{k}(x, r)$, definida recursivamente como \begin{equation}
+Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem como a função de resumo criptográfico $\text{\hh{}} : \binwds{*} \longrightarrow \binwds{m}$ de maneira análoga ao esquema original. A família de funções que o \textsc{Wots+} utiliza é definida por $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e $\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família, e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, elabora-se a nova função de iteração $c^{i}_{k}(x, r)$, definida recursivamente como \begin{equation}
 \begin{split}
 c^{0}_{k}(x, r) &= x \\
 c^{i}_{k}(x, r) &= f_k(c^{i-1}_{k}(x, r) \oplus r_i).
@@ -761,7 +761,7 @@ c^{i}_{k}(x, r) &= f_k(c^{i-1}_{k}(x, r) \oplus r_i).
 
     \item[] \emph{Geração de chaves.} Defina \sk{} e $r$ como tuplas de inteiros pseudoaleatórios, discutidos anteriormente. O algoritmo também deve escolher uma chave de função $k \stackrel{\$}\longleftarrow \mathcal{K}$. Por fim, $\text{\pk{}} = (c^{2^w-1}_{k}(x_{t-1}, r), \dots, c^{0}_{k}(x, r))$.
     
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu resumo $d = \mathcal{H}(M)$ e a soma de verificação $c$ correspondente, produzindo $\mathcal{B}$. As considerações sobre preenchimento de $m$ e $c$ ainda se aplicam. Aplicando a nova função de iteração, tem-se $\sigma = (c^{b_{t - 1}}_{k}(x_{t-1}, r), \dots, c^{b_{0}}_{k}(x_{0}, r))$.
+    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu resumo $d = \hash{M}$ e a soma de verificação $c$ correspondente, produzindo $\mathcal{B}$. As considerações sobre preenchimento de $m$ e $c$ ainda se aplicam. Aplicando a nova função de iteração, tem-se $\sigma = (c^{b_{t - 1}}_{k}(x_{t-1}, r), \dots, c^{b_{0}}_{k}(x_{0}, r))$.
     
     \item[] \emph{Verificação da assinatura.} Novamente, é necessário calcular $\mathcal{B}$ para obter as iterações restantes até \pk{}. Note que as primeiras $b_i$ palavras de $r$ não serão utilizadas. Assim, $\sigma$ está correta se $\text{\pk{}} = (c^{2^{w} - 1 - b_{t - 1}}_{k}(\sigma_{t-1}, r), \dots, c^{2^{w} - 1 - b_{0}}_{k}(\sigma_{0}, r))$. 
 
@@ -781,11 +781,11 @@ Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
 
-De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na altura $i$, e uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós intermediários a partir das folhas:
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na altura $i$, e uma função de resumo criptográfico $\text{\hh{}} : \binwds{*} \longrightarrow \binwds{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós intermediários a partir das folhas:
 \begin{equation}
 \begin{split}
-T_{h - 1, k} &= \mathcal{H}(\mathcal{D}_k), 0 \leq k < 2^{h - 1}, \text{ e } \\
-T_{i,j} &= \mathcal{H}(T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}),
+T_{h - 1, k} &= \hash{\mathcal{D}_k}, 0 \leq k < 2^{h - 1}, \text{ e } \\
+T_{i,j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
     \; 0 \leq j < 2^{i}, \; h - 1 > i \geq 0.
 \end{split}
 \end{equation}
@@ -797,19 +797,19 @@ Esta estrutura também pode ser utilizada para verificação conjunta da integri
       \tikzset{every tree node/.style={align=center,anchor=north}}
       \Tree
         [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
-          [.\node{$T_{1, 0}$ \\ $\mathcal{H}(T_{2, 0} \concat T_{2, 1})$};
-            [.{$T_{2, 0}$ \\ $\mathcal{H}(\mathcal{D}_{0})$}
+          [.\node{$T_{1, 0}$ \\ $\hash{T_{2, 0} \concat T_{2, 1}}$};
+            [.{$T_{2, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{0}$
             ]
-            [.{$T_{2, 1}$ \\ $\mathcal{H}(\mathcal{D}_{1})$}
+            [.{$T_{2, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{1}$
             ]
           ]
-          [.\node{$T_{1, 1}$ \\ $\mathcal{H}(T_{2, 2} \concat T_{2, 3})$};
-            [.{$T_{2, 2}$ \\ $\mathcal{H}(\mathcal{D}_{2})$}
+          [.\node{$T_{1, 1}$ \\ $\hash{T_{2, 2} \concat T_{2, 3}}$};
+            [.{$T_{2, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{2}$
             ]
-            [.{$T_{2, 3}$ \\ $\mathcal{H}(\mathcal{D}_{3})$}
+            [.{$T_{2, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
               \edge[dashed, style={<-}] node {}; $\mathcal{D}_{3}$
             ]
           ]
@@ -823,7 +823,7 @@ Esta estrutura também pode ser utilizada para verificação conjunta da integri
 
 O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} recomenda a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas, e a assinatura consiste da mensagem assinada pela instância do esquema localizado em uma folha qualquer, bem como todos os nós necessários para calcular o conteúdo da raiz da árvore.
 
-Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de assinatura digital única genérico \textsc{Ots}, suas chaves privada e pública como, respectivamente, $\textsc{Ots}_\text{\sk{}}$ e $\textsc{Ots}_\text{\pk{}}$, e os algoritmos de geração de chaves, geração de assinatura e verificação de assinatura como, respectivamente, $\textsc{Ots}_\mathcal{K}, \textsc{Ots}_\mathcal{S} \text{ e } \textsc{Ots}_\mathcal{V}$. Por fim, considere uma função de resumo criptográfico $\mathcal{H} : \binwds{*} \longrightarrow \binwds{m}$.
+Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de assinatura digital única genérico \textsc{Ots}, suas chaves privada e pública como, respectivamente, $\textsc{Ots}_\text{\sk{}}$ e $\textsc{Ots}_\text{\pk{}}$, e os algoritmos de geração de chaves, geração de assinatura e verificação de assinatura como, respectivamente, $\textsc{Ots}_\mathcal{K}, \textsc{Ots}_\mathcal{S} \text{ e } \textsc{Ots}_\mathcal{V}$. Por fim, considere uma função de resumo criptográfico $\text{\hh{}} : \binwds{*} \longrightarrow \binwds{m}$.
 
 \begin{enumerate}
 
