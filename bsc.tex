@@ -424,33 +424,33 @@ desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
 ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
 como alicerce, é possível construir funções de resumo criptográfico: por
 exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2,
-utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
+utiliza uma função de compressão de mÃ£o Ãºnica, obtida a partir de uma cifra de
 bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
 \subsection{AES --- \emph{Advanced Encryption Standard}}
 
-O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde $A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações \texttt{AND} e \texttt{XOR}, e coeficientes de polinômios são palavras binárias, tornando esta estrutura convidativa para operações computacionais.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192, 256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of Standards and Technology})~\cite{Standards2001} do algoritmo Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
+O AES Ã© uma cifra de blocos que opera sobre uma matriz de estado $A$, onde $A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinÃ´mio irredutÃ­vel $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. AdiÃ§Ãµes e multiplicaÃ§Ãµes em corpos da forma $\mathbb{F}_{2^n}$ sÃ£o, respectivamente, representadas por operaÃ§Ãµes \texttt{AND} e \texttt{XOR}, e coeficientes de polinÃ´mios sÃ£o palavras binÃ¡rias, tornando esta estrutura convidativa para operaÃ§Ãµes computacionais.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192, 256\}$. Ã uma versÃ£o padronizada pelo NIST (\emph{National Institute of Standards and Technology})~\cite{Standards2001} do algoritmo Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento Ã© denominado iterativo, consistindo em aplicaÃ§Ãµes sequenciais de quatro operaÃ§Ãµes ordenadas (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicaÃ§Ãµes, denominadas rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
 
-Note que existe uma rodada adicional introdutória composta apenas de \textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais, \textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a reversibilidade da cifra. Uma rotina de expansão de chave (\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas com valores derivados, porém distintos. Estes componentes serão descritos abaixo.
+Note que existe uma rodada adicional introdutÃ³ria composta apenas de \textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais, \textsc{MixColumns} Ã© ignorado na Ãºltima rodada, a fim de facilitar a reversibilidade da cifra. Uma rotina de expansÃ£o de chave (\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas com valores derivados, porÃ©m distintos. Estes componentes serÃ£o descritos abaixo.
 
 \begin{enumerate}[label=\roman*.]
 
-    \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$
-        pelo seu valor correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a partir de uma transformação afim em $A_{i,j}^{-1}$ sobre $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos, respectivamente, representam a linha e a coluna do elemento na \emph{S-box}.
+    \item \textsc{SubBytes}: realiza-se a reposiÃ§Ã£o de $A_{i,j}$
+        pelo seu valor correspondente em uma \emph{substitution-box} (\emph{S-box}, construÃ­da a partir de uma transformaÃ§Ã£o afim em $A_{i,j}^{-1}$ sobre $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos, respectivamente, representam a linha e a coluna do elemento na \emph{S-box}.
 
     \item \textsc{ShiftRows}: cada linha de $A$, $A_i$,
-        é deslocada circularmente à esquerda $i$ vezes.
+        Ã© deslocada circularmente Ã  esquerda $i$ vezes.
 
-    \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, é multiplicada pelo polinômio
-        $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, módulo $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau máximo 3, apto a ser representado na coluna.
+    \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, Ã© multiplicada pelo polinÃ´mio
+        $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, mÃ³dulo $x^{4} + 1$, para que o resultado ainda seja um polinÃ´mio de grau mÃ¡ximo 3, apto a ser representado na coluna.
 
-    \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada entre $A$ e o
-        bloco da chave referente à rodada.
+    \item \textsc{AddRoundKey}: a operaÃ§Ã£o \texttt{XOR} bit a bit Ã© aplicada entre $A$ e o
+        bloco da chave referente Ã  rodada.
 
 \end{enumerate}
 
-\textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de 32 bits.
-Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar palavras suficientes para utilização em todas as rodadas do algoritmo, então $t = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina $rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é definida pelas restrições (mutualmente exclusivas) abaixo:
+\textsc{KeyExpansion} consiste da criaÃ§Ã£o de um conjunto de palavras $K_e$ de 32 bits.
+Tome $\ell = \frac{n}{32}$, e assumindo que Ã© necessÃ¡rio criar palavras suficientes para utilizaÃ§Ã£o em todas as rodadas do algoritmo, entÃ£o $t = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. TambÃ©m defina $rot(x)$ como o deslocamento circular Ã  esquerda de 8 bits da palavra $x$, e a lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela recursÃ£o $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ Ã© definida pelas restriÃ§Ãµes (mutualmente exclusivas) abaixo:
 \begin{equation}
     \mathbf{k} = 
         \begin{cases}
@@ -458,11 +458,11 @@ Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar palavras sufici
                 \text{ se } i \equiv 0 \pmod{4} \\
             \textsc{SubBytes}(K^{e}_{i - 1}),
                 \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
-            K^{e}_{i - 1}, \text{ caso contrário.}
+            K^{e}_{i - 1}, \text{ caso contrÃ¡rio.}
         \end{cases}
 \end{equation}
-Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado $c$ pode ser
-representada pelo pseudocódigo abaixo.
+Assim, uma funÃ§Ã£o que criptografa uma mensagem $m$ e retorna um texto cifrado $c$ pode ser
+representada pelo pseudocÃ³digo abaixo.
 
 \begin{algorithm}[H]
     \small
@@ -848,6 +848,8 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
     
 \end{enumerate}
+
+% write a few more about merkle
 
 \bibliographystyle{alpha}
 \bibliography{ref}
