@@ -452,12 +452,14 @@ Note que existe uma rodada adicional introdutória composta apenas de \textsc{Ad
 Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar palavras suficientes para utilização em todas as rodadas do algoritmo, então $t = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina $rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela recursão 
 \begin{equation}
     \begin{split}
-        
+        RC_0 = x^0 \\
+        RC_1 = x^1 \\
+        RC_j = x^{j-1} \cdot RC_{j-1}, j > 2        
     \end{split}
 \end{equation}
 
 
-$RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$, inicialmente com valor $K^{e}_{i - 1}$, pode ser modificada de acordo com as restrições (mutualmente exclusivas) abaixo.
+$$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$, inicialmente com valor $K^{e}_{i - 1}$, pode ser modificada de acordo com as restrições (mutualmente exclusivas) abaixo.
 \begin{equation}
     \mathbf{k} = 
         \begin{cases}
