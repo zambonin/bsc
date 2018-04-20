@@ -614,7 +614,7 @@ que uma mensagem foi assinada e enviada, após este fato.
     \node (sk) at (0, -1) {\sk{}};
     \node (pk) at (4, -1) {\pk{}};
     \node (ds) at (2, 0) {$\sigma$};
-    %   {\scriptsize{$m \concat \textsc{Sig}(\mathcal{S}_k, \hash{m})$}};
+    %   {\scriptsize{}};
     \node (res) at (5.5, 0) {\scriptsize\{0, 1\}};
     \node[draw] (sig) at (0, 0) {\textsc{Sig}};
     \node[draw] (gen) at (2, -2) {\textsc{Gen}};
@@ -651,7 +651,7 @@ geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
 Na Figura \ref{fig:2}, é possível visualizar um diagrama do comportamento de
 um esquema de assinatura digital genérico. Note que $\sigma$ geralmente é
 composta da concatenação da mensagem original com a assinatura do resumo
-criptográfico desta (), embora a saída do algoritmo \textsc{Sig} consista apenas
+criptográfico desta ($m \concat \textsc{Sig}(\mathcal{S}_k, \hash{m})$), embora a saída do algoritmo \textsc{Sig} consista apenas
 da aplicação de uma função interna ao resumo.
 
 \chapter{Assinatura digital baseada em funções de resumo criptográfico}
