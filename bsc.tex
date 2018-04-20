@@ -33,9 +33,10 @@
         (\tikzlastnode.north) edge (\tikzlastnode.south)
         (\tikzlastnode.east) edge (\tikzlastnode.west)}},
     edge/.style={->},
-    edgee/.style={<->}
+    edgee/.style={<->},
+    level distance=45pt,
+    sibling distance=25pt
 }
-\tikzset{level distance=45pt, sibling distance=25pt}
 
 \title{Otimização de desempenho do esquema de assinatura digital única Winternitz}
 \author{Gustavo Zambonin}
@@ -126,23 +127,23 @@ do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
 \section{Objetivos}
 
-\begin{itemize}
+\begin{enumerate}
 
-\item \emph{Objetivo geral.} Apresentar um estudo detalhado sobre o esquema de
+\item[] \emph{Objetivo geral.} Apresentar um estudo detalhado sobre o esquema de
     assinatura digital única Winternitz, contextualizando-o junto ao estado da
     arte, observando o refinamento e utilização deste em vários outros esquemas
     a fim de habilitar o gerenciamento de múltiplas assinaturas, fundamentando
     a criação de uma otimização que afeta os tempos de execução da criação e
     verificação de uma assinatura.
     
-\item \emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
+\item[] \emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
     única Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever
     os esquemas de assinatura digital baseados em árvores de Merkle: \emph{Merkle
     Signature Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências
     da modificação do esquema Winternitz no contexto destes, e mensurar desempenho
     onde aplicável.
 
-\end{itemize}
+\end{enumerate}
 
 \chapter{Primitivas criptográficas}
 
@@ -667,7 +668,7 @@ Esquemas de assinatura única (\emph{one-time signature schemes}) possibilitam a
 A utilização de funções de resumo criptográfico para a criação de 
 esquemas de assinatura digital foi iniciada por 
 Lamport~\cite{Lamport1979} e estendida 
-em~\cite{Diffie:2006:NDC:2263321.2269104}, permitindo assinar um 
+em~\cite{Diffie:2006:NDC:2263321.2269104, Merkle:1989:CDS:118209.118230}, permitindo assinar um 
 \emph{bit} de cada vez para uma dada mensagem. O par de chaves consiste 
 de um par de palavras pseudoaleatórias $x_0, x_1$ como $\sk{}$, e seus 
 resumos como $\pk{}$. O assinante assina um \emph{bit} $b$ distribuindo 
@@ -730,7 +731,7 @@ A partir destes, calcula-se
 que representarão, respectivamente, a quantidade de palavras em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a quantidade total.
 Por fim, considere as funções de mão única
 $f : \binwds{m} \longrightarrow \binwds{m}$ e de resumo criptográfico
-$\hh{} : \binwds{*} \longrightarrow \binwds{m}$.
+$\fhash{m}$.
 
 \begin{enumerate}
 
