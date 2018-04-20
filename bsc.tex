@@ -833,14 +833,14 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo.
     \begin{equation}
         \begin{split}
-        a_{0} &= \hash{\textsc{Ots}_{\pk{}}^{j}} \text{ e } 1 \leq k \leq h, \\
+        a_{0} &= \hash{\textsc{Ots}_{\pk{}}^{j}} \text{ e } \\
         a_{k} &= 
         \begin{cases}
             \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}},
                 \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 0 \pmod{2} \\
             \hash{\textsc{Auth}_{k - 1} \concat a_{k - 1}},
                 \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 1 \pmod{2} \\
-        \end{cases}
+        \end{cases} \text{ para } 1 \leq k \leq h.
         \end{split}
     \end{equation}
     Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
