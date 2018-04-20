@@ -25,20 +25,23 @@
 \colorlet{circle area}{black!35}
 
 \tikzset{
-    filled/.style={fill=circle area, draw=circle edge, thick},
-    outline/.style={draw=circle edge, thick},
-    SpongePerm/.style={rounded corners=4pt},
-    XOR/.style={draw,circle,append after command={
-        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
-        (\tikzlastnode.north) edge (\tikzlastnode.south)
-        (\tikzlastnode.east) edge (\tikzlastnode.west)}},
-    edge/.style={->},
-    edgee/.style={<->},
-    level distance=45pt,
-    sibling distance=25pt
+  filled/.style={fill=circle area, draw=circle edge, thick},
+  outline/.style={draw=circle edge, thick},
+  SpongePerm/.style={rounded corners=4pt},
+  XOR/.style={draw,circle,append after command={
+    [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+    (\tikzlastnode.north) edge (\tikzlastnode.south)
+    (\tikzlastnode.east) edge (\tikzlastnode.west)}},
+  edge/.style={->},
+  edgee/.style={<->},
+  level distance=45pt,
+  sibling distance=25pt
 }
 
-\title{Otimização de desempenho do esquema de assinatura digital única Winternitz}
+\title{
+  Otimização de desempenho
+  do esquema de assinatura digital única Winternitz
+}
 \author{Gustavo Zambonin}
 \date{}
 
@@ -56,21 +59,21 @@ sejam estas dispositivos eletrônicos ou indivíduos, em virtude da possível
 criticalidade e sensibilidade atribuídas aos dados transmitidos. Esquemas de
 assinatura digital são comumente utilizados para assegurar este processo de
 maneira formal~\cite{Goldreich:2004:FCV:975541}, através da autenticidade e
-não-repúdio do remetente e certeza da integridade dos dados, a fim de
-traduzir o resguardo provido por uma assinatura de próprio punho no mundo real.
+não-repúdio do remetente e certeza da integridade dos dados, a fim de traduzir
+o resguardo provido por uma assinatura de próprio punho no mundo real.
 
 Na prática, a maior parte destes esquemas utilizam como alicerce algorítmico
-criptossistemas assimétricos baseados em problemas ``difíceis'' da teoria
-dos números, como a fatoração de inteiros ou resolução do logaritmo discreto,
-ambos para números grandes. Este fato provê a segurança necessária para os
-esquemas em computadores clássicos (eletrônicos), por conta da inexistência de
+criptossistemas assimétricos baseados em problemas ``difíceis'' da teoria dos
+números, como a fatoração de inteiros ou resolução do logaritmo discreto, ambos
+para números grandes. Este fato provê a segurança necessária para os esquemas
+em computadores clássicos (eletrônicos), por conta da inexistência de
 algoritmos que resolvem estes problemas em tempo polinomial, até o momento.
 Entretanto, em computadores quânticos, algoritmos dessa forma já existem -- em
-especial, o algoritmo de Shor~\cite{Shor:1997:PAP:264393.264406} -- efetivamente
-tornando estes esquemas clássicos inseguros neste novo contexto.
+especial, o algoritmo de Shor~\cite{Shor:1997:PAP:264393.264406} --
+efetivamente tornando estes esquemas clássicos inseguros neste novo contexto.
 
-Para combater esta situação, a \emph{criptografia pós-quântica} encarrega-se de buscar
-algoritmos criptográficos cuja segurança é considerada suficiente mesmo
+Para combater esta situação, a \emph{criptografia pós-quântica} encarrega-se de
+buscar algoritmos criptográficos cuja segurança é considerada suficiente mesmo
 utilizando-se de um computador quântico e ataques especializados, como o
 algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}. Esta área conta com
 diversas abordagens diferentes: a criptografia baseada em reticulados,
@@ -83,21 +86,21 @@ em aplicações práticas~\cite{Bernstein2017}.
 Não obstante, uma abordagem distinta de esquema de assinatura digital
 resistente a computadores quânticos pode ser obtida apenas com funções de
 resumo criptográfico, construídas a partir de funções de mão
-única~\cite{cryptoeprint:2005:328}. De fato, estas funções, desde que apresentem
-requisitos de segurança como resistência à segunda pré-imagem e à colisões, são
-necessárias e suficientes para a construção de esquemas bem comportados e
-seguros~\cite{Rompel:1990:OFN:100216.100269}. Visto que estas funções são
-estudadas exaustivamente por conta de sua vasta presença em diversos âmbitos da
-segurança da informação, reduções de segurança são mais comuns em relação a
-outras abordagens pós-quânticas, e tamanhos de chaves e assinaturas não são
-proibitivos.
+única~\cite{cryptoeprint:2005:328}. De fato, estas funções, desde que
+apresentem requisitos de segurança como resistência à segunda pré-imagem e à
+colisões, são necessárias e suficientes para a construção de esquemas bem
+comportados e seguros~\cite{Rompel:1990:OFN:100216.100269}. Visto que estas
+funções são estudadas exaustivamente por conta de sua vasta presença em
+diversos âmbitos da segurança da informação, reduções de segurança são mais
+comuns em relação a outras abordagens pós-quânticas, e tamanhos de chaves e
+assinaturas não são proibitivos.
 
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
-consistem da utilização de um esquema de assinatura digital \emph{única},
-onde apenas uma mensagem pode ser assinada de modo seguro,
-ou sua combinação com a estrutura de dados chamada de árvore de
-Merkle~\cite{Merkle:1989:CDS:118209.118230}, que abriga diversos pares de chave do
-esquema supracitado como suas folhas, e reduz a verificação destes para uma
+consistem da utilização de um esquema de assinatura digital \emph{única}, onde
+apenas uma mensagem pode ser assinada de modo seguro, ou sua combinação com a
+estrutura de dados chamada de árvore de
+Merkle~\cite{Merkle:1989:CDS:118209.118230}, que abriga diversos pares de chave
+do esquema supracitado como suas folhas, e reduz a verificação destes para uma
 única chave, codificada em sua raiz. Esta árvore é construída com a
 concatenação de resumos criptográficos do conteúdo dos nós, habilitando assim a
 assinatura de diversas mensagens. Como uma função específica não é necessária,
@@ -105,120 +108,119 @@ assinatura de diversas mensagens. Como uma função específica não é necessá
 destas abordagens.
 
 Embora os esquemas iniciais tenham sido construídos sem atenção particular à
-eficiência de modo geral (e.g. o esquema de assinatura única de Lamport~\cite{Lamport1979}
-assina apenas um \emph{bit} de informação em sua forma mais
-simples), muitos resultados práticos demonstram a redução contínua do tempo de
-verificação da assinatura, tamanho e tempo para geração do par de chaves e
-assinatura, bem como avanços teóricos possibilitam a utilização de funções com
-requisitos de segurança mínimos~\cite{cryptoeprint:2017:965},
-garantem o conceito de sigilo encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011}
-(i.e. comprometimento de uma chave não
-implica na segurança de mensagens que utilizaram esta chave anteriormente) e da
-ausência de estado~\cite{Bernstein2015} (i.e. esquema não necessita registrar
-quais chaves de assinatura única já foram utilizadas).
+eficiência de modo geral (e.g. o esquema de assinatura única de
+Lamport~\cite{Lamport1979} assina apenas um \emph{bit} de informação em sua
+forma mais simples), muitos resultados práticos demonstram a redução contínua
+do tempo de verificação da assinatura, tamanho e tempo para geração do par de
+chaves e assinatura, bem como avanços teóricos possibilitam a utilização de
+funções com requisitos de segurança mínimos~\cite{cryptoeprint:2017:965},
+garantem o conceito de sigilo
+encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de
+uma chave não implica na segurança de mensagens que utilizaram esta chave
+anteriormente) e da ausência de estado~\cite{Bernstein2015} (i.e. esquema não
+necessita registrar quais chaves de assinatura única já foram utilizadas).
 
 Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
 apresenta-se uma customização para o esquema na forma de um parâmetro extra,
-que habilita a redução de tempos de verificação de assinatura em troca de
-mais computação na geração desta, ou vice-versa. Ademais, as consequências
-desta otimização são verificadas em esquemas mais complexos, como os baseados
-em árvores de Merkle. Este trabalho é uma versão expandida, e portanto didática,
+que habilita a redução de tempos de verificação de assinatura em troca de mais
+computação na geração desta, ou vice-versa. Ademais, as consequências desta
+otimização são verificadas em esquemas mais complexos, como os baseados em
+árvores de Merkle. Este trabalho é uma versão expandida, e portanto didática,
 do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
 \section{Objetivos}
 
 \emph{Objetivo geral.} Apresentar um estudo detalhado sobre o esquema de
 assinatura digital única Winternitz, contextualizando-o junto ao estado da
-arte, observando o refinamento e utilização deste em vários outros esquemas
-a fim de habilitar o gerenciamento de múltiplas assinaturas, fundamentando
-a criação de uma otimização que afeta os tempos de execução da criação e
+arte, observando o refinamento e utilização deste em vários outros esquemas a
+fim de habilitar o gerenciamento de múltiplas assinaturas, fundamentando a
+criação de uma otimização que afeta os tempos de execução da criação e
 verificação de uma assinatura.
-    
-\emph{Objetivos específicos.} Descrever os esquemas de assinatura digital
-única Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever
-os esquemas de assinatura digital baseados em árvores de Merkle: \emph{Merkle
-Signature Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências
-da modificação do esquema Winternitz no contexto destes, e mensurar desempenho
-onde aplicável.
+
+\emph{Objetivos específicos.} Descrever os esquemas de assinatura digital única
+Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever os esquemas de
+assinatura digital baseados em árvores de Merkle: \emph{Merkle Signature
+Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências da modificação
+do esquema Winternitz no contexto destes, e mensurar desempenho onde aplicável.
 
 \chapter{Primitivas criptográficas}
 
-Neste capítulo, são mostradas breves explicações sobre os conceitos
-necessários a fim de entender inteiramente um esquema de assinatura digital:
-a função de resumo criptográfico, utilizada para que o processo de assinatura
-seja menos custoso e mais seguro, e um exemplo da construção teórica por trás
-deste tipo de função; os conceitos de criptografia simétrica e assimétrica, e
-uma simples comparação entre os mesmos, com foco na variante assimétrica,
-novamente apresentando um exemplo comum -- mas não resistente a computadores
-quânticos -- e, por fim, a definição formal de um esquema de assinatura digital
-agregando estas noções.
+Neste capítulo, são mostradas breves explicações sobre os conceitos necessários
+a fim de entender inteiramente um esquema de assinatura digital: a função de
+resumo criptográfico, utilizada para que o processo de assinatura seja menos
+custoso e mais seguro, e um exemplo da construção teórica por trás deste tipo
+de função; os conceitos de criptografia simétrica e assimétrica, e uma simples
+comparação entre os mesmos, com foco na variante assimétrica, novamente
+apresentando um exemplo comum -- mas não resistente a computadores quânticos --
+e, por fim, a definição formal de um esquema de assinatura digital agregando
+estas noções.
 
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
 de tamanho arbitrário para uma palavra pequena e identificável
-deterministicamente, podem possuir várias propriedades,
-apresentadas abaixo de acordo com~\cite[9.2]{Menezes:1996:HAC:548089}.
-Tome uma função $\mathcal{H} : X \longrightarrow Y$. Comumente, os elementos de $Y$
-são chamados de resumos. É importante notar que um problema é considerado
-``difícil'', ou computacionalmente inviável, quando o tempo ou recursos gastos
-para esta computação excedem a validade ou utilidade da informação desejada.
+deterministicamente, podem possuir várias propriedades, apresentadas abaixo de
+acordo com~\cite[9.2]{Menezes:1996:HAC:548089}.  Tome uma função $\mathcal{H} :
+X \longrightarrow Y$. Comumente, os elementos de $Y$ são chamados de resumos. É
+importante notar que um problema é considerado ``difícil'', ou
+computacionalmente inviável, quando o tempo ou recursos gastos para esta
+computação excedem a validade ou utilidade da informação desejada.
 
 \begin{enumerate}[label=(\roman*)]
 
-    \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil};
-    
-    \item $\hh{}$ deve apresentar \emph{compressão},
-        ou seja, $\forall x \in X, y \in Y, \length{x} > \length{y}$;
-    
-    \item $\hh{}$ pode apresentar \emph{resistência à pré-imagem} (\textsc{Pre}),
-        caracterizada pelo seguinte comportamento: fornecido um resumo
-        $h \in Y$, é computacionalmente inviável achar a mensagem
-        original $m \in X$ que gerou $h$ através de $\hash{m} = h$;
+  \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil};
 
-    \item $\hh{}$ pode apresentar \emph{resistência à segunda pré-imagem}
-        (\textsc{Sec}), caracterizada pelo seguinte comportamento:
-        fornecida uma mensagem $m_0 \in X$, é computacionalmente
-        inviável achar uma mensagem $m_1 \in X$ tal que $m_0 \neq m_1$ e
-        $\hash{m_0} = \hash{m_1}$;
-        
-    \item $\hh{}$ pode apresentar \emph{resistência à colisões}
-        (\textsc{Col}), caracterizada pelo seguinte comportamento:
-        é computacionalmente inviável encontrar quaisquer duas
-        mensagens $m_0, \; m_1 \in X$ e $m_0 \neq m_1$, de forma
-        que $\hash{m_0} = \hash{m_1}$;
-        
-    \item $\hh{}$ pode ser parametrizada por uma chave $k$.
-        Este comportamento pode ser representado por $\hh{}_k$.
-        
+  \item $\hh{}$ deve apresentar \emph{compressão}, ou seja, $\forall x \in X, y
+      \in Y, \length{x} > \length{y}$;
+
+  \item $\hh{}$ pode apresentar \emph{resistência à pré-imagem} (\textsc{Pre}),
+      caracterizada pelo seguinte comportamento: fornecido um resumo $h \in Y$,
+        é computacionalmente inviável achar a mensagem original $m \in X$ que
+        gerou $h$ através de $\hash{m} = h$;
+
+  \item $\hh{}$ pode apresentar \emph{resistência à segunda pré-imagem}
+      (\textsc{Sec}), caracterizada pelo seguinte comportamento: fornecida uma
+        mensagem $m_0 \in X$, é computacionalmente inviável achar uma mensagem
+        $m_1 \in X$ tal que $m_0 \neq m_1$ e $\hash{m_0} = \hash{m_1}$;
+
+  \item $\hh{}$ pode apresentar \emph{resistência à colisões} (\textsc{Col}),
+      caracterizada pelo seguinte comportamento: é computacionalmente inviável
+        encontrar quaisquer duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq
+        m_1$, de forma que $\hash{m_0} = \hash{m_1}$;
+
+  \item $\hh{}$ pode ser parametrizada por uma chave $k$.  Este comportamento
+      pode ser representado por $\hh{}_k$.
+
 \end{enumerate}
 
-É possível classificar $\hh{}$ de acordo com a presença destas
-propriedades. Uma função de resumo simples contém apenas (i) e (ii). Ao
-adicionar (iii) e remover (i), obtém-se uma função de mão única, onde o cálculo de
-$\hh{}^{-1}$ é computacionalmente inviável. Uma função de resumo
-de mão única é obtida com as quatro primeiras propriedades. Por fim, uma
-função de resumo resistente à colisões, ou \emph{função de resumo
-criptográfico}, conta com as cinco primeiras propriedades, que
-tornam-a adequada para utilização no contexto de segurança da informação. 
+É possível classificar $\hh{}$ de acordo com a presença destas propriedades.
+Uma função de resumo simples contém apenas (i) e (ii). Ao adicionar (iii) e
+remover (i), obtém-se uma função de mão única, onde o cálculo de $\hh{}^{-1}$ é
+computacionalmente inviável. Uma função de resumo de mão única é obtida com as
+quatro primeiras propriedades. Por fim, uma função de resumo resistente à
+colisões, ou \emph{função de resumo criptográfico}, conta com as cinco
+primeiras propriedades, que tornam-a adequada para utilização no contexto de
+segurança da informação.
 
-Estas possibilitam a certeza da integridade de dados, mesmo que armazenados
-em um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorra
-uma relação aparente entre entradas e saídas da função, tratando-se da
-do resumo por completo e subseções deste.  Outra característica desejada é o
-efeito avalanche, baseado no conceito de difusão~\cite{Stallings:2010:CNS:1824151}:
-trocar apenas um \emph{bit} da mensagem $m$ deve modificar cerca de metade
-dos \emph{bits} do resumo, e vice-versa.
+Estas possibilitam a certeza da integridade de dados, mesmo que armazenados em
+um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorra
+uma relação aparente entre entradas e saídas da função, tratando-se da do
+resumo por completo e subseções deste.  Outra característica desejada é o
+efeito avalanche, baseado no conceito de
+difusão~\cite{Stallings:2010:CNS:1824151}: trocar apenas um \emph{bit} da
+mensagem $m$ deve modificar cerca de metade dos \emph{bits} do resumo, e
+vice-versa.
 
-Adicionalmente, discute-se brevemente a relação da propriedade (vi) com
-funções de resumo. Funções de compressão de mão única não admitem o título
-de funções de resumo, visto que a propriedade de compressão não é respeitada
--- embora seu nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem
-ser parametrizadas por uma chave, e são utilizadas para a construção de cifras
-de bloco~\cite[9.25]{Menezes:1996:HAC:548089}. Códigos de autenticação de
-mensagens, por outro lado, geralmente englobam todas as seis propriedades,
-pois funções de resumo criptográfico são utilizadas em sua construção,
-e a parametrização habilita autenticação da mensagem junto à integridade já fornecida.
+Adicionalmente, discute-se brevemente a relação da propriedade (vi) com funções
+de resumo. Funções de compressão de mão única não admitem o título de funções
+de resumo, visto que a propriedade de compressão não é respeitada -- embora seu
+nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem ser
+parametrizadas por uma chave, e são utilizadas para a construção de cifras de
+bloco~\cite[9.25]{Menezes:1996:HAC:548089}. Códigos de autenticação de
+mensagens, por outro lado, geralmente englobam todas as seis propriedades, pois
+funções de resumo criptográfico são utilizadas em sua construção, e a
+parametrização habilita autenticação da mensagem junto à integridade já
+fornecida.
 
 \begin{figure}[h]
   \centering
@@ -233,24 +235,24 @@ e a parametrização habilita autenticação da mensagem junto à integridade j�
     \draw node[right=1.75cm, above=0.75cm] {\textsc{Sec}};
     \draw[outline] \colcircle node {\textsc{Col}};
   \end{tikzpicture}
-  \caption{Diagrama de Venn das resistências desejáveis para uma função de resumo
-    no contexto de assinaturas digitais.}
+  \caption{Diagrama de Venn das resistências desejáveis para uma função de
+    resumo no contexto de assinaturas digitais.}
   \label{fig:1}
 \end{figure}
 
-Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença: na
-primeira, um adversário não pode escolher $m_0$, enquanto na segunda, quaisquer
-pares de mensagens podem ser testados. A resistência à colisão, portanto,
-implica na resistência à segunda pré-imagem, visto que basta um adversário
-fixar $m_0$ para simular o cômputo de $m_1$. 
+Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença:
+na primeira, um adversário não pode escolher $m_0$, enquanto na segunda,
+quaisquer pares de mensagens podem ser testados. A resistência à colisão,
+portanto, implica na resistência à segunda pré-imagem, visto que basta um
+adversário fixar $m_0$ para simular o cômputo de $m_1$.
 
 Na Figura \ref{fig:1}, estão destacados os requisitos comuns para a utilização
-de funções de resumo no contexto de esquemas de assinatura
-digital, em vista da possibilidade de uma entidade maliciosa, geralmente
-chamada de adversário, desejar produzir assinaturas forjadas. É possível
-constatar que, embora exista uma divisão estrita entre \textsc{Pre} e
-\textsc{Sec}, observa-se que na prática, assume-se que a segunda
-implica a primeira resistência \cite[9.20]{Menezes:1996:HAC:548089}.
+de funções de resumo no contexto de esquemas de assinatura digital, em vista da
+possibilidade de uma entidade maliciosa, geralmente chamada de adversário,
+desejar produzir assinaturas forjadas. É possível constatar que, embora exista
+uma divisão estrita entre \textsc{Pre} e \textsc{Sec}, observa-se que na
+prática, assume-se que a segunda implica a primeira resistência
+\cite[9.20]{Menezes:1996:HAC:548089}.
 
 Enumeram-se algumas aplicações comuns para estas funções: a verificação da
 integridade de um arquivo, i.e. determinar se mudanças neste foram feitas ao
@@ -259,11 +261,11 @@ armazenamento de senhas em texto plano, é possível manter apenas o resumo
 criptográfico destas, e no momento da autenticação do usuário perante o
 serviço, comparar apenas estes resumos\footnote{É possível armazenar tabelas de
 resumos pré-computados a fim de atacar serviços que não empregam uma maneira
-mais elaborada de autenticação (i.e. um valor pseudoaleatório
-concatenado ao resumo criptográfico da senha do usuário).}; resumos
-criptográficos são comumente empregados como identificadores únicos para um
-arquivo (e.g. \emph{commits} em um sistema de controle de versões); entre
-outras aplicações, como a geração de números pseudoaleatórios.
+mais elaborada de autenticação (i.e. um valor pseudoaleatório concatenado ao
+resumo criptográfico da senha do usuário).}; resumos criptográficos são
+comumente empregados como identificadores únicos para um arquivo (e.g.
+\emph{commits} em um sistema de controle de versões); entre outras aplicações,
+como a geração de números pseudoaleatórios.
 
 \subsection{Construção esponja}
 
@@ -284,77 +286,67 @@ ou exclusivo ($\oplus$) é calculada entre os blocos e os estados da construçã
 intercalados por aplicações de $f$.
 
 \begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[scale=0.5]
-
+  \centering
+  \begin{tikzpicture}[scale=0.5]
     \begin{scope}[xshift=0cm]
-        \draw[thick] (0,0) rectangle ++(1,10);
-        \draw[thick] (0,3) -- ++(1,0);
-        \node[XOR,thick] (xm0) at (1+1.5,8) {};
-        \draw[edge,thick] (1,8) -- (xm0);
-        \draw[edge,thick] (1,2) -- ++(3,0);
-        \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{0}$} -- (xm0);  
-        \draw[edge,thick] (xm0) -- ++(1.5,0);
-        \draw[edgee,anchor=east] (-1,3) -- node[left] {$r$} ++(0,7);
-        \draw[edgee,anchor=east] (-1,0) -- node[left] {$c$} ++(0,3);
+      \draw[thick] (0,0) rectangle ++(1,10);
+      \draw[thick] (0,3) -- ++(1,0);
+      \node[XOR,thick] (xm0) at (1+1.5,8) {};
+      \draw[edge,thick] (1,8) -- (xm0);
+      \draw[edge,thick] (1,2) -- ++(3,0);
+      \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{0}$} -- (xm0);
+      \draw[edge,thick] (xm0) -- ++(1.5,0);
+      \draw[edgee,anchor=east] (-1,3) -- node[left] {$r$} ++(0,7);
+      \draw[edgee,anchor=east] (-1,0) -- node[left] {$c$} ++(0,3);
     \end{scope}
-      
     \begin{scope}[xshift=4cm]
-        \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-        \node[thick] (xm1) at (1+1.5,8) {$\dots$};
-        \draw[edge,thick] (1,8) -- (xm1);
-        \draw[edge,thick] (xm1) -- ++(1.5,0);
-        \node[thick] (xm1) at (1+1.5,2) {$\dots$};
-        \draw[edge,thick] (1,2) -- (xm1);
-        \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+      \node[thick] (xm1) at (1+1.5,8) {$\dots$};
+      \draw[edge,thick] (1,8) -- (xm1);
+      \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \node[thick] (xm1) at (1+1.5,2) {$\dots$};
+      \draw[edge,thick] (1,2) -- (xm1);
+      \draw[edge,thick] (xm1) -- ++(1.5,0);
     \end{scope}
-    
     \begin{scope}[xshift=8cm]
-        \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-        \node[XOR,thick] (xm1) at (1+1.5,8) {};
-        \draw[edge,thick] (1,8) -- (xm1);
-        \draw[edge,thick] (1,2) -- ++(3,0);  
-        \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{i}$} -- (xm1);
-        \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+      \node[XOR,thick] (xm1) at (1+1.5,8) {};
+      \draw[edge,thick] (1,8) -- (xm1);
+      \draw[edge,thick] (1,2) -- ++(3,0);
+      \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{i}$} -- (xm1);
+      \draw[edge,thick] (xm1) -- ++(1.5,0);
     \end{scope}
-      
     \begin{scope}[xshift=12cm]
-        \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-        \draw[edge,thick] (1,2) -- ++(3,0);
-        \draw[edge,thick] (1,8) -- ++(3,0);  
+      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+      \draw[edge,thick] (1,2) -- ++(3,0);
+      \draw[edge,thick] (1,8) -- ++(3,0);
     \end{scope}
-    
     \begin{scope}[xshift=16cm]
-        \draw[thick] (0,0) rectangle ++(1,10);
-        \draw[thick] (0,3) -- ++(1,0);
-        \draw[edge,thick] (1,2) -- ++(3,0);
-        \draw[edge,thick] (1,8) -- ++(3,0);  
-        \draw[edge,thick] (1+1.5,8) -- ++(0,2.5) node[above] {\large $z_{0}$};
-        \draw[dashed,thick] (-1.5,-1.5) -- ++(0,13);
+      \draw[thick] (0,0) rectangle ++(1,10);
+      \draw[thick] (0,3) -- ++(1,0);
+      \draw[edge,thick] (1,2) -- ++(3,0);
+      \draw[edge,thick] (1,8) -- ++(3,0);
+      \draw[edge,thick] (1+1.5,8) -- ++(0,2.5) node[above] {\large $z_{0}$};
+      \draw[dashed,thick] (-1.5,-1.5) -- ++(0,13);
     \end{scope}
-    
     \begin{scope}[xshift=20cm]
-        \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-        \node[thick] (xm1) at (1+1.5,8) {$\dots$};
-        \draw[edge,thick] (1,8) -- (xm1);
-        \draw[edge,thick] (xm1) -- ++(1.5,0);
-        \node[thick] (xm1) at (1+1.5,2) {$\dots$};
-        \draw[edge,thick] (1,2) -- (xm1);
-        \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+      \node[thick] (xm1) at (1+1.5,8) {$\dots$};
+      \draw[edge,thick] (1,8) -- (xm1);
+      \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \node[thick] (xm1) at (1+1.5,2) {$\dots$};
+      \draw[edge,thick] (1,2) -- (xm1);
+      \draw[edge,thick] (xm1) -- ++(1.5,0);
     \end{scope}
-    
     \begin{scope}[xshift=24cm]
-        \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-        \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
+      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
+      \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
     \end{scope}
-    
-    \end{tikzpicture}
-    
-    \caption{Descrição gráfica da construção
-        esponja~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
-    \label{fig:3}
+  \end{tikzpicture}
+  \caption{Descrição gráfica da construção
+      esponja~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
+  \label{fig:3}
 \end{figure}
-
 
 Ao término do processamento dos blocos, a fase de compressão é iniciada, onde
 $n$ blocos de tamanho $r$ compõem a saída da função, novamente intercalados por
@@ -362,8 +354,8 @@ aplicações de $f$, onde $n$ é parametrizável pelo usuário. Os últimos $c$ 
 do estado nunca são diretamente afetados pelos blocos, e também nunca revelados
 durante a fase de compressão. Essencialmente, estão correlacionados com o nível
 de segurança da construção esponja. Assim, uma função esponja pode ser definida
-como $\textsc{Sponge}[f, \texttt{pad}, r]$, e sua representação gráfica pode ser
-consultada em~\ref{fig:3}.
+como $\textsc{Sponge}[f, \texttt{pad}, r]$, e sua representação gráfica pode
+ser consultada em~\ref{fig:3}.
 
 A função esponja \textsc{Keccak}~\cite{KeccakReference} é definida a partir
 desta construção, e pode agir como uma função de resumo criptográfico. Existem
@@ -378,20 +370,21 @@ $R$, por sua vez, consiste da composição de cinco etapas: $R = \iota \circ \ch
 \begin{enumerate}
 
   \item[Etapa $\theta$:] Calcula o ou exclusivo entre um elemento de $a$ e
-    todos os elementos das colunas adjacentes a este.
+      todos os elementos das colunas adjacentes a este.
 
   \item[Etapa $\rho$:] Dispersa os elementos entre cortes transversais
-    verticais de $a$.
+      verticais de $a$.
 
   \item[Etapa $\pi$:] Rearranja elementos em cortes transversais horizontais de
-    $a$.
+      $a$.
 
   \item[Etapa $\chi$:] Modifica uma elemento de uma linha de $a$ de acordo com
-    uma função não-linear de dois outros bits adjacentes. Análogo a uma caixa-S.
+      uma função não-linear de dois outros bits adjacentes. Análogo a uma
+        caixa-S.
 
   \item[Etapa $\iota$:] Calcula o ou exclusivo entre o estado $a$ e uma
-    sequência gerada por um \emph{linear-feedback shift register} alimentado
-    pelo índice da rodada atual, tornando a rodada assimétrica.
+      sequência gerada por um \emph{linear-feedback shift register} alimentado
+        pelo índice da rodada atual, tornando a rodada assimétrica.
 
 \end{enumerate}
 
@@ -415,130 +408,173 @@ são definições de \textsc{Keccak} com parâmetros fixos, e.g.
 
 \section{Criptografia simétrica}
 
-Algoritmos criptográficos que utilizam a mesma chave para criptografar o
-texto plano e descriptografar o texto correspondente cifrado são classificados
-como algoritmos de criptografia simétrica. A chave representa um segredo
+Algoritmos criptográficos que utilizam a mesma chave para criptografar o texto
+plano e descriptografar o texto correspondente cifrado são classificados como
+algoritmos de criptografia simétrica. A chave representa um segredo
 compartilhado entre entidades em uma comunicação segura. Porém, a necessidade
 de um canal seguro para o estabelecimento desta chave apresenta-se como uma
 desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
 ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
 como alicerce, é possível construir funções de resumo criptográfico: por
 exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2,
-utiliza uma função de compressão de mÃ£o Ãºnica, obtida a partir de uma cifra de
+utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
 bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
 \subsection{AES --- \emph{Advanced Encryption Standard}}
 
-O AES Ã© uma cifra de blocos que opera sobre uma matriz de estado $A$, onde $A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinÃ´mio irredutÃ­vel $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. AdiÃ§Ãµes e multiplicaÃ§Ãµes em corpos da forma $\mathbb{F}_{2^n}$ sÃ£o, respectivamente, representadas por operaÃ§Ãµes \texttt{AND} e \texttt{XOR}, e coeficientes de polinÃ´mios sÃ£o palavras binÃ¡rias, tornando esta estrutura convidativa para operaÃ§Ãµes computacionais.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192, 256\}$. Ã uma versÃ£o padronizada pelo NIST (\emph{National Institute of Standards and Technology})~\cite{Standards2001} do algoritmo Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento Ã© denominado iterativo, consistindo em aplicaÃ§Ãµes sequenciais de quatro operaÃ§Ãµes ordenadas (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicaÃ§Ãµes, denominadas rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
+O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde
+$A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível
+$m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da
+forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações
+\texttt{AND} e \texttt{XOR}, e coeficientes de polinômios são palavras
+binárias, tornando esta estrutura convidativa para operações computacionais.},
+$0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192,
+256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of
+Standards and Technology})~\cite{Standards2001} do algoritmo
+Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado
+iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas
+(\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
+\textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas
+rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow
+n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
 
-Note que existe uma rodada adicional introdutÃ³ria composta apenas de \textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais, \textsc{MixColumns} Ã© ignorado na Ãºltima rodada, a fim de facilitar a reversibilidade da cifra. Uma rotina de expansÃ£o de chave (\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas com valores derivados, porÃ©m distintos. Estes componentes serÃ£o descritos abaixo.
+Note que existe uma rodada adicional introdutória composta apenas de
+\textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais,
+\textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
+reversibilidade da cifra. Uma rotina de expansão de chave
+(\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas
+com valores derivados, porém distintos. Estes componentes serão descritos
+abaixo.
 
 \begin{enumerate}[label=\roman*.]
 
-    \item \textsc{SubBytes}: realiza-se a reposiÃ§Ã£o de $A_{i,j}$
-        pelo seu valor correspondente em uma \emph{substitution-box} (\emph{S-box}, construÃ­da a partir de uma transformaÃ§Ã£o afim em $A_{i,j}^{-1}$ sobre $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos, respectivamente, representam a linha e a coluna do elemento na \emph{S-box}.
+  \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$ pelo seu valor
+      correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a
+        partir de uma transformação afim em $A_{i,j}^{-1}$ sobre
+        $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos,
+        respectivamente, representam a linha e a coluna do elemento na
+        \emph{S-box}.
 
-    \item \textsc{ShiftRows}: cada linha de $A$, $A_i$,
-        Ã© deslocada circularmente Ã  esquerda $i$ vezes.
+  \item \textsc{ShiftRows}: cada linha de $A$, $A_i$, é deslocada circularmente
+      à esquerda $i$ vezes.
 
-    \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, Ã© multiplicada pelo polinÃ´mio
-        $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, mÃ³dulo $x^{4} + 1$, para que o resultado ainda seja um polinÃ´mio de grau mÃ¡ximo 3, apto a ser representado na coluna.
+  \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, é multiplicada pelo
+      polinômio $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, módulo
+        $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau
+        máximo 3, apto a ser representado na coluna.
 
-    \item \textsc{AddRoundKey}: a operaÃ§Ã£o \texttt{XOR} bit a bit Ã© aplicada entre $A$ e o
-        bloco da chave referente Ã  rodada.
+  \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
+      entre $A$ e o bloco da chave referente à rodada.
 
 \end{enumerate}
 
-\textsc{KeyExpansion} consiste da criaÃ§Ã£o de um conjunto de palavras $K_e$ de 32 bits.
-Tome $\ell = \frac{n}{32}$, e assumindo que Ã© necessÃ¡rio criar palavras suficientes para utilizaÃ§Ã£o em todas as rodadas do algoritmo, entÃ£o $t = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. TambÃ©m defina $rot(x)$ como o deslocamento circular Ã  esquerda de 8 bits da palavra $x$, e a lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela recursÃ£o $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$. Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell, K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ Ã© definida pelas restriÃ§Ãµes (mutualmente exclusivas) abaixo:
+\textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
+32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
+palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
+= \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina
+$rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
+lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela
+recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
+Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell,
+K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é
+definida pelas restrições (mutualmente exclusivas) abaixo:
 \begin{equation}
-    \mathbf{k} = 
-        \begin{cases}
-            \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
-                \text{ se } i \equiv 0 \pmod{4} \\
-            \textsc{SubBytes}(K^{e}_{i - 1}),
-                \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
-            K^{e}_{i - 1}, \text{ caso contrÃ¡rio.}
-        \end{cases}
+  \mathbf{k} =
+    \begin{cases}
+      \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
+        \text{ se } i \equiv 0 \pmod{4} \\
+      \textsc{SubBytes}(K^{e}_{i - 1}),
+        \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
+      K^{e}_{i - 1}, \text{ caso contrário.}
+    \end{cases}
 \end{equation}
-Assim, uma funÃ§Ã£o que criptografa uma mensagem $m$ e retorna um texto cifrado $c$ pode ser
-representada pelo pseudocÃ³digo abaixo.
+Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
+$c$ pode ser representada pelo pseudocódigo abaixo.
 
 \begin{algorithm}[H]
-    \small
-    \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
-    \KwResult{$c$, o texto cifrado resultante}
+  \small
+  \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
+  \KwResult{$c$, o texto cifrado resultante}
 
-    $A \longleftarrow m$\;
-    $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-        \longleftarrow \textsc{KeyExpansion}(K)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-        \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
-    
-    \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
-        $A \longleftarrow \textsc{SubBytes}(A)$\;
-        $A \longleftarrow \textsc{ShiftRows}(A)$\;
-        $A \longleftarrow \textsc{MixColumns}(A)$\;
-        $A \longleftarrow \textsc{AddRoundKey}(A,
-            \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
-    }
- 
+  $A \longleftarrow m$\;
+  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
+    \longleftarrow \textsc{KeyExpansion}(K)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+
+  \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
     $A \longleftarrow \textsc{SubBytes}(A)$\;
     $A \longleftarrow \textsc{ShiftRows}(A)$\;
+    $A \longleftarrow \textsc{MixColumns}(A)$\;
     $A \longleftarrow \textsc{AddRoundKey}(A,
-        \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
+  }
 
-    $c \longleftarrow A$\;
+  $A \longleftarrow \textsc{SubBytes}(A)$\;
+  $A \longleftarrow \textsc{ShiftRows}(A)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+
+  $c \longleftarrow A$\;
 \end{algorithm}
 
-Para que a cifra seja caracterizada como simétrica, é preciso criar uma função que faça o inverso do procedimento acima. Assim, suas etapas precisam ser modificadas de acordo.
+Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
+que faça o inverso do procedimento acima. Assim, suas etapas precisam ser
+modificadas de acordo.
 
 \begin{enumerate}[label=\roman*.]
 
-    \item \textsc{InvShiftRows}: cada linha de $A$, $A_i$, é deslocada circularmente à direita $i$ vezes.
+  \item \textsc{InvShiftRows}: cada linha de $A$, $A_i$, é deslocada
+      circularmente à direita $i$ vezes.
 
-    \item \textsc{InvSubBytes}: é necessário computar a transformação afim inversa para cada elemento $A_{i,j}$, e depois calcular sua inversa multiplicativa.
-    
-    \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela inversa multiplicativa $d = c^{-1}$, obtida por: $(03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02) \cdot d \equiv 1 \pmod{x^{4} + 1}$, logo $d(x) = 0B \cdot x^{3} + OD \cdot x^{2} + 09 \cdot x + 0E$.
+  \item \textsc{InvSubBytes}: é necessário computar a transformação afim
+      inversa para cada elemento $A_{i,j}$, e depois calcular sua inversa
+        multiplicativa.
+
+  \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
+      inversa multiplicativa $d = c^{-1}$, obtida por: $(03 \cdot x^{3} + 01
+        \cdot x^{2} + 01 \cdot x + 02) \cdot d \equiv 1 \pmod{x^{4} + 1}$, logo
+        $d(x) = 0B \cdot x^{3} + OD \cdot x^{2} + 09 \cdot x + 0E$.
 
 \end{enumerate}
 
-Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo. Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
+Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo.
+Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
 
 \begin{algorithm}[H]
-    \small
-    \KwData{$c$, o texto cifrado; $K$, a chave desejada}
-    \KwResult{$m$, o texto claro resultante}
+  \small
+  \KwData{$c$, o texto cifrado; $K$, a chave desejada}
+  \KwResult{$m$, o texto claro resultante}
 
-    $A \longleftarrow c$\;
-    $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-        \longleftarrow \textsc{KeyExpansion}(K)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-        \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
-    
-    \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
-        $A \longleftarrow \textsc{InvShiftRows}(A)$\;
-        $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-        $A \longleftarrow \textsc{AddRoundKey}(A,
-            \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
-        $A \longleftarrow \textsc{InvMixColumns}(A)$\;
-    }
- 
+  $A \longleftarrow c$\;
+  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
+    \longleftarrow \textsc{KeyExpansion}(K)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+
+  \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
     $A \longleftarrow \textsc{InvShiftRows}(A)$\;
     $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-        \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+    $\longleftarrow \textsc{AddRoundKey}(A,
+      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
+    $A \longleftarrow \textsc{InvMixColumns}(A)$\;
+  }
 
-    $m \longleftarrow A$\;
+  $A \longleftarrow \textsc{InvShiftRows}(A)$\;
+  $A \longleftarrow \textsc{InvSubBytes}(A)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+
+  $m \longleftarrow A$\;
 \end{algorithm}
 
 \section{Criptografia assimétrica}
 
 Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
 públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
-($\sk{}$), conhecida apenas pela entidade que a gerou, e a chave pública ($\pk{}$),
-distribuída livremente. Isto possibilita o uso livre de $\pk{}$ para a
-comunicação segura com o detentor da chave sem a necessidade de um canal
+($\sk{}$), conhecida apenas pela entidade que a gerou, e a chave pública
+($\pk{}$), distribuída livremente. Isto possibilita o uso livre de $\pk{}$ para
+a comunicação segura com o detentor da chave sem a necessidade de um canal
 seguro, em virtude da construção dos algoritmos. A segurança destes depende da
 ``dificuldade'' computacional de determinar uma chave privada a partir da chave
 pública, e também do armazenamento de $\sk{}$ em um lugar seguro. Problemas em
@@ -555,55 +591,56 @@ implementação de criptografia assimétrica amplamente utilizada. É baseado na
 dificuldade de fatorar o produto de dois números primos suficientemente
 grandes\footnote{O algoritmo é baseado no problema RSA, definido como realizar
 uma operação de chave privada no algoritmo RSA utilizando apenas $\pk{}$.
-Acredita-se que este problema seja equivalente à fatoração de 
-inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo desempenho
-computacional, geralmente apenas um resumo criptográfico da mensagem desejada é
-codificado por este algoritmo. Abaixo, uma descrição do funcionamento do
-algoritmo. Tome $\phi(x)$ como a função totiente de Euler, que representa a
-quantidade de números relativamente primos a $x$.
+Acredita-se que este problema seja equivalente à fatoração de
+inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo
+desempenho computacional, geralmente apenas um resumo criptográfico da mensagem
+desejada é codificado por este algoritmo. Abaixo, uma descrição do
+funcionamento do algoritmo. Tome $\phi(x)$ como a função totiente de Euler, que
+representa a quantidade de números relativamente primos a $x$.
 
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} Gere dois números primos $p, q$
-    aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
-    $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório $e$
-    relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
-    estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
-    a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k = d$ e
-    $\mathcal{P}_k = (n, e)$.
+      aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
+        $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
+        $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
+        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
+        a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k =
+        d$ e $\mathcal{P}_k = (n, e)$.
 
-  \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual
-    deseja-se criptografar uma mensagem. Transforma-se uma mensagem $m$ em um
-    inteiro no intervalo $[0, n - 1]$ através de uma função de preenchimento.
-    O texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo
-    como a exponenciação quadrática e enviado para a entidade desejada.
+  \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual deseja-se
+      criptografar uma mensagem. Transforma-se uma mensagem $m$ em um inteiro
+        no intervalo $[0, n - 1]$ através de uma função de preenchimento.  O
+        texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo
+        como a exponenciação quadrática e enviado para a entidade desejada.
 
   \item[] \emph{Decodificação.} O receptor da mensagem calcula $m = c^d
-    \pmod{n}$.
+      \pmod{n}$.
 
   \item[] \emph{Demonstração.} Para demonstrar $m^{ed} \equiv m \pmod{n}$, é
-    suficiente mostrar que $m^{ed} \equiv m \pmod{p}$ e $m^{ed} \equiv m \pmod{q}$,
-    pelo Teorema Chinês do Resto. Se $m \equiv 0 \pmod{p}$, então
-    $gcd(m, p) = p$ e certamente $m^{ed} \equiv 0 \equiv m \pmod{n}$.
-    Se $m \not\equiv 0 \pmod{p}$, então $mdc(m, p) = 1$ e pelo Pequeno Teorema
-    de Fermat, $m^{p - 1} \equiv 1 \pmod{p}$. Reescrevendo o produto $ed$ como
-    $ed = 1 + y\phi(n) = 1 + y(p - 1)(q - 1), \; y \in \mathbb{N}$, então
-    \begin{equation}
-      m^{ed} \equiv m^{1 + y(p-1)(q-1)} \equiv (m^{p-1})^{y(q-1)}m
-        \equiv 1^{y(q-1)}m \equiv m \pmod{p}.
-    \end{equation}
-    Analogamente, substituindo $p$ por $q$ no argumento acima, tem-se a prova
-    que $\forall m \in \mathbb{N}, \; m^{ed} \equiv m \pmod{n}$.
+      suficiente mostrar que $m^{ed} \equiv m \pmod{p}$ e $m^{ed} \equiv m
+        \pmod{q}$, pelo Teorema Chinês do Resto. Se $m \equiv 0 \pmod{p}$,
+        então $gcd(m, p) = p$ e certamente $m^{ed} \equiv 0 \equiv m \pmod{n}$.
+        Se $m \not\equiv 0 \pmod{p}$, então $mdc(m, p) = 1$ e pelo Pequeno
+        Teorema de Fermat, $m^{p - 1} \equiv 1 \pmod{p}$. Reescrevendo o
+        produto $ed$ como $ed = 1 + y\phi(n) = 1 + y(p - 1)(q - 1), \; y \in
+        \mathbb{N}$, então
+        \begin{equation}
+          m^{ed} \equiv m^{1 + y(p-1)(q-1)} \equiv
+            (m^{p-1})^{y(q-1)}m \equiv 1^{y(q-1)}m \equiv m \pmod{p}.
+        \end{equation}
+        Analogamente, substituindo $p$ por $q$ no argumento acima, tem-se a
+        prova que $\forall m \in \mathbb{N}, \; m^{ed} \equiv m \pmod{n}$.
 
 \end{enumerate}
 
 \section{Esquemas de assinatura digital}
 
 Um esquema de assinatura digital é uma construção matemática que habilita a
-demonstração de certas propriedades sobre mensagens assinadas: nomeadamente,
-a autenticação do remetente, onde esta entidade pode ser facilmente
-identificada como a emissora da assinatura digital; a integridade da mensagem,
-i.e. a certeza de que esta não foi modificada ao ser transmitida por um canal
+demonstração de certas propriedades sobre mensagens assinadas: nomeadamente, a
+autenticação do remetente, onde esta entidade pode ser facilmente identificada
+como a emissora da assinatura digital; a integridade da mensagem, i.e. a
+certeza de que esta não foi modificada ao ser transmitida por um canal
 possivelmente inseguro; e o não-repúdio do remetente, onde não é possível negar
 que uma mensagem foi assinada e enviada, após este fato.
 
@@ -636,217 +673,375 @@ que uma mensagem foi assinada e enviada, após este fato.
 Esquemas de assinatura digital são fortemente baseados em criptografia de
 chaves públicas, e consistem de três algoritmos: a geração de chaves
 $\textsc{Gen}(1^n)$, que gera um par de chaves aleatório $(\mathcal{P}_k,
-\mathcal{S}_k)$ com parâmetro de segurança $n \in \mathbb{N}^{*}$; o algoritmo de assinatura
-$\textsc{Sig}(\mathcal{S}_k, m)$, que produz uma assinatura $\sigma$ para uma
-mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
-\sigma)$, que retorna o estado de validade da assinatura como um valor verdade
-binário. De acordo com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
+\mathcal{S}_k)$ com parâmetro de segurança $n \in \mathbb{N}^{*}$; o algoritmo
+de assinatura $\textsc{Sig}(\mathcal{S}_k, m)$, que produz uma assinatura
+$\sigma$ para uma mensagem $m$; e o algoritmo de verificação
+$\textsc{Ver}(\mathcal{P}_k, m, \sigma)$, que retorna o estado de validade da
+assinatura como um valor verdade binário. De acordo
+com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
-geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
-\textsc{Gen}(1^n)$ e $\forall w \in \binwds{*}$,
+geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in \textsc{Gen}(1^n)$ e
+$\forall w \in \binwds{*}$,
 \begin{equation}
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
-É necessário apontar que esta definição não considera a segurança do esquema -- é possível construir trivialmente algoritmos que respeitam a equação acima, sem qualquer tipo de codificação a fim de ocultar mensagens. 
-Na Figura \ref{fig:2}, é possível visualizar um diagrama do comportamento de
-um esquema de assinatura digital genérico. Note que $\sigma$ geralmente é
-composta da concatenação da mensagem original com a assinatura do resumo
-criptográfico desta, embora a saída do algoritmo \textsc{Sig} consista apenas
-da aplicação de uma função interna ao resumo.
+É necessário apontar que esta definição não considera a segurança do esquema --
+é possível construir trivialmente algoritmos que respeitam a equação acima, sem
+qualquer tipo de codificação a fim de ocultar mensagens.  Na Figura
+\ref{fig:2}, é possível visualizar um diagrama do comportamento de um esquema
+de assinatura digital genérico. Note que $\sigma$ geralmente é composta da
+concatenação da mensagem original com a assinatura do resumo criptográfico
+desta, embora a saída do algoritmo \textsc{Sig} consista apenas da aplicação de
+uma função interna ao resumo.
 
 \chapter{Assinatura digital baseada em funções de resumo criptográfico}
 
-Neste capítulo, são apresentados os esquemas de assinatura digital única Lamport, a fim de fundamentar o raciocínio por trás do esquema alvo. Winternitz e \textsc{Wots+} são definidos logo após, bem como os esquemas Merkle, XMSS (\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores XMSS$^{MT}$, SPHINCS e SPHINCS+, e a relação entre estes. Em especial, estes esquemas são escolhidos como os exemplos mais reconhecidos de suas respectivas categorias.
+Neste capítulo, são apresentados os esquemas de assinatura digital única
+Lamport, a fim de fundamentar o raciocínio por trás do esquema alvo. Winternitz
+e \textsc{Wots+} são definidos logo após, bem como os esquemas Merkle, XMSS
+(\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores
+XMSS$^{MT}$, SPHINCS e SPHINCS+, e a relação entre estes. Em especial, estes
+esquemas são escolhidos como os exemplos mais reconhecidos de suas respectivas
+categorias.
 
 \section{Esquemas de assinatura única}
 
-Esquemas de assinatura única (\emph{one-time signature schemes}) possibilitam a assinatura de apenas uma mensagem, facilitando a falsificação deste processo no caso da reutilização do par de chaves. São construções fundamentais para a criação de esquemas baseados apenas em funções de resumo criptográfico -- vários esquemas continuam utilizando assinatura única e compõem o estado da arte da literatura~\cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}.
+Esquemas de assinatura única (\emph{one-time signature schemes}) possibilitam a
+assinatura de apenas uma mensagem, facilitando a falsificação deste processo no
+caso da reutilização do par de chaves. São construções fundamentais para a
+criação de esquemas baseados apenas em funções de resumo criptográfico --
+vários esquemas continuam utilizando assinatura única e compõem o estado da
+arte da literatura~\cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}.
 
 \subsection{O esquema Lamport}
 
-A utilização de funções de resumo criptográfico para a criação de 
-esquemas de assinatura digital foi iniciada por 
-Lamport~\cite{Lamport1979} e estendida 
-em~\cite{Diffie:2006:NDC:2263321.2269104, Merkle:1989:CDS:118209.118230}, permitindo assinar um 
-\emph{bit} de cada vez para uma dada mensagem. O par de chaves consiste 
-de um par de palavras pseudoaleatórias $x_0, x_1$ como $\sk{}$, e seus 
-resumos como $\pk{}$. O assinante assina um \emph{bit} $b$ distribuindo 
-$x_b$, e o recipiente verifica se $\hash{x_b}$ é o
-valor correto em $\pk{}$. Como parte de $\sk{}$ é distribuída, não é
-recomendável reutilizar o par de chaves, e os elementos não
-distribuídos devem ser destruídos. Assinar mensagens mais longas
-envolve o cálculo do resumo desta, visto que do contrário, o
-tamanho do par de chaves e assinaturas torna-se extremamente
-proibitivo.
+A utilização de funções de resumo criptográfico para a criação de esquemas de
+assinatura digital foi iniciada por Lamport~\cite{Lamport1979} e estendida
+em~\cite{Diffie:2006:NDC:2263321.2269104, Merkle:1989:CDS:118209.118230},
+permitindo assinar um \emph{bit} de cada vez para uma dada mensagem. O par de
+chaves consiste de um par de palavras pseudoaleatórias $x_0, x_1$ como $\sk{}$,
+e seus resumos como $\pk{}$. O assinante assina um \emph{bit} $b$ distribuindo
+$x_b$, e o recipiente verifica se $\hash{x_b}$ é o valor correto em $\pk{}$.
+Como parte de $\sk{}$ é distribuída, não é recomendável reutilizar o par de
+chaves, e os elementos não distribuídos devem ser destruídos. Assinar mensagens
+mais longas envolve o cálculo do resumo desta, visto que do contrário, o
+tamanho do par de chaves e assinaturas torna-se extremamente proibitivo.
 
-Formalmente, tome um parâmetro de segurança $m$, geralmente considerado como
-o tamanho da saída da função de resumo criptográfico escolhido. Considere as funções\footnote{Na prática, o esquema pode ser instanciado utilizando $\hh{}$ no lugar de $f$.} de mão única
-$f : \binwds{m} \longrightarrow \binwds{m}$
-e de resumo criptográfico $\fhash{m}$.
-Descreve-se abaixo o funcionamento do esquema
-e discute-se algumas de suas características. 
+Formalmente, tome um parâmetro de segurança $m$, geralmente considerado como o
+tamanho da saída da função de resumo criptográfico escolhido. Considere as
+funções\footnote{Na prática, o esquema pode ser instanciado utilizando $\hh{}$
+no lugar de $f$.} de mão única $f : \binwds{m} \longrightarrow \binwds{m}$ e de
+resumo criptográfico $\fhash{m}$.  Descreve-se abaixo o funcionamento do
+esquema e discute-se algumas de suas características.
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave pública $\pk{} = (y_{0, m-1}, y_{1, m-1}, \dots, y_{0,0}, y_{1,0})$ é derivada de $\sk{}$, computando $f(x) \; \forall x \in  \sk{}$. Logo, $\pk{} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0}))$.
+  \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{0, m-1}, x_{1, m-1},
+      \dots, x_{0,0}, x_{1,0}) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a
+        chave privada, informalmente uma $2m$-tupla de inteiros
+        pseudoaleatórios. A chave pública $\pk{} = (y_{0, m-1}, y_{1, m-1},
+        \dots, y_{0,0}, y_{1,0})$ é derivada de $\sk{}$, computando $f(x) \;
+        \forall x \in  \sk{}$. Logo, $\pk{} = (f(x_{0, m-1}), f(x_{1, m-1}),
+        \dots, f(x_{0,0}), f(x_{1,0}))$.
 
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. $d$ pode ser representado como $d_{m-1} \dots d_0$. A assinatura consiste de elementos de $\sk{}$ operados por $f$: $\sigma = (f(x_{d_{m-1}, m-1}), \dots, f(x_{d_0, 0}))$.
-    
-    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos de $\sigma$ precisam ser verificados separadamente através do recálculo de $d = d_{m-1} \dots d_0$, para que
-    os elementos corretos de $\pk{}$ sejam escolhidos. Assim, $\sigma$ está
-    correta se $(\sigma_{m-1}, \dots, \sigma_0) = (y_{d_{m-1}, m-1}, \dots, y_{d_{0}, 0})$.
-    
+  \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
+      resumo $d = \hash{M}$. $d$ pode ser representado como $d_{m-1} \dots
+        d_0$. A assinatura consiste de elementos de $\sk{}$ operados por $f$:
+        $\sigma = (f(x_{d_{m-1}, m-1}), \dots, f(x_{d_0, 0}))$.
+
+  \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da
+      assinatura $\sigma$, todos os blocos de $\sigma$ precisam ser verificados
+        separadamente através do recálculo de $d = d_{m-1} \dots d_0$, para que
+        os elementos corretos de $\pk{}$ sejam escolhidos.  Assim, $\sigma$
+        está correta se $(\sigma_{m-1}, \dots, \sigma_0) = (y_{d_{m-1}, m-1},
+        \dots, y_{d_{0}, 0})$.
+
 \end{enumerate}
 
 É necessário comentar que assinaturas produzidas por este esquema podem ser
-forjadas, visto que é possível computar $f$ para os \emph{bits} da mensagem
-que são igual a zero. Assim, uma soma de verificação representando a
-quantidade de zeros na mensagem original também é assinada e enviada ao
-recipiente, adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.
-Esta característica será explicada em mais detalhes no próximo esquema.
+forjadas, visto que é possível computar $f$ para os \emph{bits} da mensagem que
+são igual a zero. Assim, uma soma de verificação representando a quantidade de
+zeros na mensagem original também é assinada e enviada ao recipiente,
+adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.  Esta
+característica será explicada em mais detalhes no próximo esquema.
 
-Ademais, uma otimização simples para reduzir o tamanho das chaves privadas pode ser
-implementada através da utilização de um gerador de números pseudoaleatórios
-criptograficamente seguro. Assim, mostra-se necessário apenas guardar uma
-palavra de tamanho $m$ que age como a semente deste gerador. Reduzir
-o tamanho de chaves públicas e assinaturas mostra-se mais difícil; entretanto,
-a generalização deste esquema permite estas otimizações.
+Ademais, uma otimização simples para reduzir o tamanho das chaves privadas pode
+ser implementada através da utilização de um gerador de números
+pseudoaleatórios criptograficamente seguro. Assim, mostra-se necessário apenas
+guardar uma palavra de tamanho $m$ que age como a semente deste gerador.
+Reduzir o tamanho de chaves públicas e assinaturas mostra-se mais difícil;
+entretanto, a generalização deste esquema permite estas otimizações.
 
 \subsection{O esquema Winternitz}
 
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
-por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.
-O esquema, referido como \textsc{Wots}, permite assinar múltiplos \emph{bits} em cada bloco da assinatura,
-generalizando a proposta de Lamport. Elabora-se a definição do esquema abaixo.
+por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.  O
+esquema, referido como \textsc{Wots}, permite assinar múltiplos \emph{bits} em
+cada bloco da assinatura, generalizando a proposta de Lamport. Elabora-se a
+definição do esquema abaixo.
 
-Um parâmetro de segurança $m$ é necessário, como acima. O parâmetro
-Winternitz, da forma $w \in \mathbb{N}, w > 1$, também deve ser definido, que
-representa a quantidade de \emph{bits} a serem assinados simultaneamente.
-A partir destes, calcula-se
-    $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil 
-    \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
-    t = t_1 + t_2,$$
-que representarão, respectivamente, a quantidade de palavras em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a quantidade total.
-Por fim, considere as funções de mão única
-$f : \binwds{m} \longrightarrow \binwds{m}$ e de resumo criptográfico
-$\fhash{m}$.
+Um parâmetro de segurança $m$ é necessário, como acima. O parâmetro Winternitz,
+da forma $w \in \mathbb{N}, w > 1$, também deve ser definido, que representa a
+quantidade de \emph{bits} a serem assinados simultaneamente.  A partir destes,
+calcula-se $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil
+\frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
+t = t_1 + t_2,$$ que representarão, respectivamente, a quantidade de palavras
+em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a
+quantidade total.  Por fim, considere as funções de mão única $f : \binwds{m}
+\longrightarrow \binwds{m}$ e de resumo criptográfico $\fhash{m}$.
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{t-1}, \dots, x_0) \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada, informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave pública $\pk{} = (y_{t-1}, \dots, y_0)$ pode ser derivada de $\sk{}$, computando $f^{2^{w}-1}(x) \; \forall x \in  \sk{}$. Logo, $\pk{} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
+  \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{t-1}, \dots, x_0)
+      \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada,
+        informalmente uma $t$-tupla de inteiros pseudoaleatórios. A chave
+        pública $\pk{} = (y_{t-1}, \dots, y_0)$ pode ser derivada de $\sk{}$,
+        computando $f^{2^{w}-1}(x) \; \forall x \in  \sk{}$. Logo, $\pk{} =
+        (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0))$.
 
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Por conveniência, escolhe-se $m$ ou $w$ de forma que $w \mid m$, mas podem ser concatenados zeros ao resumo para que isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$. 
-    Adicionalmente, uma soma de verificação é calculada usando a representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1}, \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots, f^{b_0}(x_0)).$
-    
-    \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados separadamente através do cálculo das aplicações restantes de $f$. Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se $\pk{} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 - b_0}(\sigma_0))$.
-    
+  \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
+      resumo $d = \hash{M}$. Por conveniência, escolhe-se $m$ ou $w$ de forma
+        que $w \mid m$, mas podem ser concatenados zeros ao resumo para que
+        isso seja satisfeito. $d$ é dividido em uma $t_1$-tupla de palavras em
+        base-$w$, $\mathcal{B}_1 = (b_{t-1}, \dots, b_{t-t_1})$.
+        Adicionalmente, uma soma de verificação é calculada usando a
+        representação inteira dos elementos de $\mathcal{B}_1$: $c = \sum_{b
+        \in \mathcal{B}_1} 2^w - 1 - b$. Novamente, $c$ pode ser arredondado
+        com zeros até que $w \mid \length{c}$. Finalmente, $c$ é dividido em
+        uma $t_2$-tupla de palavras base-$w$, $\mathcal{B}_2 = (b_{t_2-1},
+        \dots, b_0)$. Assim, $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2$ e
+        obtém-se a assinatura $\sigma = (f^{b_{t-1}}(x_{t-1}), \dots,
+        f^{b_0}(x_0)).$
+
+  \item[] \emph{Verificação da assinatura.} Para assegurar a corretude da
+      assinatura $\sigma$, todos os blocos $\sigma_i$ precisam ser verificados
+        separadamente através do cálculo das aplicações restantes de $f$.
+        Assim, computando $\mathcal{B}$ novamente, $\sigma$ está correta se
+        $\pk{} = (f^{2^w - 1 - b_{t-1}}(\sigma_{t-1}), \dots, f^{2^w - 1 -
+        b_0}(\sigma_0))$.
+
 \end{enumerate}
 
-Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto implicaria em achar uma pré-imagem de $f$, o que é computacionalmente inviável em vista da restrição para $f$. Então, resta apenas a tentativa da falsificação de $\sigma$ incrementando algum valor $b_i$. A soma de verificação $c$ é necessária a fim de proteger o esquema contra este comportamento. Observe que, em sua ausência, é possível que uma entidade maliciosa crie assinaturas $\sigma'$ apenas calculando mais iterações de $f$ em blocos da assinatura $\sigma$. Entretanto, com a presença de $c$, e consequentemente $\mathcal{B}_2$, ao modificar um valor $b_j \in \mathcal{B}_1$, para que o valor correto de $\mathcal{B}_2$ seja mantido, é necessário que uma pré-imagem de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura impossível.
+Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto
+implicaria em achar uma pré-imagem de $f$, o que é computacionalmente inviável
+em vista da restrição para $f$. Então, resta apenas a tentativa da falsificação
+de $\sigma$ incrementando algum valor $b_i$. A soma de verificação $c$ é
+necessária a fim de proteger o esquema contra este comportamento. Observe que,
+em sua ausência, é possível que uma entidade maliciosa crie assinaturas
+$\sigma'$ apenas calculando mais iterações de $f$ em blocos da assinatura
+$\sigma$. Entretanto, com a presença de $c$, e consequentemente
+$\mathcal{B}_2$, ao modificar um valor $b_j \in \mathcal{B}_1$, para que o
+valor correto de $\mathcal{B}_2$ seja mantido, é necessário que uma pré-imagem
+de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar
+algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura
+impossível.
 
 \subsection{\textsc{Wots+}}
 
-O principal esquema variante do \textsc{Wots}, chamado de \textsc{Wots+}~\cite{cryptoeprint:2017:965}, tem como ideia principal a reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o processo de iterações sequenciais --- utilizando apenas uma função --- do esquema original. Esta característica também permite uma prova de segurança mais simples, mas não menos poderosa, que desconsidera a necessidade da resistência à colisões de $f$.
+O principal esquema variante do \textsc{Wots}, chamado de
+\textsc{Wots+}~\cite{cryptoeprint:2017:965}, tem como ideia principal a
+reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o
+processo de iterações sequenciais --- utilizando apenas uma função --- do
+esquema original. Esta característica também permite uma prova de segurança
+mais simples, mas não menos poderosa, que desconsidera a necessidade da
+resistência à colisões de $f$.
 
-Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema original. A família de funções que o \textsc{Wots+} utiliza é definida por $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e $\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família, e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, elabora-se a nova função de iteração $c^{i}_{k}(x, r)$, definida recursivamente como \begin{equation}
-\begin{split}
-c^{0}_{k}(x, r) &= x \\
-c^{i}_{k}(x, r) &= f_k(c^{i-1}_{k}(x, r) \oplus r_i).
-\end{split}
+Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem
+como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema
+original. A família de funções que o \textsc{Wots+} utiliza é definida por
+$\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
+\mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e
+$\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família,
+e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1})
+\stackrel{\$}{\longleftarrow} \binwds{m}$, elabora-se a nova função de iteração
+$c^{i}_{k}(x, r)$, definida recursivamente como
+\begin{equation}
+  \begin{split}
+    c^{0}_{k}(x, r) &= x \\
+    c^{i}_{k}(x, r) &= f_k(c^{i-1}_{k}(x, r) \oplus r_i).
+  \end{split}
 \end{equation}
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} Defina $\sk{}$ e $r$ como tuplas de inteiros pseudoaleatórios, discutidos anteriormente. O algoritmo também deve escolher uma chave de função $k \stackrel{\$}\longleftarrow \mathcal{K}$. Por fim, $\pk{} = (c^{2^w-1}_{k}(x_{t-1}, r), \dots, c^{0}_{k}(x, r))$.
-    
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu resumo $d = \hash{M}$ e a soma de verificação $c$ correspondente, produzindo $\mathcal{B}$. As considerações sobre preenchimento de $m$ e $c$ ainda se aplicam. Aplicando a nova função de iteração, tem-se $\sigma = (c^{b_{t - 1}}_{k}(x_{t-1}, r), \dots, c^{b_{0}}_{k}(x_{0}, r))$.
-    
-    \item[] \emph{Verificação da assinatura.} Novamente, é necessário calcular $\mathcal{B}$ para obter as iterações restantes até $\pk{}$. Note que as primeiras $b_i$ palavras de $r$ não serão utilizadas. Assim, $\sigma$ está correta se $\pk{} = (c^{2^{w} - 1 - b_{t - 1}}_{k}(\sigma_{t-1}, r), \dots, c^{2^{w} - 1 - b_{0}}_{k}(\sigma_{0}, r))$. 
+  \item[] \emph{Geração de chaves.} Defina $\sk{}$ e $r$ como tuplas de
+      inteiros pseudoaleatórios, discutidos anteriormente. O algoritmo também
+        deve escolher uma chave de função $k \stackrel{\$}\longleftarrow
+        \mathcal{K}$. Por fim, $\pk{} = (c^{2^w-1}_{k}(x_{t-1}, r), \dots,
+        c^{0}_{k}(x, r))$.
+
+  \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu
+      resumo $d = \hash{M}$ e a soma de verificação $c$ correspondente,
+        produzindo $\mathcal{B}$. As considerações sobre preenchimento de $m$ e
+        $c$ ainda se aplicam. Aplicando a nova função de iteração, tem-se
+        $\sigma = (c^{b_{t - 1}}_{k}(x_{t-1}, r), \dots, c^{b_{0}}_{k}(x_{0},
+        r))$.
+
+  \item[] \emph{Verificação da assinatura.} Novamente, é necessário calcular
+      $\mathcal{B}$ para obter as iterações restantes até $\pk{}$. Note que as
+        primeiras $b_i$ palavras de $r$ não serão utilizadas. Assim, $\sigma$
+        está correta se $\pk{} = (c^{2^{w} - 1 - b_{t - 1}}_{k}(\sigma_{t-1},
+        r), \dots, c^{2^{w} - 1 - b_{0}}_{k}(\sigma_{0}, r))$.
 
 \end{enumerate}
 
-Note que é possível utilizar uma função conhecida, como o AES, para as iterações de $f$. Isto pode ser explicado por conta de implementações em hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da Intel, habilitando um grande ganho de desempenho no cômputo desta cifra. Porém, é necessário adaptar a cifra de blocos para que respeite as restrições impostas pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um nível de segurança suficiente, é possível empregar a construção Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
+Note que é possível utilizar uma função conhecida, como o AES, para as
+iterações de $f$. Isto pode ser explicado por conta de implementações em
+hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da
+Intel, habilitando um grande ganho de desempenho no cômputo desta cifra. Porém,
+é necessário adaptar a cifra de blocos para que respeite as restrições impostas
+pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um
+nível de segurança suficiente, é possível empregar a construção
+Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
 
-Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que represente uma palavra $x$, e que sua inversibilidade seja computacionalmente inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X, \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam elementos que desrespeitem esta regra. O resultado deste processo é definido recursivamente como \begin{equation}
-\begin{split}
-h_0 &= IV \\
-h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
-\end{split}
+Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo
+bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de
+tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho
+necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que
+represente uma palavra $x$, e que sua inversibilidade seja computacionalmente
+inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
+\length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
+tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
+elementos que desrespeitem esta regra. O resultado deste processo é definido
+recursivamente como
+\begin{equation}
+  \begin{split}
+    h_0 &= IV \\
+    h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
+  \end{split}
 \end{equation}
-Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como forma de executar iterações para criar e verificar a assinatura, como sugerido em~\cite[4.1]{cryptoeprint:2017:965}. Note que apenas esta versão do esquema pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração. Do contrário, o método pode introduzir multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total. % citation needed
+Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
+forma de executar iterações para criar e verificar a assinatura, como sugerido
+em~\cite[4.1]{cryptoeprint:2017:965}. Note que apenas esta versão do esquema
+pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$
+aplicados em cada iteração. Do contrário, o método pode introduzir
+multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total.
+% citation needed
 
 \section{Esquemas baseados em árvores de Merkle}
 
-A criação de um par de chaves para cada mensagem, bem como a infraestrutura necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se processos extremamente onerosos. Desse modo, assim como esquemas de assinatura digital clássicos, deseja-se que uma chave privada possa assinar múltiplos documentos. No contexto de esquemas baseados em funções de resumo criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de característica binária e perfeita, pode ser aproveitada para tal.
+A criação de um par de chaves para cada mensagem, bem como a infraestrutura
+necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se
+processos extremamente onerosos. Desse modo, assim como esquemas de assinatura
+digital clássicos, deseja-se que uma chave privada possa assinar múltiplos
+documentos. No contexto de esquemas baseados em funções de resumo
+criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de
+característica binária e perfeita, pode ser aproveitada para tal.
 
 \begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-      \tikzset{every tree node/.style={align=center,anchor=north}}
-      \Tree
-        [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
-          [.\node{$T_{1, 0}$ \\ $\hash{T_{2, 0} \concat T_{2, 1}}$};
-            [.{$T_{2, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
-              \edge[dashed, style={<-}] node {}; $\mathcal{D}_{0}$
-            ]
-            [.{$T_{2, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
-              \edge[dashed, style={<-}] node {}; $\mathcal{D}_{1}$
-            ]
+  \centering
+  \begin{tikzpicture}
+    \tikzset{every tree node/.style={align=center,anchor=north}}
+    \Tree
+      [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
+        [.\node{$T_{1, 0}$ \\ $\hash{T_{2, 0} \concat T_{2, 1}}$};
+          [.{$T_{2, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
+            \edge[dashed, style={<-}] node {}; $\mathcal{D}_{0}$
           ]
-          [.\node{$T_{1, 1}$ \\ $\hash{T_{2, 2} \concat T_{2, 3}}$};
-            [.{$T_{2, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
-              \edge[dashed, style={<-}] node {}; $\mathcal{D}_{2}$
-            ]
-            [.{$T_{2, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
-              \edge[dashed, style={<-}] node {}; $\mathcal{D}_{3}$
-            ]
+          [.{$T_{2, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
+            \edge[dashed, style={<-}] node {}; $\mathcal{D}_{1}$
           ]
         ]
-    \end{tikzpicture}
-    \caption{Representação gráfica de uma árvore $T$, com altura $h = 2$.}
-    \label{fig:4}
+        [.\node{$T_{1, 1}$ \\ $\hash{T_{2, 2} \concat T_{2, 3}}$};
+          [.{$T_{2, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
+            \edge[dashed, style={<-}] node {}; $\mathcal{D}_{2}$
+          ]
+          [.{$T_{2, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
+            \edge[dashed, style={<-}] node {}; $\mathcal{D}_{3}$
+          ]
+        ]
+      ]
+  \end{tikzpicture}
+  \caption{Representação gráfica de uma árvore $T$, com altura $h = 2$.}
+  \label{fig:4}
 \end{figure}
 
-De modo genérico, folhas de uma árvore de Merkle são construídas a partir do resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais destas folhas computarão o resumo criptográfico do valor dos resumos de seus filhos concatenados, repetindo este processo até que a raiz seja preenchida, como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na altura $i$, e uma função de resumo criptográfico $\fhash{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós intermediários a partir das folhas:
+De modo genérico, folhas de uma árvore de Merkle são construídas a partir do
+resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais
+destas folhas computarão o resumo criptográfico do valor dos resumos de seus
+filhos concatenados, repetindo este processo até que a raiz seja preenchida,
+como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de
+altura $h \in \mathbb{N}^{*}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na
+altura $i$, e uma função de resumo criptográfico $\fhash{m}$. As folhas são
+construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
+intermediários a partir das folhas:
 \begin{equation}
-\begin{split}
-T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k < 2^{h}, \text{ e } \\
-T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
-    \; 0 \leq j < 2^{i}, \; h > i \geq 0.
-\end{split}
+  \begin{split}
+    T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k < 2^{h}, \text{ e } \\
+    T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
+      \; 0 \leq j < 2^{i}, \; h > i \geq 0.
+  \end{split}
 \end{equation}
-Esta estrutura também pode ser utilizada para verificação conjunta da integridade de múltiplos arquivos, visto que qualquer mudança em um nó da árvore produzirá um valor distinto na raiz quando calculado novamente, descaracterizando a validade dos dados atrelados a esta.
+Esta estrutura também pode ser utilizada para verificação conjunta da
+integridade de múltiplos arquivos, visto que qualquer mudança em um nó da
+árvore produzirá um valor distinto na raiz quando calculado novamente,
+descaracterizando a validade dos dados atrelados a esta.
 
 \subsection{O esquema de Merkle}
 
-O primeiro esquema de assinatura digital baseado em árvores de Merkle \cite{Merkle:1989:CDS:118209.118230} recomenda a assinatura de até $2^{20}$ mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}. Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste esquema, que validará todas as folhas da árvore através de um caminho de autenticação. A chave privada pode ser descrita como o conjunto de chaves privadas das folhas, e a assinatura consiste da mensagem assinada pela instância do esquema localizado em uma folha qualquer, bem como todos os nós necessários para calcular o conteúdo da raiz da árvore.
+O primeiro esquema de assinatura digital baseado em árvores de Merkle
+\cite{Merkle:1989:CDS:118209.118230} recomenda a assinatura de até $2^{20}$
+mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas
+de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}.
+Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste
+esquema, que validará todas as folhas da árvore através de um caminho de
+autenticação. A chave privada pode ser descrita como o conjunto de chaves
+privadas das folhas, e a assinatura consiste da mensagem assinada pela
+instância do esquema localizado em uma folha qualquer, bem como todos os nós
+necessários para calcular o conteúdo da raiz da árvore.
 
-Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de assinatura digital única genérico \textsc{Ots}, suas chaves privada e pública como, respectivamente, $\textsc{Ots}_{\sk{}}$ e $\textsc{Ots}_{\pk{}}$, e os algoritmos de geração de chaves, geração de assinatura e verificação de assinatura como, respectivamente, $\textsc{Ots}_\mathcal{K}, \textsc{Ots}_\mathcal{S} \text{ e } \textsc{Ots}_\mathcal{V}$. Por fim, considere uma função de resumo criptográfico $\fhash{m}$.
+Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de
+assinatura digital única genérico \textsc{Ots}, suas chaves privada e pública
+como, respectivamente, $\textsc{Ots}_{\sk{}}$ e $\textsc{Ots}_{\pk{}}$, e os
+algoritmos de geração de chaves, geração de assinatura e verificação de
+assinatura como, respectivamente, $\textsc{Ots}_\mathcal{K},
+\textsc{Ots}_\mathcal{S} \text{ e } \textsc{Ots}_\mathcal{V}$. Por fim,
+considere uma função de resumo criptográfico $\fhash{m}$.
 
 \begin{enumerate}
 
-    \item[] \emph{Geração de chaves.} A chave privada é definida como uma $2^{h}$-tupla
-    de pares de chaves diferentes provenientes de \textsc{Ots}. Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada folha, tem-se $\sk{} = ((\textsc{Ots}_{\sk{}}^{2^{h} - 1}, \textsc{Ots}_{\pk{}}^{2^{h} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0}, \textsc{Ots}_{\pk{}}^{0}))$. As folhas de $T$ são preenchidas com as respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h, j} = \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j < 2^{h}$, e $T$ é construída recursivamente. Finalmente, $\pk{} = T_{0,0}$.
-    
-    \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Escolha
-    uma folha de índice $j$ não utilizada anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é uma $h$-tupla necessária para recriar os resumos desejados a fim de compará-los com a raiz da árvore, e também deve ser incluído na assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375}, $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2 (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k < h$. A assinatura final leva em conta todos estes itens. Portanto, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
-    
-    \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo:
-    \begin{equation}
-        \begin{split}
-        a_{0} &= \hash{\textsc{Ots}_{\pk{}}^{j}} \text{ e } \\
-        a_{k} &= 
-        \begin{cases}
-            \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}},
-                \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 0 \pmod{2} \\
-            \hash{\textsc{Auth}_{k - 1} \concat a_{k - 1}},
-                \text{ se } \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 1 \pmod{2} \\
-        \end{cases} \text{ para } 1 \leq k \leq h.
-        \end{split}
-    \end{equation}
-    Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
-    
+  \item[] \emph{Geração de chaves.} A chave privada é definida como uma
+      $2^{h}$-tupla de pares de chaves diferentes provenientes de \textsc{Ots}.
+        Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada
+        folha, tem-se $\sk{} = ((\textsc{Ots}_{\sk{}}^{2^{h} - 1},
+        \textsc{Ots}_{\pk{}}^{2^{h} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0},
+        \textsc{Ots}_{\pk{}}^{0}))$. As folhas de $T$ são preenchidas com as
+        respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h, j} =
+        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j < 2^{h}$, e $T$ é construída
+        recursivamente. Finalmente, $\pk{} = T_{0,0}$.
+
+  \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
+      resumo $d = \hash{M}$. Escolha uma folha de índice $j$ não utilizada
+        anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} =
+        \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é
+        uma $h$-tupla necessária para recriar os resumos desejados a fim de
+        compará-los com a raiz da árvore, e também deve ser incluído na
+        assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375},
+        $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2
+        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k < h$. A assinatura final
+        leva em conta todos estes itens. Portanto, $\sigma = (j,
+        \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
+
+  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura
+      perante a árvore $T$, é necessário primeiro verificar a assinatura única.
+        Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j},
+        \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos
+        do caminho de autenticação através da definição recursiva abaixo:
+        \begin{equation}
+          \begin{split}
+            a_{0} &= \hash{\textsc{Ots}_{\pk{}}^{j}} \text{ e } \\
+            a_{k} &=
+            \begin{cases}
+              \hash{a_{k - 1} \concat \textsc{Auth}_{k - 1}}, \text{ se }
+                \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 0 \pmod{2} \\
+              \hash{\textsc{Auth}_{k - 1} \concat a_{k - 1}}, \text{ se }
+                \lfloor \sfrac{j}{2^{k - 1}} \rfloor \equiv 1 \pmod{2} \\
+            \end{cases} \text{ para } 1 \leq k \leq h.
+          \end{split}
+        \end{equation}
+        Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
+
 \end{enumerate}
 
 % write a few more about merkle
@@ -855,5 +1050,3 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
 \bibliography{ref}
 
 \end{document}
-
-% write a few more about merkle
