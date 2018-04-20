@@ -613,8 +613,8 @@ que uma mensagem foi assinada e enviada, após este fato.
     \node (in) at (0, -2) {$1^n$};
     \node (sk) at (0, -1) {\sk{}};
     \node (pk) at (4, -1) {\pk{}};
-    \node (ds) at (2, 0)
-      {\scriptsize{$m \concat \textsc{Sig}(\mathcal{S}_k, \hash{m})$}};
+    \node (ds) at (2, 0) {$\sigma$};
+    %   {\scriptsize{$m \concat \textsc{Sig}(\mathcal{S}_k, \hash{m})$}};
     \node (res) at (5.5, 0) {\scriptsize\{0, 1\}};
     \node[draw] (sig) at (0, 0) {\textsc{Sig}};
     \node[draw] (gen) at (2, -2) {\textsc{Gen}};
@@ -643,7 +643,7 @@ mensagem $m$; e o algoritmo de verificação $\textsc{Ver}(\mathcal{P}_k, m,
 binário. De acordo com~\cite{Goldreich:2004:FCV:975541}, todas as assinaturas geradas por
 \textsc{Sig} devem ser verificáveis por \textsc{Ver} utilizando todas as chaves
 geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
-\textsc{Gen}(1^n)$ e $\forall w \in \{0, 1\}^{*}$,
+\textsc{Gen}(1^n)$ e $\forall w \in \binwds{*}$,
 \begin{equation}
     \text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1.
 \end{equation}
@@ -651,8 +651,8 @@ geradas por \textsc{Gen}. Formalmente, $\forall (p, s) \in
 Na Figura \ref{fig:2}, é possível visualizar um diagrama do comportamento de
 um esquema de assinatura digital genérico. Note que $\sigma$ geralmente é
 composta da concatenação da mensagem original com a assinatura do resumo
-criptográfico desta, embora a saída do algoritmo \textsc{Sig} consista apenas
-da aplicação de uma função interna a este ao resumo.
+criptográfico desta (), embora a saída do algoritmo \textsc{Sig} consista apenas
+da aplicação de uma função interna ao resumo.
 
 \chapter{Assinatura digital baseada em funções de resumo criptográfico}
 
@@ -769,7 +769,7 @@ c^{i}_{k}(x, r) &= f_k(c^{i-1}_{k}(x, r) \oplus r_i).
 
 Note que é possível utilizar uma função conhecida, como o AES, para as iterações de $f$. Isto pode ser explicado por conta de implementações em hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da Intel, habilitando um grande ganho de desempenho no cômputo desta cifra. Porém, é necessário adaptar a cifra de blocos para que respeite as restrições impostas pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um nível de segurança suficiente, é possível empregar a construção Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
 
-Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que represente uma palavra $x$, e que sua inversibilidade seja computacionalmente inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X, \vert x_i \vert = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam elementos que desrespeitem esta regra. O resultado deste processo é definido recursivamente como \begin{equation}
+Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que represente uma palavra $x$, e que sua inversibilidade seja computacionalmente inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X, \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam elementos que desrespeitem esta regra. O resultado deste processo é definido recursivamente como \begin{equation}
 \begin{split}
 h_0 &= IV \\
 h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
