@@ -362,7 +362,8 @@ aplicações de $f$, onde $n$ é parametrizável pelo usuário. Os últimos $c$ 
 do estado nunca são diretamente afetados pelos blocos, e também nunca revelados
 durante a fase de compressão. Essencialmente, estão correlacionados com o nível
 de segurança da construção esponja. Assim, uma função esponja pode ser definida
-como $\textsc{Sponge}[f, \texttt{pad}, r]$.
+como $\textsc{Sponge}[f, \texttt{pad}, r]$, e sua representação gráfica pode ser
+consultada em~\ref{fig:3}.
 
 A função esponja \textsc{Keccak}~\cite{KeccakReference} é definida a partir
 desta construção, e pode agir como uma função de resumo criptográfico. Existem
@@ -456,8 +457,9 @@ Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar palavras sufici
             \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
                 \text{ se } i \equiv 0 \pmod{4} \\
             \textsc{SubBytes}(K^{e}_{i - 1}),
-                \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8}
-        \end{cases}.
+                \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
+            K^{e}_{i - 1}, \text{ caso contrário.}
+        \end{cases}
 \end{equation}
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado $c$ pode ser
 representada pelo pseudocódigo abaixo.
@@ -830,7 +832,7 @@ Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de a
     \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu resumo $d = \hash{M}$. Escolha
     uma folha de índice $j$ não utilizada anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(M)$. O caminho de autenticação \textsc{Auth} é uma $h$-tupla necessária para recriar os resumos desejados a fim de compará-los com a raiz da árvore, e também deve ser incluído na assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375}, $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2 (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k < h$. A assinatura final leva em conta todos estes itens. Portanto, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
     
-    \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo.
+    \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a árvore $T$, é necessário primeiro verificar a assinatura única. Caso $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, então é possível reconstruir os nodos do caminho de autenticação através da definição recursiva abaixo:
     \begin{equation}
         \begin{split}
         a_{0} &= \hash{\textsc{Ots}_{\pk{}}^{j}} \text{ e } \\
