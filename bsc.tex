@@ -312,6 +312,86 @@ algébrica por trás deste, escolhas feitas em cada etapa, criptoanálise
 relacionada e outros tópicos avançados, mostra-se razoável consultar
 o livro original de descrição do AES~\cite{Daemen:2002:DR:560131}.
 
+\section{Criptografia simétrica}
+
+Algoritmos criptográficos que utilizam a mesma chave para criptografar o texto
+plano e descriptografar o texto correspondente cifrado são classificados como
+algoritmos de criptografia simétrica. A chave representa um segredo
+compartilhado entre entidades em uma comunicação segura. Porém, a necessidade
+de um canal seguro para o estabelecimento desta chave apresenta-se como uma
+desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
+ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
+como alicerce, é possível construir funções de resumo criptográfico: por
+exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2,
+utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
+bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
+
+\section{Criptografia assimétrica}
+
+Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
+públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
+($\sk{}$), conhecida apenas pela entidade que a gerou, e a chave pública
+($\pk{}$), distribuída livremente. Isto possibilita o uso livre de $\pk{}$ para
+a comunicação segura com o detentor da chave sem a necessidade de um canal
+seguro, em virtude da construção dos algoritmos. A segurança destes depende da
+``dificuldade'' computacional de determinar uma chave privada a partir da chave
+pública, e também do armazenamento de $\sk{}$ em um lugar seguro. Problemas em
+teoria de números e álgebra que atualmente não admitem soluções em tempo
+polinomial são comumente utilizados como base para algoritmos assimétricos.
+Porém, percebe-se que, com a introdução de um computador quântico, estes
+problemas podem ser resolvidos de maneira significativamente mais rápida, como
+visto em~\cite{Shor:1997:PAP:264393.264406}.
+
+\subsection{O criptossistema RSA}
+
+O algoritmo conhecido como RSA~\cite{Rivest:1978:MOD:359340.359342} é uma
+implementação de criptografia assimétrica amplamente utilizada. É baseado na
+dificuldade de fatorar o produto de dois números primos suficientemente
+grandes\footnote{O algoritmo é baseado no problema RSA, definido como realizar
+uma operação de chave privada no algoritmo RSA utilizando apenas $\pk{}$.
+Acredita-se que este problema seja equivalente à fatoração de
+inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo
+desempenho computacional, geralmente apenas um resumo criptográfico da mensagem
+desejada é codificado por este algoritmo. Abaixo, uma descrição do
+funcionamento do algoritmo. Tome $\phi(x)$ como a função totiente de Euler, que
+representa a quantidade de números relativamente primos a $x$.
+
+\begin{enumerate}
+
+  \item[] \emph{Geração de chaves.} Gere dois números primos $p, q$
+      aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
+        $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
+        $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
+        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
+        a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k =
+        d$ e $\mathcal{P}_k = (n, e)$.
+
+  \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual deseja-se
+      criptografar uma mensagem. Transforma-se uma mensagem $m$ em um inteiro
+        no intervalo $[0, n - 1]$ através de uma função de preenchimento.  O
+        texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo
+        como a exponenciação quadrática e enviado para a entidade desejada.
+
+  \item[] \emph{Decodificação.} O receptor da mensagem calcula $m = c^d
+      \pmod{n}$.
+
+  \item[] \emph{Demonstração.} Para demonstrar $m^{ed} \equiv m \pmod{n}$, é
+      suficiente mostrar que $m^{ed} \equiv m \pmod{p}$ e $m^{ed} \equiv m
+        \pmod{q}$, pelo Teorema Chinês do Resto. Se $m \equiv 0 \pmod{p}$,
+        então $gcd(m, p) = p$ e certamente $m^{ed} \equiv 0 \equiv m \pmod{n}$.
+        Se $m \not\equiv 0 \pmod{p}$, então $mdc(m, p) = 1$ e pelo Pequeno
+        Teorema de Fermat, $m^{p - 1} \equiv 1 \pmod{p}$. Reescrevendo o
+        produto $ed$ como $ed = 1 + y\phi(n) = 1 + y(p - 1)(q - 1), \; y \in
+        \mathbb{N}$, então
+        \begin{equation}
+          m^{ed} \equiv m^{1 + y(p-1)(q-1)} \equiv
+            (m^{p-1})^{y(q-1)}m \equiv 1^{y(q-1)}m \equiv m \pmod{p}.
+        \end{equation}
+        Analogamente, substituindo $p$ por $q$ no argumento acima, tem-se a
+        prova que $\forall m \in \mathbb{N}, \; m^{ed} \equiv m \pmod{n}$.
+
+\end{enumerate}
+
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
@@ -562,88 +642,6 @@ são definições de \textsc{Keccak} com parâmetros fixos, e.g.
 \begin{equation}
   \text{SHA3-}256(m) = \textsc{Keccak}[512](m \concat 01, 256).
 \end{equation}
-
-\section{Criptografia simétrica}
-
-Algoritmos criptográficos que utilizam a mesma chave para criptografar o texto
-plano e descriptografar o texto correspondente cifrado são classificados como
-algoritmos de criptografia simétrica. A chave representa um segredo
-compartilhado entre entidades em uma comunicação segura. Porém, a necessidade
-de um canal seguro para o estabelecimento desta chave apresenta-se como uma
-desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
-ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
-como alicerce, é possível construir funções de resumo criptográfico: por
-exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2,
-utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
-bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
-
-
-
-\section{Criptografia assimétrica}
-
-Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
-públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
-($\sk{}$), conhecida apenas pela entidade que a gerou, e a chave pública
-($\pk{}$), distribuída livremente. Isto possibilita o uso livre de $\pk{}$ para
-a comunicação segura com o detentor da chave sem a necessidade de um canal
-seguro, em virtude da construção dos algoritmos. A segurança destes depende da
-``dificuldade'' computacional de determinar uma chave privada a partir da chave
-pública, e também do armazenamento de $\sk{}$ em um lugar seguro. Problemas em
-teoria de números e álgebra que atualmente não admitem soluções em tempo
-polinomial são comumente utilizados como base para algoritmos assimétricos.
-Porém, percebe-se que, com a introdução de um computador quântico, estes
-problemas podem ser resolvidos de maneira significativamente mais rápida, como
-visto em~\cite{Shor:1997:PAP:264393.264406}.
-
-\subsection{O criptossistema RSA}
-
-O algoritmo conhecido como RSA~\cite{Rivest:1978:MOD:359340.359342} é uma
-implementação de criptografia assimétrica amplamente utilizada. É baseado na
-dificuldade de fatorar o produto de dois números primos suficientemente
-grandes\footnote{O algoritmo é baseado no problema RSA, definido como realizar
-uma operação de chave privada no algoritmo RSA utilizando apenas $\pk{}$.
-Acredita-se que este problema seja equivalente à fatoração de
-inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo
-desempenho computacional, geralmente apenas um resumo criptográfico da mensagem
-desejada é codificado por este algoritmo. Abaixo, uma descrição do
-funcionamento do algoritmo. Tome $\phi(x)$ como a função totiente de Euler, que
-representa a quantidade de números relativamente primos a $x$.
-
-\begin{enumerate}
-
-  \item[] \emph{Geração de chaves.} Gere dois números primos $p, q$
-      aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
-        $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
-        $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
-        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
-        a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k =
-        d$ e $\mathcal{P}_k = (n, e)$.
-
-  \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual deseja-se
-      criptografar uma mensagem. Transforma-se uma mensagem $m$ em um inteiro
-        no intervalo $[0, n - 1]$ através de uma função de preenchimento.  O
-        texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo
-        como a exponenciação quadrática e enviado para a entidade desejada.
-
-  \item[] \emph{Decodificação.} O receptor da mensagem calcula $m = c^d
-      \pmod{n}$.
-
-  \item[] \emph{Demonstração.} Para demonstrar $m^{ed} \equiv m \pmod{n}$, é
-      suficiente mostrar que $m^{ed} \equiv m \pmod{p}$ e $m^{ed} \equiv m
-        \pmod{q}$, pelo Teorema Chinês do Resto. Se $m \equiv 0 \pmod{p}$,
-        então $gcd(m, p) = p$ e certamente $m^{ed} \equiv 0 \equiv m \pmod{n}$.
-        Se $m \not\equiv 0 \pmod{p}$, então $mdc(m, p) = 1$ e pelo Pequeno
-        Teorema de Fermat, $m^{p - 1} \equiv 1 \pmod{p}$. Reescrevendo o
-        produto $ed$ como $ed = 1 + y\phi(n) = 1 + y(p - 1)(q - 1), \; y \in
-        \mathbb{N}$, então
-        \begin{equation}
-          m^{ed} \equiv m^{1 + y(p-1)(q-1)} \equiv
-            (m^{p-1})^{y(q-1)}m \equiv 1^{y(q-1)}m \equiv m \pmod{p}.
-        \end{equation}
-        Analogamente, substituindo $p$ por $q$ no argumento acima, tem-se a
-        prova que $\forall m \in \mathbb{N}, \; m^{ed} \equiv m \pmod{n}$.
-
-\end{enumerate}
 
 \section{Esquemas de assinatura digital}
 
