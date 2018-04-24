@@ -428,8 +428,12 @@ representa a quantidade de números relativamente primos a $x$.
 
 Nota-se que a descrição acima, embora funcional, apresenta sérios problemas de
 segurança se implementada de maneira ingênua. Observe, por exemplo, que não
-existe qualquer fator aleatório na codificação da mensagem, tornando o
-esquema semanticamente inseguro
+existe qualquer fator aleatório na codificação da mensagem, caracterizando-a
+como determinística e portanto tornando o sistema semanticamente inseguro.
+
+
+É desejável que uma mensagem cifrada qualquer não revele informações sobre seu
+texto plano correspondente
 
 . Desse modo, esta
 etapa é caracterizada como determinística, habilitando uma entidade
