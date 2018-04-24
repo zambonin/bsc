@@ -258,8 +258,8 @@ $c$ pode ser representada pelo pseudocódigo abaixo.
 \end{algorithm}
 
 Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
-que faça o inverso do procedimento acima~\cite{Daemen:2002:DR:560131}. Assim,
-suas etapas precisam ser modificadas de acordo.
+que faça o inverso do procedimento acima. Assim, suas etapas precisam ser
+modificadas de acordo.
 
 \begin{enumerate}[label=\roman*.]
 
@@ -294,7 +294,7 @@ Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
   \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
     $A \longleftarrow \textsc{InvShiftRows}(A)$\;
     $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-    $\longleftarrow \textsc{AddRoundKey}(A,
+    $A \longleftarrow \textsc{AddRoundKey}(A,
       \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
     $A \longleftarrow \textsc{InvMixColumns}(A)$\;
   }
@@ -306,6 +306,11 @@ Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
 
   $m \longleftarrow A$\;
 \end{algorithm}
+
+Para mais detalhes sobre o funcionamento interno do algoritmo, em especial
+de suas etapas bem como
+discussões sobre design e criptoanálise relacionada,
+~\cite{Daemen:2002:DR:560131}
 
 \section{Funções de resumo criptográfico}
 
