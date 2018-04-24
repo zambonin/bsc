@@ -427,7 +427,15 @@ representa a quantidade de números relativamente primos a $x$.
 \end{enumerate}
 
 Nota-se que a descrição acima, embora funcional, apresenta sérios problemas de
-segurança se implementada de maneira ingênua. Observe, por exemplo, que não
+segurança se implementada de maneira ingênua. Defina a noção de segurança
+semântica como, dado um texto cifrado, a impossibilidade de revelar
+informações quaisquer sobre seu texto plano
+correspondente~\cite{Goldwasser:1982:PEA:800070.802212}. Observe, por exemplo,
+
+
+Observe, por exemplo, 
+
+que não
 existe qualquer fator aleatório na codificação da mensagem, caracterizando-a
 como determinística e portanto tornando o sistema semanticamente inseguro.
 
