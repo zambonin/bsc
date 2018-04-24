@@ -338,8 +338,14 @@ exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e
 SHA2, utiliza uma função de compressão de mão única, obtida
 a partir de uma cifra de bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
-No contexto da computação quântica, estes algoritmos são ameaçados de
-maneira relativamente modesta pelo algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}.
+No contexto da computação quântica, estes sistemas são ameaçados
+pelo algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}, que
+possibilita a busca de elementos em conjuntos em tempo sub-linear.
+Por outra forma, suponha que deseja-se inverter uma função $f$ desconhecida.
+Para tal, é necessário buscar o elemento no domínio de $f$ 
+
+uma função genérica que age sobre qualquer
+elemento de seu domínio.
 
 Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
 públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
