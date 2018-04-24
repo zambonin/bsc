@@ -320,12 +320,16 @@ resultado irrecuperável sem a apresentação da chave correspondente.
 Neste âmbito, é possível classificá-los em duas grandes famílias.
 
 Sistemas que utilizam a mesma chave para as operações de codificação
-e decodificação são chamados de simétricos.
+e decodificação são chamados de simétricos. Nesta situação, a chave
+representa um segredo compartilhado entre entidades desejando
+estabelecer comunicação segura. Entretanto, o ato de compartilhar
+este segredo necessita, por si próprio, de um canal seguro. Assim,
+esta característica apresenta uma desvantagem para os criptossistemas
+simétricas
 
-Algoritmos criptográficos que utilizam a mesma chave para criptografar o texto
-plano e descriptografar o texto correspondente cifrado são classificados como
-algoritmos de criptografia simétrica. A chave representa um segredo
-compartilhado entre entidades em uma comunicação segura. Porém, a necessidade
+
+
+Porém, a necessidade
 de um canal seguro para o estabelecimento desta chave apresenta-se como uma
 desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
 ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
