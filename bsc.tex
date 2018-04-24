@@ -340,12 +340,13 @@ a partir de uma cifra de bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
 No contexto da computação quântica, estes sistemas são ameaçados
 pelo algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}, que
-possibilita a busca de elementos em conjuntos em tempo sub-linear.
-Por outra forma, suponha que deseja-se inverter uma função $f$,
-a partir de um elemento de seu contradomínio $b$.
-
-uma função genérica que age sobre qualquer
-elemento de seu domínio.
+possibilita a busca de elementos em conjuntos em tempo reduzido.
+Por outra forma, suponha que deseja-se inverter uma função $f : A \longrightarrow B$,
+a partir de um elemento de seu contradomínio $b$. Classicamente,
+como não existe informação qualquer sobre a função, é necessário
+calcular $f$ para cada um dos elementos de seu domínio, e esta
+complexidade cresce linearmente. Entretanto, Grover permite que
+esta busca seja feista
 
 Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
 públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
