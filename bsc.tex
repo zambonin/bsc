@@ -313,16 +313,23 @@ o livro original de descrição do AES~\cite{Daemen:2002:DR:560131}.
 
 \section{Criptografia simétrica e assimétrica}
 
+Algoritmos criptográficos podem ser parametrizados por uma chave, que
+habilita a transformação do texto plano para texto cifrado de acordo
+com esta -- e apenas com . Neste âmbito,
+é possível classificá-los a partir do método de utilização das chaves.
+Sistemas que utilizam a mesma chave para as operações de codificação 
+
 Algoritmos criptográficos que utilizam a mesma chave para criptografar o texto
 plano e descriptografar o texto correspondente cifrado são classificados como
 algoritmos de criptografia simétrica. A chave representa um segredo
-compartilhado entre entidades em uma comunicação segura. Geralmente, cifras de
-bloco (DES, AES) ou de fluxo (RC4, Salsa20) são a base para estes algoritmos.
-Utilizando estas como alicerce, é possível construir funções de resumo
-criptográfico (a serem discutidas em breve): por exemplo, a construção
-Merkle-Damgård, base para as funções MD5, SHA1 e SHA2, utiliza uma função de
-compressão de mão única, obtida a partir de uma cifra de
-bloco~\cite[9.41]{Menezes:1996:HAC:548089}. No contexto
+compartilhado entre entidades em uma comunicação segura. Porém, a necessidade
+de um canal seguro para o estabelecimento desta chave apresenta-se como uma
+desvantagem deste tipo de criptografia. Geralmente, cifras de bloco (DES, AES)
+ou de fluxo (RC4, Salsa20) são a base para estes algoritmos. Utilizando estas
+como alicerce, é possível construir funções de resumo criptográfico (a serem
+discutidas em breve): por exemplo, a construção Merkle-Damgård, base para as
+funções MD5, SHA1 e SHA2, utiliza uma função de compressão de mão única, obtida
+a partir de uma cifra de bloco~\cite[9.41]{Menezes:1996:HAC:548089}. No contexto
 da computação quântica, estes algoritmos são ameaçados de maneira relativamente
 modesta pelo algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}.
 
