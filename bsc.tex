@@ -157,6 +157,154 @@ utilizada para que o processo de assinatura seja menos custoso e mais seguro,
 e um exemplo de construção teórica por trás deste tipo de função; e, por fim,
 a definição formal de um esquema de assinatura digital agregando estas noções.
 
+\subsection{AES --- \emph{Advanced Encryption Standard}}
+
+O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde
+$A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível
+$m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da
+forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações
+\texttt{AND} e \texttt{XOR}, e coeficientes de polinômios são palavras
+binárias, tornando esta estrutura convidativa para operações computacionais.},
+$0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192,
+256\}$. É resultado de uma competição organizada pelo uma versão padronizada pelo NIST (\emph{National Institute of
+Standards and Technology})~\cite{Standards2001} do algoritmo
+Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado
+iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas
+(\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
+\textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas
+rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow
+n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
+
+Note que existe uma rodada adicional introdutória composta apenas de
+\textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais,
+\textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
+reversibilidade da cifra. Uma rotina de expansão de chave
+(\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas
+com valores derivados, porém distintos. Estes componentes serão descritos
+abaixo.
+
+\begin{enumerate}[label=\roman*.]
+
+  \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$ pelo seu valor
+      correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a
+        partir de uma transformação afim em $A_{i,j}^{-1}$ sobre
+        $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos,
+        respectivamente, representam a linha e a coluna do elemento na
+        \emph{S-box}.
+
+  \item \textsc{ShiftRows}: cada linha de $A$, $A_i$, é deslocada circularmente
+      à esquerda $i$ vezes.
+
+  \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, é multiplicada pelo
+      polinômio $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, módulo
+        $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau
+        máximo 3, apto a ser representado na coluna.
+
+  \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
+      entre $A$ e o bloco da chave referente à rodada.
+
+\end{enumerate}
+
+\textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
+32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
+palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
+= \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina
+$rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
+lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela
+recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
+Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell,
+K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é
+definida pelas restrições (mutualmente exclusivas) abaixo:
+\begin{equation}
+  \mathbf{k} =
+    \begin{cases}
+      \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
+        \text{ se } i \equiv 0 \pmod{4} \\
+      \textsc{SubBytes}(K^{e}_{i - 1}),
+        \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
+      K^{e}_{i - 1}, \text{ caso contrário.}
+    \end{cases}
+\end{equation}
+Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
+$c$ pode ser representada pelo pseudocódigo abaixo.
+
+\begin{algorithm}[H]
+  \small
+  \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
+  \KwResult{$c$, o texto cifrado resultante}
+
+  $A \longleftarrow m$\;
+  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
+    \longleftarrow \textsc{KeyExpansion}(K)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+
+  \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
+    $A \longleftarrow \textsc{SubBytes}(A)$\;
+    $A \longleftarrow \textsc{ShiftRows}(A)$\;
+    $A \longleftarrow \textsc{MixColumns}(A)$\;
+    $A \longleftarrow \textsc{AddRoundKey}(A,
+      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
+  }
+
+  $A \longleftarrow \textsc{SubBytes}(A)$\;
+  $A \longleftarrow \textsc{ShiftRows}(A)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+
+  $c \longleftarrow A$\;
+\end{algorithm}
+
+Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
+que faça o inverso do procedimento acima. Assim, suas etapas precisam ser
+modificadas de acordo.
+
+\begin{enumerate}[label=\roman*.]
+
+  \item \textsc{InvShiftRows}: cada linha de $A$, $A_i$, é deslocada
+      circularmente à direita $i$ vezes.
+
+  \item \textsc{InvSubBytes}: é necessário computar a transformação afim
+      inversa para cada elemento $A_{i,j}$, e depois calcular sua inversa
+        multiplicativa.
+
+  \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
+      inversa multiplicativa $d = c^{-1}$, obtida por: $(03 \cdot x^{3} + 01
+        \cdot x^{2} + 01 \cdot x + 02) \cdot d \equiv 1 \pmod{x^{4} + 1}$, logo
+        $d(x) = 0B \cdot x^{3} + OD \cdot x^{2} + 09 \cdot x + 0E$.
+
+\end{enumerate}
+
+Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo.
+Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
+
+\begin{algorithm}[H]
+  \small
+  \KwData{$c$, o texto cifrado; $K$, a chave desejada}
+  \KwResult{$m$, o texto claro resultante}
+
+  $A \longleftarrow c$\;
+  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
+    \longleftarrow \textsc{KeyExpansion}(K)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+
+  \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
+    $A \longleftarrow \textsc{InvShiftRows}(A)$\;
+    $A \longleftarrow \textsc{InvSubBytes}(A)$\;
+    $\longleftarrow \textsc{AddRoundKey}(A,
+      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
+    $A \longleftarrow \textsc{InvMixColumns}(A)$\;
+  }
+
+  $A \longleftarrow \textsc{InvShiftRows}(A)$\;
+  $A \longleftarrow \textsc{InvSubBytes}(A)$\;
+  $A \longleftarrow \textsc{AddRoundKey}(A,
+    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+
+  $m \longleftarrow A$\;
+\end{algorithm}
+
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
@@ -422,153 +570,7 @@ exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e SHA2
 utiliza uma função de compressão de mão única, obtida a partir de uma cifra de
 bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
-\subsection{AES --- \emph{Advanced Encryption Standard}}
 
-O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde
-$A_{i,j} \in \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível
-$m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da
-forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações
-\texttt{AND} e \texttt{XOR}, e coeficientes de polinômios são palavras
-binárias, tornando esta estrutura convidativa para operações computacionais.},
-$0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192,
-256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of
-Standards and Technology})~\cite{Standards2001} do algoritmo
-Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado
-iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas
-(\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
-\textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas
-rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow
-n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
-
-Note que existe uma rodada adicional introdutória composta apenas de
-\textsc{AddRoundKey}, para que o estado inicial seja modificado. Ademais,
-\textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
-reversibilidade da cifra. Uma rotina de expansão de chave
-(\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas
-com valores derivados, porém distintos. Estes componentes serão descritos
-abaixo.
-
-\begin{enumerate}[label=\roman*.]
-
-  \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$ pelo seu valor
-      correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a
-        partir de uma transformação afim em $A_{i,j}^{-1}$ sobre
-        $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos,
-        respectivamente, representam a linha e a coluna do elemento na
-        \emph{S-box}.
-
-  \item \textsc{ShiftRows}: cada linha de $A$, $A_i$, é deslocada circularmente
-      à esquerda $i$ vezes.
-
-  \item \textsc{MixColumns}: cada coluna de $A$, $A_j$, é multiplicada pelo
-      polinômio $c = 03 \cdot x^{3} + 01 \cdot x^{2} + 01 \cdot x + 02$, módulo
-        $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau
-        máximo 3, apto a ser representado na coluna.
-
-  \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
-      entre $A$ e o bloco da chave referente à rodada.
-
-\end{enumerate}
-
-\textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
-32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
-palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
-= \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina
-$rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
-lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela
-recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
-Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell,
-K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é
-definida pelas restrições (mutualmente exclusivas) abaixo:
-\begin{equation}
-  \mathbf{k} =
-    \begin{cases}
-      \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
-        \text{ se } i \equiv 0 \pmod{4} \\
-      \textsc{SubBytes}(K^{e}_{i - 1}),
-        \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
-      K^{e}_{i - 1}, \text{ caso contrário.}
-    \end{cases}
-\end{equation}
-Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
-$c$ pode ser representada pelo pseudocódigo abaixo.
-
-\begin{algorithm}[H]
-  \small
-  \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
-  \KwResult{$c$, o texto cifrado resultante}
-
-  $A \longleftarrow m$\;
-  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-    \longleftarrow \textsc{KeyExpansion}(K)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
-
-  \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
-    $A \longleftarrow \textsc{SubBytes}(A)$\;
-    $A \longleftarrow \textsc{ShiftRows}(A)$\;
-    $A \longleftarrow \textsc{MixColumns}(A)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
-  }
-
-  $A \longleftarrow \textsc{SubBytes}(A)$\;
-  $A \longleftarrow \textsc{ShiftRows}(A)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
-
-  $c \longleftarrow A$\;
-\end{algorithm}
-
-Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
-que faça o inverso do procedimento acima. Assim, suas etapas precisam ser
-modificadas de acordo.
-
-\begin{enumerate}[label=\roman*.]
-
-  \item \textsc{InvShiftRows}: cada linha de $A$, $A_i$, é deslocada
-      circularmente à direita $i$ vezes.
-
-  \item \textsc{InvSubBytes}: é necessário computar a transformação afim
-      inversa para cada elemento $A_{i,j}$, e depois calcular sua inversa
-        multiplicativa.
-
-  \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
-      inversa multiplicativa $d = c^{-1}$, obtida por: $(03 \cdot x^{3} + 01
-        \cdot x^{2} + 01 \cdot x + 02) \cdot d \equiv 1 \pmod{x^{4} + 1}$, logo
-        $d(x) = 0B \cdot x^{3} + OD \cdot x^{2} + 09 \cdot x + 0E$.
-
-\end{enumerate}
-
-Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo.
-Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
-
-\begin{algorithm}[H]
-  \small
-  \KwData{$c$, o texto cifrado; $K$, a chave desejada}
-  \KwResult{$m$, o texto claro resultante}
-
-  $A \longleftarrow c$\;
-  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-    \longleftarrow \textsc{KeyExpansion}(K)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
-
-  \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
-    $A \longleftarrow \textsc{InvShiftRows}(A)$\;
-    $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-    $\longleftarrow \textsc{AddRoundKey}(A,
-      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
-    $A \longleftarrow \textsc{InvMixColumns}(A)$\;
-  }
-
-  $A \longleftarrow \textsc{InvShiftRows}(A)$\;
-  $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
-
-  $m \longleftarrow A$\;
-\end{algorithm}
 
 \section{Criptografia assimétrica}
 
