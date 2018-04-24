@@ -173,7 +173,7 @@ binárias, tornando esta estrutura convidativa para operações computacionais.}
 $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192,
 256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of
 Standards and Technology}) do algoritmo
-Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado
+Rjindael. Seu funcionamento é denominado
 iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas
 (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
 \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas
@@ -261,8 +261,8 @@ $c$ pode ser representada pelo pseudocódigo abaixo.
 \end{algorithm}
 
 Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
-que faça o inverso do procedimento acima. Assim, suas etapas precisam ser
-modificadas de acordo.
+que faça o inverso do procedimento acima~\cite{Daemen:2002:DR:560131}. Assim,
+suas etapas precisam ser modificadas de acordo.
 
 \begin{enumerate}[label=\roman*.]
 
