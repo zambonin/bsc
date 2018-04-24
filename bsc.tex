@@ -807,12 +807,12 @@ zeros na mensagem original também é assinada e enviada ao recipiente,
 adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.  Esta
 característica será explicada em mais detalhes no próximo esquema.
 
-Ademais, uma otimização simples para reduzir o tamanho de $\pk{}$ pode
+Ademais, uma otimização simples para reduzir o tamanho de $\sk{}$ pode
 ser implementada através da utilização de um gerador de números
 pseudoaleatórios criptograficamente seguro. Assim, mostra-se necessário apenas
-guardar uma palavra de tamanho $m$ que age como a semente deste gerador. No caso
-das chaves públicas, basta apenas concatenar todos os valores
-Reduzir o tamanho das assinaturas mostra-se mais difícil;
+guardar uma palavra de tamanho $m$ que age como a semente deste gerador. No
+caso de $\pk{}$, basta guardar o resumo criptográfico de seus valores
+concatenados. Reduzir o tamanho das assinaturas mostra-se mais difícil;
 entretanto, a generalização deste esquema permite estas otimizações.
 
 \subsection{O esquema Winternitz}
