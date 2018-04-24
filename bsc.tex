@@ -385,7 +385,8 @@ uma operação de chave privada no algoritmo RSA utilizando apenas $\pk{}$.
 Acredita-se que este problema seja equivalente à fatoração de
 inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo
 desempenho computacional, geralmente apenas um resumo criptográfico da mensagem
-desejada é codificado por este algoritmo. Abaixo, uma descrição do
+desejada é codificado por este algoritmo, e sua transmissão é realizada
+junto à mensagem original, de forma concatenada. Abaixo, uma descrição do
 funcionamento do algoritmo. Tome $\phi(x)$ como a função totiente de Euler, que
 representa a quantidade de números relativamente primos a $x$.
 
@@ -425,7 +426,7 @@ representa a quantidade de números relativamente primos a $x$.
 
 \end{enumerate}
 
-
+A descrição acima 
 
 \section{Funções de resumo criptográfico}
 
