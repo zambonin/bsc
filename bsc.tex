@@ -428,10 +428,16 @@ representa a quantidade de números relativamente primos a $x$.
 
 Nota-se que a descrição acima, embora funcional, apresenta sérios problemas de
 segurança se implementada de maneira ingênua. Observe, por exemplo, que não
-existe qualquer fator aleatório na codificação da mensagem. Desse modo, o
-algoritmo pode ser caracterizado como determinístico, habilitando uma entidade
+existe qualquer fator aleatório na codificação da mensagem, tornando o
+esquema semanticamente inseguro
+
+. Desse modo, esta
+etapa é caracterizada como determinística, habilitando uma entidade
 maliciosa a aplicar um ataque de texto plano escolhido, i.e. a codificação
-de múltiplas mensagens 
+de múltiplas mensagens a fim de descobrir informações sobre o algoritmo
+baseado em semelhanças entre as mensagens cifradas. Um sistema que impede
+este comportamento é chamado de semanticamente seguro, ou seja, uma mensagem
+cifrada não revela informações sobre seu texto plano correspondente.
 
 \section{Funções de resumo criptográfico}
 
