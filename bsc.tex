@@ -357,16 +357,23 @@ a comunicação segura com o detentor da chave sem a necessidade de um canal
 seguro, em virtude da construção dos algoritmos.
 
 A ideia foi introduzida abstratamente em~\cite{Diffie:2006:NDC:2263321.2269104}
-e algoritmos como RSA, ElGamal 
+e algoritmos como RSA, ElGamal e abordagens baseadas em curvas elípticas.
+Diferentemente dos algoritmos simétricos, estes sistemas utilizam operações
+mais robustas, e portanto de desempenho reduzido. Assim, a utilização
+convencional destes dois tipos de criptografia em protocolos se dá pela
+codificação de uma chave simétrica (responsável por cifrar um documento
+de tamanho não-trivial) com uma chave pública -- e portanto,
+assimétrica -- e transmissão desta ``chave cifrada'' sem a necessidade de
+um canal seguro.
 
-A segurança destes depende da ``dificuldade'' computacional de determinar
-uma chave privada a partir da chave pública, e também do armazenamento de
-$\sk{}$ em um lugar seguro. Problemas em teoria de números e álgebra que
-atualmente não admitem soluções em tempo polinomial são comumente utilizados
-como base para algoritmos assimétricos. Porém, percebe-se que, com a introdução
-de um computador quântico, estes problemas podem ser resolvidos de maneira
-significativamente mais rápida, como visto 
-em~\cite{Shor:1997:PAP:264393.264406}.
+A segurança de sistemas assimétricos depende da ``dificuldade''
+computacional de determinar uma chave privada a partir da chave pública,
+e também do armazenamento de $\sk{}$ em um lugar seguro. Problemas em
+teoria de números e álgebra que atualmente não admitem soluções em tempo
+polinomial são comumente utilizados como base para algoritmos assimétricos.
+Porém, percebe-se que, com a introdução de um computador quântico, estes
+problemas podem ser resolvidos de maneira significativamente mais rápida,
+como visto em~\cite{Shor:1997:PAP:264393.264406}.
 
 \subsection{O criptossistema RSA}
 
