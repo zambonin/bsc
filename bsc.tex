@@ -439,8 +439,6 @@ baseado em semelhanças entre as mensagens cifradas, portanto semanticamente
 inseguro. Este e outros ataques~\cite{Boneh99twentyyears} são mitigados com
 a aplicação de uma função de preenchimento à mensagem~\cite{Bellare1995}.
 
-Outros ataques podem ser aplicados se uma função de preenchimento
-
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
@@ -649,9 +647,9 @@ sete permutações passíveis de utilização nesta função: defina $w = 2^{\el
 \ell \in \{0, \dots, 6\}$.  Estas são chamadas de $\textsc{Keccak}-f[b]$, onde
 $b = 25w$, cujo estado $a$ é descrito como uma estrutura tridimensional com
 elementos em $\mathbb{F}_2$, de dimensões $5 \times 5 \times w$. Esta
-permutação é iterativa e consiste de um número de rodadas $n_R$. Cada rodada
-$R$, por sua vez, consiste da composição de cinco etapas: $R = \iota \circ \chi
-\circ \pi \circ \rho \circ \theta$.
+permutação é iterativa e consiste de um número de rodadas
+$n_R = 12 \times 2 \ell$. Cada rodada $R$, por sua vez, consiste da composição
+de cinco etapas: $R = \iota \circ \chi \circ \pi \circ \rho \circ \theta$.
 
 \begin{enumerate}
 
