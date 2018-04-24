@@ -161,8 +161,9 @@ a definição formal de um esquema de assinatura digital agregando estas noçõe
 
 Originalmente chamado de Rjindael, o algoritmo conhecido como AES é resultado
 de um esforço de padronização para um sistema criptográfico seguro, finalizado
-no final do século XX pelo NIST (\emph{National Institute of Standards and
-Technology}), a fim de substituir a cifra DES (\emph{Data Encryption Standard}).
+no final do século XX pelo NIST~\cite{Standards2001} (\emph{National Institute
+of Standards and Technology}), a fim de substituir a cifra DES (\emph{Data
+Encryption Standard}).
 
 
 O AES é uma cifra de blocos que opera sobre uma matriz de estado $A$, onde
@@ -173,7 +174,7 @@ forma $\mathbb{F}_{2^n}$ são, respectivamente, representadas por operações
 binárias, tornando esta estrutura convidativa para operações computacionais.},
 $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n = \{128, 192,
 256\}$. É uma versão padronizada pelo NIST (\emph{National Institute of
-Standards and Technology})~\cite{Standards2001} do algoritmo
+Standards and Technology}) do algoritmo
 Rjindael~\cite{Daemen:2002:DR:560131}. Seu funcionamento é denominado
 iterativo, consistindo em aplicações sequenciais de quatro operações ordenadas
 (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
