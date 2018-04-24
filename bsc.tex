@@ -426,7 +426,12 @@ representa a quantidade de números relativamente primos a $x$.
 
 \end{enumerate}
 
-A descrição acima 
+Nota-se que a descrição acima, embora funcional, apresenta sérios problemas de
+segurança se implementada de maneira ingênua. Observe, por exemplo, que não
+existe qualquer fator aleatório na codificação da mensagem. Desse modo, o
+algoritmo pode ser caracterizado como determinístico, habilitando uma entidade
+maliciosa a aplicar um ataque de texto plano escolhido, i.e. a codificação
+de múltiplas mensagens 
 
 \section{Funções de resumo criptográfico}
 
