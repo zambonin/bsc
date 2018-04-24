@@ -330,37 +330,42 @@ Cifras de bloco (DES, AES) ou de fluxo (RC4, Salsa20) são
 considerados exemplos convencionais de criptossistemas simétricos.
 A construção destes geralmente dá-se pelo encadeamento de operações
 binárias e matemáticas favoráveis para computadores, assim permitindo
-aos algoritmos um desempenho altíssimo.
-
-Utilizando estas como alicerce, é possível construir
-funções de resumo criptográfico (a serem discutidas em breve): por
-exemplo, a construção Merkle-Damgård, base para as funções MD5, SHA1 e
-SHA2, utiliza uma função de compressão de mão única, obtida
+aos algoritmos um desempenho altíssimo. Utilizando estas como alicerce,
+é possível construir funções de resumo criptográfico (a serem discutidas
+em breve): por exemplo, a construção Merkle-Damgård, base para as funções
+MD5, SHA1 e SHA2, utiliza uma função de compressão de mão única, obtida
 a partir de uma cifra de bloco~\cite[9.41]{Menezes:1996:HAC:548089}.
 
 No contexto da computação quântica, estes sistemas são ameaçados
 pelo algoritmo de Grover~\cite{Grover:1996:FQM:237814.237866}, que
 possibilita a busca de elementos em conjuntos em tempo reduzido.
-Por outra forma, suponha que deseja-se inverter uma função $f : A \longrightarrow B$,
-a partir de um elemento $b \in B$. Classicamente,
+Por outra forma, suponha que deseja-se inverter uma função $f : A
+\longrightarrow B$, a partir de um elemento $b \in B$. Classicamente,
 como não existe informação qualquer sobre a função, é necessário
-calcular $f$ para cada um dos elementos de seu domínio (i.e. $\length{A} vezes$), e esta
-complexidade cresce linearmente. Entretanto, Grover permite que
-esta busca seja feista
+calcular $f$ para cada um dos elementos de seu domínio (i.e. $\length{A}
+vezes$). Entretanto, Grover permite que esta busca seja feita em
+$\sqrt{\length{A}}$ vezes. Assim, um algoritmo criptográfico simétrico
+que toma o lugar de $f$ neste exemplo precisa de parâmetros de segurança
+maiores, a fim de igualar a dificuldade da busca tratando-se de um
+computador clássico.
 
 Em contrapartida, a criptografia assimétrica, ou criptografia de chaves
 públicas, engloba os algoritmos que utilizam um par de chaves: a chave privada
 ($\sk{}$), conhecida apenas pela entidade que a gerou, e a chave pública
 ($\pk{}$), distribuída livremente. Isto possibilita o uso livre de $\pk{}$ para
 a comunicação segura com o detentor da chave sem a necessidade de um canal
-seguro, em virtude da construção dos algoritmos. A segurança destes depende da
-``dificuldade'' computacional de determinar uma chave privada a partir da chave
-pública, e também do armazenamento de $\sk{}$ em um lugar seguro. Problemas em
-teoria de números e álgebra que atualmente não admitem soluções em tempo
-polinomial são comumente utilizados como base para algoritmos assimétricos.
-Porém, percebe-se que, com a introdução de um computador quântico, estes
-problemas podem ser resolvidos de maneira significativamente mais rápida, como
-visto em~\cite{Shor:1997:PAP:264393.264406}.
+seguro, em virtude da construção dos algoritmos.
+
+
+
+A segurança destes depende da ``dificuldade'' computacional de determinar
+uma chave privada a partir da chave pública, e também do armazenamento de
+$\sk{}$ em um lugar seguro. Problemas em teoria de números e álgebra que
+atualmente não admitem soluções em tempo polinomial são comumente utilizados
+como base para algoritmos assimétricos. Porém, percebe-se que, com a introdução
+de um computador quântico, estes problemas podem ser resolvidos de maneira
+significativamente mais rápida, como visto 
+em~\cite{Shor:1997:PAP:264393.264406}.
 
 \subsection{O criptossistema RSA}
 
