@@ -1005,6 +1005,7 @@ recursivamente como
 \begin{tabular}{c|c}
      &  \\
      & 
+\end{tabular}
 \begin{tikzpicture}[scale=0.25]
   \draw (-2, 5) rectangle node {$g$} ++(2, 2);
   \draw (0, 0) rectangle node {$E$} ++(4, 4);
@@ -1016,14 +1017,14 @@ recursivamente como
   \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
   \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
   \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
-\end{tikzpicture} \\
+\end{tikzpicture}
+
 \begin{equation}
   \begin{split}
     h_0 &= IV \\
     h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
   \end{split}
 \end{equation}
-\end{tabular}
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
