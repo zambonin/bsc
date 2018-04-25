@@ -1002,10 +1002,6 @@ tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo é definido
 recursivamente como
 
-\begin{tabular}{c|c}
-     &  \\
-     & 
-\end{tabular}
 \begin{tikzpicture}[scale=0.25]
   \draw (-2, 5) rectangle node {$g$} ++(2, 2);
   \draw (0, 0) rectangle node {$E$} ++(4, 4);
@@ -1018,13 +1014,15 @@ recursivamente como
   \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
   \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
 \end{tikzpicture}
-
+\end{minipage}%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.5\textwidth}
 \begin{equation}
   \begin{split}
     h_0 &= IV \\
     h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
   \end{split}
 \end{equation}
+\end{minipage}
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
