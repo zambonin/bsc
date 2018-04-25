@@ -1003,7 +1003,19 @@ elementos que desrespeitem esta regra. O resultado deste processo é definido
 recursivamente como
 
 \begin{minipage}[t]{0.5\textwidth}
-\includegraphics[width=\linewidth,keepaspectratio=true]{./slike-v/taylor_1.pdf}
+
+\begin{tikzpicture}[scale=0.25]
+  \draw (-2, 5) rectangle node {$g$} ++(2, 2);
+  \draw (0, 0) rectangle node {$E$} ++(4, 4);
+  \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
+  \node[XOR] (x0) at (7,2) {};
+  \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
+  \draw[edge] (4,2) -- (x0);
+  \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
+  \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
+  \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
+  \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
+\end{tikzpicture}
 \end{minipage}%%%%%%%%%%%%%%%%
 % \begin{minipage}[t]{0.5\textwidth}
 
