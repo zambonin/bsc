@@ -854,9 +854,9 @@ entretanto, a generalização deste esquema permite esta otimização.
 		\node [abox] (yt1) {$y_i$}; \\
     };
 
-	\node[above = 5pt of xt1] (X) {$x_i \in X$};
-	\node[above = 5pt of st1] (S) {$\sigma_i \in \sigma$};
-	\node[above = 5pt of yt1] (Y) {$y_i \in Y$};
+	\node[above = 5pt of xt1] (X) {$x_i \in X:$};
+	\node[above = 5pt of st1] (S) {$\sigma_i \in \sigma:$};
+	\node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
 
  	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
  	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
@@ -865,7 +865,7 @@ entretanto, a generalização deste esquema permite esta otimização.
  	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
     \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
   \end{tikzpicture}
-  \caption{Funcionamento típico de um esquema de assinatura digital.}
+  \caption{Representação gráfica das etapas de processo de assinatura e verificação do \textsc{Wots}, para $0 \leq i < t$.}
   \label{fig:5}
 \end{figure}
 
