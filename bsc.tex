@@ -837,17 +837,12 @@ entretanto, a generalização deste esquema permite esta otimização.
 
 \begin{figure}[ht]
   \centering
-  
-  \caption{Funcionamento típico de um esquema de assinatura digital.}
-  \label{fig:2}
-\end{figure}
-
-\begin{tikzpicture}[decoration={
-        markings,
-        mark= at position 0.5 with {\node[font=\scriptsize] {/};},
-        mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
+  \begin{tikzpicture}[
+    decoration={
+      markings,
+      mark= at position 0.5 with {\node[font=\scriptsize] {/};},
+      mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
     }]
-
 	\tikzstyle{arrowline}=[draw, -latex']
 	\tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
 
@@ -869,8 +864,10 @@ entretanto, a generalização deste esquema permite esta otimização.
  	\path[arrowline, postaction={decorate}] (st1)      --      (st1 -| fvt1.west);
  	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
     \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
-\end{tikzpicture}
-
+  \end{tikzpicture}
+  \caption{Funcionamento típico de um esquema de assinatura digital.}
+  \label{fig:5}
+\end{figure}
 
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
