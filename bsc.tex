@@ -833,6 +833,36 @@ entretanto, a generalização deste esquema permite esta otimização.
 
 \subsection{O esquema Winternitz}
 
+\begin{tikzpicture}[decoration={
+        markings,
+        mark= at position 0.5 with {\node[font=\scriptsize] {/};},
+        mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
+    }]
+
+	\tikzstyle{arrowline}=[draw, -latex']
+	\tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
+
+    \matrix[matrix of nodes, column sep=20pt, row sep=30pt] {
+		\node [abox] (xt1) {$x_i$}; &
+		\node (fst1) {$f(x_i)$}; &
+		\node [abox] (st1) {$\alpha_i$}; &
+		\node (fvt1) {$f(\alpha_i)$}; &
+		\node [abox] (yt1) {$y_i$}; \\
+    };
+
+	\node[above = 5pt of xt1] (X) {$x_i \in X:$};
+	\node[above = 5pt of st1] (S) {$\alpha_i \in \alpha:$};
+	\node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
+
+ 	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
+ 	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
+    \path[->] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
+ 	\path[arrowline, postaction={decorate}] (st1)      --      (st1 -| fvt1.west);
+ 	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
+    \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
+\end{tikzpicture}
+
+
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
 por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.  O
@@ -946,9 +976,9 @@ $c^{i}_{k}(x, r)$, definida recursivamente como
 \end{enumerate}
 
 Note que é possível utilizar uma função conhecida, como o AES, para as
-iterações de $f$. Porém, é necessário adaptar a cifra de blocos para que respeite as restrições impostas
-pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um
-nível de segurança suficiente, é possível empregar a construção
+iterações de $f$. Porém, é necessário adaptá-la para que respeite as
+restrições impostas pelo esquema. Para que isto seja feito de maneira
+a manter um nível de segurança suficiente, é possível empregar a construção
 Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
 
 Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo
@@ -970,8 +1000,8 @@ recursivamente como
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
-hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da
-Intel, habilitando um grande ganho de desempenho no cômputo desta cifra.
+hardware de rotinas relacionadas (como o conjunto de instruções AES-NI da
+Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 Note que apenas esta versão do esquema pode beneficiar-se deste método,
 em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração.
 Do contrário, o método pode introduzir multicolisões em \textsc{Wots},
