@@ -946,9 +946,7 @@ $c^{i}_{k}(x, r)$, definida recursivamente como
 \end{enumerate}
 
 Note que é possível utilizar uma função conhecida, como o AES, para as
-iterações de $f$. Isto pode ser explicado por conta de implementações em
-hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da
-Intel, habilitando um grande ganho de desempenho no cômputo desta cifra. Porém,
+iterações de $f$. Isto pode ser explicado por conta de  Porém,
 é necessário adaptar a cifra de blocos para que respeite as restrições impostas
 pelo esquema \textsc{Wots+}. Para que isto seja feito de maneira a manter um
 nível de segurança suficiente, é possível empregar a construção
@@ -972,12 +970,13 @@ recursivamente como
 \end{equation}
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
-sugerido em~\cite[4.1]{Hlsing2013}, aproveitando 
-
-Note que apenas esta versão do esquema
-pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$
-aplicados em cada iteração. Do contrário, o método pode introduzir
-multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total.
+sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
+hardware de rotinas relacionadas, como o conjunto de instruções AES-NI da
+Intel, habilitando um grande ganho de desempenho no cômputo desta cifra.
+Note que apenas esta versão do esquema pode beneficiar-se deste método,
+em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração.
+Do contrário, o método pode introduzir multicolisões em \textsc{Wots},
+efetivamente reduzindo sua segurança total.
 
 \todo[inline]{discussion about multicollision or multiuser idk, also other wots
 schemes, comment about wots-t and lm and stuff}
