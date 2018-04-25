@@ -835,40 +835,6 @@ entretanto, a generalização deste esquema permite esta otimização.
 
 \subsection{O esquema Winternitz}
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[
-    decoration={
-      markings,
-      mark= at position 0.5 with {\node[font=\scriptsize] {/};},
-      mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
-    }]
-	\tikzstyle{arrowline}=[draw, -latex']
-	\tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
-
-    \matrix[matrix of nodes, column sep=35pt, row sep=30pt] {
-		\node [abox] (xt1) {$x_i$}; &
-		\node (fst1) {$f(x_i)$}; &
-		\node [abox] (st1) {$\sigma_i$}; &
-		\node (fvt1) {$f(\sigma_i)$}; &
-		\node [abox] (yt1) {$y_i$}; \\
-    };
-
-	\node[above = 5pt of xt1] (X) {$x_i \in X:$};
-	\node[above = 5pt of st1] (S) {$\sigma_i \in \sigma:$};
-	\node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
-
- 	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
- 	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
-    \path[->] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
- 	\path[arrowline, postaction={decorate}] (st1)      --      (st1 -| fvt1.west);
- 	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
-    \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
-  \end{tikzpicture}
-  \caption{Representação gráfica das etapas de processo de assinatura e verificação do \textsc{Wots}, para $0 \leq i < t$.}
-  \label{fig:5}
-\end{figure}
-
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
 por Winternitz e publicada por Merkle~\cite{Merkle:1989:CDS:118209.118230}.  O
@@ -931,6 +897,40 @@ valor correto de $\mathcal{B}_2$ seja mantido, é necessário que uma pré-image
 de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar
 algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura
 impossível.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+    decoration={
+      markings,
+      mark= at position 0.5 with {\node[font=\scriptsize] {/};},
+      mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
+    }]
+	\tikzstyle{arrowline}=[draw, -latex']
+	\tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
+
+    \matrix[matrix of nodes, column sep=35pt, row sep=30pt] {
+		\node [abox] (xt1) {$x_i$}; &
+		\node (fst1) {$f(x_i)$}; &
+		\node [abox] (st1) {$\sigma_i$}; &
+		\node (fvt1) {$f(\sigma_i)$}; &
+		\node [abox] (yt1) {$y_i$}; \\
+    };
+
+	\node[above = 5pt of xt1] (X) {$x_i \in X:$};
+	\node[above = 5pt of st1] (S) {$\sigma_i \in \sigma:$};
+	\node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
+
+ 	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
+ 	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
+    \path[->] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
+ 	\path[arrowline, postaction={decorate}] (st1)      --      (st1 -| fvt1.west);
+ 	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
+    \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
+  \end{tikzpicture}
+  \caption{Representação gráfica das etapas de assinatura e verificação do \textsc{Wots}, para $0 \leq i < t$.}
+  \label{fig:5}
+\end{figure}
 
 \subsection{\textsc{Wots+}}
 
