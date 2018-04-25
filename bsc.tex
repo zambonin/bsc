@@ -1001,6 +1001,25 @@ inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
 tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo é definido
 recursivamente como
+
+\begin{tikzpicture}[scale=0.25]
+
+\draw (-2, 5) rectangle node {$g$} ++(2, 2);
+\draw (0, 0) rectangle node {$E$} ++(4, 4);
+\draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
+
+%% XOR
+\node[XOR] (x0) at (7,2) {};
+%% Arrows
+\draw[edge] (-4,2) node[left] {$m_{i}$} -- ++(4,0);
+\draw[edge] (4,2) -- (x0);
+\draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
+\draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
+\draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);	
+\draw[edge] (0, 5) -- ++
+	
+\end{tikzpicture}
+
 \begin{equation}
   \begin{split}
     h_0 &= IV \\
