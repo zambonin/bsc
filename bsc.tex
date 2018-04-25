@@ -1005,21 +1005,22 @@ h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t. $$
 
 \begin{figure}
     \centering
-    \caption{Caption}
-    \label{fig:my_label}
+    \begin{tikzpicture}[scale=0.25]
+      \draw (-2, 5) rectangle node {$g$} ++(2, 2);
+      \draw (0, 0) rectangle node {$E$} ++(4, 4);
+      \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
+      \node[XOR] (x0) at (7,2) {};
+      \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
+      \draw[edge] (4,2) -- (x0);
+      \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
+      \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
+      \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
+      \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
+    \end{tikzpicture}
+    \caption{Representação gráfica da construção Matyas-Meyer-Oseas,
+      adaptado de~\cite{TikZ:for:Cryptographers}.}
+    \label{fig:6}
 \end{figure}
-\begin{tikzpicture}[scale=0.25]
-  \draw (-2, 5) rectangle node {$g$} ++(2, 2);
-  \draw (0, 0) rectangle node {$E$} ++(4, 4);
-  \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
-  \node[XOR] (x0) at (7,2) {};
-  \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
-  \draw[edge] (4,2) -- (x0);
-  \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
-  \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
-  \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
-  \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
-\end{tikzpicture}
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
