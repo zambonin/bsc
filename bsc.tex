@@ -970,9 +970,11 @@ recursivamente como
     h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
   \end{split}
 \end{equation}
-Utilizando este método, é possível integrar AES junto ao \textsc{Wots+}, como
-forma de executar iterações para criar e verificar a assinatura, como sugerido
-em~\cite[4.1]{Hlsing2013}. Note que apenas esta versão do esquema
+Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
+forma de executar iterações para criar e verificar a assinatura, conforme
+sugerido em~\cite[4.1]{Hlsing2013}, aproveitando 
+
+Note que apenas esta versão do esquema
 pode beneficiar-se deste método, em virtude dos elementos pseudoaleatórios $r$
 aplicados em cada iteração. Do contrário, o método pode introduzir
 multicolisões em \textsc{Wots}, efetivamente reduzindo sua segurança total.
