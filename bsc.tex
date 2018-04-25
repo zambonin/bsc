@@ -1108,6 +1108,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
 
 \end{enumerate}
 
+Note que no passo de geração da assinatura, um índice da folha tem de ser escolhido, de modo que respeite uma restrição estrita: o nodo não pode ter sido utilizado anteriormente, a fim de prevenir a reutilização de uma instância de esquema de assinatura digital única. Para que essa escolha seja bem sucedida, é necessário que o esquema baseado em Merkle gerencie quais índices foram utilizados. Este conceito é chamado de gerenciamento de estado.
+
 \todo[inline]{comment about statefulness, some random notes about s ecurity,
 traversal algorithms etc.}
 
