@@ -10,6 +10,8 @@
 
 \usepackage{todonotes}
 
+\usetikzlibrary{matrix, arrows, decorations.markings}
+
 \newcommand{\hh}{\mathcal{H}}
 \newcommand{\pk}{\mathcal{P}_k}
 \newcommand{\sk}{\mathcal{S}_k}
@@ -833,6 +835,13 @@ entretanto, a generalização deste esquema permite esta otimização.
 
 \subsection{O esquema Winternitz}
 
+\begin{figure}[ht]
+  \centering
+  
+  \caption{Funcionamento típico de um esquema de assinatura digital.}
+  \label{fig:2}
+\end{figure}
+
 \begin{tikzpicture}[decoration={
         markings,
         mark= at position 0.5 with {\node[font=\scriptsize] {/};},
@@ -842,17 +851,17 @@ entretanto, a generalização deste esquema permite esta otimização.
 	\tikzstyle{arrowline}=[draw, -latex']
 	\tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
 
-    \matrix[matrix of nodes, column sep=20pt, row sep=30pt] {
+    \matrix[matrix of nodes, column sep=35pt, row sep=30pt] {
 		\node [abox] (xt1) {$x_i$}; &
 		\node (fst1) {$f(x_i)$}; &
-		\node [abox] (st1) {$\alpha_i$}; &
-		\node (fvt1) {$f(\alpha_i)$}; &
+		\node [abox] (st1) {$\sigma_i$}; &
+		\node (fvt1) {$f(\sigma_i)$}; &
 		\node [abox] (yt1) {$y_i$}; \\
     };
 
-	\node[above = 5pt of xt1] (X) {$x_i \in X:$};
-	\node[above = 5pt of st1] (S) {$\alpha_i \in \alpha:$};
-	\node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
+	\node[above = 5pt of xt1] (X) {$x_i \in X$};
+	\node[above = 5pt of st1] (S) {$\sigma_i \in \sigma$};
+	\node[above = 5pt of yt1] (Y) {$y_i \in Y$};
 
  	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
  	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
