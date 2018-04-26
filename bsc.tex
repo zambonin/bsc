@@ -992,18 +992,6 @@ a manter um nível de segurança suficiente, é possível empregar a construçã
 Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}, apresentada na
 Figura~\ref{fig:6}.
 
-Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo
-bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de
-tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho
-necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que
-represente uma palavra $x$, e que sua inversibilidade seja computacionalmente
-inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
-\length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
-tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
-elementos que desrespeitem esta regra. O resultado deste processo, observado
-em~\ref{fig:6}, é definido recursivamente como
-$h_0 = IV, h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
-
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}[scale=0.25]
@@ -1022,6 +1010,21 @@ $h_0 = IV, h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
     adaptado de~\cite{TikZ:for:Cryptographers}.}
   \label{fig:6}
 \end{figure}
+
+Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo
+bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de
+tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho
+necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que
+represente uma palavra $x$, e que sua inversibilidade seja computacionalmente
+inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
+\length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
+tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
+elementos que desrespeitem esta regra. O resultado deste processo, observado
+em~\ref{fig:6}, é definido recursivamente como
+\begin{equation}
+    
+\end{equation}
+$$h_0 = IV, \qquad h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.$$
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
