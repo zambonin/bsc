@@ -1000,9 +1000,29 @@ represente uma palavra $x$, e que sua inversibilidade seja computacionalmente
 inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
 \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
 tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
-elementos que desrespeitem esta regra. O resultado deste processo é definido
-recursivamente como $h_0 = IV, \quad
-h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
+elementos que desrespeitem esta regra. O resultado deste processo, observado
+em~\ref{fig:6}, é definido recursivamente como
+$h_0 = IV, h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[scale=0.25]
+    \draw (-2, 5) rectangle node {$g$} ++(2, 2);
+    \draw (0, 0) rectangle node {$E$} ++(4, 4);
+    \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
+    \node[XOR] (x0) at (7,2) {};
+    \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
+    \draw[edge] (4,2) -- (x0);
+    \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
+    \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
+    \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
+    \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
+  \end{tikzpicture}
+  \caption{Representação gráfica da construção Matyas-Meyer-Oseas,
+    adaptado de~\cite{TikZ:for:Cryptographers}.}
+  \label{fig:6}
+\end{figure}
+
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
@@ -1012,25 +1032,6 @@ Note que apenas esta versão do esquema pode beneficiar-se deste método,
 em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração.
 Do contrário, o método pode introduzir multicolisões em \textsc{Wots},
 efetivamente reduzindo sua segurança total.
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[scale=0.25]
-      \draw (-2, 5) rectangle node {$g$} ++(2, 2);
-      \draw (0, 0) rectangle node {$E$} ++(4, 4);
-      \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
-      \node[XOR] (x0) at (7,2) {};
-      \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
-      \draw[edge] (4,2) -- (x0);
-      \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
-      \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
-      \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
-      \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
-    \end{tikzpicture}
-    \caption{Representação gráfica da construção Matyas-Meyer-Oseas,
-      adaptado de~\cite{TikZ:for:Cryptographers}.}
-    \label{fig:6}
-\end{figure}
 
 \section{Esquemas baseados em árvores de Merkle}
 
