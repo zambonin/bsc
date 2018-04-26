@@ -1020,12 +1020,12 @@ inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
 \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
 tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo, observado
-em~\ref{fig:6}, é definido recursivamente como
+na Figura~\ref{fig:6}, é definido recursivamente como
 \begin{equation}
     \begin{split}
-        
+        h_0 &= IV, \\
+        h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
     \end{split}
-    h_0 = IV, \qquad h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
 \end{equation}
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
