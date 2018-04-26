@@ -1022,9 +1022,11 @@ tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo, observado
 em~\ref{fig:6}, é definido recursivamente como
 \begin{equation}
-    
+    \begin{split}
+        
+    \end{split}
+    h_0 = IV, \qquad h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
 \end{equation}
-$$h_0 = IV, \qquad h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.$$
 
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
