@@ -1001,8 +1001,8 @@ inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
 \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
 tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo é definido
-recursivamente como $$h_0 = IV, \quad
-h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t. $$
+recursivamente como $h_0 = IV, \quad
+h_i = E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t$.
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
