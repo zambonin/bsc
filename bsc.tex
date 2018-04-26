@@ -1167,6 +1167,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
 
 Note que no passo de geração da assinatura, um índice da folha tem de ser escolhido, de modo que respeite uma restrição estrita: o nodo não pode ter sido selecionado anteriormente, a fim de prevenir a reutilização de uma instância de esquema de assinatura digital única. Para que essa escolha seja bem sucedida, é necessário que o esquema baseado em árvores de Merkle coordene quais índices foram utilizados. Este conceito é chamado de gerenciamento de estado, e introduz vários obstáculos para o funcionamento do esquema~\cite{McGrew2016}, como a necessidade de salvar frequentemente informações sobre o estado em armazenamento não volátil. Ademais, este é geralmente codificado em $\pk{}$, e portanto, duas mensagens não podem ser assinadas com a mesma chave privada, criando problemas de sincronização de chaves entre múltiplos dispositivos.
 
+% 
+
 \todo[inline]{comment about statefulness, some random notes about s ecurity,
 traversal algorithms etc.}
 
