@@ -283,7 +283,6 @@ lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
 Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell$
 \begin{equation}
-  \forall i \geq \ell,
   k_{i} = k_{i - \ell} \oplus 
     \begin{cases}
       \textsc{SubBytes}(rot(k_{i - 1})) \oplus RC_{\frac{i}{\ell}},
