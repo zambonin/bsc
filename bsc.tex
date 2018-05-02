@@ -279,19 +279,20 @@ abaixo.
 palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
 = \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina
 $rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
-lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ definida pela
+lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
 Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell,
-K^{e}_{i} = K^{e}_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é
+k_{i} = k_{i - \ell} \oplus \mathbf{k}$. A palavra $\mathbf{k}$ é 
 definida pelas restrições (mutualmente exclusivas) abaixo:
 \begin{equation}
-  \mathbf{k} =
+  \forall i \geq \ell,
+  k_{i} = k_{i - \ell} \oplus 
     \begin{cases}
-      \textsc{SubBytes}(rot(K^{e}_{i - 1})) \oplus RC_{\frac{i}{\ell}},
+      \textsc{SubBytes}(rot(k_{i - 1})) \oplus RC_{\frac{i}{\ell}},
         \text{ se } i \equiv 0 \pmod{4} \\
-      \textsc{SubBytes}(K^{e}_{i - 1}),
+      \textsc{SubBytes}(k_{i - 1}),
         \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
-      K^{e}_{i - 1}, \text{ caso contrário.}
+      k_{i - 1}, \text{ caso contrário.}
     \end{cases}
 \end{equation}
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
