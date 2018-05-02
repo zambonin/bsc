@@ -277,11 +277,11 @@ abaixo.
 \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
 32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
 palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
-= \ell \cdot (n_r + 1)$ e $K^e = \{k_0, \dots, k_{t - 1}\}$. Também defina
+= \ell \cdot (n_r + 1)$ e $K_e = \{k_0, \dots, k_{t - 1}\}$. Também defina
 $rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
-Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell$
+Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell$,
 \begin{equation}
   k_{i} = k_{i - \ell} \oplus 
     \begin{cases}
@@ -293,33 +293,35 @@ Inicialmente, $\{k_0, \dots, k_{\ell - 1}\} = K$, e $\forall i \geq \ell$
     \end{cases}
 \end{equation}
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
-$c$ pode ser representada pelo pseudocódigo abaixo.
+$c$ pode ser representada pelo pseudocódigo~\ref{alg:1}.
 
 \begin{algorithm}[H]
   \small
   \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
   \KwResult{$c$, o texto cifrado resultante}
 
-  $A \longleftarrow m$\;
-  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-    \longleftarrow \textsc{KeyExpansion}(K)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+  $A \leftarrow m$\;
+  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
+    \leftarrow \textsc{KeyExpansion}(K)$\;
+  $A \leftarrow \textsc{AddRoundKey}(A,
+    \{k_{0}, \dots, k_{\ell - 1}\})$\;
 
   \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
-    $A \longleftarrow \textsc{SubBytes}(A)$\;
-    $A \longleftarrow \textsc{ShiftRows}(A)$\;
-    $A \longleftarrow \textsc{MixColumns}(A)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
+    $A \leftarrow \textsc{SubBytes}(A)$\;
+    $A \leftarrow \textsc{ShiftRows}(A)$\;
+    $A \leftarrow \textsc{MixColumns}(A)$\;
+    $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
   }
 
-  $A \longleftarrow \textsc{SubBytes}(A)$\;
-  $A \longleftarrow \textsc{ShiftRows}(A)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+  $A \leftarrow \textsc{SubBytes}(A)$\;
+  $A \leftarrow \textsc{ShiftRows}(A)$\;
+  $A \leftarrow \textsc{AddRoundKey}(A,
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
 
-  $c \longleftarrow A$\;
+  $c \leftarrow A$\;
+  \caption{Algoritmo de codificação do AES.}
+  \label{alg:1}
 \end{algorithm}
 
 Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
@@ -342,7 +344,7 @@ modificadas de acordo.
 
 \end{enumerate}
 
-Por fim, o algoritmo resultante pode ser representado pelo pseudocódigo abaixo.
+Por fim, o algoritmo resultante pode ser representado pelo Algoritmo~\ref{alg:2}.
 Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
 
 \begin{algorithm}[H]
@@ -350,26 +352,28 @@ Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
   \KwData{$c$, o texto cifrado; $K$, a chave desejada}
   \KwResult{$m$, o texto claro resultante}
 
-  $A \longleftarrow c$\;
-  $K^{e}_{0} \dots K^{e}_{(n_r + 1) \cdot \ell}
-    \longleftarrow \textsc{KeyExpansion}(K)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{n_r \cdot \ell}, \dots, K^{e}_{(n_r + 1) \cdot \ell - 1}\})$\;
+  $A \leftarrow c$\;
+  $k_{0} \dots k_{(n_r + 1) \cdot \ell}
+    \leftarrow \textsc{KeyExpansion}(K)$\;
+  $A \leftarrow \textsc{AddRoundKey}(A,
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
 
   \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
-    $A \longleftarrow \textsc{InvShiftRows}(A)$\;
-    $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-    $A \longleftarrow \textsc{AddRoundKey}(A,
-      \{K^{e}_{i \cdot \ell}, \dots, K^{e}_{(i + 1) \cdot \ell - 1}\})$\;
-    $A \longleftarrow \textsc{InvMixColumns}(A)$\;
+    $A \leftarrow \textsc{InvShiftRows}(A)$\;
+    $A \leftarrow \textsc{InvSubBytes}(A)$\;
+    $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
+    $A \leftarrow \textsc{InvMixColumns}(A)$\;
   }
 
-  $A \longleftarrow \textsc{InvShiftRows}(A)$\;
-  $A \longleftarrow \textsc{InvSubBytes}(A)$\;
-  $A \longleftarrow \textsc{AddRoundKey}(A,
-    \{K^{e}_{0}, \dots, K^{e}_{\ell - 1}\})$\;
+  $A \leftarrow \textsc{InvShiftRows}(A)$\;
+  $A \leftarrow \textsc{InvSubBytes}(A)$\;
+  $A \leftarrow \textsc{AddRoundKey}(A,
+    \{k_{0}, \dots, k_{\ell - 1}\})$\;
 
-  $m \longleftarrow A$\;
+  $m \leftarrow A$\;
+  \caption{Algoritmo de decodificação do AES.}
+  \label{alg:2}
 \end{algorithm}
 
 Para discussões detalhadas sobre as etapas do algoritmo, a fundamentação
