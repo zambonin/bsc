@@ -246,15 +246,18 @@ baratas.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n \in \{128,
 rodadas ($n_r$), depende diretamente do tamanho da chave: $n = 128 \rightarrow
 n_r = 10, n = 192 \rightarrow n_r = 12, n = 256 \rightarrow n_r = 14$.
 
-
+Uma rotina de expansão de chave (\textsc{KeyExpansion}) existe
+para que $K$ seja propagada em todas as rodadas com valores derivados,
+porém variados entre si. A presença desta rotina é fundamentada pela
+construção abstrata no qual o Rijndael é baseado, chamada de rede de
+substituição-permutação, onde o estado inicial é primeiramente modificado
+com uma chave de rodaa.
 
 Note que existe uma rodada adicional introdutória composta apenas de
 \textsc{AddRoundKey}, para que o estado inicial seja modificado. Isto é
 fundamentado pelo construção abstrada chamada de rede de substituição-permutação, na qual o
 AES é baseado. Ademais, \textsc{MixColumns} é ignorado na última rodada,
-a fim de facilitar a reversibilidade da cifra. Uma rotina de expansão de chave
-(\textsc{KeyExpansion}) existe para que $K$ seja propagada em todas as rodadas
-com valores derivados, porém distintos. Estes componentes serão descritos
+a fim de facilitar a reversibilidade da cifra. Estes componentes serão descritos
 abaixo.
 
 \begin{enumerate}[label=\roman*.]
