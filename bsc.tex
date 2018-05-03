@@ -294,7 +294,8 @@ Para os elementos restantes, ou seja, $\forall i \geq \ell$,
     \end{cases}
 \end{equation}
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
-$c$ pode ser representada pelo Algoritmo~\ref{alg:1}.
+$c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é primeiramente
+codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j < 4$.
 
 \begin{algorithm}[H]
   \small
@@ -346,7 +347,8 @@ modificadas de acordo.
 \end{enumerate}
 
 Por fim, o algoritmo resultante pode ser representado pelo Algoritmo~\ref{alg:2}.
-Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
+Note a mudança da ordem das etapas, e a utilização invertida de $K_e$. $c$ é
+codificado no estado de maneira análoga ao algoritmo anterior.
 
 \begin{algorithm}[H]
   \small
@@ -354,7 +356,7 @@ Note a mudança da ordem das etapas, e a utilização invertida de $K_e$.
   \KwResult{$m$, o texto claro resultante}
 
   $A \leftarrow c$\;
-  $k_{0} \dots k_{(n_r + 1) \cdot \ell}
+  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
     \leftarrow \textsc{KeyExpansion}(K)$\;
   $A \leftarrow \textsc{AddRoundKey}(A,
     \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
