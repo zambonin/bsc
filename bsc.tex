@@ -78,20 +78,20 @@ efetivamente tornando estes esquemas clássicos inseguros neste novo contexto.
 
 Para combater esta situação, a \emph{criptografia pós-quântica} encarrega-se de
 buscar algoritmos criptográficos cuja segurança é considerada ``suficiente'',
-mesmo utilizando-se de um computador quântico para ataques especializados. Esta área
-conta com diversas abordagens diferentes: a criptografia baseada em reticulados,
+mesmo utilizando-se de um computador quântico para ataques especializados. Esta
+área conta com diversas abordagens: a criptografia baseada em reticulados,
 polinômios de múltiplas variáveis sobre um corpo finito, teoria de códigos,
 morfismos entre curvas elípticas supersingulares e criptossistemas simétricos.
 Entretanto, reduções de segurança formais não existem para alguns destes
 métodos, e para outros, o tamanho das chaves impossibilita a utilização destes
 em aplicações práticas~\cite{Bernstein2017}.
 
-Não obstante, uma abordagem distinta de esquema de assinatura digital
-resistente a computadores quânticos pode ser obtida apenas com funções de
+Não obstante, uma abordagem adicional de esquema de assinatura digital
+resistente a computadores quânticos é baseada apenas em funções de
 resumo criptográfico, construídas a partir de funções de mão
 única~\cite{cryptoeprint:2005:328}. De fato, estas funções, desde que
-apresentem requisitos de segurança como resistência à segunda pré-imagem e à
-colisões, são necessárias e suficientes para a construção de esquemas bem
+apresentem requisitos de segurança como resistência à segunda pré-imagem e/ou
+à colisões, são necessárias e suficientes para a construção de esquemas bem
 comportados e seguros~\cite{Rompel:1990:OFN:100216.100269}. Visto que estas
 funções são estudadas exaustivamente por conta de sua vasta presença em
 diversos âmbitos da segurança da informação, reduções de segurança são mais
@@ -101,8 +101,8 @@ assinaturas não são proibitivos.
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
 consistem da utilização de um esquema de assinatura digital \emph{única}, onde
 apenas uma mensagem pode ser assinada de modo seguro, ou sua combinação com a
-estrutura de dados chamada de árvore de
-Merkle~\cite{Merkle:1989:CDS:118209.118230}, que abriga diversos pares de chave
+estrutura de dados chamada de árvore de Merkle~\cite{Merkle:1989:CDS:118209.118230},
+que abriga pares de chaves de diversas instâncias
 do esquema supracitado como suas folhas, e reduz a verificação destes para uma
 única chave, codificada em sua raiz. Esta árvore é construída com a
 concatenação de resumos criptográficos do conteúdo dos nós, habilitando assim a
@@ -115,8 +115,8 @@ eficiência de modo geral (e.g. o esquema de assinatura única de
 Lamport~\cite{lamport1979constructing} assina apenas um \emph{bit}
 de informação em sua forma mais simples), muitos resultados práticos demonstram
 a redução contínua do tempo de verificação da assinatura, tamanho e tempo para
-geração do par de chaves e assinatura, bem como avanços teóricos possibilitam
-a utilização de funções com requisitos de segurança 
+geração do par de chaves e assinatura, bem como avanços teóricos que
+possibilitam a utilização de funções com requisitos de segurança 
 mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
 encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de
 uma chave não implica na segurança de mensagens que utilizaram esta chave
@@ -125,9 +125,11 @@ necessita registrar quais chaves de assinatura única já foram utilizadas).
 
 Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
 apresenta-se uma customização para o esquema na forma de um parâmetro extra,
-que habilita a redução de tempos de verificação de assinatura em troca de mais
+que habilita a redução da complexidade de verificação de assinatura em troca
+do aumento desta na geração da assinatura,
+adição de 
 computação na geração desta, ou vice-versa. Ademais, as consequências desta
-otimização são verificadas em esquemas mais complexos, como os baseados em
+otimização são verificadas em esquemas mais complexos, baseados em
 árvores de Merkle. Este trabalho é uma versão expandida, e portanto didática,
 do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
