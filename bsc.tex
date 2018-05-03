@@ -273,14 +273,11 @@ com uma chave de rodada. As operações e rotinas serão descritas abaixo.
   \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
       entre $A$ e o bloco da chave referente à rodada.
 
-  \item 
-\end{enumerate}
-
-\textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
+  \item \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
 32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
 palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
 = \ell \cdot (n_r + 1)$ e $K_e = \{k_0, \dots, k_{t - 1}\}$. Também defina
-$rot(x)$ como o deslocamento circular à esquerda de 8 bits da palavra $x$, e a
+$rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
@@ -288,13 +285,16 @@ Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 \begin{equation}
   k_{i} = k_{i - \ell} \oplus 
     \begin{cases}
-      \textsc{SubBytes}(rot(k_{i - 1})) \oplus RC_{\frac{i}{\ell}},
+      \textsc{SubBytes}(k_{i - 1} \stackrel{\curvearrowright}{\ll} 8) \oplus RC_{\frac{i}{\ell}},
         \text{ se } i \equiv 0 \pmod{4} \\
       \textsc{SubBytes}(k_{i - 1}),
         \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
       k_{i - 1}, \text{ caso contrário.}
     \end{cases}
 \end{equation}
+
+\end{enumerate}
+
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
 $c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é primeiramente
 codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j < 4$.
