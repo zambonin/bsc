@@ -251,9 +251,7 @@ para que $K$ seja propagada em todas as rodadas com valores derivados,
 porém variados entre si. A presença desta rotina é fundamentada pela
 construção abstrata no qual o Rijndael é baseado, chamada de rede de
 substituição-permutação, onde o estado inicial é primeiramente modificado
-com uma chave de rodada. A demais, \textsc{MixColumns} é ignorado na última
-rodada, a fim de facilitar a reversibilidade da cifra. Estes componentes serão descritos
-abaixo.
+com uma chave de rodada. As operações e rotinas serão descritas abaixo.
 
 \begin{enumerate}[label=\roman*.]
 
@@ -275,6 +273,7 @@ abaixo.
   \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
       entre $A$ e o bloco da chave referente à rodada.
 
+  \item 
 \end{enumerate}
 
 \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
@@ -299,6 +298,8 @@ Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
 $c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é primeiramente
 codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j < 4$.
+Note que \textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
+reversibilidade da cifra. 
 
 \begin{algorithm}[H]
   \small
