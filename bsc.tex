@@ -256,8 +256,8 @@ abaixo.
 
   \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$ pelo seu valor
       correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a
-        partir de uma transformação afim em $A_{i,j}^{-1}$ sobre
-        $\mathbb{F}_2$), onde os \emph{nibbles} mais e menos significativos,
+        partir de uma transformação afim em $A_{i,j}^{-1}$),
+        onde os \emph{nibbles} mais e menos significativos,
         respectivamente, representam a linha e a coluna do elemento na
         \emph{S-box}.
 
@@ -853,7 +853,7 @@ quantidade de \emph{bits} a serem assinados simultaneamente.  A partir destes,
 calcula-se $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil
 \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
 t = t_1 + t_2,$$ que representarão, respectivamente, a quantidade de palavras
-em base-$w$ na assinatura referente à mensagem, à soma de verificação, e a
+em base-$w$ na assinatura referente à mensagem, à soma de verificação, e à
 quantidade total.  Por fim, considere as funções de mão única $f : \binwds{m}
 \longrightarrow \binwds{m}$ e de resumo criptográfico $\fhash{m}$.
 
@@ -936,6 +936,8 @@ impossível.
   \caption{Representação gráfica das etapas de assinatura e verificação do \textsc{Wots}, para $0 \leq i < t$.}
   \label{fig:5}
 \end{figure}
+
+
 
 \todo[inline]{discussion about multicollision or multiuser idk, also other wots
 schemes, comment about wots-t and lm and stuff}
