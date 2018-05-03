@@ -280,12 +280,13 @@ palavras suficientes para utilização em todas as rodadas do algoritmo, então 
 $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão
-\begin{split}
+\begin{equation}
     
-\end{split}
+\end{equation}
+\begin{split}
     RC_0 &= x^0, RC_1 = x^1 \\
     RC_j &= x^{j-1} \cdot RC_{j-1}, j > 2.
-\end{align}
+\end{split}
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
 Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 \begin{equation}
