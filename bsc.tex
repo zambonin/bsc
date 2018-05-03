@@ -164,8 +164,9 @@ digital agregando estas noções.
 
 Define-se criptografia como a criação e análise de protocolos
 matemáticos que habilitam comunicação segura, através de um canal
-inseguro, entre duas ou mais entidades. Algoritmos criptográficos
-podem ser parametrizados por uma chave, que habilita a transformação
+inseguro, entre duas ou mais entidades. Implementações destes,
+comumente chamadas de algoritmos criptográficos,
+podem ser parametrizadas por uma chave, que habilita a transformação
 do texto plano para texto cifrado de acordo
 com esta, de maneira individual e inteligível, mas a fim de tornar o
 resultado irrecuperável sem a apresentação da chave correspondente.
@@ -194,10 +195,10 @@ possibilita a busca de elementos em conjuntos em tempo reduzido.
 Por outra forma, suponha que deseja-se inverter uma função $f : A
 \longrightarrow B$, a partir de um elemento $b \in B$. Classicamente,
 como não existe informação qualquer sobre a função, é necessário
-calcular $f$ para cada um dos elementos de seu domínio (i.e. $\length{A}
-vezes$). Entretanto, Grover permite que esta busca seja feita em
-$\sqrt{\length{A}}$ vezes. Assim, um algoritmo criptográfico simétrico
-que toma o lugar de $f$ neste exemplo precisa de parâmetros de segurança
+calcular $f$ para cada um dos elementos de seu domínio (i.e. $\length{A}$
+vezes). Entretanto, Grover permite que esta busca seja feita em
+$\length{A}^{\frac{1}{2}}$ operações. Assim, um algoritmo criptográfico simétrico
+que toma o lugar de $f$, neste exemplo, precisa de parâmetros de segurança
 maiores, a fim de igualar a dificuldade da busca tratando-se de um
 computador clássico.
 
@@ -209,7 +210,7 @@ a comunicação segura com o detentor da chave sem a necessidade de um canal
 seguro, em virtude da construção dos algoritmos.
 
 A ideia foi introduzida abstratamente em~\cite{Diffie:2006:NDC:2263321.2269104}
-e algoritmos como RSA, ElGamal e abordagens baseadas em curvas elípticas.
+e tem como exemplos algoritmos como RSA, ElGamal e abordagens baseadas em curvas elípticasEcD.
 Diferentemente dos algoritmos simétricos, estes sistemas utilizam operações
 mais robustas, e portanto de desempenho reduzido. Assim, a utilização
 convencional destes dois tipos de criptografia em protocolos se dá pela
