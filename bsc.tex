@@ -279,13 +279,18 @@ palavras suficientes para utilização em todas as rodadas do algoritmo, então 
 = \ell \cdot (n_r + 1)$ e $K_e = \{k_0, \dots, k_{t - 1}\}$. Também defina
 $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
-recursão $RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
+recursão
+\begin{align}
+    
+\end{align}
+
+$RC_0 = x^0, RC_1 = x^1, RC_j = x^{j-1} \cdot RC_{j-1}, j > 2$.
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
 Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 \begin{equation}
-  k_{i} = k_{i - \ell} \oplus 
+  k_{i} = k_{i - \ell} + 
     \begin{cases}
-      \textsc{SubBytes}(k_{i - 1} \stackrel{\curvearrowright}{\ll} 8) \oplus RC_{\frac{i}{\ell}},
+      \textsc{SubBytes}(rot(k_{i - 1})) + RC_{\frac{i}{\ell}},
         \text{ se } i \equiv 0 \pmod{4} \\
       \textsc{SubBytes}(k_{i - 1}),
         \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
