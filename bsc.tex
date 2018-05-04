@@ -280,7 +280,10 @@ palavras suficientes para utilização em todas as rodadas do algoritmo, então 
 $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão
-$$RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x^{j-1} \cdot RC_{j-1}, \; j > 2.$$
+\begin{equation}
+    
+\end{equation}
+RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x^{j-1} \cdot RC_{j-1}, \; j > 2.$$
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
 Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 \begin{equation}
@@ -581,7 +584,7 @@ criptográficos, não necessita de valores especiais e é ocupado com valores
 nulos. A entrada $m$ é preenchida com uma função de preenchimento \texttt{pad}
 de tal modo que $r \mid \length{m}$, e dividida em blocos de tamanho $r$. A
 fase de absorção de $m$ pela esponja procede da seguinte maneira: a operação de
-ou exclusivo ($\oplus$) é calculada entre os blocos e os estados da construção,
+ou exclusivo é calculada entre os blocos e os estados da construção,
 intercalados por aplicações de $f$.
 
 \begin{figure}[ht]
@@ -677,12 +680,13 @@ de cinco etapas: $R = \iota \circ \chi \circ \pi \circ \rho \circ \theta$.
   \item[Etapa $\pi$:] Rearranja elementos em cortes transversais horizontais de
       $a$.
 
-  \item[Etapa $\chi$:] Modifica uma elemento de uma linha de $a$ de acordo com
+  \item[Etapa $\chi$:] Modifica um elemento de uma linha de $a$ de acordo com
       uma função não-linear de dois outros bits adjacentes. Análogo a uma
         caixa-S.
 
   \item[Etapa $\iota$:] Calcula o ou exclusivo entre o estado $a$ e uma
-      sequência gerada por um \emph{linear-feedback shift register} alimentado
+      sequência gerada por um \emph{linear-feedback shift register}
+      (gerador de números pseudoaleatórios) alimentado
         pelo índice da rodada atual, tornando a rodada assimétrica.
 
 \end{enumerate}
