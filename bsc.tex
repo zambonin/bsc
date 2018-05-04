@@ -350,7 +350,7 @@ modificadas de acordo.
 
 \end{enumerate}
 
-Por fim, o algoritmo resultante pode ser representado pelo Algoritmo~\ref{alg:2}.
+Por fim, o resultado é representado pelo Algoritmo~\ref{alg:2}.
 Note a mudança da ordem das etapas, e a utilização invertida de $K_e$. $c$ é
 codificado no estado de maneira análoga ao algoritmo anterior.
 
@@ -407,17 +407,17 @@ representa a quantidade de números relativamente primos a $x$.
 
   \item[] \emph{Geração de chaves.} Gere dois números primos $p, q$
       aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
-        $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
+        $n = p \times q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
         $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
-        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
+        estendido para computar $d$ tal que $e \times d \equiv 1 \pmod{\phi(n)}$), i.e.
         a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k =
         d$ e $\mathcal{P}_k = (n, e)$.
 
   \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual deseja-se
       criptografar uma mensagem. Transforma-se uma mensagem $m$ em um inteiro
         no intervalo $[0, n - 1]$ através de uma função de preenchimento.  O
-        texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo
-        como a exponenciação quadrática e enviado para a entidade desejada.
+        texto cifrado $c = m^e \pmod{n}$ é calculado através de um algoritmo,
+        como a exponenciação quadrática, e enviado para a entidade desejada.
 
   \item[] \emph{Decodificação.} O receptor da mensagem calcula $m = c^d
       \pmod{n}$.
