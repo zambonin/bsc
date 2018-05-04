@@ -293,7 +293,6 @@ Para os elementos restantes, ou seja, $\forall i \geq \ell$,
       k_{i - 1}, \text{ caso contrário.}
     \end{cases}
 \end{equation}
-
 \end{enumerate}
 
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
@@ -345,9 +344,9 @@ modificadas de acordo.
         multiplicativa.
 
   \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
-      inversa multiplicativa $d = c^{-1}$, obtida por: $(03 \cdot x^{3} + 01
-        \cdot x^{2} + 01 \cdot x + 02) \cdot d \equiv 1 \pmod{x^{4} + 1}$, logo
-        $d(x) = 0B \cdot x^{3} + OD \cdot x^{2} + 09 \cdot x + 0E$.
+      inversa multiplicativa $d = c^{-1}$, obtida por: $(3 x^{3} +
+        x^{2} + x + 2) \times d \equiv 1 \pmod{x^{4} + 1}$, logo
+        $d(x) = 11 x^{3} + 13 x^{2} + 9 x + 14$.
 
 \end{enumerate}
 
