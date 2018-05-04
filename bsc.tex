@@ -455,8 +455,8 @@ a aplicação de uma função de preenchimento à mensagem~\cite{Bellare1995}.
 \section{Funções de resumo criptográfico}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
-de tamanho arbitrário para uma palavra pequena e identificável
-deterministicamente, podem possuir várias propriedades, apresentadas abaixo de
+de tamanho arbitrário para uma palavra pequena e identificável,
+podem possuir várias propriedades, apresentadas abaixo de
 acordo com~\cite[9.2]{Menezes:1996:HAC:548089}.  Tome uma função $\mathcal{H} :
 X \longrightarrow Y$. Comumente, os elementos de $Y$ são chamados de resumos. É
 importante notar que um problema é considerado ``difícil'', ou
@@ -469,7 +469,7 @@ computação excedem a validade ou utilidade da informação desejada.
 
   \item O cálculo de todo resumo deve ser \emph{computacionalmente fácil};
 
-  \item $\hh{}$ deve apresentar \emph{compressão}, ou seja, $\forall x \in X, y
+  \item $\hh{}$ pode apresentar \emph{compressão}, ou seja, $\forall x \in X, y
       \in Y, \length{x} > \length{y}$;
 
   \item $\hh{}$ pode apresentar \emph{resistência à pré-imagem} (\textsc{Pre}),
@@ -488,11 +488,17 @@ computação excedem a validade ou utilidade da informação desejada.
         m_1$, de forma que $\hash{m_0} = \hash{m_1}$;
 
   \item $\hh{}$ pode ser parametrizada por uma chave $k$.  Este comportamento
-      pode ser representado por $\hh{}_k$.
+      é representado por $\hh{}_k$.
 
 \end{enumerate}
 
-É possível classificar $\hh{}$ de acordo com a presença destas propriedades.
+É possível classificar $\hh{}$ de acordo com a presença destas propriedades,
+criando estruturas com várias funcionalidades diferentes. Funções de
+resumo simples contêm apenas os três primeiros itens, e são utilizadas em
+vários âmbitos, em especial na estrutura de dados chamada de tabela de
+espalhamento.
+
+
 Uma função de resumo simples contém apenas (i) e (ii). Ao adicionar (iii) e
 remover (i), obtém-se uma função de mão única, onde o cálculo de $\hh{}^{-1}$ é
 computacionalmente inviável. Uma função de resumo de mão única é obtida com as
