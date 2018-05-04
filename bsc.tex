@@ -493,14 +493,14 @@ computação excedem a validade ou utilidade da informação desejada.
 \end{enumerate}
 
 É possível classificar $\hh{}$ de acordo com a presença destas propriedades,
-criando estruturas com várias funcionalidades diferentes. Funções de
+criando funções com várias aplicabilidades distintas. Funções de
 resumo simples contêm apenas os três primeiros itens, e são utilizadas em
 vários âmbitos, em especial na estrutura de dados chamada de tabela de
-espalhamento. Por outro lado, é imposto para um função de mão única que
-o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, i.e. o item (iv),
-Por fim, funções resistentes à segunda pré-imagem e/ou colisões são definidas
-como \emph{funções de resumo criptográfico}, adequadas para utilização no
-contexto de segurança da informação.
+espalhamento. Por outro lado, é imposto para uma função de mão única que
+o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, i.e. o item (iv)
+seja respeitado. Por fim, funções resistentes à segunda pré-imagem e/ou colisões
+são definidas como \emph{funções de resumo criptográfico}, adequadas para
+utilização no contexto de segurança da informação. 
 
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados em
 um dispositivo inseguro. Intuitivamente, mostra-se desejável que não ocorra
@@ -511,8 +511,8 @@ difusão~\cite{Stallings:2010:CNS:1824151}: trocar apenas um \emph{bit} da
 mensagem $m$ deve modificar cerca de metade dos \emph{bits} do resumo, e
 vice-versa.
 
-Adicionalmente, discute-se brevemente a relação da propriedade (vi) com funções
-de resumo. Funções de compressão de mão única não admitem o título de funções
+Adicionalmente, discute-se brevemente a relação da propriedade (vii) com funções
+de resumo. \emph{Funções de compressão de mão única} não admitem o título de funções
 de resumo, visto que a propriedade de compressão não é respeitada -- embora seu
 nome leve a erro, neste caso, $\length{X}$ é fixo. Porém, podem ser
 parametrizadas por uma chave, e são utilizadas para a construção de cifras de
