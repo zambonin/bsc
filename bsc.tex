@@ -487,7 +487,7 @@ computação excedem a validade ou utilidade da informação desejada.
         encontrar quaisquer duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq
         m_1$, de forma que $\hash{m_0} = \hash{m_1}$;
 
-  \item $\hh{}$ pode ser parametrizada por uma chave $k$.  Este comportamento
+  \item $\hh{}$ pode ser parametrizada por uma chave $k$. Este comportamento
       é representado por $\hh{}_k$.
 
 \end{enumerate}
@@ -499,14 +499,13 @@ vários âmbitos, em especial na estrutura de dados chamada de tabela de
 espalhamento. Por outro lado, é imposto para um função de mão única que
 o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, i.e. o item (iv),
 Por fim, funções resistentes à segunda pré-imagem e/ou colisões são definidas
-como \emph{funções de resumo criptográfico}, conta com as seis
-primeiras propriedades, que tornam-a adequada para utilização no contexto de
-segurança da informação.
+como \emph{funções de resumo criptográfico}, adequadas para utilização no
+contexto de segurança da informação.
 
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados em
 um dispositivo inseguro. Mostra-se desejável, intuitivamente, que não ocorra
-uma relação aparente entre entradas e saídas da função, tratando-se da do
-resumo por completo e subseções deste.  Outra característica desejada é o
+uma relação aparente entre entradas e saídas da função, tratando-se do
+resumo por completo e também de subseções deste.  Outra característica desejada é o
 efeito avalanche, baseado no conceito de
 difusão~\cite{Stallings:2010:CNS:1824151}: trocar apenas um \emph{bit} da
 mensagem $m$ deve modificar cerca de metade dos \emph{bits} do resumo, e
