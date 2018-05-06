@@ -839,11 +839,12 @@ esquema e discute-se algumas de suas características.
 \end{enumerate}
 
 É necessário comentar que assinaturas produzidas por este esquema podem ser
-forjadas, visto que é possível computar $f$ para os \emph{bits} da mensagem que
-são igual a zero. Assim, uma soma de verificação representando a quantidade de
-zeros na mensagem original também é assinada e enviada ao recipiente,
-adicionando apenas $m \cdot log_2(m)$ \emph{bits} na assinatura.  Esta
-característica será explicada em mais detalhes no próximo esquema.
+forjadas~\cite{Merkle:1989:CDS:118209.118230}, visto que é possível computar
+$f$ para os \emph{bits} da mensagem que são igual a zero. Assim, uma soma de
+verificação representando a quantidade de zeros na mensagem original também é
+assinada e enviada ao recipiente, adicionando apenas $m \cdot log_2(m)$
+\emph{bits} na assinatura. Esta característica será explicada em mais detalhes
+no próximo esquema.
 
 Ademais, uma otimização simples para reduzir o tamanho de $\sk{}$ pode
 ser implementada através da utilização de um gerador de números
@@ -906,9 +907,9 @@ quantidade total.  Por fim, considere as funções de mão única $f : \binwds{m
 
 Note que não é possível decrementar valores $b_i \in \mathcal{B}$, pois isto
 implicaria em achar uma pré-imagem de $f$, o que é computacionalmente inviável
-em vista da restrição para $f$. Então, resta apenas a tentativa da falsificação
+em vista de sua restrição imposta. Então, resta apenas a tentativa da falsificação
 de $\sigma$ incrementando algum valor $b_i$. A soma de verificação $c$ é
-necessária a fim de proteger o esquema contra este comportamento. Observe que,
+necessária a fim de proteger o esquema contra esta situação. Observe que,
 em sua ausência, é possível que uma entidade maliciosa crie assinaturas
 $\sigma'$ apenas calculando mais iterações de $f$ em blocos da assinatura
 $\sigma$. Entretanto, com a presença de $c$, e consequentemente
