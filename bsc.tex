@@ -1118,21 +1118,22 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
 \begin{figure}
     \centering
     \includegraphics{}
+    \begin{tikzpicture}
+        \node (hm) at (-1.25, -1) {$M$};
+        \node (d) at (7.25, -0.15) {$d$};
+    	\node[draw,dashed,minimum width=20em,minimum height=2.5em] (dbox) at (3.5, -1) {};
+        \node[draw, minimum width=3em, minimum height=1.75em] (d0) at (0.5, -1) {$d_0$};
+        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of d0] (d1) {$\dots$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d1] (d2) {$d_{j - 1}$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 7.5pt of d2] (d3) {$d_{j}$};
+        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of d3] (d4) {$\dots$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d4] (d5) {$d_{k - 1}$};
+        \draw[-latex] (hm) -- (dbox);
+    \end{tikzpicture}
     \caption{Caption}
     \label{fig:my_label}
 \end{figure}
-\begin{tikzpicture}
-    \node (hm) at (-1.25, -1) {$M$};
-    \node (d) at (7.25, -0.15) {$d$};
-	\node[draw,dashed,minimum width=20em,minimum height=2.5em] (dbox) at (3.5, -1) {};
-    \node[draw, minimum width=3em, minimum height=1.75em] (d0) at (0.5, -1) {$d_0$};
-    \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of d0] (d1) {$\dots$};
-    \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d1] (d2) {$d_{j - 1}$};
-    \node[draw, minimum width=3em, minimum height=1.75em, right = 7.5pt of d2] (d3) {$d_{j}$};
-    \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of d3] (d4) {$\dots$};
-    \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d4] (d5) {$d_{k - 1}$};
-    \draw[-latex] (hm) -- (dbox);
-\end{tikzpicture}
+
 
 \todo[inline]{just a few more? maybe a drawing? HORST?}
 
