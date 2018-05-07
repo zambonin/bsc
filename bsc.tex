@@ -1096,8 +1096,12 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{t-1}, \dots, x_0)
-      \stackrel{\$}{\longleftarrow} \binwds{m}$, e
+  \item[] \emph{Geração de chaves.} Defina $X = (x_{t-1}, \dots, x_0)
+      \stackrel{\$}{\longleftarrow} \binwds{m}$, e adicione $k$ para
+      obter a chave privada. Portanto, $\sk{} = (k, x_{t-1}, \dots, x_0)$.
+      Aplique $f$ em todos os elementos aleatórios, i.e. 
+      
+      como a chave privada, e
       $\pk{} = (f(x_{t-1}), \dots, f(x_0))$ como a chave pública.
 
   \item[] \emph{Geração da assinatura.}
