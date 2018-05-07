@@ -1085,7 +1085,7 @@ acordo com a mensagem desejada, a partir de uma lista de inteiros trivial.
 
 Seguindo a notação original em~\cite{Reyzin:2002:BBS:646039.678322}, defina
 um parâmetro de segurança $m$ e escolha $t, k \in \mathbb{N},
-\binom{t}{k} \geq 2^m, t \gg k$. O tamanho dos pares de chaves e das assinaturas
+\binom{t}{k} \geq 2^m, t \gg k$, e adicionalmente $t$ sendo uma potência de 2. O tamanho dos pares de chaves e das assinaturas
 são fortemente relacionados com, respectivamente, $t$ e $k$. Seja o conjunto
 sequencial $T = \{0, \dots, t - 1\}$, e a função de mão única $f : \binwds{m}
 \longrightarrow \binwds{m}$. A função $\fhash{m}$ utilizada deve apresentar também a característica de
@@ -1103,7 +1103,8 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
       $\pk{} = (k, f(x_{t-1}), \dots, f(x_0))$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu
-    resumo $d = \hash{M}$, e represente
+    resumo $d = \hash{M}$, e represente-o como uma $k$-tupla de palavras em base-$t$,
+    ou seja, $\mathbf{d} = (d_0, \dots, d_k)$. Interpretando cada
 
   \item[] \emph{Verificação da assinatura.}
 
