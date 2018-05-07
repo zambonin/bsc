@@ -1088,7 +1088,9 @@ um parâmetro de segurança $m$ e escolha $t, k \in \mathbb{N},
 \binom{t}{k} \geq 2^m, t \gg k$. O tamanho dos pares de chaves e das assinaturas
 são fortemente relacionados com, respectivamente, $t$ e $k$. Seja o conjunto
 trivial $T = \{0, \dots, t - 1\}$, e a função de mão única $f : \binwds{m}
-\longrightarrow \binwds{m}$. A função $\fhh{}$ utilizada deve 
+\longrightarrow \binwds{m}$. A função $\fhash{m}$ utilizada deve ser também
+\emph{$r$-subset-resilient}, ou seja, deve ser computacionalmente inviável
+para um atacante encontrar $r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup$
 
 \section{Esquemas baseados em árvores de Merkle}
 
