@@ -239,7 +239,7 @@ sobre uma matriz de estado $A$, onde $A_{i,j} \in
 \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível
 $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da
 forma $\mathbb{F}_{2^n}$ são análogas a operações computacionais extremamente
-baratas.}, $0 \leq i, j < 4$, a partir de uma chave $K$ de tamanho $n \in \{128, 192,
+baratas.}, $0 \leq i, j \leq 3$, a partir de uma chave $K$ de tamanho $n \in \{128, 192,
 256\}$. Consiste em aplicações sequenciais de quatro operações ordenadas
 (\textsc{SubBytes}, \textsc{ShiftRows}, \textsc{MixColumns} e
 \textsc{AddRoundKey}) sobre $A$. A quantidade destas aplicações, denominadas
@@ -281,7 +281,7 @@ $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
 recursão 
 \begin{equation}
-RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x^{j-1} \cdot RC_{j-1}, \; j > 2.
+RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x^{j-1} \cdot RC_{j-1}, \; j \geq 2.
 \end{equation}
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
 Para os elementos restantes, ou seja, $\forall i \geq \ell$,
@@ -299,7 +299,7 @@ Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
 $c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é primeiramente
-codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j < 4$.
+codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j \leq 3$.
 Note que \textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
 reversibilidade da cifra. 
 
@@ -949,7 +949,8 @@ impossível.
  	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
     \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
   \end{tikzpicture}
-  \caption{Representação gráfica das etapas de assinatura e verificação do \textsc{Wots}, para $0 \leq i < t$.}
+  \caption{Representação gráfica das etapas de assinatura e verificação do \textsc{Wots},
+    para $0 \leq i \leq t - 1$.}
   \label{fig:5}
 \end{figure}
 
@@ -1108,9 +1109,9 @@ construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
 intermediários a partir das folhas:
 \begin{equation}
   \begin{split}
-    T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k < 2^{h}, \text{ e } \\
+    T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k \leq 2^{h} - 1, \text{ e } \\
     T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
-      \; 0 \leq j < 2^{i}, \; h > i \geq 0.
+      \; 0 \leq j \leq 2^{i} - 1, \; h > i \geq 0.
   \end{split}
 \end{equation}
 Esta estrutura também pode ser utilizada para verificação conjunta da
@@ -1151,8 +1152,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         \textsc{Ots}_{\pk{}}^{2^{h} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0},
         \textsc{Ots}_{\pk{}}^{0}))$. As folhas de $T$ são preenchidas com as
         respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h, j} =
-        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j < 2^{h}$, e $T$ é construída
-        recursivamente. Finalmente, $\pk{} = T_{0,0}$.
+        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j \leq 2^{h} - 1$,
+        e $T$ é construída recursivamente. Finalmente, $\pk{} = T_{0,0}$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
       resumo $d = \hash{M}$. Escolha uma folha de índice $j$ não utilizada
@@ -1162,8 +1163,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         compará-los com a raiz da árvore, e também deve ser incluído na
         assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375},
         $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2
-        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k < h$. A assinatura final
-        leva em conta todos estes itens. Portanto, $\sigma = (j,
+        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k \leq h - 1$. A assinatura
+        final leva em conta todos estes itens. Portanto, $\sigma = (j,
         \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
 
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura
