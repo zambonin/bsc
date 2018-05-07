@@ -1073,7 +1073,7 @@ Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 
 \subsection{HORS}
 
-Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração
+Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
 considerável (i.e. metade) de $\sk{}$ é exposta no momento da assinatura no
 esquema de Lamport, enquanto cadeias de resumos em uma assinatura computada
 com Winternitz podem ser utilizadas para forjar novas assinaturas se $\sk{}$
@@ -1087,20 +1087,20 @@ os parâmetros $t, k \in \mathbb{N}, t \gg k$, e $t$ como uma potência de 2.
 O tamanho dos pares de chaves e das assinaturas são fortemente relacionados
 com, respectivamente, $t$ e $k$. O parâmetro de segurança
 $m = k \times \log_2 t$ garante que existam subconjuntos suficientes para
-todos os resumos possíveis. Seja o conjunto sequencial $T = \{0, \dots, t - 1\}$,
-e a função de mão única $f : \binwds{m} \longrightarrow \binwds{m}$.
-A função $\fhash{m}$ utilizada deve apresentar também a característica de
+todos os resumos possíveis. Seja o conjunto sequencial $T = \{0, \dots, t - 1\}$, a função de mão única $f : \binwds{m} \longrightarrow \binwds{m}$ e a função de resumo criptográfico $\fhash{m}$.
+
+A função $\hh{}$ utilizada deve apresentar também a característica de
 resiliência a subconjuntos de tamanho $r$ (\emph{$r$-subset-resilience}), ou seja, deve ser computacionalmente inviável
 para um atacante, fornecidas $r$ mensagens $(m_1, \dots, m_r)$, encontrar
-$r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup^{r}_{i = 1} \hash{m_i}$.
-A escola de $r$ não é diretamente discutida, visto que acredita-se que uma função de resumo criptográfico usual provê esta característica para valores suficientemente pequenos.
+$r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup^{r}_{i = 1} \hash{m_i}$. De outra forma, a probabilidade de um resumo para uma mensagem 
+A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma função de resumo criptográfico usual provê esta característica para valores suficientemente pequenos.
 
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} Defina $X = (x_{t - 1}, \dots, x_0)
       \stackrel{\$}{\longleftarrow} \binwds{m}$, e adicione $k$ para
       obter a chave privada. Portanto, $\sk{} = (k, x_{t - 1}, \dots, x_0)$.
-      Aplique $f$ em todos os elementos aleatórios para obter a chave pública, i.e. 
+      Aplique $f$ em todos os elementos aleatórios para obter a chave pública, i.e.
       $\pk{} = (k, f(x_{t - 1}), \dots, f(x_0))$, ou $\pk{} = (k, y_{t - 1}, \dots, y_0)$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu
