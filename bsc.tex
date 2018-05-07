@@ -1092,7 +1092,7 @@ todos os resumos possíveis. Seja o conjunto sequencial $T = \{0, \dots, t - 1\}
 A função $\hh{}$ utilizada deve apresentar também a característica de
 resiliência a subconjuntos de tamanho $r$ (\emph{$r$-subset-resilience}), ou seja, deve ser computacionalmente inviável
 para um atacante, fornecidas $r$ mensagens $(m_1, \dots, m_r)$, encontrar
-$r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup^{r}_{i = 1} \hash{m_i}$. De outra forma, a probabilidade de um resumo para uma mensagem 
+$r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup^{r}_{i = 1} \hash{m_i}$. De outra forma, a probabilidade de que $r$ assinaturas contenham valores que sejam mapeados para um resumo novo é desprezível.
 A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma função de resumo criptográfico usual provê esta característica para valores suficientemente pequenos.
 
 \begin{enumerate}
