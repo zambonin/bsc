@@ -965,7 +965,7 @@ reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o
 processo de iterações sequenciais --- utilizando apenas uma função --- do
 esquema original. Esta característica também permite uma prova de segurança
 mais simples, mas não menos poderosa, que desconsidera a necessidade da
-resistência à colisões de $f$.
+resistência à colisões de $f$ e $\hh{}$.
 
 Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem
 como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema
@@ -1052,6 +1052,8 @@ forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
 hardware de rotinas relacionadas (como o conjunto de instruções AES-NI da
 Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
+
+\subsection{Cronologia de esquemas de assinatura única}
 
 \section{Esquemas baseados em árvores de Merkle}
 
