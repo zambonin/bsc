@@ -644,7 +644,7 @@ intercalados por aplicações de $f$.
       \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
     \end{scope}
   \end{tikzpicture}
-  \caption{Descrição gráfica da construção
+  \caption{Representação gráfica da construção
       esponja~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
   \label{fig:3}
 \end{figure}
@@ -1052,10 +1052,6 @@ forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
 hardware de rotinas relacionadas (como o conjunto de instruções AES-NI da
 Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
-Note que apenas esta versão do esquema pode beneficiar-se deste método,
-em virtude dos elementos pseudoaleatórios $r$ aplicados em cada iteração.
-Do contrário, o método pode introduzir multicolisões em \textsc{Wots},
-efetivamente reduzindo sua segurança total.
 
 \section{Esquemas baseados em árvores de Merkle}
 
