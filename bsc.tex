@@ -1092,7 +1092,18 @@ sequencial $T = \{0, \dots, t - 1\}$, e a função de mão única $f : \binwds{m
 resiliência a subconjuntos de tamanho $r$ (\emph{$r$-subset-resilience}), ou seja, deve ser computacionalmente inviável
 para um atacante, fornecidas $r$ mensagens $(m_1, \dots, m_r)$, encontrar
 $r + 1$ mensagens tal que $\hash{m_{r + 1}} \subseteq \bigcup^{r}_{i = 1} \hash{m_i}$.
-Acredita-se que uma função de resumo criptográfico usual provê esta característica
+A escola de $r$ não é diretamente discutida, visto que acredita-se que uma função de resumo criptográfico usual provê esta característica para valores suficientemente pequenos.
+
+\begin{enumerate}
+
+  \item[] \emph{Geração de chaves.} Defina $\sk{} = (x_{t-1}, \dots, x_0)
+      \stackrel{\$}{\longleftarrow} \binwds{m}$ como a chave privada,
+
+  \item[] \emph{Geração da assinatura.}
+
+  \item[] \emph{Verificação da assinatura.}
+
+\end{enumerate}
 
 \section{Esquemas baseados em árvores de Merkle}
 
