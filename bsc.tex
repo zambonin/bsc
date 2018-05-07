@@ -38,6 +38,7 @@
     (\tikzlastnode.east) edge (\tikzlastnode.west)}},
   edge/.style={->},
   edgee/.style={<->},
+  tedge/.style={dashed, <-},
   level distance=45pt,
   sibling distance=25pt
 }
@@ -864,7 +865,7 @@ cada bloco da assinatura, generalizando a proposta de Lamport. Elabora-se a
 definição do esquema abaixo.
 
 Um parâmetro de segurança $m$ é necessário, como acima. O parâmetro Winternitz,
-da forma $w \in \mathbb{N}, w > 1$, também deve ser definido, que representa a
+da forma $w \in \mathbb{N}^{*}\setminus\{1\}$, também deve ser definido, que representa a
 quantidade de \emph{bits} a serem assinados simultaneamente.  A partir destes,
 calcula-se $$t_1 = \left\lceil \frac{m}{w} \right\rceil, \; t_2 = \left\lceil
 \frac{\left\lfloor \log_2 t_1 \right\rfloor + 1 + w}{w} \right\rceil \text{ e }
@@ -944,10 +945,10 @@ impossível.
 
  	\path[arrowline, postaction={decorate}] (xt1)      --      (xt1 -| fst1.west);
  	\path[arrowline, postaction={decorate}] (fst1.east |- st1)      --      (st1);
-    \path[->] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
+    \path[edge] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
  	\path[arrowline, postaction={decorate}] (st1)      --      (st1 -| fvt1.west);
  	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
-    \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
+    \path[edge] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
   \end{tikzpicture}
   \caption{Representação gráfica das etapas de assinatura e verificação do \textsc{Wots},
     para $0 \leq i \leq t - 1$.}
@@ -1111,7 +1112,7 @@ intermediários a partir das folhas:
   \begin{split}
     T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k \leq 2^{h} - 1, \text{ e } \\
     T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
-      \; 0 \leq j \leq 2^{i} - 1, \; h > i \geq 0.
+      \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
   \end{split}
 \end{equation}
 Esta estrutura também pode ser utilizada para verificação conjunta da
