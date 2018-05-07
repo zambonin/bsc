@@ -1130,7 +1130,12 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
         \draw[-latex] (hm) -- (dbox) node[midway, above = 1pt] {$\hh{}$};
         
         \node[draw, minimum width=3em, minimum height=1.75em] (x0) at (-1, -3) {$x_0$};        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x0] (x1) {$\dots$};
-        
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of x1] (x2) {$x_{i}$};
+        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x2] (x3) {$\dots$};
+        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x3] (x4) {$\dots$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of x4] (x5) {$x_{j}$};
+        \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x3] (x4) {$\dots$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of x4] (x5) {$x_{j}$};
     \end{tikzpicture}
     \caption{Caption}
     \label{fig:my_label}
