@@ -808,7 +808,7 @@ chaves, e os elementos não distribuídos devem ser destruídos. Assinar mensage
 mais longas envolve o cálculo do resumo desta, visto que do contrário, o
 tamanho do par de chaves e assinaturas torna-se extremamente proibitivo.
 
-Formalmente, tome um parâmetro de segurança $m$, geralmente considerado como o
+Formalmente, tome um parâmetro de segurança $m \in \mathbb{N}$, geralmente considerado como o
 tamanho da saída da função de resumo criptográfico escolhido. Considere as
 funções\footnote{Na prática, o esquema pode ser instanciado utilizando $\hh{}$
 no lugar de $f$.} de mão única $f : \binwds{m} \longrightarrow \binwds{m}$ e de
@@ -1083,7 +1083,9 @@ busca resolver este problema através da substituição de $f$ por uma computaç
 baseada na publicação de um subconjunto como a assinatura, escolhido a partir
 da mensagem desejada, a partir de uma lista de inteiros trivial.
 
-Seguindo a notação original em~\cite{Reyzin:2002:BBS:646039.678322},
+Seguindo a notação original em~\cite{Reyzin:2002:BBS:646039.678322}, defina
+um parâmetro de segurança $m$ e escolha $t, k \in \mathbb{N},
+\binom{t}{k} \geq 2^m, t \gg k$.
 
 \section{Esquemas baseados em árvores de Merkle}
 
