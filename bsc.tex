@@ -1138,17 +1138,17 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
         \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of x4] (x5) {$x_{l}$};
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x5] (x6) {$\dots$};
         \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of x6] (x7) {$x_{t - 1}$};
-        \draw[-latex] (d0) -- (x5);
-        \draw[-latex] (d2) -- (x5);
-        \draw[-latex] (d5) -- (x0);
-        \draw[-latex] (d3) -- (x2);
+        \draw[-latex, dash dot] (d0) -- (x5);
+        \draw[-latex, dash dot] (d2) -- (x5);
+        \draw[-latex, dash dot] (d5) -- (x0);
+        \draw[-latex, dash dot] (d3) -- (x2);
 
         \node (sig) at (7.25, -4.7) {$\sigma$}; 
     	\node[draw,dashed,minimum width=20em,minimum height=2.5em] (sigbox) at (3.5, -5.5) {};
         \node[draw, minimum width=3em, minimum height=1.75em] (s0) at (0.5, -5.5) {$\sigma_0$};
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of s0] (s1) {$\dots$};
         \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of s1] (s2) {$\sigma_{i - 1}$};
-        \node[draw, minimum width=3em, minimum height=1.75em, right = 7.5pt of s2] (s3) {$d_{i}$};
+        \node[draw, minimum width=3em, minimum height=1.75em, right = 7.5pt of s2] (s3) {$\sigma_{i}$};
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of s3] (s4) {$\dots$};
         \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of s4] (s5) {$\sigma_{k - 1}$};
         \draw[-latex] (x0) -- (s0);
@@ -1156,11 +1156,11 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
         \draw[-latex] (x5) -- (s3);
         \draw[-latex] (x5) -- (s5);
     \end{tikzpicture}
-    \caption{Representação gráfica do mapeamento de valores do resumo $d$ para valores de $\sk{}$, resultando na criação da assinatura $\sigma$, para $0 \leq i \leq k - 1, \; 0 \leq j, l \leq t - 1$, no HORS.}
+    \caption{Representação gráfica da criação de uma assinatura $\sigma$ no HORS, para $0 \leq i \leq k - 1, \; 0 \leq j, l \leq t - 1$.}
     \label{fig:7}
 \end{figure}
 
-É possível visualizar este processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$.
+É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$.
 \todo[inline]{just a few more? HORST?}
 
 \section{Esquemas baseados em árvores de Merkle}
