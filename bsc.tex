@@ -1086,8 +1086,9 @@ acordo com a mensagem desejada, a partir de uma lista de inteiros trivial.
 De acordo com a definição de~\cite{Reyzin:2002:BBS:646039.678322}, tome
 os parâmetros $t, k \in \mathbb{N}, t \gg k$, e $t$ como uma potência de 2.
 O tamanho dos pares de chaves e das assinaturas são fortemente relacionados
-com, respectivamente, $t$ e $k$. O parâmetro de segurança $m$ é obtido a partir
-de $m = k \times \log_2 t$. Seja o conjunto sequencial $T = \{0, \dots, t - 1\}$,
+com, respectivamente, $t$ e $k$. O parâmetro de segurança
+$m = k \times \log_2 t$ garante que existam subconjuntos suficientes para
+todos os resumos possíveis. Seja o conjunto sequencial $T = \{0, \dots, t - 1\}$,
 e a função de mão única $f : \binwds{m} \longrightarrow \binwds{m}$.
 A função $\fhash{m}$ utilizada deve apresentar também a característica de
 resiliência a subconjuntos de tamanho $r$ (\emph{$r$-subset-resilience}), ou seja, deve ser computacionalmente inviável
