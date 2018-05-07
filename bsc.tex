@@ -1106,11 +1106,12 @@ A escola de $r$ não é diretamente discutida, visto que acredita-se que uma fun
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu
     resumo $d = \hash{M}$, e represente-o como uma $k$-tupla de palavras em base-$t$,
-    ou seja, $\mathbf{d} = (d_{k-1}, \dots, d_0)$. A assinatura é composta dos elementos
+    ou seja, $\mathbf{d} = (d_{k - 1}, \dots, d_0)$. A assinatura é composta dos elementos
     de $\sk{}$ escolhidos pela representação inteira dos elementos de $\mathbf{d}$,
     ou seja, $\sigma = (x_{d_{k - 1}}, \dots, x_{d_{0}})$.
 
-  \item[] \emph{Verificação da assinatura.}
+  \item[] \emph{Verificação da assinatura.} Recalcule $\mathbf{d}$ a partir da mensagem $M$,
+    e assegure a corretude da assinatura para cada bloco: ${\pk{}}_{d_{i}} = f(\sigma_{i}), 0 \leq i \leq k - 1$.
 
 \end{enumerate}
 
