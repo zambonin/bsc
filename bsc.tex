@@ -56,8 +56,6 @@
 
 \tableofcontents
 
-\listoffigures
-
 \chapter{Introdução}
 
 A aplicação de protocolos criptográficos é essencial no contexto da validação e
@@ -647,8 +645,8 @@ intercalados por aplicações de $f$.
       \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
     \end{scope}
   \end{tikzpicture}
-  \caption{Representação gráfica da construção
-      esponja~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
+  \caption{Construção esponja, adaptado
+    de~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
   \label{fig:3}
 \end{figure}
 
@@ -1076,7 +1074,7 @@ Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 \subsection{HORS}
 
 Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
-considerável (i.e. metade) de $\sk{}$ é exposta no momento da assinatura no
+considerável de $\sk{}$ é exposta no momento da assinatura, e.g. metade no
 esquema de Lamport, enquanto cadeias de resumos em uma assinatura computada
 com Winternitz podem ser utilizadas para forjar novas assinaturas se $\sk{}$
 é mantida. Portanto, é desejável que a quantidade de dados expostos por uma
@@ -1309,7 +1307,7 @@ Note que no passo de geração da assinatura, um índice da folha tem de ser esc
 % assumptions.
 
 
-\todo[inline]{comment about statefulness, some random notes about s ecurity,
+\todo[inline]{comment about statefulness, some random notes about security,
 traversal algorithms etc.}
 
 \subsection{XMSS -- \emph{eXtended Merkle Signature Scheme}}
@@ -1321,6 +1319,7 @@ that we optimize these}
 
 \subsection{SPHINCS}
 
+\todo[inline]{talk about horst, list lots of parameters, multitree drawings}
 \todo[inline]{comment about modifications for sphincs+ but it's too much}
 
 \chapter{Otimização do esquema Winternitz}
