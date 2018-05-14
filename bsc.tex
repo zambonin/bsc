@@ -1073,8 +1073,6 @@ Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 
 \subsection{HORS}
 
-\todo[inline]{comentario legal sobre como no lamport escolhe-se entre 2m valores, no winternitz entre 2 to the w - 1 x t, e no hors k valores entre t, ai depois existem iteraçoes de uma f que é geralmente nao inversivel}
-
 Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
 considerável de elementos relacionados diretamente com $\sk{}$, habilitando
 a forja de assinaturas caso esta seja mantida. No caso de Lamport, metade
@@ -1083,7 +1081,9 @@ cadeias de resumos são computadas sobre todos os elementos de $sk{}$. Portanto,
 é desejável que esta exposição seja reduzida. Para tal, a ideia de esquemas de
 ``poucas assinaturas digitais'' (\emph{few-time signature schemes}), introduzida
 principalmente por~\cite{Perrig:2001:BOS:501983.501988} com o esquema \emph{Bins
-and Balls}, uma aplicação do problema clássico em probabilidade.
+and Balls}, uma aplicação do problema homônimo em probabilidade. Este trabalho
+é subsequentemente otimizado por~\cite{Reyzin:2002:BBS:646039.678322} na forma do
+esquema HORS (\emph{hash to obtain random subset}). Neste caso, 
 
 Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
 considerável de $\sk{}$ é exposta no momento da assinatura, e.g. metade no
