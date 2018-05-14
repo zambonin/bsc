@@ -1083,16 +1083,12 @@ cadeias de resumos são computadas sobre todos os elementos de $sk{}$. Portanto,
 principalmente por~\cite{Perrig:2001:BOS:501983.501988} com o esquema \emph{Bins
 and Balls}, uma aplicação do problema homônimo em probabilidade. Este trabalho
 é subsequentemente otimizado por~\cite{Reyzin:2002:BBS:646039.678322} na forma do
-esquema HORS (\emph{hash to obtain random subset}). Neste caso, 
+esquema HORS (\emph{hash to obtain random subset}). Neste caso, a função $f$ é
+modificada
 
-Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
-considerável de $\sk{}$ é exposta no momento da assinatura, e.g. metade no
-esquema de Lamport, enquanto cadeias de resumos em uma assinatura computada
-com Winternitz podem ser utilizadas para forjar novas assinaturas se $\sk{}$
-é mantida. Portanto, é desejável que a quantidade de dados expostos por uma
-assinatura seja reduzida. O esquema HORS (\emph{Hash to Obtain Random Subset})
-busca resolver este problema através da substituição de $f$ por um algoritmo distinto. Neste caso, o conteúdo da mensagem controla a seleção de elementos
-diferentes em uma lista de inteiros trivial, construindo subconjuntos variados.
+o conteúdo da
+mensagem controla a seleção de elementos em uma lista de inteiros trivial,
+construindo subconjuntos variados.
 
 De acordo com a definição de~\cite{Reyzin:2002:BBS:646039.678322}, tome
 os parâmetros $t, k \in \mathbb{N}, t \gg k$, e $t$ como uma potência de 2.
