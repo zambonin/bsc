@@ -1079,7 +1079,10 @@ Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
 considerável de elementos relacionados diretamente com $\sk{}$, habilitando
 a forja de assinaturas caso esta seja mantida. No caso de Lamport, metade
 dos valores são diretamente escolhidos como a assinatura, e em Winternitz,
-cadeias de resum
+cadeias de resumos são computadas sobre todos os elementos de $sk{}$. Portanto,
+é desejável que esta exposição seja reduzida. Para tal, a ideia de esquemas de
+``poucas assinaturas digitais'' (\emph{few-time signature schemes}), introduzida
+principalmente por~\cite{Perrig:2001:BOS:501983.501988} com o esquema 
 
 Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
 considerável de $\sk{}$ é exposta no momento da assinatura, e.g. metade no
