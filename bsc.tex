@@ -1075,6 +1075,12 @@ Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 
 \todo[inline]{comentario legal sobre como no lamport escolhe-se entre 2m valores, no winternitz entre 2 to the w - 1 x t, e no hors k valores entre t, ai depois existem iteraçoes de uma f que é geralmente nao inversivel}
 
+Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
+considerável de elementos relacionados diretamente com $\sk{}$, habilitando
+a forja de assinaturas caso esta seja mantida. No caso de Lamport, metade
+dos valores são diretamente escolhidos como a assinatura, e em Winternitz,
+cadeias de resum
+
 Todos os esquemas discutidos até o momento sofrem do mesmo problema: uma fração 
 considerável de $\sk{}$ é exposta no momento da assinatura, e.g. metade no
 esquema de Lamport, enquanto cadeias de resumos em uma assinatura computada
