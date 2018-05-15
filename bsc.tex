@@ -1305,7 +1305,9 @@ Note que uma árvore de altura razoável para utilização em aplicações prát
 
 Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a restrição implícita de ser resistente à colisões, notoriamente o requisito de segurança mais explorado no contexto de criptoanálise aplicada sobre funções de resumo criptográfico (e.g. colisões encontradas em várias funções baseadas na estrutura Merkle-D\aa{}mgard). Assim, é razoável construir esquemas com menos requisitos, tornando-os naturalmente mais seguros.
 
-Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste da adição de máscaras de \emph{bits} aleatórias na construção de cada nível da árvore, e adi
+Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas, onde o resumo da concatenação dos elementos de cada chave pública não é mais calculado. De forma diferenciada, estes elementos são reorganizados em uma árvore possivelmente desbalanceada. Adicionalmente, máscaras de \emph{bits} aleatórias são 
+
+da adição de máscaras de \emph{bits} aleatórias na construção de cada nível da árvore, e adi
 
 \todo[inline]{second pre-image resistance \\
 finish talking about how collision resistance can be ignored, alluding to xmss}
