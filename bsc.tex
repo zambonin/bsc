@@ -1305,11 +1305,11 @@ Note que uma árvore de altura razoável para utilização em aplicações prát
 
 Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a restrição implícita de ser resistente à colisões, notoriamente o requisito de segurança mais explorado no contexto de criptoanálise aplicada sobre funções de resumo criptográfico (e.g. colisões encontradas em várias funções baseadas na estrutura Merkle-D\aa{}mgard). Assim, é razoável construir esquemas com menos requisitos, tornando-os naturalmente mais seguros.
 
-Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
+Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de SPR-MSS, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
 
 \subsection{XMSS -- \emph{eXtended Merkle Signature Scheme}}
 
-A redução dos requisitos de segurança para resistência à segunda pré-imagem de funções de resumo criptográfico, bem como a presença do sigilo encaminhado e gerenciamento de estado, são características 
+A redução dos requisitos de segurança para resistência à segunda pré-imagem de funções de resumo criptográfico, bem como a presença do sigilo encaminhado e gerenciamento de estado, são as principais características do esquema XMSS, apresentado em~\cite{Buchmann:2011:XPF:2184003.2184011} como uma otimização do SPR-MSS
 
 para um esquema baseado em árvores de Merkle, além da presença do sigilo encaminhado e do gerenciamento de estado
 
