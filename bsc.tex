@@ -1318,11 +1318,11 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 \mathcal{K}_m\}$, um gerador de números pseudoaleatórios \textsc{Gen} que apresenta sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$, e o esquema de assinatura única \textsc{Ots} definido como \textsc{Wots+}.
 
 Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
-
 \begin{equation}
     T_{i, j} = h_k(r_i \oplus (T_{i + 1, 2j} \concat T_{i + 1, 2j + 1})),
       \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
 \end{equation}
+O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}.
 
 \todo[inline]{describe the scheme with figures, talk about rfc variants, allude
 that we optimize these}
