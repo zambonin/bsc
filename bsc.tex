@@ -1313,7 +1313,7 @@ A redução dos requisitos de segurança para resistência à segunda pré-image
 
 A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
 
-Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada. 
+Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada. Suas folhas são subs
 
 Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, a altura da árvore de Merkle $h \in \mathbb{N}$, uma família de funções de resumo $\hh{}_k : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
