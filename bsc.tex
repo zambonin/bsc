@@ -1322,7 +1322,7 @@ Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da 
     T_{i, j} = h_k(r_i \oplus (T_{i + 1, 2j} \concat T_{i + 1, 2j + 1})),
       \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
 \end{equation}
-O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}.
+O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à árvore anterior, mas com máscaras de bits iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada de forma que 
 
 \todo[inline]{describe the scheme with figures, talk about rfc variants, allude
 that we optimize these}
