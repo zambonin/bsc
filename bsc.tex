@@ -1322,7 +1322,7 @@ Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da 
     T_{i, j} = h_k(r_i \oplus (T_{i + 1, 2j} \concat T_{i + 1, 2j + 1})),
       \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
 \end{equation}
-O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à árvore anterior, mas com máscaras de bits iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada de forma que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a árvore-$l$ tem altura total de $\lceil \log_{2} t \rceil$.
+O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à árvore anterior, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a árvore-$l$ tem altura total de $\lceil \log_{2} t \rceil$.
 
 \begin{enumerate}
 
@@ -1334,6 +1334,8 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, e utilize esta chave para reconstruir a árvore-$l$ com as máscaras $\mathbf{r}$, obtendo a raiz desta. Junto a \textsc{Auth}, compute o caminho de nodos $(a_0, \dots, a_h)$. Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
 
 \end{enumerate}
+
+
 
 \todo[inline]{describe the scheme with figures, talk about rfc variants, allude that we optimize these}
 
