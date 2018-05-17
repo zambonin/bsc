@@ -988,7 +988,7 @@ resistência à colisões de $f$ e $\hh{}$.
 Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem
 como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema
 original. A família de funções que o \textsc{Wots+} utiliza é definida por
-$\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
+$\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e
 $\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família,
 e de uma tupla de palavras pseudoaleatórias $r = (r_0, \dots, r_{2^w - 1})
@@ -1313,8 +1313,8 @@ A redução dos requisitos de segurança para resistência à segunda pré-image
 
 A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
 
-Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_k : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
-\mathcal{K}_m\}$, a altura $h$ para uma árvore de Merkle $T$, uma família de funções de resumo $\hh{}_k : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
+Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
+\mathcal{K}_m\}$, a altura $h$ para uma árvore de Merkle $T$, uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, um gerador de números pseudoaleatórios \textsc{Gen} que apresenta sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$, e o esquema de assinatura única \textsc{Ots} definido como \textsc{Wots+}.
 
 Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
@@ -1326,7 +1326,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_k$
+  \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{h + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, utilize
   
   \item[] \emph{Geração da assinatura.}
   
