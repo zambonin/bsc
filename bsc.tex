@@ -1331,7 +1331,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
   não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(d)$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
   
-  \item[] \emph{Verificação da assinatura.}
+  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, obtendo $\textsc{Ots}_{\pk{}}^{j}$. Com esta chave, reconstrua a árvore-$l$ com as máscaras $\mathbb{r}$
   
 \end{enumerate}
 
