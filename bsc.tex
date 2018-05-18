@@ -1326,12 +1326,15 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
     ]
     \Tree
-    [.{}
+    [.\node[label=below:{$\pk{}$}]{};
         [.{}
-            [.{} {} {} ]
-            [.{} \node[dashed,label=below:{$\textsc{Auth}_0$}]{}; \node[label=below:{$i = 3$}]{}; ]
+            [.\node[dashed,label=left:{$\textsc{Auth}_1$}]{}; {} {} ]
+            [.{} 
+                \node[dashed,label=below:{$\textsc{Auth}_0$}]{};
+                \node[label=below:{$i = 3$}]{};
+            ]
         ]
-        [.{} 
+        [.\node[dashed,label=right:{$\textsc{Auth}_2$}]{}; 
             [.{} {} {} ]
             [.{} {} {} ]
         ]
