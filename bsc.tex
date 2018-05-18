@@ -1317,28 +1317,33 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
 
 \begin{figure}
     \centering
-\begin{tikzpicture}[every tree node/.style={draw,circle,minimum size=0.75cm},
-   level distance=1cm,sibling distance=2cm,
-   edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}]
-\Tree
-[.{}
-    \edge node[auto=right] {$[a]$};
-    [.b 
-       \edge node[midway,left] {$[b]$};
-       [.{} {} {} ]
-       \edge node[midway,right] {$[b]$};
-       [.{} {} {} ]
-        ]
-    \edge node[auto=left] {$[a]$};
-    [.{} 
-        \edge node[midway,left] {$[c]$};
-        [.{} {} {} ]
-        \edge node[midway,right] {$[c]$};
-        [.{} {} {} ]
+    \begin{tikzpicture}[
+        every tree node/.style={draw,circle,minimum size=0.75cm},
+        level distance=1cm,
+        level 1/.style={sibling distance=2cm},
+        level 2/.style={sibling distance=1.5cm}, 
+        level 3/.style={sibling distance=1cm}, 
+        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}
     ]
-]
-\end{tikzpicture}
-    \caption{Caption}
+    \Tree
+    [.{}
+        \edge node[auto=right] {$[a]$};
+        [.{}
+           \edge node[midway,left] {$[b]$};
+           [.{} {} {} ]
+           \edge node[midway,right] {$[b]$};
+           [.{} {} {} ]
+            ]
+        \edge node[auto=left] {$[a]$};
+        [.{} 
+            \edge node[midway,left] {$[c]$};
+            [.{} {} {} ]
+            \edge node[midway,right] {$[c]$};
+            [.{} {} {} ]
+        ]
+    ]
+    \end{tikzpicture}
+    \caption{Caminho de autenticação para um nodo de índice $i = 3$.}
     \label{fig:my_label}
 \end{figure}
 
