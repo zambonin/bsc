@@ -1315,6 +1315,8 @@ Note que no passo de geração da assinatura, um índice da folha tem de ser esc
 
 Este conceito é chamado de gerenciamento de estado, e introduz vários obstáculos para o funcionamento do esquema~\cite{McGrew2016}, como a necessidade de salvar frequentemente informações sobre o estado em armazenamento não volátil. Ademais, este é geralmente codificado em $\sk{}$, e portanto, duas mensagens não podem ser assinadas com a mesma chave privada, criando problemas de sincronização de chaves entre múltiplos dispositivos. Esta restrição é removida em~\cite[6.4.16]{Goldreich:2004:FCV:975541}, onde o esquema deve escolher um nodo aleatoriamente, assim introduzindo a probabilidade de que um nodo possa ser escolhido duas vezes, relativa à quantidade de folhas. Esquemas que lidarão com esta característica serão discutidos futuramente.
 
+Também, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T 
+
 \begin{figure}
     \centering
     \begin{tikzpicture}[
