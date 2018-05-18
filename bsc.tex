@@ -1315,6 +1315,33 @@ Note que no passo de geração da assinatura, um índice da folha tem de ser esc
 
 Este conceito é chamado de gerenciamento de estado, e introduz vários obstáculos para o funcionamento do esquema~\cite{McGrew2016}, como a necessidade de salvar frequentemente informações sobre o estado em armazenamento não volátil. Ademais, este é geralmente codificado em $\pk{}$, e portanto, duas mensagens não podem ser assinadas com a mesma chave privada, criando problemas de sincronização de chaves entre múltiplos dispositivos. Esta restrição é removida em~\cite[6.4.16]{Goldreich:2004:FCV:975541}, onde o esquema deve escolher um nodo aleatoriamente, assim introduzindo a probabilidade de que um nodo possa ser escolhido duas vezes, relativa à quantidade de folhas. Esquemas que lidarão com esta característica serão discutidos futuramente.
 
+\begin{figure}
+    \centering
+    \tikzset{every tree node/.style={align=center,anchor=north,draw}}
+    \Tree
+      [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
+        [.\node{$T_{1, 0}$ \\ $\hash{T_{2, 0} \concat T_{2, 1}}$};
+          [.{$T_{2, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
+            \edge[tedge] node {}; $\mathcal{D}_{0}$
+          ]
+          [.{$T_{2, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
+            \edge[tedge] node {}; $\mathcal{D}_{1}$
+          ]
+        ]
+        [.\node{$T_{1, 1}$ \\ $\hash{T_{2, 2} \concat T_{2, 3}}$};
+          [.{$T_{2, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
+            \edge[tedge] node {}; $\mathcal{D}_{2}$
+          ]
+          [.{$T_{2, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
+            \edge[tedge] node {}; $\mathcal{D}_{3}$
+          ]
+        ]
+      ]
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
 Outrossim, nota-se que o tamanho da chave pública é extremamente proibitivo e escala com o número de folhas da árvore. Para resolver esta limitação, é possível adicionar ao esquema um novo parâmetro, na forma de um gerador de números pseudoaleatórios determinístico, cuja semente será a nova chave privada~\cite[6.4.2.3]{Goldreich:2004:FCV:975541}. Adicionalmente, este recurso implica que a árvore não necessita ser construída totalmente, posto que a assinatura de novas mensagens implica na criação dinâmica de pares de chaves para estas instâncias de esquemas de assinatura única. Caso este gerador apresente como característica o sigilo encaminhado (\emph{forward secrecy}), onde valores gerados no passado não são ameaçados caso a função seja comprometida, o esquema também será caracterizado como tal~\cite{Bernstein:2008:PQC:1522375}: chaves privadas comprometidas não implicarão na falsificação de mensagens assinadas com chaves antigas.
 
 Note que uma árvore de altura razoável para utilização em aplicações práticas tem seu armazenamento total impossibilitado na maioria absoluta dos dispositivos alvo, em vista da quantidade excessiva de nodos. A fim de reduzir este ônus, estruturas virtuais são empregadas, onde apenas apenas partes relevantes da árvore de Merkle em uso estão acomodadas em memória. Entretanto, é necessário que quaisquer nodos possam ser autenticados de maneira modesta, levando em conta restrições de processamento e armazenamento. Nesta fronte, um problema de travessia entre os nodos da árvore de Merkle deve ser resolvido, e a utilização de algoritmos otimizados~\cite{Buchmann:2008:MTT:1473109.1473114} é crucial na execução de alguns esquemas, visto que a extensão das árvores de assinaturas é um fator desejável na criação de novos esquemas.
