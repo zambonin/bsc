@@ -1323,8 +1323,8 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         level 1/.style={sibling distance=2cm},
         level 2/.style={sibling distance=1.5cm}, 
         level 3/.style={sibling distance=1cm}, 
-        edge from parent/.style={
-            draw, edge from parent path={\tikzparentnode) -- (\tikzchildnode)},
+        edge from parent path={
+            draw, edge from parent pth(\tikzparentnode) -- (\tikzchildnode),
             legend/.style={label=below:{\strut#1}}
         },
     ]
