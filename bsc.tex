@@ -1327,11 +1327,12 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
     ]
     \Tree
     [.\node[label=below:{$\pk{}$}]{};
-        [. edge[thick]; \node[] {};
+        [.{}
+                \edge[<-, thick]; \node[label=below:{$i = 3$},thick]{};
             [.\node[dashed,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
-            [.{aaaa}
+            [.{}
                 \node[dashed,label=below:{$\textsc{Auth}_0$}]{};
-                \edge[thick]; \node[label=below:{$i = 3$},thick]{};
+                \edge[<-, thick]; \node[label=below:{$i = 3$},thick]{};
             ]
         ]
         [.\node[dashed,label=above:{$\textsc{Auth}_2$}]{}; 
