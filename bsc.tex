@@ -1091,16 +1091,16 @@ Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
 
 Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
 considerável de elementos relacionados diretamente com $\sk{}$, habilitando
-a forja de assinaturas caso esta seja mantida. No caso de Lamport, metade
+a falsificação de assinaturas caso esta seja mantida. No caso de Lamport, metade
 dos valores são diretamente escolhidos como a assinatura, e em Winternitz,
-cadeias de resumos são computadas sobre todos os elementos de $sk{}$. Portanto,
+cadeias de resumos são diretamente computadas sobre todos os elementos de $\sk{}$. Portanto,
 é desejável que esta exposição seja reduzida.
 
 Para tal, a ideia de esquemas de ``poucas assinaturas'' (\emph{few-time signature
-schemes}), introduzida originalmente por~\cite{Perrig:2001:BOS:501983.501988}
+schemes}) foi introduzida originalmente em~\cite{Perrig:2001:BOS:501983.501988}
 com o esquema \emph{Bins and Balls}, uma aplicação do problema homônimo em
 probabilidade. Este trabalho é subsequentemente generalizado e otimizado
-por~\cite{Reyzin:2002:BBS:646039.678322} na forma do esquema HORS
+em~\cite{Reyzin:2002:BBS:646039.678322} na forma do esquema HORS
 (\emph{hash to obtain random subset}), onde o conteúdo da mensagem controla a
 seleção de elementos em uma lista de inteiros trivial, construindo subconjuntos
 distintos, distribuídos como assinaturas.
@@ -1389,6 +1389,8 @@ was already proposed in LM-OTS}
 \section{Resultados}
 
 \chapter{Conclusão}
+
+\section{Trabalhos futuros}
 
 \bibliographystyle{alpha}
 \bibliography{ref}
