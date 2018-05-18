@@ -1317,26 +1317,27 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
 
 \begin{figure}
     \centering
-\begin{tikzpicture}[every tree node/.style={draw,circle},
-   level distance=1.25cm,sibling distance=1cm,
+\begin{tikzpicture}[every tree node/.style={draw,circle,minimum size=0.75cm},
+   level distance=1cm,sibling distance=2cm,
    edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}]
 \Tree
-[.a
+[.{}
     \edge node[auto=right] {$[a]$};
     [.b 
        \edge node[midway,left] {$[b]$};
-       [.1 ]
+       [.{} {} {} ]
        \edge node[midway,right] {$[b]$};
-       [.2 ]
+       [.{} {} {} ]
         ]
     \edge node[auto=left] {$[a]$};
-    [.c 
+    [.{} 
         \edge node[midway,left] {$[c]$};
-        [.3 ]
+        [.{} {} {} ]
         \edge node[midway,right] {$[c]$};
-        [.4 ]
-        ]
+        [.{} {} {} ]
+    ]
 ]
+\end{tikzpicture}
     \caption{Caption}
     \label{fig:my_label}
 \end{figure}
