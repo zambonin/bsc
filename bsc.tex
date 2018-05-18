@@ -979,8 +979,8 @@ com~\cite{LafrancePhilip2017}, é necessário considerar várias situações em 
 entidades maliciosas podem atacar instâncias destes esquemas. Nomeadamente, para
 um ataque que consiste em ameaçar múltiplos usuários, cada qual com seu par de
 chaves, a possibilidade de sucesso aumenta de acordo com o subconjunto de
-instâncias almejado. Um esquema que combate especificamente este problema pode
-ser consultado em~\cite{Hulsing:2016:MMA:3081852.3081871}.
+instâncias almejado. Um esquema que combate especificamente este problema,
+chamado de \textsc{Wots-t}, pode ser consultado em~\cite{Hulsing:2016:MMA:3081852.3081871}.
 
 Ademais, encontra-se em processo de padronização pela IETF (\emph{Internet Engineering Task
 Force}) outro esquema que combate este tipo de ataque, chamado \textsc{Wots-lm}, publicado
@@ -1315,8 +1315,6 @@ Note que no passo de geração da assinatura, um índice da folha tem de ser esc
 
 Este conceito é chamado de gerenciamento de estado, e introduz vários obstáculos para o funcionamento do esquema~\cite{McGrew2016}, como a necessidade de salvar frequentemente informações sobre o estado em armazenamento não volátil. Ademais, este é geralmente codificado em $\sk{}$, e portanto, duas mensagens não podem ser assinadas com a mesma chave privada, criando problemas de sincronização de chaves entre múltiplos dispositivos. Esta restrição é removida em~\cite[6.4.16]{Goldreich:2004:FCV:975541}, onde o esquema deve escolher um nodo aleatoriamente, assim introduzindo a probabilidade de que um nodo possa ser escolhido duas vezes, relativa à quantidade de folhas. Esquemas que lidarão com esta característica serão discutidos futuramente.
 
-Também, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T 
-
 \begin{figure}
     \centering
     \begin{tikzpicture}[
@@ -1398,6 +1396,8 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 \end{enumerate}
 
 O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \textsc{Wots+} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema. 
+
+Também, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}
 
 \subsection{XMSS multiárvores}
 
