@@ -1183,7 +1183,7 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
     \label{fig:7}
 \end{figure}
 
-É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Uma otimização será discutida futuramente com o intuito de resolver esta situação, piorando relativamente o tempo de execução do esquema.
+É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo HORST (\emph{HORS with trees}) é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na seção a seguir, a fim de reduzir substancialmente o tamanho de $\pk{}$.
 
 \section{Esquemas baseados em árvores de Merkle}
 
