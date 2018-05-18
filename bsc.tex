@@ -1286,7 +1286,7 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         compará-los com a raiz da árvore, e também deve ser incluído na
         assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375},
         $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2
-        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k \leq h - 1$. A assinatura
+        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k \leq h - 1$, como na Figura~\ref{fig:9}. A assinatura
         final leva em conta todos estes itens. Portanto, $\sigma = (j,
         \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
 
@@ -1326,15 +1326,15 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
     ]
     \Tree
-    [.\node[label=below:{$\pk{}$}]{};
+    [.\node[name=ah0,label=below:{$\pk{}$}]{};
         [.\node[name=ah1]{};
-            [.\node[dashed,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
+            [.\node[dashdotted,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
             [.\node[name=ah2]{};
-                \node[dashed,label=below:{$\textsc{Auth}_0$}]{};
+                \node[dashdotted,label=below:{$\textsc{Auth}_0$}]{};
                 \node[name=orig,label=below:{$i = 3$},thick]{};
             ]
         ]
-        [.\node[dashed,label=above:{$\textsc{Auth}_2$}]{}; 
+        [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{}; 
             [.{} {} {} ]
             [.{} {} {} ]
         ]
@@ -1344,7 +1344,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
     \draw[thick,->] (ah1) -- (ah0);
     \end{tikzpicture}
     \caption{Caminho de autenticação para um nodo de índice $i = 3$.}
-    \label{fig:my_label}
+    \label{fig:9}
 \end{figure}
 
 Outrossim, nota-se que o tamanho da chave pública é extremamente proibitivo e escala com o número de folhas da árvore. Para resolver esta limitação, é possível adicionar ao esquema um novo parâmetro, na forma de um gerador de números pseudoaleatórios determinístico, cuja semente será a nova chave privada~\cite[6.4.2.3]{Goldreich:2004:FCV:975541}. Adicionalmente, este recurso implica que a árvore não necessita ser construída totalmente, posto que a assinatura de novas mensagens implica na criação dinâmica de pares de chaves para estas instâncias de esquemas de assinatura única. Caso este gerador apresente como característica o sigilo encaminhado (\emph{forward secrecy}), onde valores gerados no passado não são ameaçados caso a função seja comprometida, o esquema também será caracterizado como tal~\cite{Bernstein:2008:PQC:1522375}: chaves privadas comprometidas não implicarão na falsificação de mensagens assinadas com chaves antigas.
