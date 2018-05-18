@@ -1324,13 +1324,12 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         level 2/.style={sibling distance=1.25cm}, 
         level 3/.style={sibling distance=1cm}, 
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-        legend/.style={label=below:{\strut#1}},
     ]
     \Tree
     [.{}
         [.{}
             [.{} {} {} ]
-            [.{} {} \node[label=below:{$i = 3$}]{}; ]
+            [.{} \node[dashed,label=below:{$\textsc{Auth}_0$}]{}; \node[label=below:{$i = 3$}]{}; ]
         ]
         [.{} 
             [.{} {} {} ]
