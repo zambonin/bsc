@@ -1327,12 +1327,11 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
     ]
     \Tree
     [.\node[label=below:{$\pk{}$}]{};
-        [.{}
-                \edge[<-, thick]; \node[label=below:{$i = 3$},thick]{};
+        [.\node[name=ah0]{};
             [.\node[dashed,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
-            [.{}
+            [.\node[name=ah2]{};
                 \node[dashed,label=below:{$\textsc{Auth}_0$}]{};
-                \edge[<-, thick]; \node[label=below:{$i = 3$},thick]{};
+                \edge[<-, thick]; \node[name=orig,label=below:{$i = 3$},thick]{};
             ]
         ]
         [.\node[dashed,label=above:{$\textsc{Auth}_2$}]{}; 
@@ -1340,6 +1339,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
             [.{} {} {} ]
         ]
     ]
+    \draw (orig) -- (ah2);
     \end{tikzpicture}
     \caption{Caminho de autenticação para um nodo de índice $i = 3$.}
     \label{fig:my_label}
