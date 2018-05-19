@@ -1451,10 +1451,10 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \textbf{e} $\tau < H - 1$}{
     $\textsc{Keep}_{\tau} \longleftarrow \textsc{Auth}_{\tau}$\;
   }
-  \If{$\tau = 0$}{
+  \uIf{$\tau = 0$}{
     $\textsc{Auth}_0 \longleftarrow \textsc{Leafcalc}(s)$\;
   }
-  \uElseIf{$\tau > 0$} {
+  \ElseIf{$\tau > 0$}{
     $\textsc{Auth}_{\tau} \longleftarrow
         \hash{\textsc{Auth}_{\tau - 1} \concat \textsc{Keep}_{\tau - 1}}$\;
     $\textsc{Keep}.remove(\tau - 1)$
@@ -1462,7 +1462,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
         \uIf{$h < H - K$}{
             $\textsc{Auth}_{h} \longleftarrow \textsc{Treehash}_{h}.pop()$\;
         }
-        \uElseIf{$h \geq H - K$}{
+        \Else{
             $\textsc{Auth}_{h} \longleftarrow \textsc{Retain}_{h}.pop()$\;
         }
     }
