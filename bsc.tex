@@ -11,11 +11,6 @@
 \usepackage{algpseudocode, algorithm, algorithmicx}
 \usepackage{todonotes}
 
-\algnewcommand\algorithmicinput{\textbf{Entrada:}}
-\algnewcommand\algorithmicoutput{\textbf{Saída:}}
-\algnewcommand\Input{\item[\algorithmicinput]}
-\algnewcommand\Output{\item[\algorithmicoutput]}
-
 \usetikzlibrary{matrix, arrows, decorations.markings}
 
 \newcommand{\hh}{\mathcal{H}}
@@ -26,6 +21,11 @@
 \newcommand{\binwds}[1]{\{0, 1\}^{#1}}
 \newcommand{\length}[1]{\vert #1 \vert}
 \newcommand{\fhash}[1]{\hh{} : \binwds{*} \longrightarrow \binwds{#1}}
+
+\algnewcommand\algorithmicinput{\textbf{Entrada:}}
+\algnewcommand\algorithmicoutput{\textbf{Saída:}}
+\algnewcommand\Input{\item[\algorithmicinput]}
+\algnewcommand\Output{\item[\algorithmicoutput]}
 
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
@@ -1452,7 +1452,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 \begin{algorithm}
   \caption{teste}
 \begin{algorithmic}[1]
-\INPUT foo
+\Input foo
 \Require $x\ge5$
 \Ensure $x\le-5$
 \vspace{2mm}
