@@ -8,8 +8,13 @@
 % \usepackage[portuguese, onelanguage]{algorithm2e}
 \usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree, xfrac}
 
-\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{algpseudocode, algorithm, algorithmicx}
 \usepackage{todonotes}
+
+\algnewcommand\algorithmicinput{\textbf{Entrada:}}
+\algnewcommand\algorithmicoutput{\textbf{Saída:}}
+\algnewcommand\Input{\item[\algorithmicinput]}
+\algnewcommand\Output{\item[\algorithmicoutput]}
 
 \usetikzlibrary{matrix, arrows, decorations.markings}
 
@@ -1444,29 +1449,17 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 
 \subsection{XMSS multiárvores}
 
-
-\algrenewcommand\algorithmicrequire{\textbf{Input:}}
-\algrenewcommand\algorithmicensure{\textbf{Output:}}
-
 \begin{algorithm}
-  \caption{Counting mismatches between two packed DNA strings
-    \label{alg:packed-dna-hamming}}
-  \begin{algorithmic}[1]
-    \Require{$x$ and $y$ are packed DNA strings of equal length $n$}
-    \Ensure{saida}
-    
-    \Function{Distance}{$x, y$}
-    $z \longleftarrow x \oplus y$
-      \Let{$z$}{$x \oplus y$}
-      \Let{$\delta$}{$0$}
-      \For{$i \gets 1 \textrm{ to } n$}
-        \If{$z_i \neq 0$}
-          \Let{$\delta$}{$\delta + 1$}
-        \EndIf
-      \EndFor
-      \Return{$\delta$}
-    \EndFunction
-  \end{algorithmic}
+  \caption{teste}
+\begin{algorithmic}[1]
+\INPUT foo
+\Require $x\ge5$
+\Ensure $x\le-5$
+\vspace{2mm}
+\While{$x>-5$}
+\State $x\gets x-1$
+\EndWhile
+\end{algorithmic}
 \end{algorithm}
 
 \todo[inline]{introduce with the idea of the hyper tree in cmss and gmss, follow with xmss mt}
