@@ -5,9 +5,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
-\usepackage[portuguese, onelanguage]{algorithm2e}
+% \usepackage[portuguese, onelanguage]{algorithm2e}
 \usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree, xfrac}
 
+\usepackage{algpseudocode,algorithm,algorithmicx}
 \usepackage{todonotes}
 
 \usetikzlibrary{matrix, arrows, decorations.markings}
@@ -1442,6 +1443,30 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \textsc{Wots+} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema. 
 
 \subsection{XMSS multiárvores}
+
+
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+
+\begin{algorithm}
+  \caption{Counting mismatches between two packed \DNA{} strings
+    \label{alg:packed-dna-hamming}}
+  \begin{algorithmic}[1]
+    \Require{$x$ and $y$ are packed \DNA{} strings of equal length $n$}
+    \Ensure{saida}
+    
+    \Function{Distance}{$x, y$}
+      \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}
+      \Let{$\delta$}{$0$}
+      \For{$i \gets 1 \textrm{ to } n$}
+        \If{$z_i \neq 0$}
+          \Let{$\delta$}{$\delta + 1$}
+        \EndIf
+      \EndFor
+      \State \Return{$\delta$}
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
 
 \todo[inline]{introduce with the idea of the hyper tree in cmss and gmss, follow with xmss mt}
 
