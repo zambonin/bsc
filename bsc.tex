@@ -1448,8 +1448,8 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
   $\tau \longleftarrow max(h, \sfrac{2^h}{s + 1})$\;
-  \If{}
-  \ifthenelse{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \And $\tau < H - 1$}{}{}
+  \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \And $\tau < H - 1$}{}
+  \ifthenelse{}{}{}
   
 \vspace{2mm}
   \caption{Algoritmo de travessia BDS.}
