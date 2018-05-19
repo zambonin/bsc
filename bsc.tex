@@ -1289,8 +1289,16 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         uma $H$-tupla necessária para recriar os resumos desejados a fim de
         compará-los com a raiz da árvore, e também deve ser incluído na
         assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375},
-        $\textsc{Auth}_k = T_{h - k, \lfloor \sfrac{j}{2^k} \rfloor + 1 - 2
-        (\lfloor j/2^k \rfloor \pmod{2})}, 0 \leq k \leq h - 1$, como na Figura~\ref{fig:9}. A assinatura
+        \begin{equation}
+            \textsc{Auth}_h =
+            \begin{cases}
+                T_{h, (j / 2^h  - 1)}, \text{ se } \lfloor s / 2^h \rfloor \equiv 1 \pmod{2} \\
+                T_{h, (j / 2^h  + 1)}, \text{ se } \lfloor s / 2^h \rfloor \equiv 0 \pmod{2}
+            \end{cases} \text{ para } 0 \leq h \leq H - 1
+        \end{equation}
+        $\textsc{Auth}_h = T_{h, \lfloor \sfrac{j}{2^h} \rfloor + 1 - 2
+        (\lfloor j/2^h \rfloor \pmod{2})}, 0 \leq h \leq H - 1$,
+        representado visualmente na Figura~\ref{fig:9}. A assinatura
         final leva em conta todos estes itens. Portanto, $\sigma = (j,
         \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
 
