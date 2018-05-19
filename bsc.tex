@@ -1443,7 +1443,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 
 \subsection{XMSS multiárvores}
 
-Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de hiper-árvores é proposto em diversos trabalhos
+Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de hiper-árvores é proposto em diversos trabalhos, com o intuito de encadear camadas de árvores de Merkle, conectadas por uma instância de esquema de assinatura única, de tal forma que a folha da árvore superior assina a raiz da árvore inferior. A ideia original é introduzida em~\cite{} na forma do esquema CMSS, que habilita a assinatura de até $2^{40}$ mensagens com uma estrutura virtual de duas camadas, onde cada árvore 
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
