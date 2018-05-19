@@ -8,7 +8,6 @@
 \usepackage[portuguese, onelanguage]{algorithm2e}
 \usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree, xfrac}
 
-\usepackage{algpseudocode,algorithm,algorithmicx}
 \usepackage{todonotes}
 
 \usetikzlibrary{matrix, arrows, decorations.markings}
@@ -1444,23 +1443,22 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 
 \subsection{XMSS multiárvores}
 
-\begin{algorithm}
-  \caption{Counting mismatches between two packed \DNA{} strings
-    \label{alg:packed-dna-hamming}}
-  \begin{algorithmic}[1]
-    \Require{$x$ and $y$ are packed \DNA{} strings of equal length $n$}
-    \Statex
-    \Function{Distance}{$x, y$}
-      \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}
-      \Let{$\delta$}{$0$}
-      \For{$i \gets 1 \textrm{ to } n$}
-        \If{$z_i \neq 0$}
-          \Let{$\delta$}{$\delta + 1$}
-        \EndIf
-      \EndFor
-      \State \Return{$\delta$}
-    \EndFunction
-  \end{algorithmic}
+\begin{algorithm}[ht]
+  \KwData{$H$, a altura da árvore $T$, $K$, um parâmetro de compensação, $s, \; 0 \leq s \leq 2^{H} - 2$, índice de uma folha, $\textsc{State}_{\textsc{BDS}}$, o estado do algoritmo}
+  \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
+
+  \For{$i \leftarrow 0$ \KwTo $2^{H} - 1$}{
+    $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
+    \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
+      $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
+      $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
+    }
+    $\mathbf{S}.push(n_1)$\;
+  }
+  
+  $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
+  \caption{Algoritmo \textsc{Treehash}.}
+  \label{alg:3}
 \end{algorithm}
 
 \todo[inline]{introduce with the idea of the hyper tree in cmss and gmss, follow with xmss mt}
