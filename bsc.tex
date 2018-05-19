@@ -1447,11 +1447,11 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   \KwData{$H$, a altura da árvore $T$, $K$, um parâmetro de compensação, $s, \; 0 \leq s \leq 2^{H} - 2$, índice de uma folha, $\textsc{State}_{\textsc{BDS}}$, o estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 
+  $\tau \longleftarrow max(h, \sfrac{2^h}{s + 1})$\;
   
   
-  $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
   \caption{Algoritmo \textsc{Treehash}.}
-  \label{alg:3}
+  \label{alg:4}
 \end{algorithm}
 
 \todo[inline]{introduce with the idea of the hyper tree in cmss and gmss, follow with xmss mt}
