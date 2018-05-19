@@ -1229,14 +1229,13 @@ De modo genérico, folhas de uma árvore de Merkle são construídas a partir do
 resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais
 destas folhas computarão o resumo criptográfico do valor dos resumos de seus
 filhos concatenados, repetindo este processo até que a raiz seja preenchida,
-como na Figura~\ref{fig:4}. Considerando uma árvore binária perfeita $T$ de
-altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nó $T_{i,j}$ é o $j$-ésimo à esquerda na
-altura $i$, e uma função de resumo criptográfico $\fhash{m}$. As folhas são
+como na Figura~\ref{fig:4}. Considere uma árvore binária perfeita $T$ de
+altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo $T_{h,j}, 0 \leq j \leq 2^{H - h} - 1, h \in \{0, \dots, H\}$ (o $j$-ésimo à esquerda na altura $h$), e uma função de resumo criptográfico $\fhash{m}$. As folhas são
 construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
 intermediários a partir das folhas:
 \begin{equation}
   \begin{split}
-    T_{h, k} &= \hash{\mathcal{D}_k}, 0 \leq k \leq 2^{h} - 1, \text{ e } \\
+    T_{0, j} &= \hash{\mathcal{D}_j}, 0 \leq k \leq 2^{h} - 1, \text{ e } \\
     T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
       \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
   \end{split}
