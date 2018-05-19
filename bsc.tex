@@ -8,8 +8,13 @@
 % \usepackage[portuguese, onelanguage]{algorithm2e}
 \usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree, xfrac}
 
-\usepackage{algpseudocode, algorithm, algorithmicx}
+\usepackage{algpseudocode,algorithm,algorithmicx}
 \usepackage{todonotes}
+
+\algnewcommand\algorithmicinput{\textbf{Entrada:}}
+\algnewcommand\algorithmicoutput{\textbf{Saída:}}
+\algnewcommand\Input{\item[\algorithmicinput]}
+\algnewcommand\Input{\item[\algorithmic]}
 
 \usetikzlibrary{matrix, arrows, decorations.markings}
 
@@ -21,11 +26,6 @@
 \newcommand{\binwds}[1]{\{0, 1\}^{#1}}
 \newcommand{\length}[1]{\vert #1 \vert}
 \newcommand{\fhash}[1]{\hh{} : \binwds{*} \longrightarrow \binwds{#1}}
-
-\algnewcommand\algorithmicinput{\textbf{Entrada:}}
-\algnewcommand\algorithmicoutput{\textbf{Saída:}}
-\algnewcommand\Input{\item[\algorithmicinput]}
-\algnewcommand\Output{\item[\algorithmicoutput]}
 
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
@@ -1452,8 +1452,9 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 \begin{algorithm}
   \caption{teste}
 \begin{algorithmic}[1]
-\Input foo
-\Output
+\INPUT foo
+\Require $x\ge5$
+\Ensure $x\le-5$
 \vspace{2mm}
 \While{$x>-5$}
 \State $x\gets x-1$
