@@ -1261,7 +1261,7 @@ são chamados de nodos de cauda (\emph{tail nodes}).
 
 \begin{algorithm}[H]
   \small
-  \KwData{$c$, o texto cifrado; $K$, a chave desejada}
+  \KwData{$H$, a altura da árvore $T$}
   \KwResult{$m$, o texto claro resultante}
 
   
@@ -1419,32 +1419,32 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
   \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
   
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
-  não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticaç£o \textsc{Auth} Ã© construÃ­do com o auxÃ­lio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
+  não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
   
-  \item[] \emph{VerificaÃ§Ã£o da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, e utilize esta chave para reconstruir a Ã¡rvore-$l$ com as mÃ¡scaras $\mathbf{r}$, obtendo a raiz desta. Junto a \textsc{Auth}, compute o caminho de nodos $(a_0, \dots, a_h)$. Finalmente, se $\pk{} = a_{h}$, a assinatura estÃ¡ vÃ¡lida.
+  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, e utilize esta chave para reconstruir a árvore-$l$ com as máscaras $\mathbf{r}$, obtendo a raiz desta. Junto a \textsc{Auth}, compute o caminho de nodos $(a_0, \dots, a_h)$. Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
 
 \end{enumerate}
 
-O esquema descrito tem estrutura similar Ã  variante em processo de padronizaÃ§Ã£o pela IETF, que faz uso de \textsc{Wots+} em suas folhas. Este esquema tambÃ©m conta com outros arcabouÃ§os que permitem a resistÃªncia a ataques especÃ­ficos, e.g. a associaÃ§Ã£o da assinatura com o usuÃ¡rio e a posiÃ§Ã£o na Ã¡rvore impede ataques que almejam forjar assinaturas para um grande nÃºmero de instÃ¢ncias de esquemas de assinatura Ãºnica~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral Ã© similar a esquemas clÃ¡ssicos, e o gerenciamento de estado Ã© mantido. As otimizaÃ§Ãµes apresentadas futuramente sÃ£o implementadas e testadas principalmente neste esquema. 
+O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \textsc{Wots+} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema. 
 
-\subsection{XMSS multiÃ¡rvores}
+\subsection{XMSS multiárvores}
 
 \todo[inline]{introduce with the idea of the hyper tree in cmss and gmss, follow with xmss mt}
 
-TambÃ©m, como mencionado na seÃ§Ã£o do \textsc{Wots}, o esquema XMSS-T Ã© definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante resistente Ã  ataques multiusuÃ¡rio, atribuindo um endereÃ§o Ãºnico a cada nodo na Ã¡rvore, e derivando deste um resumo criptogrÃ¡fico calculado por funÃ§Ãµes com novas noÃ§Ãµes de resistÃªncia Ã  prÃ©-imagem, segunda prÃ©-imagem e colisÃµes, a fim de reduzir as ameaÃ§as ocasionadas por este tipo de ataque.
+Também, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante resistente à ataques multiusuário, atribuindo um endereço único a cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
 \todo[inline]{at the end of this thing, talk about sphincs and sphincs+ and how they remove the state}
 
-\chapter{OtimizaÃ§Ã£o do esquema Winternitz}
+\chapter{Otimização do esquema Winternitz}
 
-\section{DescriÃ§Ã£o das abordagens}
+\section{Descrição das abordagens}
 
 \todo[inline]{focus on the $R$ parameter, not the padding stuff that probably
 was already proposed in LM-OTS}
 
 \section{Resultados}
 
-\chapter{ConclusÃ£o}
+\chapter{Conclusão}
 
 \section{Trabalhos futuros}
 
