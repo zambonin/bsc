@@ -1257,18 +1257,19 @@ com as operações $\mathbf{S}.pop()$ e $\mathbf{S}.push(\cdot)$, calcula o nodo
 desejado em $2^H$ chamadas de \textsc{Leaf} e $2^{H} - 1$ cálculos de $\hh{}$.
 Em qualquer momento de uma execução de \textsc{Treehash}, o número máximo de
 nodos armazenados em \textbf{S} será $H$, e os nodos armazenados neste instante
-são chamados de nodos cauda (\emph{tail nodes}).
+são chamados de nodos cauda (\emph{tail nodes}). O algoritmo~\ref{alg:3} 
 
 \begin{algorithm}[H]
   \KwData{$H$, a altura da árvore $T$}
   \KwResult{$T_{H, 0}$, o nodo raiz}
 
   \For{$i \leftarrow 0$ \KwTo $2^{H} - 1$}{
-    $A \leftarrow \textsc{InvShiftRows}(A)$\;
-    $A \leftarrow \textsc{InvSubBytes}(A)$\;
-    $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
-    $A \leftarrow \textsc{InvMixColumns}(A)$\;
+    $n_1 \longleftarrow \textsc{Leaf}(i)$ \\
+    \While{$n_1.height() == \mathbf{S}.top().height()$}{
+      $n_2 \longleftarrow \mathbf{S}.pop()$ \\
+      $n_1 \longleftarrow \hash{n_2 \concat n_1}$
+    }
+    $\mathbf{S}.push(n_1)$
   }
   
   $T_{H, 0} \longleftarrow \mathbf{S}.pop()$
