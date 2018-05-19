@@ -1230,14 +1230,18 @@ resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais
 destas folhas computarão o resumo criptográfico do valor dos resumos de seus
 filhos concatenados, repetindo este processo até que a raiz seja preenchida,
 como na Figura~\ref{fig:4}. Considere uma árvore binária perfeita $T$ de
-altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo $T_{h,j}, 0 \leq j \leq 2^{H - h} - 1, h \in \{0, \dots, H\}$ (o $j$-ésimo à esquerda na altura $h$), e uma função de resumo criptográfico $\fhash{m}$. As folhas são
+altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
+\begin{equation}
+    
+\end{equation}
+$$T_{h,j}, 0 \leq j \leq 2^{H - h} - 1, h \in \{0, \dots, H\}$$ (o $j$-ésimo à esquerda na altura $h$), e uma função de resumo criptográfico $\fhash{m}$. As folhas são
 construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
 intermediários a partir das folhas:
 \begin{equation}
   \begin{split}
     T_{0, j} &= \hash{\mathcal{D}_j}, \text{ e } \\
     T_{h, j} &= \hash{T_{h - 1, 2j} \concat T_{h - 1, 2j + 1}},
-      \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
+      \; 1 \leq h \leq H.
   \end{split}
 \end{equation}
 Esta estrutura também pode ser utilizada para verificação conjunta da
