@@ -1391,9 +1391,8 @@ Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da 
 \begin{equation}
     T_{h, j} = h_k(r_i \oplus (T_{h - 1, 2j} \concat T_{h - 1, 2j + 1})),
       \; 1 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1.
-      0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
 \end{equation}
-O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à árvore anterior, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a árvore-$l$ tem altura total de $\lceil \log_{2} t \rceil$.
+O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma árvore chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à principal anterior, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a árvore-$l$ tem altura total de $\lceil \log_{2} t \rceil$.
 
 \begin{enumerate}
 
