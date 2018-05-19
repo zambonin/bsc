@@ -327,26 +327,27 @@ reversibilidade da cifra.
   \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
   \KwResult{$c$, o texto cifrado resultante}
 
-  $A \leftarrow m$\;
+  $A \leftarrow m$
   $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$\;
+    \leftarrow \textsc{KeyExpansion}(K)$
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$\;
+    \{k_{0}, \dots, k_{\ell - 1}\})$
 
   \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
-    $A \leftarrow \textsc{SubBytes}(A)$\;
-    $A \leftarrow \textsc{ShiftRows}(A)$\;
-    $A \leftarrow \textsc{MixColumns}(A)$\;
+    $A \leftarrow \textsc{SubBytes}(A)$
+    $A \leftarrow \textsc{ShiftRows}(A)$
+    $A \leftarrow \textsc{MixColumns}(A)$
     $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
   }
 
-  $A \leftarrow \textsc{SubBytes}(A)$\;
-  $A \leftarrow \textsc{ShiftRows}(A)$\;
+  $A \leftarrow \textsc{SubBytes}(A)$
+  $A \leftarrow \textsc{ShiftRows}(A)$
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
 
-  $c \leftarrow A$\;
+  $c \leftarrow A$
+  \Return $c$
   \caption{Algoritmo de codificação do AES.}
   \label{alg:1}
 \end{algorithm}
@@ -380,26 +381,28 @@ codificado no estado de maneira análoga ao algoritmo anterior.
   \KwData{$c$, o texto cifrado; $K$, a chave desejada}
   \KwResult{$m$, o texto claro resultante}
 
-  $A \leftarrow c$\;
+  $A \leftarrow c$
   $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$\;
+    \leftarrow \textsc{KeyExpansion}(K)$
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
 
   \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
-    $A \leftarrow \textsc{InvShiftRows}(A)$\;
-    $A \leftarrow \textsc{InvSubBytes}(A)$\;
+    $A \leftarrow \textsc{InvShiftRows}(A)$
+    $A \leftarrow \textsc{InvSubBytes}(A)$
     $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
-    $A \leftarrow \textsc{InvMixColumns}(A)$\;
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
+    $A \leftarrow \textsc{InvMixColumns}(A)$
   }
 
-  $A \leftarrow \textsc{InvShiftRows}(A)$\;
-  $A \leftarrow \textsc{InvSubBytes}(A)$\;
+  $A \leftarrow \textsc{InvShiftRows}(A)$
+  $A \leftarrow \textsc{InvSubBytes}(A)$
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$\;
+    \{k_{0}, \dots, k_{\ell - 1}\})$
 
-  $m \leftarrow A$\;
+  $m \leftarrow A$
+    \Return $m$
+
   \caption{Algoritmo de decodificação do AES.}
   \label{alg:2}
 \end{algorithm}
@@ -1272,8 +1275,7 @@ são chamados de nodos cauda (\emph{tail nodes}). O algoritmo~\ref{alg:3}
     $\mathbf{S}.push(n_1)$
   }
   
-  $T_{H, 0} \longleftarrow \mathbf{S}.pop()$
-  
+  \Return $\mathbf{S}.pop()$
   \caption{Algoritmo \textsc{Treehash}.}
   \label{alg:3}
 \end{algorithm}
