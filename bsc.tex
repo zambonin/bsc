@@ -1279,8 +1279,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         \textsc{Ots}_{\pk{}}^{2^{H} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0},
         \textsc{Ots}_{\pk{}}^{0}))$. As folhas de $T$ são preenchidas com as
         respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{0, j} =
-        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j \leq 2^{H} - 1$,
-        e $T$ é construída recursivamente. Finalmente, $\pk{} = T_{H,0}$.
+        \hash{\textsc{Ots}_{\pk{}}^{j}}$, e $T$ é construída recursivamente.
+        Finalmente, $\pk{} = T_{H,0}$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
       resumo $d = \hash{M}$. Escolha uma folha de índice $j, \: 0 \leq j \leq 2^h - 1$ não utilizada
