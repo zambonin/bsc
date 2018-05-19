@@ -327,27 +327,26 @@ reversibilidade da cifra.
   \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
   \KwResult{$c$, o texto cifrado resultante}
 
-  $A \leftarrow m$
+  $A \leftarrow m$\;
   $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$
+    \leftarrow \textsc{KeyExpansion}(K)$\;
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$
+    \{k_{0}, \dots, k_{\ell - 1}\})$\;
 
   \For{$i \leftarrow 1$ \KwTo $n_r - 1$}{
-    $A \leftarrow \textsc{SubBytes}(A)$
-    $A \leftarrow \textsc{ShiftRows}(A)$
-    $A \leftarrow \textsc{MixColumns}(A)$
+    $A \leftarrow \textsc{SubBytes}(A)$\;
+    $A \leftarrow \textsc{ShiftRows}(A)$\;
+    $A \leftarrow \textsc{MixColumns}(A)$\;
     $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
   }
 
-  $A \leftarrow \textsc{SubBytes}(A)$
-  $A \leftarrow \textsc{ShiftRows}(A)$
+  $A \leftarrow \textsc{SubBytes}(A)$\;
+  $A \leftarrow \textsc{ShiftRows}(A)$\;
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
 
-  $c \leftarrow A$
-  \Return $c$
+  $c \leftarrow A$\;
   \caption{Algoritmo de codificação do AES.}
   \label{alg:1}
 \end{algorithm}
@@ -381,28 +380,26 @@ codificado no estado de maneira análoga ao algoritmo anterior.
   \KwData{$c$, o texto cifrado; $K$, a chave desejada}
   \KwResult{$m$, o texto claro resultante}
 
-  $A \leftarrow c$
+  $A \leftarrow c$\;
   $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$
+    \leftarrow \textsc{KeyExpansion}(K)$\;
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
+    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
 
   \For{$i \leftarrow n_r - 1$ \KwTo $1$}{
-    $A \leftarrow \textsc{InvShiftRows}(A)$
-    $A \leftarrow \textsc{InvSubBytes}(A)$
+    $A \leftarrow \textsc{InvShiftRows}(A)$\;
+    $A \leftarrow \textsc{InvSubBytes}(A)$\;
     $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
-    $A \leftarrow \textsc{InvMixColumns}(A)$
+      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
+    $A \leftarrow \textsc{InvMixColumns}(A)$\;
   }
 
-  $A \leftarrow \textsc{InvShiftRows}(A)$
-  $A \leftarrow \textsc{InvSubBytes}(A)$
+  $A \leftarrow \textsc{InvShiftRows}(A)$\;
+  $A \leftarrow \textsc{InvSubBytes}(A)$\;
   $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$
+    \{k_{0}, \dots, k_{\ell - 1}\})$\;
 
-  $m \leftarrow A$
-    \Return $m$
-
+  $m \leftarrow A$\;
   \caption{Algoritmo de decodificação do AES.}
   \label{alg:2}
 \end{algorithm}
@@ -1254,7 +1251,8 @@ descaracterizando a validade dos dados atrelados a esta.
 
 Para calcular $T_{H,0}$ de maneira eficiente, não é necessário armazenar
 $T$ inteiramente. Considere a subrotina $\textsc{Leaf}(k), 0 \leq k \leq 2^{H} - 1$,
-que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$.
+que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
+e um nodo $n$ 
 O algoritmo \textsc{Treehash}, munido de uma pilha \textbf{S} usual
 com as operações $\mathbf{S}.pop()$ e $\mathbf{S}.push(\cdot)$, calcula o nodo
 desejado em $2^H$ chamadas de \textsc{Leaf} e $2^{H} - 1$ cálculos de $\hh{}$.
@@ -1262,7 +1260,7 @@ Em qualquer momento de uma execução de \textsc{Treehash}, o número máximo de
 nodos armazenados em \textbf{S} será $H$, e os nodos armazenados neste instante
 são chamados de nodos cauda (\emph{tail nodes}). O algoritmo~\ref{alg:3} 
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
   \KwResult{$T_{H, 0}$, o nodo raiz}
 
@@ -1275,7 +1273,7 @@ são chamados de nodos cauda (\emph{tail nodes}). O algoritmo~\ref{alg:3}
     $\mathbf{S}.push(n_1)$
   }
   
-  \Return $\mathbf{S}.pop()$
+  $T_{H, 0} \longleftarrow \mathbf{S}.pop()$
   \caption{Algoritmo \textsc{Treehash}.}
   \label{alg:3}
 \end{algorithm}
