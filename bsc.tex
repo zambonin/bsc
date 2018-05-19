@@ -1447,14 +1447,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   \KwData{$H$, a altura da árvore $T$, $K$, um parâmetro de compensação, $s, \; 0 \leq s \leq 2^{H} - 2$, índice de uma folha, $\textsc{State}_{\textsc{BDS}}$, o estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 
-  \For{$i \leftarrow 0$ \KwTo $2^{H} - 1$}{
-    $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
-    \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
-      $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
-      $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
-    }
-    $\mathbf{S}.push(n_1)$\;
-  }
+  
   
   $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
   \caption{Algoritmo \textsc{Treehash}.}
