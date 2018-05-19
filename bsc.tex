@@ -1447,7 +1447,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   \KwData{$H$, a altura da árvore $T$, $K$, um parâmetro de compensação, $s, \; 0 \leq s \leq 2^{H} - 2$, índice de folha, $\textsc{State}_{\textsc{BDS}}$, o estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
-  $\tau \longleftarrow max_{h \in \{1, \dots, H\}}(\sfrac{2^h}{s + 1})$\;
+  $\tau \longleftarrow max(\{\sfrac{2^h}{s + 1} : h \in 1, \dots, H\})$\;
   \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \textbf{e} $\tau < H - 1$}{
     $\textsc{Keep}_{\tau} \longleftarrow \textsc{Auth}_{\tau}$\;
   }
@@ -1472,6 +1472,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
   }
   \For{$i = 0$ \KwTo $\sfrac{H - K}{2}$}{
     $k \longleftarrow min_{j \in \{0, \dots, H - K - 1\}}\{\textsc{Treehash}_{j}.height()\}$\;
+    $k \longleftarrow min(\{ \})$
     $\textsc{Treehash}_{k}.update()$
   }
 \vspace{2mm}
