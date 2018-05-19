@@ -1446,11 +1446,13 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 \begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$, $K$, um parâmetro de compensação, $s, \; 0 \leq s \leq 2^{H} - 2$, índice de uma folha, $\textsc{State}_{\textsc{BDS}}$, o estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
-
+\vspace{2mm}
   $\tau \longleftarrow max(h, \sfrac{2^h}{s + 1})$\;
+  \If{}
+  \ifthenelse{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \And $\tau < H - 1$}{}{}
   
-  
-  \caption{Algoritmo \textsc{Treehash}.}
+\vspace{2mm}
+  \caption{Algoritmo de travessia BDS.}
   \label{alg:4}
 \end{algorithm}
 
