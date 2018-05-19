@@ -1249,6 +1249,8 @@ visto que qualquer mudança em um nó da
 árvore produzirá um valor distinto na raiz quando calculado novamente,
 descaracterizando a validade dos dados atrelados a esta.
 
+Para calcular $T_{H,0}$ de maneira eficiente, não é necessár
+
 \subsection{O esquema de Merkle}
 
 O primeiro esquema de assinatura digital baseado em árvores de Merkle
@@ -1284,8 +1286,8 @@ considere uma função de resumo criptográfico $\fhash{m}$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
       resumo $d = \hash{M}$. Escolha uma folha de índice $j$ não utilizada
-        anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j}$.
-        O caminho de autenticação \textsc{Auth} é
+        anteriormente e produza a assinatura $\textsc{Ots}_\sigma^{j}$ a
+        partir de $d$. O caminho de autenticação \textsc{Auth} é
         uma $H$-tupla necessária para recriar os resumos desejados a fim de
         compará-los com a raiz da árvore, e também deve ser incluído na
         assinatura. Assim, de acordo com~\cite{Bernstein:2008:PQC:1522375},
@@ -1399,7 +1401,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
   \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
   
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
-  não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j} = \textsc{Ots}_\mathcal{S}(d)$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
+  não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
   
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, e utilize esta chave para reconstruir a árvore-$l$ com as máscaras $\mathbf{r}$, obtendo a raiz desta. Junto a \textsc{Auth}, compute o caminho de nodos $(a_0, \dots, a_h)$. Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
 
