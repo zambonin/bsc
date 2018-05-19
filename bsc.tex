@@ -1292,12 +1292,10 @@ considere uma função de resumo criptográfico $\fhash{m}$.
         \begin{equation}
             \textsc{Auth}_h =
             \begin{cases}
-                T_{h, (j / 2^h  - 1)}, \text{ se } \lfloor s / 2^h \rfloor \equiv 1 \pmod{2} \\
+                T_{h, (\sfrac{j}{2^h  - 1)}, \text{ se } \lfloor s / 2^h \rfloor \equiv 1 \pmod{2} \\
                 T_{h, (j / 2^h  + 1)}, \text{ se } \lfloor s / 2^h \rfloor \equiv 0 \pmod{2}
             \end{cases} \text{ para } 0 \leq h \leq H - 1
         \end{equation}
-        $\textsc{Auth}_h = T_{h, \lfloor \sfrac{j}{2^h} \rfloor + 1 - 2
-        (\lfloor j/2^h \rfloor \pmod{2})}, 0 \leq h \leq H - 1$,
         representado visualmente na Figura~\ref{fig:9}. A assinatura
         final leva em conta todos estes itens. Portanto, $\sigma = (j,
         \textsc{Ots}_\sigma^{j}, \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth})$.
