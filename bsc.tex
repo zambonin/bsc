@@ -1372,7 +1372,7 @@ A redução dos requisitos de segurança, bem como a presença do sigilo encamin
 A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
 
 Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
-\mathcal{K}_m\}$, a altura $h$ para uma árvore de Merkle $T$, uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
+\mathcal{K}_m\}$, a altura $H$ para uma árvore de Merkle $T$, uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, um gerador de números pseudoaleatórios \textsc{Gen} que apresenta sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$, e o esquema de assinatura única \textsc{Ots} definido como \textsc{Wots+}.
 
 \begin{figure}
