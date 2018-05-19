@@ -1202,26 +1202,26 @@ característica binária e perfeita, pode ser aproveitada para tal.
   \begin{tikzpicture}
     \tikzset{every tree node/.style={align=center,anchor=north}}
     \Tree
-      [.\node{$T_{0,0}$ \\ $\hash{T_{1,0} \concat T_{1,1}}$};
-        [.\node{$T_{1, 0}$ \\ $\hash{T_{2, 0} \concat T_{2, 1}}$};
-          [.{$T_{2, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
+      [.\node{$T_{2, 0}$ \\ $\hash{T_{1, 0} \concat T_{1, 1}}$};
+        [.\node{$T_{1, 0}$ \\ $\hash{T_{0, 0} \concat T_{0, 1}}$};
+          [.{$T_{0, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
             \edge[tedge] node {}; $\mathcal{D}_{0}$
           ]
-          [.{$T_{2, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
+          [.{$T_{0, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
             \edge[tedge] node {}; $\mathcal{D}_{1}$
           ]
         ]
-        [.\node{$T_{1, 1}$ \\ $\hash{T_{2, 2} \concat T_{2, 3}}$};
-          [.{$T_{2, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
+        [.\node{$T_{1, 1}$ \\ $\hash{T_{0, 2} \concat T_{0, 3}}$};
+          [.{$T_{0, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
             \edge[tedge] node {}; $\mathcal{D}_{2}$
           ]
-          [.{$T_{2, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
+          [.{$T_{0, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
             \edge[tedge] node {}; $\mathcal{D}_{3}$
           ]
         ]
       ]
   \end{tikzpicture}
-  \caption{Árvore de Merkle $T$, com altura $h = 2$.}
+  \caption{Árvore de Merkle $T$, com altura $H = 2$.}
   \label{fig:4}
 \end{figure}
 
@@ -1232,10 +1232,10 @@ filhos concatenados, repetindo este processo até que a raiz seja preenchida,
 como na Figura~\ref{fig:4}. Considere uma árvore binária perfeita $T$ de
 altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
 \begin{equation}
-    T_{h,j} : 0 \leq j \leq 2^{H - h} - 1, \; h \in \{0, \dots, H\} 
+    T_{h,j}, \; h \in \{0, \dots, H\}, \; 0 \leq j \leq 2^{H - h} - 1
 \end{equation}
 (o $j$-ésimo à esquerda na altura $h$), e uma função de resumo criptográfico $\fhash{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
-intermediários a partir das folhas:
+intermediários a partir de seus filhos:
 \begin{equation}
   \begin{split}
     T_{0, j} &= \hash{\mathcal{D}_j}, \text{ e } \\
@@ -1262,25 +1262,25 @@ privadas das folhas, e a assinatura consiste da mensagem assinada pela
 instância do esquema localizado em uma folha qualquer, bem como todos os nós
 necessários para calcular o conteúdo da raiz da árvore.
 
-Formalmente, seja uma árvore de Merkle $T$ com $h \geq 2$. Tome um esquema de
+Formalmente, seja uma árvore de Merkle $T$ com $H \geq 2$. Tome um esquema de
 assinatura digital única genérico \textsc{Ots}, suas chaves privada e pública
 como, respectivamente, $\textsc{Ots}_{\sk{}}$ e $\textsc{Ots}_{\pk{}}$, e os
 algoritmos de geração de chaves, geração de assinatura e verificação de
-assinatura como, respectivamente, $\textsc{Ots}_\mathcal{K},
+assinatura como, respectivamente, $\textsc{Ots}_\mathcal{G},
 \textsc{Ots}_\mathcal{S} \text{ e } \textsc{Ots}_\mathcal{V}$. Por fim,
 considere uma função de resumo criptográfico $\fhash{m}$.
 
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} A chave privada é definida como uma
-      $2^{h}$-tupla de pares de chaves diferentes provenientes de \textsc{Ots}.
-        Então, a partir de execuções de $\textsc{Ots}_\mathcal{K}$ para cada
-        folha, tem-se $\sk{} = ((\textsc{Ots}_{\sk{}}^{2^{h} - 1},
-        \textsc{Ots}_{\pk{}}^{2^{h} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0},
+      $2^{H}$-tupla de pares de chaves diferentes provenientes de \textsc{Ots}.
+        Então, a partir de execuções de $\textsc{Ots}_\mathcal{G}$ para cada
+        folha, tem-se $\sk{} = ((\textsc{Ots}_{\sk{}}^{2^{H} - 1},
+        \textsc{Ots}_{\pk{}}^{2^{H} - 1}), \dots, (\textsc{Ots}_{\sk{}}^{0},
         \textsc{Ots}_{\pk{}}^{0}))$. As folhas de $T$ são preenchidas com as
-        respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{h, j} =
-        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j \leq 2^{h} - 1$,
-        e $T$ é construída recursivamente. Finalmente, $\pk{} = T_{0,0}$.
+        respectivas chaves públicas de \textsc{Ots}. Portanto, $T_{0, j} =
+        \hash{\textsc{Ots}_{\pk{}}^{j}}, 0 \leq j \leq 2^{H} - 1$,
+        e $T$ é construída recursivamente. Finalmente, $\pk{} = T_{H,0}$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
       resumo $d = \hash{M}$. Escolha uma folha de índice $j, \: 0 \leq j \leq 2^h - 1$ não utilizada
