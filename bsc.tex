@@ -1443,6 +1443,8 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 
 \subsection{XMSS multiárvores}
 
+Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de hiper-árvores é proposto em diversos trabalhos
+
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
