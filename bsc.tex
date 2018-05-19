@@ -1460,19 +1460,20 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
     $\textsc{Keep}.remove(\tau - 1)$\;
     \For{$h = 0$ \KwTo $\tau - 1$}{
         \uIf{$h < H - K$}{
-            $\textsc{Auth}_{h} \longleftarrow \textsc{Treehash}_{h}.pop()$\;
+            $\textsc{Auth}_{h} \longleftarrow \textsc{Treehash}_{h}.t$\;
         }
         \Else{
             $\textsc{Auth}_{h} \longleftarrow \textsc{Retain}_{h}.pop()$\;
         }
     }
     \For{$h = 0$ \KwTo $min(\tau - 1, H - K - 1)$}{
+    \If{$s + 1 + 3 \cdot 2^h < 2^H$}{}
         $\textsc{Treehash}_{h}.initialize(s + 1 + 3 \cdot 2^h)$\;
     }
   }
   \For{$i = 0$ \KwTo $\sfrac{H - K}{2}$}{
     $k \longleftarrow min_{j \in \{0, \dots, H - K - 1\}}\{\textsc{Treehash}_{j}.height()\}$\;
-    $k \longleftarrow min(\{ \})$
+    $k \longleftarrow min(\{\textsc{Treehash}_{j} \})$
     $\textsc{Treehash}_{k}.update()$
   }
 \vspace{2mm}
