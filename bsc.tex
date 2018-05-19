@@ -1235,8 +1235,8 @@ construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
 intermediários a partir das folhas:
 \begin{equation}
   \begin{split}
-    T_{0, j} &= \hash{\mathcal{D}_j}, 0 \leq k \leq 2^{h} - 1, \text{ e } \\
-    T_{i, j} &= \hash{T_{i + 1, 2j} \concat T_{i + 1, 2j + 1}},
+    T_{0, j} &= \hash{\mathcal{D}_j}, \text{ e } \\
+    T_{h, j} &= \hash{T_{h - 1, 2j} \concat T_{h - 1, 2j + 1}},
       \; 0 \leq j \leq 2^{i} - 1, \; h - 1 \geq i \geq 0.
   \end{split}
 \end{equation}
