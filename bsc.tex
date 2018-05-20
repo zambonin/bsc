@@ -1528,7 +1528,7 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de bits aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$.
+  \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de bits aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Sementes para cada camada da hiper-árvore também são escolhidas desta maneira: $\textbf{s} = (s_0, \dots, s_{d - 1}) \stackrel{\$}{\longleftarrow} \binwds{$, e estados do algoritmo BDS são inicializados: $\textsc{State} = (\textsc{State}_{\textsc{BDS}}^{0}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 1})$. Utilizando instâncias do algoritmo \textsc{Treehash} e a tupla $\textbf{s}$, a raiz da hiper-árvore é calculada
   
   \item[] \emph{Geração da assinatura.}
   
