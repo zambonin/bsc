@@ -1419,43 +1419,6 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 \mathcal{K}_m\}$, uma árvore de Merkle $T$ com altura $H$ e uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$. Um gerador de números pseudoaleatórios \textsc{Gen} é construído a partir de $f$ a fim de assegurar sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura única \textsc{Ots} é definido como \textsc{Wots+}.
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[
-        every tree node/.style={draw,circle,minimum size=0.75cm},
-        level distance=1.5cm,
-        sibling distance=0.5cm,
-        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-    ]    \Tree
-    [.{}
-        [.{}
-            [.{} {} {} ]
-            [.{} {} {} ]
-        ]
-        [.{} 
-            [.{} {} {} ]
-            [.{} {} {} ]
-        ]
-    ]
-        \node[draw,minimum width=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
-        \node[draw,minimum width=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
-        \node[draw,minimum size=0.75cm] (concat) at (2, -0.75) {$\concat$};
-        \node[draw,minimum size=0.75cm] (oplus) at (2, 0.5) {$\oplus$};
-        \node (mask) at (3.5, 0.5) {$r_i$};
-        \node[draw,trapezium,minimum size=0.75cm] (hash) at (2, 1.75) {$\hh{}$};
-        \node[draw,minimum width=2cm] (father) at (2, 3) {$T_{h, j}$};
-        
-        \draw[-latex] (left) to (0.5, -0.75) to (concat);
-        \draw[-latex] (right) to (3.5, -0.75) to (concat);
-        \draw[-latex] (concat) to (oplus);
-        \draw[-latex] (mask) to (oplus);
-        \draw[-latex] (oplus) to (hash);
-        \draw[-latex] (hash) to (father);
-    \end{tikzpicture}
-    \caption{Construção da árvore XMSS.}
-    \label{fig:8}
-\end{figure}
-
 Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada, como visto na Figura~\ref{fig:8}. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
 \begin{equation}
     T_{h, j} = h_k(r_i \oplus (T_{h - 1, 2j} \concat T_{h - 1, 2j + 1})),
