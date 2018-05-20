@@ -1469,14 +1469,14 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
     \item $\textsc{Keep}$, lista de tamanho $H - 1$ que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda;
     
-    \item $\textsc{Retain} = T_{H - 2, 3}$;
+    \item $\textsc{Retain}$, o nodo $T_{H - 2, 3}$;
     
     \item \textbf{S}, pilha munida das operações usuais;
     
     \item instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
 \end{enumerate}
 
-, uma lista $\textsc{Keep}$ de tamanho $H - 1$, , , uma pilha \textbf{S}, 
+As listas são munidas da operação $remove(\cdot)$, que remove o elemento no índice do argumento, desde que este seja válido; as instâncias $\textsc{Treehash}_{h}$ são inicializadas por $init(\cdot)$, cujo argumento é um índice de folha, executadas por $update()$, e munidas da função $height()$, que 
 
 \todo[inline]{here goes bds}
 
