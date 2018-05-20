@@ -1257,8 +1257,6 @@ com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.to
 calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
 Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
 
-Ao seu estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
-
 \begin{algorithm}[ht]
   \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
   \KwResult{\textbf{S}, pilha atualizada}
@@ -1286,6 +1284,12 @@ Ao seu estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
   \caption{\textsc{Treehash} para calcular $T_{H,0}$.}
   \label{alg:5}
 \end{algorithm}
+
+Em qualquer momento de sua execução, o número máximo de nodos armazenados em
+\textbf{S} será $h$, chamados de nodos cauda (\emph{tail nodes}). Ao seu estado
+final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
+Note que é possível executar \textsc{Treehash} repetidamente, como visto no
+algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
 
 O algoritmo~\ref{alg:3} demonstra a versão completa de \textsc{Treehash}.
 Em qualquer momento de sua execução, o número máximo de
