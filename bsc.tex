@@ -1474,10 +1474,10 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
             [. \node[dashdotted]{}; {} {} ]
         ]
     ]
-        \draw[->, thick] (sig0) to (halfroot);
+    \draw[->, thick] (halfroot) to (leaf);
+    \draw[->, thick] (p2) to (halfroot);
     \draw[->, thick] (p1) to (p2);
     \draw[->, thick] (sig0) to (p1);
-    \draw[->, thick] (halfroot) to (leaf);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
