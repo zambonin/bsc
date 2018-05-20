@@ -10,7 +10,7 @@
 
 \usepackage{todonotes}
 
-\usetikzlibrary{matrix, arrows, decorations.markings}
+\usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
 
 \newcommand{\hh}{\mathcal{H}}
 \newcommand{\pk}{\mathcal{P}_k}
@@ -1422,17 +1422,20 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
-        \node[draw,circle,minimum size=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
-        \node[draw,circle,minimum size=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
+        \node[draw,minimum width=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
+        \node[draw,minimum width=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
         \node[draw,minimum size=0.75cm] (concat) at (2, -0.75) {$\concat$};
         \node[draw,minimum size=0.75cm] (oplus) at (2, 0.5) {$\oplus$};
         \node (mask) at (3.5, 0.5) {$r_i$};
-        \node[draw,minimum size=0.75] (hash) at (2, 1.75) {$\hh{}$};
+        \node[draw,trapezium,minimum size=0.75cm] (hash) at (2, 1.75) {$\hh{}$};
+        \node[draw,minimum width=2cm] (father) at (2, 3) {$T_{h, j}$};
         
         \draw[-latex] (left) to (0.5, -0.75) to (concat);
         \draw[-latex] (right) to (3.5, -0.75) to (concat);
         \draw[-latex] (concat) to (oplus);
         \draw[-latex] (mask) to (oplus);
+        \draw[-latex] (oplus) to (hash);
+        \draw[-latex] (hash) to (father);
     \end{tikzpicture}
     \caption{Construção da árvore XMSS.}
     \label{fig:8}
