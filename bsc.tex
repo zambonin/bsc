@@ -1257,6 +1257,21 @@ com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.to
 calcula o nodo desejado em $2^H$ chamadas de \textsc{Leaf} e $2^{H} - 1$ cálculos de $\hh{}$.
 
 \begin{algorithm}[ht]
+  \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
+  \KwResult{\textbf{S}, pilha atualizada}
+
+    $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
+    \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
+      $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
+      $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
+    }
+    $\mathbf{S}.push(\textsc{Leaf})$\;
+  
+  \caption{\textsc{Treehash} para uma folha de índice $h$.}
+  \label{alg:3}
+\end{algorithm}
+
+\begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
   \KwResult{$T_{H, 0}$, o nodo raiz}
 
@@ -1270,8 +1285,8 @@ calcula o nodo desejado em $2^H$ chamadas de \textsc{Leaf} e $2^{H} - 1$ cálcul
   }
   
   $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
-  \caption{Algoritmo \textsc{Treehash}.}
-  \label{alg:3}
+  \caption{\textsc{Treehash} para calcular $T_{H,0}$.}
+  \label{alg:4}
 \end{algorithm}
 
 O algoritmo~\ref{alg:3} demonstra a versão completa de \textsc{Treehash}.
