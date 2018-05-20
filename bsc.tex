@@ -1459,13 +1459,13 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
 
 Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+~\cite{xmssplus}, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
 
-
+A notação proposta é retirada de~\cite{Bernstein:2008:PQC:1522375}. Considere o algoritmo~\ref{alg:3}, e a representação usual para nodos em uma árvore de Merkle $T$. Defina $$
 
 \begin{algorithm}[ht]
-  \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
+  \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
-  $\tau \longleftarrow max(\{\sfrac{2^h}{s + 1} : h \in 1, \dots, H\})$\;
+  $\tau \longleftarrow max(\{2^h \mid s + 1 : h \in 1, \dots, H\})$\;
   \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \textbf{e} $\tau < H - 1$}{
     $\textsc{Keep}_{\tau} \longleftarrow \textsc{Auth}_{\tau}$\;
   }
@@ -1486,7 +1486,7 @@ Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a varia
     }
     \For{$h = 0$ \KwTo $min(\tau - 1, H - K - 1)$}{
         \If{$s + 1 + 3 \cdot 2^h < 2^H$}{
-            $\textsc{Treehash}_{h}.initialize(s + 1 + 3 \cdot 2^h)$\;
+            $\textsc{Treehash}_{h}.init(s + 1 + 3 \cdot 2^h)$\;
         }
     }
   }
