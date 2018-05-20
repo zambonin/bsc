@@ -1453,7 +1453,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         level distance=1cm,
     ]
     \begin{scope}[yshift=4cm,xshift=1.5cm]
-    \Tree[.{} [.{} [.{} {} {} ] [.{} {} \node(leaf){a}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
+    \Tree[.{} [.{} [.{} {} {} ] [.{} {} \node[name=leaf,label=below:{$i = 3$}]{a}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \end{scope}
     \Tree[. \node(root){b}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} \node(msg){m}; {} ] [.{} {} {} ] ] ]
     \draw[->](leaf) to (root);
