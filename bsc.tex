@@ -1467,10 +1467,12 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
     \item $\textsc{Auth}$, lista de tamanho $H$ que armazena o caminho de autenticação atual;
 
-    \item $\textsc{Keep}$, lista de tamanho $H - 1$
+    \item $\textsc{Keep}$, lista de tamanho $H - 1$ que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda;
+    
+    \item 
 \end{enumerate}
 
-, uma lista $\textsc{Keep}$ de tamanho $H - 1$, que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda, $\textsc{Retain} = T_{H - 2, 3}$, uma pilha \textbf{S}, instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
+, uma lista $\textsc{Keep}$ de tamanho $H - 1$, , $\textsc{Retain} = T_{H - 2, 3}$, uma pilha \textbf{S}, instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
 
 \todo[inline]{here goes bds}
 
