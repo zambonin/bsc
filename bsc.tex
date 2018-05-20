@@ -1248,16 +1248,6 @@ visto que qualquer mudança em um nó da
 árvore produzirá um valor distinto na raiz quando calculado novamente,
 descaracterizando a validade dos dados atrelados a esta.
 
-Para calcular nodos de maneira eficiente, não é necessário armazenar
-$T$ inteiramente. Considere a subrotina $\textsc{Leafcalc}(k), 0 \leq k \leq 2^{H} - 1$,
-que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
-e um nodo $n$ com a rotina $n.height()$, que retorna sua altura em $T$.
-O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
-com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
-calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
-Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
-
-
 \begin{algorithm}[ht]
   \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
   \KwResult{\textbf{S}, pilha atualizada}
@@ -1272,6 +1262,15 @@ Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
   \caption{Funcionamento de $\textsc{Treehash}_h$.}
   \label{alg:3}
 \end{algorithm}
+
+Para calcular nodos de maneira eficiente, não é necessário armazenar
+$T$ inteiramente. Considere a subrotina $\textsc{Leafcalc}(k), 0 \leq k \leq 2^{H} - 1$,
+que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
+e um nodo $T_{\cdot, \cdot}$ com a rotina $height()$, que retorna sua altura em $T$.
+O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
+com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
+calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
+Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
 
 Em qualquer momento de sua execução, o número máximo de nodos armazenados em
 \textbf{S} será $h$, chamados de nodos cauda (\emph{tail nodes}). Ao seu estado
@@ -1459,6 +1458,8 @@ Uma das principais limitações dos esquemas baseados em árvores de Merkle é a
 A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na forma do esquema CMSS, que habilita a assinatura de até $2^{40}$ mensagens com um par de chaves, relacionado a uma estrutura virtual de duas camadas, onde apenas uma árvore na parte inferior é criada de cada vez a fim de reduzir requisitos de armazenamento. Posteriormente, este esquema é generalizado em~\cite{Buchmann:2007:MSV:1419765.1419769} como GMSS, que utiliza um número arbitrário de camadas de árvores, com alturas e parâmetros de esquemas de assinatura única diferentes para cada uma destas, atingindo o número de $2^{80}$ mensagens por par de chaves.
 
 Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+~\cite{xmssplus}, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
+
+
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
