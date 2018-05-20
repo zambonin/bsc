@@ -1480,11 +1480,6 @@ O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É 
 
 O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
-Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ será crucial para calcular nodos de autenticação à esquerda utilizando apenas um cálculo de $\hh{}$. Observe que, se o pai da folha $T_{0, s}$ na altura $\tau + 1$ é um nodo à esquerda, então $\textsc{Auth}_{\tau}$ está à direita e pode ser armazenado em $\textsc{Keep}_{\tau}$. Caso $\tau = 0$, então a folha está à esquerda e servirá como parte do caminho de autenticação para sua irmã. Portanto,
-$\textsc{Auth}_{0}$ recebe $\textsc{Leafcalc}(s)$. Do contrário, a folha está à direita, e necessita calcular-se $\textsc{Auth}_{\tau}$. Neste caso, $\textsc{Auth}_{\tau - 1}$ deve existir e ser seu filho à esquerda. Resta buscar o filho à direita, que estará armazenado em $\textsc{Keep}_{\tau - 1}$. Portanto, $\textsc{Auth}_{\tau}$ pode ser calculado. Uma explicação detalhada deste processo pode ser encontrada em~\cite[2.1]{Buchmann:2008:MTT:1473109.1473114}.
-
-O cômputo de nodos à direita é feito desde as folhas, visto que nenhum dos seus nodos filho foram utilizados em caminhos de autenticação anteriores. O parâmetro $K$ é empregado nesta parte do algoritmo. Nodos cuja altura estão em $H - K \leq h \leq H - 2$ são retirados das pilhas $\textsc{Retain}_{h}$ e movidos para $\textsc{Auth}_h$. Nodos com altura $h < H - K$ fazem uso dos nodos armazenados nas instâncias $\textsc{Treehash}_{h}$, então subsequentemente inicializadas com
-os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias cujos nodos têm menor altura são atualizadas, de acordo com o critério em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado do algoritmo.
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
@@ -1520,9 +1515,17 @@ os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias 
     $\textsc{Treehash}_{k}.update()$\;
   }
 \vspace{2mm}
-  \caption{Algoritmo de travessia BDS.}
+  \caption{Travessia de árvores de Merkle BDS.}
   \label{alg:4}
 \end{algorithm}
+
+Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ será crucial para calcular nodos de autenticação à esquerda utilizando apenas um cálculo de $\hh{}$. Observe que, se o pai da folha $T_{0, s}$ na altura $\tau + 1$ é um nodo à esquerda, então $\textsc{Auth}_{\tau}$ está à direita e pode ser armazenado em $\textsc{Keep}_{\tau}$. Caso $\tau = 0$, então a folha está à esquerda e servirá como parte do caminho de autenticação para sua irmã. Portanto,
+$\textsc{Auth}_{0}$ recebe $\textsc{Leafcalc}(s)$. Do contrário, a folha está à direita, e necessita calcular-se $\textsc{Auth}_{\tau}$. Neste caso, $\textsc{Auth}_{\tau - 1}$ deve existir e ser seu filho à esquerda. Resta buscar o filho à direita, que estará armazenado em $\textsc{Keep}_{\tau - 1}$. Portanto, $\textsc{Auth}_{\tau}$ pode ser calculado. Uma explicação detalhada deste processo pode ser encontrada em~\cite[2.1]{Buchmann:2008:MTT:1473109.1473114}.
+
+O cômputo de nodos à direita é feito desde as folhas, visto que nenhum dos seus nodos filho foram utilizados em caminhos de autenticação anteriores. O parâmetro $K$ é empregado nesta parte do algoritmo. Nodos cuja altura estão em $H - K \leq h \leq H - 2$ são retirados das pilhas $\textsc{Retain}_{h}$ e movidos para $\textsc{Auth}_h$. Nodos com altura $h < H - K$ fazem uso dos nodos armazenados nas instâncias $\textsc{Treehash}_{h}$, então subsequentemente inicializadas com
+os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias cujos nodos têm menor altura são atualizadas, de acordo com o critério em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado do algoritmo.
+
+Finalmente, é possível descrever o esquema. 
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
