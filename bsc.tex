@@ -1459,8 +1459,6 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
 
 Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+~\cite{xmssplus}, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
 
-A notação proposta é retirada de~\cite{Bernstein:2008:PQC:1522375}. Considere o algoritmo~\ref{alg:3}, e a representação usual para nodos em uma árvore de Merkle $T$. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
-
 O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas: 
 
 \begin{enumerate}[label=(\roman*)]
@@ -1480,7 +1478,15 @@ As listas são munidas da operação $remove(\cdot)$, cujo argumento representa 
 
 O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
 
-O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos.
+O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
+
+\begin{enumerate}
+
+  \item[] \emph{Cômputo de nodos à esquerda.}
+  
+  \item[] \emph{Cômputo de nodos à direita.}
+  
+\end{enumerate}
 
 \todo[inline]{here goes bds}
 
