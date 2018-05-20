@@ -1461,7 +1461,7 @@ Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a varia
 
 A notação proposta é retirada de~\cite{Bernstein:2008:PQC:1522375}. Considere o algoritmo~\ref{alg:3}, e a representação usual para nodos em uma árvore de Merkle $T$. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
-O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguines estruturas: 
+O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas: 
 
 \begin{enumerate}[label=(\roman*)]
 
@@ -1478,7 +1478,7 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
 As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
-
+O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} é inicializado com o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$.
 
 \todo[inline]{here goes bds}
 
