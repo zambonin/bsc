@@ -1423,10 +1423,8 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
     \centering
     \begin{tikzpicture}[
         every tree node/.style={draw,circle,minimum size=0.75cm},
-        level distance=1cm,
-        level 1/.style={sibling distance=1.5cm},
-        level 2/.style={sibling distance=1.25cm}, 
-        level 3/.style={sibling distance=1cm}, 
+        level distance=1.5cm,
+        sibling distance=0.5cm,
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
     ]    \Tree
     [.{}
