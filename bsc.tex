@@ -57,7 +57,7 @@
 
 \newpage
 
-{\Huge
+{\large
 \begin{itemize}
     \item organizar sumário (siglas) e referências (nome inteiro dos autores);
     \item organizar listas de abreviaturas e siglas, figuras, algoritmos, tabelas, símbolos;
@@ -1234,9 +1234,8 @@ altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
 \begin{equation}
     T_{h,j}, \; 0 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1,
 \end{equation}
-(o $j$-ésimo à esquerda na altura $h$), e uma função de resumo criptográfico $\fhash{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
-intermediários a partir de seus filhos:
-\begin{equation}
+e uma função de resumo criptográfico $\fhash{m}$. As folhas são construídas a partir do resumo de qualquer dado $\mathcal{D}$, e seus nós
+intermediários a partir de seus filhos:\begin{equation}
   \begin{split}
     T_{0, j} &= \hash{\mathcal{D}_j}, \text{ e } \\
     T_{h, j} &= \hash{T_{h - 1, 2j} \concat T_{h - 1, 2j + 1}},
