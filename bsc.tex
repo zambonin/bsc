@@ -1397,7 +1397,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
     \draw[thick,->] (ah2) -- (ah1);
     \draw[thick,->] (ah1) -- (ah0);
     \end{tikzpicture}
-    \caption{Caminho de autenticação para um nodo de índice $i = 3$.}
+    \caption{Caminho de autenticação para a folha de índice $i = 3$.}
     \label{fig:9}
 \end{figure}
 
@@ -1419,7 +1419,7 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 \mathcal{K}_m\}$, uma árvore de Merkle $T$ com altura $H$ e uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$. Um gerador de números pseudoaleatórios \textsc{Gen} é construído a partir de $f$ a fim de assegurar sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura única \textsc{Ots} é definido como \textsc{Wots+}.
 
-Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada, como visto na Figura~\ref{fig:8}. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
+Observe que, por conta de sua semelhança com o esquema SPR-MSS, a estrutura da árvore de Merkle é modificada. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
 \begin{equation}
     T_{h, j} = h_k(r_i \oplus (T_{h - 1, 2j} \concat T_{h - 1, 2j + 1})),
       \; 1 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1.
@@ -1444,6 +1444,61 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de \emph{hiper-árvores} é proposto em diversos trabalhos, com o intuito de encadear camadas de árvores de Merkle, conectadas por uma instância de esquema de assinatura única, de tal forma que a folha da árvore superior assina a raiz da árvore inferior.
 
 A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na forma do esquema CMSS, que habilita a assinatura de até $2^{40}$ mensagens com um par de chaves, relacionado a uma estrutura virtual de duas camadas, onde apenas uma árvore na parte inferior é criada de cada vez a fim de reduzir requisitos de armazenamento. Posteriormente, este esquema é generalizado em~\cite{Buchmann:2007:MSV:1419765.1419769} como GMSS, que utiliza um número arbitrário de camadas de árvores, com alturas e parâmetros de esquemas de assinatura única diferentes para cada uma destas, atingindo o número de $2^{80}$ mensagens por par de chaves.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every tree node/.style={draw,circle,minimum size=0.75cm},
+        level distance=1.5cm,
+        sibling distance=0.5cm,
+        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+    ]    \Tree
+    [.{}
+        [.{}
+            [.{} {} {} ]
+            [.{} {} {} ]
+        ]
+        [.{} 
+            [.{} {} {} ]
+            [.{} {} {} ]
+        ]
+    ]
+    \end{tikzpicture}
+    \caption{Caminho de autenticação para a folha $j = 3$ em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$.}
+    \label{fig:8}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        every tree node/.style={draw,circle,minimum size=0.75cm},
+        level distance=1cm,
+        level 1/.style={sibling distance=1.5cm},
+        level 2/.style={sibling distance=1.25cm}, 
+        level 3/.style={sibling distance=1cm}, 
+        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+    ]
+    \Tree
+    [.\node[name=ah0,label=below:{$\pk{}$}]{};
+        [.\node[name=ah1]{};
+            [.\node[dashdotted,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
+            [.\node[name=ah2]{};
+                \node[dashdotted,label=below:{$\textsc{Auth}_0$}]{};
+                \node[name=orig,label=below:{$i = 3$},thick]{};
+            ]
+        ]
+        [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{}; 
+            [.{} {} {} ]
+            [.{} {} {} ]
+        ]
+    ]
+    \draw[thick,->] (orig) -- (ah2);
+    \draw[thick,->] (ah2) -- (ah1);
+    \draw[thick,->] (ah1) -- (ah0);
+    \end{tikzpicture}
+    \caption{Caminho de autenticação para a folha de índice $i = 3$.}
+    \label{fig:8}
+\end{figure}
 
 Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+~\cite{xmssplus}, com uma árvore superior e inferior, e posteriormente, a versão XMSS$^{MT}$~\cite{xmssmt}, generalizada para qualquer número de camadas de árvores, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
 
