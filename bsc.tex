@@ -1480,7 +1480,7 @@ As listas são munidas da operação $remove(\cdot)$, cujo argumento representa 
 
 O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
 
-Nodos à esquerda podem ser calculados de maneira muito mais simples; portanto, o cálculo depende da sua posição na árvore. O algoritmo~\ref{alg:4} contempla ambos os casos, contendo uma descrição detalhada do BDS.
+O cálculo de nodos intermediários depende da sua posição na árvore. O algoritmo~\ref{alg:4} contempla ambos os casos, contendo uma descrição detalhada do BDS.
 
 \todo[inline]{here goes bds}
 
