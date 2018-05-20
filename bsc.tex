@@ -1461,7 +1461,11 @@ Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a varia
 
 A notação proposta é retirada de~\cite{Bernstein:2008:PQC:1522375}. Considere o algoritmo~\ref{alg:3}, e a representação usual para nodos em uma árvore de Merkle $T$. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
-O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo,
+O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$ seja substituída por 
+
+permitindo a redução de $2^H - 1$ chamadas de $\textsc{Treehash}_{\star}$ para apenas $\sfrac{H - K}{2}$.
+
+e o estado $\textsc{State}_{\textsc{BDS}}$, composto das estruturas $\textsc{Auth}$
 
 \todo[inline]{here goes bds}
 
