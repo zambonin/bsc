@@ -1449,21 +1449,6 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
 Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+~\cite{xmssplus}, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
 
 \begin{algorithm}[ht]
-  \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
-  \KwResult{\textbf{S}, pilha atualizada}
-
-    $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
-    \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
-      $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
-      $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
-    }
-    $\mathbf{S}.push(\textsc{Leaf})$\;
-  
-  \caption{Algoritmo \textsc{Treehash}.}
-  \label{alg:3}
-\end{algorithm}
-
-\begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
