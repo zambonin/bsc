@@ -1542,8 +1542,6 @@ Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é
 
 Por fim, é possível notar que todos os esquemas baseados em árvores de Merkle discutidos apresentam gerenciamento de estado. Esquemas mais complexos, como a família SPHINCS~\cite{Bernstein2015,sphincsplus}, utilizam várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore tem valor $H = 60$, aumentando substancialmente o número de assinaturas que podem ser feitas com apenas um par de chaves; nos nodos folha mais inferiores, o esquema HORST é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se no cálculo de assinaturas entre árvores intermediárias.
 
-\todo[inline]{at the end of this thing, talk about sphincs and sphincs+ and how they remove the state}
-
 \chapter{Otimização do esquema Winternitz}
 
 \section{Descrição das abordagens}
