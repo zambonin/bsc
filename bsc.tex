@@ -1445,28 +1445,6 @@ Uma das principais limitações dos esquemas baseados em árvores de Merkle é a
 
 A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na forma do esquema CMSS, que habilita a assinatura de até $2^{40}$ mensagens com um par de chaves, relacionado a uma estrutura virtual de duas camadas, onde apenas uma árvore na parte inferior é criada de cada vez a fim de reduzir requisitos de armazenamento. Posteriormente, este esquema é generalizado em~\cite{Buchmann:2007:MSV:1419765.1419769} como GMSS, que utiliza um número arbitrário de camadas de árvores, com alturas e parâmetros de esquemas de assinatura única diferentes para cada uma destas, atingindo o número de $2^{80}$ mensagens por par de chaves.
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[
-        every tree node/.style={draw,circle,minimum size=0.75cm},
-        level distance=1.5cm,
-        sibling distance=0.5cm,
-        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-    ]    \Tree
-    [.{}
-        [.{}
-            [.{} {} {} ]
-            [.{} {} {} ]
-        ]
-        [.{} 
-            [.{} {} {} ]
-            [.{} {} {} ]
-        ]
-    ]
-    \end{tikzpicture}
-    \label{fig:8}
-\end{figure}
-
 \begin{figure}
     \centering
     \begin{tikzpicture}[
@@ -1495,7 +1473,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \draw[thick,->] (ah2) -- (ah1);
     \draw[thick,->] (ah1) -- (ah0);
     \end{tikzpicture}
-    \caption{Caminho de autenticação para a folha $j = 3$ em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$.}
+    \caption{Caminho de autenticação para a folha $j = 2 \cdot 2^{h_0} + 3$ em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$.}
     \label{fig:8}
 \end{figure}
 
