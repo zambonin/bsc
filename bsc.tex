@@ -1255,6 +1255,8 @@ e um nodo $n$ com a rotina $n.height()$, que retorna sua altura em $T$.
 O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
 com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
 calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
+Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
+
 Ao seu estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
 
 \begin{algorithm}[ht]
@@ -1288,10 +1290,8 @@ Ao seu estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
 O algoritmo~\ref{alg:3} demonstra a versão completa de \textsc{Treehash}.
 Em qualquer momento de sua execução, o número máximo de
 nodos armazenados em \textbf{S} será $h$, e os nodos armazenados neste instante
-são chamados de nodos cauda (\emph{tail nodes}). Note que é possível executar apenas
-a parte interna deste algoritmo, considerando um índice de folha qualquer,
-a fim de modificar \textbf{S}. Esta estratégia será considerada futuramente,
-em algoritmos de travessia para árvores de Merkle.
+são chamados de nodos cauda (\emph{tail nodes}). Note que é possível executar este
+algorito repetida
 
 \subsection{O esquema de Merkle}
 
