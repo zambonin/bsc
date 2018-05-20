@@ -1385,7 +1385,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
             [.\node[dashdotted,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
             [.\node[name=ah2]{};
                 \node[dashdotted,label=below:{$\textsc{Auth}_0$}]{};
-                \node[name=orig,label=below:{$i = 3$},thick]{};
+                \node[name=orig,label=below:{$i = 3$},thick]{$\sigma$};
             ]
         ]
         [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{}; 
@@ -1452,10 +1452,10 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
         level distance=1cm,
     ]
-    \Tree[. \node(root){b}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \begin{scope}[yshift=4cm,xshift=1.5cm]
     \Tree[.{} [.{} [.{} {} {} ] [.{} {} \node(leaf){a}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \end{scope}
+    \Tree[. \node(root){b}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} \node(msg){m}; {} ] [.{} {} {} ] ] ]
     \draw[->](leaf) to (root);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
