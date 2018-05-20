@@ -1453,10 +1453,10 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         level distance=1cm,
     ]
     \begin{scope}[yshift=4cm,xshift=1.5cm]
-    \Tree[. \node[label={below:$\pk{}$}]{}; [.{} [.{} {} {} ] [.{} {} \node[name=leaf]{$\sigma_1$}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
+    \Tree[. \node[label={below:$\pk{}$}]{}; [.{} [. {} {} {} ] [.{} \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \end{scope}
-    \Tree[. \node(root){$T_{h_0, 0}$}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} \node(msg){m}; {} ] [.{} {} {} ] ] ]
-    \draw[->](leaf) to (root);
+    \Tree[. \node(root){}; [. \node[dashdotted]{}; [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} \node(msg){$\sigma_1$}; \node[dashdotted]{}; ] [. \node[dashdotted]{}; {} {} ] ] ]
+    \draw[->](root) to (leaf);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
