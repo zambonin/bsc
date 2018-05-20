@@ -1460,7 +1460,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         ]
         [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{}; 
             [.{} {} {} ]
-            [.{} {} \node[name=future]{} ]
+            [.{} {} {} ]
         ]
     ]
     \end{scope}
@@ -1475,7 +1475,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         ]
     ]
     \node[name=closed, below of=dangling] {$\times$};
-    \node[name=virtual, below of=future, draw, dashed] {};
+    \node[name=virtual, below=
     \draw[->, thick] (p4) to (root);
     \draw[->, thick] (p3) to (p4);
     \draw[->, thick] (leaf) to (p3);
