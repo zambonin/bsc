@@ -1259,22 +1259,22 @@ calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ c
 \begin{algorithm}[ht]
   \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
   \KwResult{\textbf{S}, pilha atualizada}
-
+\vspace{2mm}
     $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
     \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
       $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
       $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
     }
     $\mathbf{S}.push(\textsc{Leaf})$\;
-  
-  \caption{$\textsc{Treehash}_h$ para uma folha de índice $h$.}
+\vspace{2mm}  
+  \caption{Funcionamento de $\textsc{Treehash}_h$.}
   \label{alg:3}
 \end{algorithm}
 
 \begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
   \KwResult{$T_{H, 0}$, o nodo raiz}
-
+\vspace{2mm}
   \For{$i \leftarrow 0$ \KwTo $2^{H} - 1$}{
     $\mathbf{S} \longleftarrow \textsc{Treehash}_{i}(\mathbf{S})$\;
   }
