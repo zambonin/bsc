@@ -1535,11 +1535,9 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
   \textsc{Next} = \big(s^{n}_{0}, \dots, s^{n}_{d - 2}, \textsc{Treehash}^{n}_{0}, \dots, \textsc{Treehash}^{n}_{d - 2}, \\
   \textsc{State}_{\textsc{BDS}}^{0, n}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 2, n}\big),
   \end{multline}
-  onde $n$ denota a próxima árvore a ser utilizada na camada $i$. Finalmente, $\sk{} = (\textbf{s}, \textsc{State}, \Sigma, \textsc{Next})$ e $\pk{} = (T_{d - 1, 0}, \mathbf{r})$.
+  onde $n$ denota a próxima árvore a ser utilizada na camada $i$. Finalmente, $\sk{} = (\textbf{s}, \textsc{State}, \Sigma, \textsc{Next})$ e $\pk{} = (T_{h_{d - 1}, 0}, \mathbf{r})$.
   
-  a fim de calcular o valor $T_{h_{d - 1}, 0}$.
-  
-  \item[] \emph{Geração da assinatura.}
+  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. A assinatura 
   
   \item[] \emph{Verificação da assinatura.}
     
