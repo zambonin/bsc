@@ -1453,7 +1453,10 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         level distance=1cm,
     ]
     \begin{scope}[yshift=4cm,xshift=1.5cm]
-    \Tree[. \node[label={below:$\pk{}$}]{}; [.{} [. {} {} {} ] [.{} \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
+    \Tree[. \node[label={below:$\pk{}$}]{};
+        [.{} [. {} {} {} ] [.{} \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ] ]
+        [.{} [.{} {} {} ] [.{} {} {} ] ]
+    ]
     \end{scope}
     \Tree[. \node(root){}; [. \node[dashdotted]{}; [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} \node(msg){$\sigma_1$}; \node[dashdotted]{}; ] [. \node[dashdotted]{}; {} {} ] ] ]
     \draw[->](root) to (leaf);
@@ -1547,8 +1550,6 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a hiper-árvore, $\textsc{Ots}_{\sigma}^{j}$ é aferida a fim de construir $\textsc{Ots}_{\pk{}}$. Com este nodo e $\textsc{Auth}^{0}$, a raiz da árvore é construída, a fim de verificar a primeira assinatura em $\Sigma$. Este processo é  repetido $d - 1$ vezes, utilizando todos os caminhos de autenticação e assinaturas em $\Sigma$ fornecidos por $\sigma$, e a saída da última iteração é comparada com $T_{h_{d - 1}, 0}$. A assinatura é válida se e somente se estes valores forem iguais. Este processo pode ser visualizado na Figura~\ref{fig:8}.
     
 \end{enumerate}
-
-\todo[inline]{visualização de multiárvores}
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
