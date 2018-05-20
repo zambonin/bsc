@@ -1454,7 +1454,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     ]
     \begin{scope}[yshift=4cm,xshift=1.5cm]
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
-        [.{} 
+        [. \node[name=p4]{}; 
             [. \node[dashdotted]{}; {} {} ]
             [.{} \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ]
         ]
@@ -1474,6 +1474,9 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
             [. \node[dashdotted]{}; {} {} ]
         ]
     ]
+    \draw[->, thick] (p4) to (root);
+    \draw[->, thick] (p3) to (p4);
+    \draw[->, thick] (leaf) to (p3);
     \draw[->, thick] (halfroot) to (leaf);
     \draw[->, thick] (p2) to (halfroot);
     \draw[->, thick] (p1) to (p2);
