@@ -1248,15 +1248,6 @@ visto que qualquer mudança em um nó da
 árvore produzirá um valor distinto na raiz quando calculado novamente,
 descaracterizando a validade dos dados atrelados a esta.
 
-Para calcular nodos de maneira eficiente, não é necessário armazenar
-$T$ inteiramente. Considere a subrotina $\textsc{Leafcalc}(k), 0 \leq k \leq 2^{H} - 1$,
-que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
-e um nodo $n$ com a rotina $n.height()$, que retorna sua altura em $T$.
-O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
-com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
-calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
-Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
-
 \begin{algorithm}[ht]
   \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
   \KwResult{\textbf{S}, pilha atualizada}
@@ -1271,6 +1262,16 @@ Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
   \caption{Funcionamento de $\textsc{Treehash}_h$.}
   \label{alg:3}
 \end{algorithm}
+
+Para calcular nodos de maneira eficiente, não é necessário armazenar
+$T$ inteiramente. Considere a subrotina $\textsc{Leafcalc}(k), 0 \leq k \leq 2^{H} - 1$,
+que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
+e um nodo $n$ com a rotina $n.height()$, que retorna sua altura em $T$.
+O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
+com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
+calcula um nodo de altura $h$ em $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.
+Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
+
 
 \begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
