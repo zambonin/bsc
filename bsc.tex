@@ -58,7 +58,7 @@
 \newpage
 
 {\large
-\begin{itemize}
+\begin{enumerate}
     \item organizar sumário (siglas) e referências (nome inteiro dos autores);
     \item organizar listas de abreviaturas e siglas, figuras, algoritmos, tabelas, símbolos;
     \item adicionar elementos pré-textuais (capa, dedicatória, agradecimentos, epígrafe, resumo);
@@ -69,7 +69,7 @@
     \item slides pra defesa;
     \item atualizar informações em \texttt{tcc.inf.ufsc.br};
     \item colocar tudo em 80 caracteres e utilizar \texttt{chktex -v3};
-\end{itemize}
+\end{enumerate}
 }
 
 \newpage
@@ -1452,11 +1452,11 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
         level distance=1cm,
     ]
-    \begin{scope}[yshift=4.5cm,xshift=0.6cm]
+    \begin{scope}[yshift=4.5cm,xshift=0.59cm]
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
         [. \node[name=p4]{}; 
             [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{1}$}]{}; {} {} ]
-            [. \node[name=p3]{}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{1}$}]{}; \node[name=leaf]{$\sigma_1$}; ]
+            [. \node[name=p3]{}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{1}$}]{}; \node[name=leaf,thick]{$\sigma_1$}; ]
         ]
         [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{}; 
             [.{} {} {} ]
@@ -1470,7 +1470,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
             [.{} {} {} ]
         ]
         [. \node[name=p2]{};
-            [. \node[name=p1]{}; \node[name=sig0]{$\sigma_0$}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{0}$}]{}; ]
+            [. \node[name=p1]{}; \node[name=sig0,thick]{$\sigma_0$}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{0}$}]{}; ]
             [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{0}$}]{}; {} {} ]
         ]
     ]
