@@ -1476,9 +1476,7 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
     \item instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
 \end{enumerate}
 
-As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista;
-
-que remove o elemento no índice do argumento, desde que este seja válido; as instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}, são inicializadas por $init(\cdot)$, cujo argumento é um índice de folha, podem ser executadas por $update()$, e são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Neste caso, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
+As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha, e podem ser executadas por $update()$.  são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Neste caso, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
 \todo[inline]{here goes bds}
 
