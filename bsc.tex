@@ -1484,7 +1484,7 @@ Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ ser�
 $\textsc{Auth}_{0}$ recebe $\textsc{Leafcalc}(s)$. Do contrário, a folha está à direita, e necessita calcular-se $\textsc{Auth}_{\tau}$. Neste caso, $\textsc{Auth}_{\tau - 1}$ deve existir e ser seu filho à esquerda. Resta buscar o filho à direita, que estará armazenado em $\textsc{Keep}_{\tau - 1}$. Portanto, $\textsc{Auth}_{\tau}$ pode ser calculado. Uma explicação detalhada deste processo pode ser encontrada em~\cite[2.1]{Buchmann:2008:MTT:1473109.1473114}.
 
 O cômputo de nodos à direita é feito desde as folhas, visto que nenhum dos seus nodos filho foram utilizados em caminhos de autenticação anteriores. O parâmetro $K$ é empregado nesta parte do algoritmo. Nodos cuja altura estão em $H - K \leq h \leq H - 2$ são retirados das pilhas $\textsc{Retain}_{h}$ e movidos para $\textsc{Auth}_h$. Nodos com altura $h < H - K$ fazem uso dos nodos armazenados nas instâncias $\textsc{Treehash}_{h}$, então subsequentemente inicializadas com
-os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias cujos nodos têm menor altura são atualizadas, de acordo com o critério em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado s
+os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias cujos nodos têm menor altura são atualizadas, de acordo com o critério em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado do algoritmo.
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
