@@ -1447,7 +1447,7 @@ Uma das principais limitações dos esquemas baseados em árvores de Merkle é a
 
 A ideia original é introduzida em~\cite{} na forma do esquema CMSS, que habilita a assinatura de até $2^{40}$ mensagens com um par de chaves, relacionado a uma estrutura virtual de duas camadas, onde apenas uma árvore na parte inferior é criada de cada vez a fim de reduzir requisitos de armazenamento. Posteriormente, este esquema é generalizado em~\cite{} como GMSS, que utiliza um número arbitrário de camadas de árvores, com alturas e parâmetros de esquemas de assinatura única diferentes para cada uma destas, atingindo o número de $2^{80}$ mensagens por par de chaves.
 
-Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. 
+Naturalmente, este recurso é aplicado ao esquema XMSS a fim de produzir a variante XMSS+, e posteriormente, a versão generalizada XMSS$^{MT}$, abordada abaixo. Para melhor entendimento deste esquema, o algoritmo
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha onde $0 \leq s \leq 2^{H} - 2$; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
