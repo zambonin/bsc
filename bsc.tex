@@ -1478,7 +1478,7 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
 As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
-O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} é inicializado com o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$.
+O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias
 
 \todo[inline]{here goes bds}
 
