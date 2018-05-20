@@ -1456,7 +1456,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
         [. \node[name=p4]{}; 
             [. \node[dashdotted]{}; {} {} ]
-            [.{} \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ]
+            [. \node[name=p3]{}; \node[dashdotted]{}; \node[name=leaf]{$\sigma_1$}; ]
         ]
         [. \node[dashdotted]{}; 
             [.{} {} {} ]
@@ -1465,13 +1465,13 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     ]
     \end{scope}
     \Tree[. \node(halfroot){};
-        [. \node[dashdotted]{};
+        [. \node[dashdotted,label=left:{$\textsc{Auth}_{2}^{0}$}]{};
             [.{} {} {} ]
             [.{} {} {} ]
         ]
         [. \node[name=p2]{};
-            [. \node[name=p1]{}; \node[name=sig0]{$\sigma_0$}; \node[dashdotted]{}; ]
-            [. \node[dashdotted]{}; {} {} ]
+            [. \node[name=p1]{}; \node[name=sig0]{$\sigma_0$}; \node[dashdotted,label=below:{$\textsc{Auth}_{1}^{0}$}]{}; ]
+            [. \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{0}$}]{}; {} {} ]
         ]
     ]
     \draw[->, thick] (p4) to (root);
