@@ -1424,8 +1424,8 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
     \begin{tikzpicture}
         \node[draw,circle,minimum size=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
         \node[draw,circle,minimum size=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
-        \node[draw,minimum size=0.5cm] (concat) at (2, -0.75) {$\concat$};
-        \node[draw,minimum size=0.5cm] (oplus) at (2, -0.25) {$\oplus$};
+        \node[draw,minimum size=0.75cm] (concat) at (2, -0.75) {$\concat$};
+        \node[draw,minimum size=0.75cm] (oplus) at (2, -0.25) {$\oplus$};
         
         \draw (left) to (0.5, -0.75) to (concat);
         \draw (right) to (3.5, -0.75) to (concat);
@@ -1437,9 +1437,6 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
         \node (res) at (5.5, 0) {\scriptsize $\binwds{}$};
         \node[draw] (sig) at (0, 0) {\textsc{Sig}};
         \node[draw] (ver) at (4, 0) {\textsc{Ver}};
-        \draw[-latex] (sk) -- (sig);
-        \draw[-latex] (hm) -- (sig);
-        \draw[-latex] (sig) -- (ds);
         \draw[-latex] (ds) -- (ver);
         \draw[-latex] (pk) -- (ver);
         \draw[-latex] (ver) -- (res);
