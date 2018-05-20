@@ -1537,7 +1537,7 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
   \end{multline}
   onde $n$ denota a próxima árvore a ser utilizada na camada $i$. Finalmente, $\sk{} = (\textbf{s}, \textsc{State}, \Sigma, \textsc{Next})$ e $\pk{} = (T_{h_{d - 1}, 0}, \mathbf{r})$.
   
-  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias de $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \sigma^{T}_{1}, \textsc{Auth}^{1}, \1}, \textsc{Auth}^{d - 1})$.
+  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \dots, \textsc{Auth}^{d - 1})$.
   
   \item[] \emph{Verificação da assinatura.}
     
