@@ -1450,14 +1450,15 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \begin{tikzpicture}[
         every tree node/.style={draw,circle,minimum size=0.75cm},
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+        level distance=1cm,
     ]
     \Tree[. \node(root){b}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
-    \begin{scope}[}]
-    \Tree[.{} [.{} [.{} {} {} ] [.{} \node(leaf){a}; {} ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
+    \begin{scope}[yshift=4cm,xshift=1.5cm]
+    \Tree[.{} [.{} [.{} {} {} ] [.{} {} \node(leaf){a}; ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \end{scope}
     \draw[->](leaf) to (root);
     \end{tikzpicture}
-    \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 2 \cdot 2^{h_0} + 5$.}
+    \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
 \end{figure}
 
