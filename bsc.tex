@@ -1474,8 +1474,8 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
             [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{0}$}]{}; {} {} ]
         ]
     ]
-    \node[name=closed, below of=dangling, minimum size=0.75cm, draw, circle] {$\times$};
-    \node[name=virtual, below of=future, draw, dashed, circle] {};
+    \node[name=closed, below of=dangling] {$\times$};
+    \node[name=virtual, below of=future, draw, dashed, circle] {$\dots$};
     \draw[->, thick] (p4) to (root);
     \draw[->, thick] (p3) to (p4);
     \draw[->, thick] (leaf) to (p3);
@@ -1484,6 +1484,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \draw[->, thick] (p1) to (p2);
     \draw[->, thick] (sig0) to (p1);
     \draw[dashed] (dangling) to (closed);
+    \draw[dashed] (future) to (virtual);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
