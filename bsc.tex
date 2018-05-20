@@ -1424,7 +1424,11 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
     \begin{tikzpicture}
         \node[draw,circle,minimum size=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
         \node[draw,circle,minimum size=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
-        \draw (left) to (0.5, -1.75) to (2, -1.75);
+        \node[draw,minimum size=0.5cm] (concat) at (2, -0.75) {$\concat$};
+        \node[draw,minimum size=0.5cm] (oplus) at (2, -0.25) {$\oplus$};
+        
+        \draw (left) to (0.5, -0.75) to (concat);
+        \draw (right) to (3.5, -0.75) to (concat);
     
         \node (hm) at (-1.25, 0) {$m$};
         \node (sk) at (0, -1) {$\sk{}$};
@@ -1432,10 +1436,7 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
         \node (ds) at (2, 0) {$\sigma$};
         \node (res) at (5.5, 0) {\scriptsize $\binwds{}$};
         \node[draw] (sig) at (0, 0) {\textsc{Sig}};
-        \node[draw] (gen) at (2, -2) {\textsc{Gen}};
         \node[draw] (ver) at (4, 0) {\textsc{Ver}};
-        \draw[-latex] (gen) to (1.25, -1) to (sk);
-        \draw[-latex] (gen) to (2.75, -1) to (pk);
         \draw[-latex] (sk) -- (sig);
         \draw[-latex] (hm) -- (sig);
         \draw[-latex] (sig) -- (ds);
