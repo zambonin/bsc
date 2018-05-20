@@ -1463,11 +1463,14 @@ A notação proposta é retirada de~\cite{Bernstein:2008:PQC:1522375}. Considere
 
 O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguines estruturas: 
 
-\begin{enumerate}
-    \item 
+\begin{enumerate}[label=(\roman*)]
+
+    \item $\textsc{Auth}$, lista de tamanho $H$ que armazena o caminho de autenticação atual;
+
+    \item $\textsc{Keep}$, lista de tamanho $H - 1$
 \end{enumerate}
 
-$\textsc{Auth}$, que armazena o caminho de autenticação atual, uma lista $\textsc{Keep}$ de tamanho $H - 1$, que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda, $\textsc{Retain} = T_{H - 2, 3}$, uma pilha \textbf{S}, instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
+, uma lista $\textsc{Keep}$ de tamanho $H - 1$, que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda, $\textsc{Retain} = T_{H - 2, 3}$, uma pilha \textbf{S}, instâncias de $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$.
 
 \todo[inline]{here goes bds}
 
