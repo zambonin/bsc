@@ -1281,7 +1281,7 @@ Este processo pode ser visualizado no algoritmo~\ref{alg:3}.
   }
   $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
   \vspace{2mm}
-  \caption{\textsc{Treehash} para calcular $T_{H,0}$.}
+  \caption{\textsc{Treehash} para o cálculo de $T_{H,0}$.}
   \label{alg:5}
 \end{algorithm}
 
@@ -1290,12 +1290,8 @@ Em qualquer momento de sua execução, o número máximo de nodos armazenados em
 final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
 Note que é possível executar \textsc{Treehash} repetidamente, como visto no
 algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
-
-O algoritmo~\ref{alg:3} demonstra a versão completa de \textsc{Treehash}.
-Em qualquer momento de sua execução, o número máximo de
-nodos armazenados em \textbf{S} será $h$, e os nodos armazenados neste instante
-são chamados de nodos cauda (\emph{tail nodes}). Note que é possível executar este
-algorito repetida
+Estas estratégias serão necessárias para a travessia em árvores de dimensões
+extensas, como será abordado na seção do XMSS.
 
 \subsection{O esquema de Merkle}
 
