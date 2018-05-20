@@ -1455,7 +1455,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \Tree[.{} [.{} [.{} {} {} ] [.{} \node(leaf){a}; {} ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
     \end{scope}
     \Tree[. \node(root){b}; [.{} [.{} {} {} ] [.{} {} {} ] ] [.{} [.{} {} {} ] [.{} {} {} ] ] ]
-    \draw[->](\subtreeof{leaf}.140)..controls +(west:1) and +(east:1)..(root);
+    \draw[->](\subtreeof{leaf}.140) to (root);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 2 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
