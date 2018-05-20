@@ -1455,7 +1455,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \begin{scope}[yshift=4.5cm,xshift=0.59cm]
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
         [. \node[name=p4]{}; 
-            [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{1}$}]{}; {} {} ]
+            [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{1}$}]{}; \node[name=dangling]{}; {} ]
             [. \node[name=p3]{}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{1}$}]{}; \node[name=leaf,thick]{$\sigma_1$}; ]
         ]
         [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{}; 
@@ -1481,7 +1481,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     \draw[->, thick] (p2) to (halfroot);
     \draw[->, thick] (p1) to (p2);
     \draw[->, thick] (sig0) to (p1);
-    \draw[dashed] (p1) to (0, 0);
+    \draw[dashed] (dangling) to ++(0, -1);
     \end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 3 \cdot 2^{h_0} + 5$.}
     \label{fig:8}
