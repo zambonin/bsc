@@ -1530,16 +1530,16 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
   \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de bits aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Sementes para cada camada da hiper-árvore também são escolhidas desta maneira: $\textbf{s} = (s_0, \dots, s_{d - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, e estados do algoritmo BDS são inicializados: $\textsc{State} = (\textsc{State}_{\textsc{BDS}}^{0}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 1})$. Utilizando instâncias do algoritmo \textsc{Treehash} e a tupla $\textbf{s}$ a fim de criar os pares de chaves de \textsc{Wots+}, os valores $T_{h_{i}, 0}, \; 0 \leq i \leq d - 2$ são calculados e assinados pela primeira folha da árvore superior. Estas assinaturas são então extraídas como $\Sigma = (\sigma_{1}^{T}, \dots, \sigma_{d - 1}^{T})$.
   
-  Note que apenas as assinaturas das primeiras raízes à esquerda são armazenadas, visto que será a primeira árvore a ser utilizada para assinar mensagens. Para facilitar a construção de futuros caminhos de autenticação irmãs em camadas interiores, sementes pseudoaleatórias, estados do algoritmo BDS e instâncias do algoritmo \textsc{Treehash} são também armazenados em uma estrutura 
+  Note que apenas as assinaturas das primeiras raízes à esquerda são armazenadas, visto que será a primeira árvore a ser utilizada para assinar mensagens. Para facilitar a construção de futuros caminhos de autenticação e árvores intermediárias, sementes pseudoaleatórias, estados do algoritmo BDS e instâncias do algoritmo \textsc{Treehash} são também armazenados em uma estrutura 
   \begin{multline}
   \textsc{Next} = \big(s^{n}_{0}, \dots, s^{n}_{d - 2}, \textsc{Treehash}^{n}_{0}, \dots, \textsc{Treehash}^{n}_{d - 2}, \\
   \textsc{State}_{\textsc{BDS}}^{0, n}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 2, n}\big),
   \end{multline}
   onde $n$ denota a próxima árvore a ser utilizada na camada $i$. Finalmente, $\sk{} = (\textbf{s}, \textsc{State}, \Sigma, \textsc{Next})$ e $\pk{} = (T_{h_{d - 1}, 0}, \mathbf{r})$.
   
-  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \dots, \textsc{Auth}^{d - 1})$. A árvore deve ser então inteiramente atualizada através dos algoritmos \textsc{Treehash} e BDS, modificando os estados. Em especial, caso a última folha de uma árvore 
+  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \dots, \textsc{Auth}^{d - 1})$. A árvore deve ser então inteiramente atualizada através dos algoritmos \textsc{Treehash} e BDS, modificando os estados e tornando a próxima folha disponível para uso. Em especial, caso a última folha de uma árvore for utilizada, isto significa que uma nova árvore deve ser criada. Assim, a chave privada deve ser atualizada com novos elementos $\textbf{s}', \textsc{State}', \Sigma', \textsc{Next}'$. Mais detalhes sobre este processo podem ser encontrados em~\cite{hu
   
-  \item[] \emph{Verificação da assinatura.}
+  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a hiper-árvore, 
     
 \end{enumerate}
 
