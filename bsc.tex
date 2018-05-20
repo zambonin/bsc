@@ -1480,6 +1480,8 @@ O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É 
 
 O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
+Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ será crucial para calcular nodos de autenticação à esquerda utilizando apenas um cálculo de $\hh{}$. Observe que, se o pai da folha $T{0, s}$ na altura $\tau + 1$ é um nodo à esquerda, então $\textsc{Auth}_{\tau}$ está à direita e pode ser armazenado em $\textsc{Keep}_{\tau}$.
+
 \begin{enumerate}
 
   \item[] \emph{Cômputo de nodos à esquerda.}
@@ -1493,7 +1495,7 @@ O cálculo de nodos intermediários depende se este está à esquerda ou à dire
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
   $\tau \longleftarrow max(\{2^h \mid s + 1 : h \in 1, \dots, H\})$\;
-  \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor$ \textbf{e} $\tau < H - 1$}{
+  \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor \equiv 0 \pmod{2}$ \textbf{e} $\tau < H - 1$}{
     $\textsc{Keep}_{\tau} \longleftarrow \textsc{Auth}_{\tau}$\;
   }
   \uIf{$\tau = 0$}{
