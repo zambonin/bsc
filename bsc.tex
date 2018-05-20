@@ -1465,24 +1465,24 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
     \item $\textsc{Auth}$, lista de tamanho $H$ que armazena o caminho de autenticação atual;
 
-    \item $\textsc{Keep}$, lista de tamanho $H - 1$ que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda;
+    \item $\textsc{Keep}$, lista de tamanho $H - 1$ que armazena nodos ºteis para o cÃ¡lculo de nodos de autenticaÃ§Ã£o Ã  esquerda;
     
-    \item $\{\textsc{Retain}_{h} : h \in H - K, \dots, H - 2\}$, pilhas com nodos à direita perto da raiz;
+    \item $\{\textsc{Retain}_{h} : h \in H - K, \dots, H - 2\}$, pilhas com nodos Ã  direita perto da raiz;
     
-    \item \textbf{S}, pilha munida das operações usuais;
+    \item \textbf{S}, pilha munida das operaÃ§Ãµes usuais;
     
-    \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, i.e. várias instâncias do algoritmo~\ref{alg:3}.
+    \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, i.e. vÃ¡rias instÃ¢ncias do algoritmo~\ref{alg:3}.
 \end{enumerate}
 
-As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
+As listas sÃ£o munidas da operaÃ§Ã£o $remove(\cdot)$, cujo argumento representa um Ã­ndice vÃ¡lido de acordo com o tamanho da lista. As instÃ¢ncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. SÃ£o inicializadas por $init(\cdot)$, cujo argumento Ã© um Ã­ndice de folha que criarÃ¡ o nodo \textsc{Leaf} no algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, sÃ£o munidas da funÃ§Ã£o $height()$, que retorna a menor altura entre nodos localizados nesta instÃ¢ncia. Em casos anÃ´malos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instÃ¢ncia nÃ£o tiver sido inicializada ou jÃ¡ tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
-O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
+O algoritmo retorna o caminho de autenticaÃ§Ã£o para a folha $T_{0, s + 1}$. Ã inicializado na etapa de geraÃ§Ã£o de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticaÃ§Ã£o para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instÃ¢ncias $\textsc{Treehash}_{h}$ tÃªm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. ExecuÃ§Ãµes posteriores do algoritmo mantÃ©m $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
 
-O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
+O cÃ¡lculo de nodos intermediÃ¡rios depende se este estÃ¡ Ã  esquerda ou Ã  direita. A descriÃ§Ã£o detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e serÃ¡ discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ Ã© a altura do primeiro pai Ã  esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticaÃ§Ã£o para $T_{0, j + 1}$ necessita de novos nodos. Nodos Ã  direita sÃ£o necessÃ¡rios para alturas atÃ© $\tau - 1$, e um nodo Ã  esquerda na altura $\tau$. Caso este nodo esteja Ã  esquerda, entÃ£o $\tau = 0$, e do contrÃ¡rio, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
 \begin{algorithm}[ht]
-  \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
-  \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
+  \KwData{$H$, altura da Ã¡rvore $T$; $K$, parÃ¢metro de compensaÃ§Ã£o; $s$, Ã­ndice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
+  \KwResult{$\textsc{Auth}$, o caminho de autenticaÃ§Ã£o para a folha $s + 1$}
 \vspace{2mm}
   $\tau \longleftarrow max(\{2^h \mid s + 1 : h \in 1, \dots, H\})$\;
   \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor \equiv 0 \pmod{2}$ \textbf{e} $\tau < H - 1$}{
@@ -1514,45 +1514,45 @@ O cálculo de nodos intermediários depende se este está à esquerda ou à dire
     $\textsc{Treehash}_{k}.update()$\;
   }
 \vspace{2mm}
-  \caption{Travessia de árvores de Merkle BDS.}
+  \caption{Travessia de Ã¡rvores de Merkle BDS.}
   \label{alg:4}
 \end{algorithm}
 
-Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ será crucial para calcular nodos de autenticação à esquerda utilizando apenas um cálculo de $\hh{}$. Observe que, se o pai da folha $T_{0, s}$ na altura $\tau + 1$ é um nodo à esquerda, então $\textsc{Auth}_{\tau}$ está à direita e pode ser armazenado em $\textsc{Keep}_{\tau}$. Caso $\tau = 0$, então a folha está à esquerda e servirá como parte do caminho de autenticação para sua irmã. Portanto,
-$\textsc{Auth}_{0}$ recebe $\textsc{Leafcalc}(s)$. Do contrário, a folha está à direita, e necessita calcular-se $\textsc{Auth}_{\tau}$. Neste caso, $\textsc{Auth}_{\tau - 1}$ deve existir e ser seu filho à esquerda. Resta buscar o filho à direita, que estará armazenado em $\textsc{Keep}_{\tau - 1}$. Portanto, $\textsc{Auth}_{\tau}$ pode ser calculado. Uma explicação detalhada deste processo pode ser encontrada em~\cite[2.1]{Buchmann:2008:MTT:1473109.1473114}.
+Para computar os nodos Ã  esquerda, a utilizaÃ§Ã£o da lista $\textsc{Keep}$ serÃ¡ crucial para calcular nodos de autenticaÃ§Ã£o Ã  esquerda utilizando apenas um cÃ¡lculo de $\hh{}$. Observe que, se o pai da folha $T_{0, s}$ na altura $\tau + 1$ Ã© um nodo Ã  esquerda, entÃ£o $\textsc{Auth}_{\tau}$ estÃ¡ Ã  direita e pode ser armazenado em $\textsc{Keep}_{\tau}$. Caso $\tau = 0$, entÃ£o a folha estÃ¡ Ã  esquerda e servirÃ¡ como parte do caminho de autenticaÃ§Ã£o para sua irmÃ£. Portanto,
+$\textsc{Auth}_{0}$ recebe $\textsc{Leafcalc}(s)$. Do contrÃ¡rio, a folha estÃ¡ Ã  direita, e necessita calcular-se $\textsc{Auth}_{\tau}$. Neste caso, $\textsc{Auth}_{\tau - 1}$ deve existir e ser seu filho Ã  esquerda. Resta buscar o filho Ã  direita, que estarÃ¡ armazenado em $\textsc{Keep}_{\tau - 1}$. Portanto, $\textsc{Auth}_{\tau}$ pode ser calculado. Uma explicaÃ§Ã£o detalhada deste processo pode ser encontrada em~\cite[2.1]{Buchmann:2008:MTT:1473109.1473114}.
 
-O cômputo de nodos à direita é feito desde as folhas, visto que nenhum dos seus nodos filho foram utilizados em caminhos de autenticação anteriores. O parâmetro $K$ é empregado nesta parte do algoritmo. Nodos cuja altura estão em $H - K \leq h \leq H - 2$ são retirados das pilhas $\textsc{Retain}_{h}$ e movidos para $\textsc{Auth}_h$. Nodos com altura $h < H - K$ fazem uso dos nodos armazenados nas instâncias $\textsc{Treehash}_{h}$, então subsequentemente inicializadas com
-os nodos $s + 1 + 3 \cdot 2^h$, se necessário. Finalmente, algumas instâncias cujos nodos têm menor altura são atualizadas, de acordo com o critério em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado do algoritmo.
+O cÃ´mputo de nodos Ã  direita Ã© feito desde as folhas, visto que nenhum dos seus nodos filho foram utilizados em caminhos de autenticaÃ§Ã£o anteriores. O parÃ¢metro $K$ Ã© empregado nesta parte do algoritmo. Nodos cuja altura estÃ£o em $H - K \leq h \leq H - 2$ sÃ£o retirados das pilhas $\textsc{Retain}_{h}$ e movidos para $\textsc{Auth}_h$. Nodos com altura $h < H - K$ fazem uso dos nodos armazenados nas instÃ¢ncias $\textsc{Treehash}_{h}$, entÃ£o subsequentemente inicializadas com
+os nodos $s + 1 + 3 \cdot 2^h$, se necessÃ¡rio. Finalmente, algumas instÃ¢ncias cujos nodos tÃªm menor altura sÃ£o atualizadas, de acordo com o critÃ©rio em~\cite[4.5]{Bernstein:2008:PQC:1522375}, a fim de adicionar nodos relevantes ao estado do algoritmo.
 
-Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m$, a família de funções geradoras de números pseudoaleatórios $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, uma função de resumo $\hh{} : \binwds{2m} \longrightarrow \binwds{m}$, o esquema de assinatura única \textsc{Ots} definido como \textsc{Wots+}, o número de camadas da hiper-árvore $d \in \mathbb{N}^{*}$, e para cada camada $0 \leq i \leq d - 1$, a altura da árvore $h_i$, o parâmetro de Winternitz $w_i$, e consequentemente $t_i$, e o parâmetro BDS $k_i, \; k_i < h_i, \; \sfrac{h_i - k_i}{2} \equiv 0 \pmod{2}$.
+Finalmente, Ã© possÃ­vel descrever o esquema. Tome o parÃ¢metro de seguranÃ§a $m$, a famÃ­lia de funÃ§Ãµes $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in \mathcal{K}_m\}$, uma funÃ§Ã£o de resumo $\hh{} : \binwds{2m} \longrightarrow \binwds{m}$, o esquema de assinatura Ãºnica \textsc{Ots} definido como \textsc{Wots+}, o nÃºmero de camadas da hiper-Ã¡rvore $d \in \mathbb{N}^{*}$, e para cada camada $0 \leq i \leq d - 1$, a altura da Ã¡rvore $h_i$, o parÃ¢metro de Winternitz $w_i$, e consequentemente $t_i$, e o parÃ¢metro BDS $k_i, \; k_i < h_i, \; \sfrac{h_i - k_i}{2} \equiv 0 \pmod{2}$. Novamente, um gerador de nÃºmeros pseudoaleatÃ³rios \textsc{Gen} Ã© construÃ­do a partir de $f$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$.
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Tome sementes 
+  \item[] \emph{GeraÃ§Ã£o de chaves.} 
   
-  \item[] \emph{Geração da assinatura.}
+  \item[] \emph{GeraÃ§Ã£o da assinatura.}
   
-  \item[] \emph{Verificação da assinatura.}
+  \item[] \emph{VerificaÃ§Ã£o da assinatura.}
     
 \end{enumerate}
 
 \todo[inline]{descrever o esquema}
-\todo[inline]{visualização de multiárvores}
+\todo[inline]{visualizaÃ§Ã£o de multiÃ¡rvores}
 
-Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
+Adicionalmente, como mencionado na seÃ§Ã£o do \textsc{Wots}, o esquema XMSS-T Ã© definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente Ã  ataques multiusuÃ¡rio. Isto Ã© realizado atravÃ©s da atribuiÃ§Ã£o de um endereÃ§o Ãºnico Ã  cada nodo na Ã¡rvore, e derivando deste um resumo criptogrÃ¡fico calculado por funÃ§Ãµes com novas noÃ§Ãµes de resistÃªncia Ã  prÃ©-imagem, segunda prÃ©-imagem e colisÃµes, a fim de reduzir as ameaÃ§as ocasionadas por este tipo de ataque.
 
-Por fim, é possível notar que todos os esquemas baseados em árvores de Merkle discutidos apresentam gerenciamento de estado. Esquemas mais complexos, como a família SPHINCS~\cite{Bernstein2015,sphincsplus}, utilizam várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore aumenta substancialmente o número de assinaturas que podem ser feitas com apenas um par de chaves; nos nodos folha mais inferiores, o esquema HORST é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se no cálculo de assinaturas entre árvores intermediárias.
+Por fim, Ã© possÃ­vel notar que todos os esquemas baseados em Ã¡rvores de Merkle discutidos apresentam gerenciamento de estado. Esquemas mais complexos, como a famÃ­lia SPHINCS~\cite{Bernstein2015,sphincsplus}, utilizam vÃ¡rias estratÃ©gias combinadas a fim de evitar esta caracterÃ­stica: a altura da hiper-Ã¡rvore aumenta substancialmente o nÃºmero de assinaturas que podem ser feitas com apenas um par de chaves; nos nodos folha mais inferiores, o esquema HORST Ã© utilizado para evitar colisÃµes entre assinaturas; o Ã­ndice de folha escolhido depende de um valor pseudoaleatÃ³rio; entre outros recursos. Entretanto, as otimizaÃ§Ãµes descritas na prÃ³xima seÃ§Ã£o tÃªm aplicaÃ§Ã£o reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas nÃ£o encontra-se no cÃ¡lculo de assinaturas entre Ã¡rvores intermediÃ¡rias.
 
-\chapter{Otimização do esquema Winternitz}
+\chapter{OtimizaÃ§Ã£o do esquema Winternitz}
 
-\section{Descrição das abordagens}
+\section{DescriÃ§Ã£o das abordagens}
 
 \todo[inline]{focus on the $R$ parameter, not the padding stuff that probably
 was already proposed in LM-OTS}
 
 \section{Resultados}
 
-\chapter{Conclusão}
+\chapter{ConclusÃ£o}
 
 \section{Trabalhos futuros}
 
