@@ -1422,8 +1422,9 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
-        \node[draw,circle,minimum size=2cm] (left) at (1, -2) {$T_{h - 1, 2j}$};
-        \node[draw,circle,minimum size=2cm] (right) at (3, -2) {$T_{h - 1, 2j + 1}$};
+        \node[draw,circle,minimum size=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
+        \node[draw,circle,minimum size=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
+        \draw (left) to (0.5, -1.75) to (2, -1.75);
     
         \node (hm) at (-1.25, 0) {$m$};
         \node (sk) at (0, -1) {$\sk{}$};
@@ -1441,7 +1442,6 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
         \draw[-latex] (ds) -- (ver);
         \draw[-latex] (pk) -- (ver);
         \draw[-latex] (ver) -- (res);
-        \draw[-latex] (in) -- (gen);
     \end{tikzpicture}
     \caption{Construção da árvore XMSS.}
     \label{fig:8}
