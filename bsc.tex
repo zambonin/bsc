@@ -1447,40 +1447,31 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
 
 \begin{figure}
     \centering
-    % \begin{tikzpicture}[
-    %     every tree node/.style={draw,circle,minimum size=0.75cm},
-    %     sibling distance=0.5cm,
-    %     level distance=1cm,
-    %     edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-    % ]
-    % \Tree
-    % [.{}
-    %     [.{} [.{} {} {} ]
-    %         [.{}
-    %             [.{}
-    %                 [.{} 
-    %                     [.{} [.{} {} {} ] [.{} {} {} ] ]
-    %                     [.{} [.{} {} {} ] [.{} {} {} ] ]
-    %                 ]
-    %             ]
-    %             {}
-    %         ]
-    %     ]
-    %     [.{} [.{} {} {} ] [.{} {} {} ] ]
-    % ]
+    \begin{tikzpicture}[
+        every tree node/.style={draw,circle,minimum size=0.75cm},
+        sibling distance=0.4
+        % level distance=1cm,
+        % level 1/.style={sibling distance=1.5cm},
+        % level 2/.style={sibling distance=1.25cm}, 
+        % level 3/.style={sibling distance=1cm}, 
+        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+    ]
+    \Tree
+    [.{}
+        [.{} [.{} {} {} ]
+            [.{}
+                [.{}
+                    [.{} 
+                        [.{} [.{} {} {} ] [.{} {} {} ] ]
+                        [.{} [.{} {} {} ] [.{} {} {} ] ]
+                    ]
+                ]
+                {}
+            ]
+        ]
+        [.{} [.{} {} {} ] [.{} {} {} ] ]
+    ]
     \end{tikzpicture}
-    
-    \begin{tikzpicture}
-\Tree [.S [.NP [.Det the ] [.N cat ] ]
-[.\node(site){VP}; [.V sat ] ] ]
-\begin{scope}[shift={(1in,0.5in)}]
-\Tree [.\node(root){VP}; VP$^\ast$
-[.PP [.P on ]
-[.NP [.Det the ] [.N mat ] ] ] ]
-\end{scope}
-\draw[->](\subtreeof{root}.140)..
-controls +(west:1) and +(east:1)..(site);
-\end{tikzpicture}
     \caption{Caminho de autenticação em uma hiper-árvore com $d = 2, h_0 = h_1 = 3$, para a folha $j = 2 \cdot 2^{h_0} + 3$.}
     \label{fig:8}
 \end{figure}
