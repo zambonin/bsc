@@ -1539,11 +1539,10 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
   
   \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \dots, \textsc{Auth}^{d - 1})$. A árvore deve ser então inteiramente atualizada através dos algoritmos \textsc{Treehash} e BDS, modificando os estados e tornando a próxima folha disponível para uso. Em especial, caso a última folha de uma árvore for utilizada, isto significa que uma nova árvore deve ser criada. Assim, a chave privada deve ser atualizada com novos elementos $\textbf{s}', \textsc{State}', \Sigma', \textsc{Next}'$. Mais detalhes sobre este processo podem ser encontrados em~\cite[2]{xmssmt}.
   
-  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a hiper-árvore, 
+  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a hiper-árvore, $\textsc{Ots}_{\sigma}^{j}$ é verificada a fim de construir $\textsc{Ots}_{\pk{}}$. Com este nodo e $\textsc{Auth}^{0}$
     
 \end{enumerate}
 
-\todo[inline]{descrever o esquema}
 \todo[inline]{visualização de multiárvores}
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
