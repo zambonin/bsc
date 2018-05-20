@@ -1421,7 +1421,24 @@ Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a 
 
 \begin{figure}[ht]
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[
+        every tree node/.style={draw,circle,minimum size=0.75cm},
+        level distance=1cm,
+        level 1/.style={sibling distance=1.5cm},
+        level 2/.style={sibling distance=1.25cm}, 
+        level 3/.style={sibling distance=1cm}, 
+        edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+    ]    \Tree
+    [.{}
+        [.{}
+            [.{} {} {} ]
+            [.{} {} {} ]
+        ]
+        [.{} 
+            [.{} {} {} ]
+            [.{} {} {} ]
+        ]
+    ]
         \node[draw,minimum width=2cm] (left) at (0.5, -2) {$T_{h - 1, 2j}$};
         \node[draw,minimum width=2cm] (right) at (3.5, -2) {$T_{h - 1, 2j + 1}$};
         \node[draw,minimum size=0.75cm] (concat) at (2, -0.75) {$\concat$};
