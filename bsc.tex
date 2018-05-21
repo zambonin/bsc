@@ -1401,7 +1401,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
     \label{fig:9}
 \end{figure}
 
-Outrossim, nota-se que o tamanho da chave pública é extremamente proibitivo e escala com o número de folhas da árvore. Para resolver esta limitação, é possível adicionar ao esquema um novo parâmetro, na forma de um gerador de números pseudoaleatórios determinístico, cuja semente será a nova chave privada~\cite[6.4.2.3]{Goldreichf:2004:FCV:975541}. Adicionalmente, este recurso implica que a árvore não necessita ser construída totalmente, posto que a assinatura de novas mensagens implica na criação dinâmica de pares de chaves para estas instâncias de esquemas de assinatura única. Caso este gerador apresente como característica o sigilo encaminhado (\emph{forward secrecy}), onde valores gerados no passado não são ameaçados caso a função seja comprometida, o esquema também será caracterizado como tal~\cite{Bernstein:2008:PQC:1522375}: chaves privadas comprometidas não implicarão na falsificação de mensagens assinadas com chaves antigas.
+Outrossim, nota-se que o tamanho da chave pública é extremamente proibitivo e escala com o número de folhas da árvore. Para resolver esta limitação, é possível adicionar ao esquema um novo parâmetro, na forma de um gerador de números pseudoaleatórios determinístico, cuja semente será a nova chave privada~\cite[6.4.2.3]{Goldreich:2004:FCV:975541}. Adicionalmente, este recurso implica que a árvore não necessita ser construída totalmente, posto que a assinatura de novas mensagens implica na criação dinâmica de pares de chaves para estas instâncias de esquemas de assinatura única. Caso este gerador apresente como característica o sigilo encaminhado (\emph{forward secrecy}), onde valores gerados no passado não são ameaçados caso a função seja comprometida, o esquema também será caracterizado como tal~\cite{Bernstein:2008:PQC:1522375}: chaves privadas comprometidas não implicarão na falsificação de mensagens assinadas com chaves antigas.
 
 Note que uma árvore de altura razoável para utilização em aplicações práticas tem seu armazenamento total impossibilitado na maioria absoluta dos dispositivos alvo, em vista da quantidade excessiva de nodos. A fim de reduzir este ônus, estruturas virtuais são empregadas, onde apenas apenas partes relevantes da árvore de Merkle em uso estão acomodadas em memória. Entretanto, é necessário que quaisquer nodos possam ser autenticados de maneira modesta, levando em conta restrições de processamento e armazenamento. Nesta fronte, um problema de travessia entre os nodos da árvore de Merkle deve ser resolvido, e a utilização de algoritmos otimizados~\cite{Buchmann:2008:MTT:1473109.1473114} é crucial na execução de alguns esquemas, visto que a extensão das árvores de assinaturas é um fator desejável na criação de novos esquemas.
 
@@ -1576,21 +1576,22 @@ Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é
 
 \section{Visão geral}
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
-      \begin{chronology}[4]{1979}{2017}{90ex}
+    \small
+      \begin{chronology}[4]{1979}{2018}{90ex}
         \event[1982]{1979}{LD-OTS, WOTS}
         \event{1982}{MSS}
-        \event[1996]{1989}{\footnotesize Theoretical results}
-        \event{2002}{HORS}
+        \event[1996]{1989}{Theoretical results}
+        \event[2002]{2001}{BiBa, HORS}
         \event[2007]{2006}{CMSS, GMSS}
         \event{2011}{XMSS}
         \event{2013}{XMSS$^{MT}$, WOTS+}
         \event{2015}{SPHINCS}
+        \event{2017}{SPHINCS+}
+        \event{2018}{test}
       \end{chronology}
-      \caption{Outline of the most important moments in hash-based digital signature schemes research, starting in 1979 with Lamport's one-time scheme, and shortly after with the work of Merkle, allowing many-time schemes through the use of hash trees. \vspace{2mm} 
-      
-      The years marked as productive for `'theoretical results`' consist primarily of research about optimal one-time signature schemes and creation of variants.}
+      \caption{Outline of the most important moments in hash-based digital signature schemes research, starting in 1979 with Lamport's one-time scheme, and shortly after with the work of Merkle, allowing many-time schemes through the use of hash trees. The years marked as productive for `'theoretical results`' consist primarily of research about optimal one-time signature schemes and creation of variants.}
 \end{figure}
 \todo[inline]{paragrafo de conclusao com a timeline dos slides, falando de outros esquemas e mencionando tambem os resultados teoricos}
 
