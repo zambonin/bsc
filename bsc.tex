@@ -6,7 +6,7 @@
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
 \usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, enumitem, parskip, tikz, tikz-qtree, xfrac}
+\usepackage{amsmath, amsfonts, chronology, enumitem, parskip, tikz, tikz-qtree, xfrac}
 
 \usepackage{todonotes}
 
@@ -1574,6 +1574,25 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
+\section{Visão geral}
+
+\begin{figure}
+      \scriptsize
+      \begin{chronology}[4]{1979}{2017}{90ex}
+        \event[1982]{1979}{LD-OTS, WOTS}
+        \event{1982}{MSS}
+        \event[1996]{1989}{\footnotesize Theoretical results}
+        \event{2002}{HORS}
+        \event[2007]{2006}{CMSS, GMSS}
+        \event{2011}{XMSS}
+        \event{2013}{XMSS$^{MT}$, WOTS+}
+        \event{2015}{SPHINCS}
+      \end{chronology}
+      \captionsetup{width=0.85\textwidth,font=scriptsize,skip=12pt}
+      \caption{Outline of the most important moments in hash-based digital signature schemes research, starting in 1979 with Lamport's one-time scheme, and shortly after with the work of Merkle, allowing many-time schemes through the use of hash trees. \vspace{2mm} 
+      
+      The years marked as productive for `'theoretical results`' consist primarily of research about optimal one-time signature schemes and creation of variants.}
+\end{figure}
 \todo[inline]{paragrafo de conclusao com a timeline dos slides, falando de outros esquemas e mencionando tambem os resultados teoricos}
 
 Por fim, é possível notar que todos os esquemas baseados em árvores de Merkle discutidos apresentam gerenciamento de estado. Esquemas mais complexos, como a família SPHINCS~\cite{Bernstein2015,sphincsplus}, utilizam várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema HORST é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winterntiz, restritos ao cálculo de assinaturas entre árvores intermediárias.
