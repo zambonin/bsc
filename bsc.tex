@@ -1598,8 +1598,7 @@ Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é
 \end{figure}
 \todo[inline]{paragrafo de conclusao com a timeline dos slides, falando de outros esquemas e mencionando tambem os resultados teoricos \\
 https://huelsing.wordpress.com/hash-based-signature-schemes/literature/
-modificar e construir uma timeline legal, pontos sem legenda sao resultados nao tao legais \\
-(1979) LD-OTS, MSS (1989) WOTS (2001) BiBa (2002) HORS (2006) CMSS (2007) GMSS(2008) SPR-MSS (2011) WOTS-PRF, XMSS (2012) XMSS+ (2013) WOTS+(2013) XMSS-MT, LMS (2015) HORST, SPHINCS (2016) XMSS-T (2017) SPHINCS+}
+modificar e construir uma timeline legal, pontos sem legenda sao resultados nao tao legais}
 
 Por fim, é possível notar que todos os esquemas baseados em árvores de Merkle discutidos apresentam gerenciamento de estado. Esquemas mais complexos, como a família SPHINCS~\cite{Bernstein2015,sphincsplus}, utilizam várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema HORST é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winterntiz, restritos ao cálculo de assinaturas entre árvores intermediárias.
 
