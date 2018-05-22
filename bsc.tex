@@ -1067,9 +1067,9 @@ autores~\cite{mcgrew-hash-sigs-08} buscam introduzir identificadores únicos par
 esquema, modificando essencialmente a estrutura da função $f$, assim combatendo
 ataques multi-usuário.
 
-\subsection{\textsc{Wots+}}
+\subsection{\wotsplus{}}
 
-O principal esquema variante do \textsc{Wots}, chamado de
+O principal esquema da família Winternitz, chamado de
 \textsc{Wots+}~\cite{Hlsing2013}, tem como ideia principal a
 reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o
 processo de iterações sequenciais --- utilizando apenas uma função --- do
@@ -1160,10 +1160,10 @@ na Figura~\ref{fig:6}, é definido recursivamente como
 Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
-hardware de rotinas relacionadas (como o conjunto de instruções AES-NI da
-Intel), habilitando um grande ganho de desempenho no cômputo desta cifra.
+hardware de rotinas relacionadas,
+habilitando um grande ganho de desempenho no cômputo desta cifra.
 
-\subsection{HORS}
+\subsection{\hors{}}
 
 Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
 considerável de elementos relacionados diretamente com $\sk{}$, habilitando
