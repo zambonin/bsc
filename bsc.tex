@@ -1415,7 +1415,7 @@ Um esquema baseado em árvores de Merkle que necessita apenas de resistência à
 
 A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema XMSS. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em SPR-MSS, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
-A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
+A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de WOTS-PRF, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
 
 Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, uma árvore de Merkle $T$ com altura $H$ e uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
@@ -1578,7 +1578,7 @@ Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é
 
 \section{Visão temporal}
 
-Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10} nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais LD-OTS e MSS, e no meio deste período, o esquema WOTS é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema LD-OTS também fazem parte de publicações com destaque, e.g.~\cite{}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
+Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10} nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais LD-OTS e MSS, e no meio deste período, o esquema WOTS é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema LD-OTS também fazem parte de publicações com destaque, e.g.~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
 
 \begin{figure}[ht]
   \centering
@@ -1611,6 +1611,9 @@ Vários esquemas foram citados ao longo das seções anteriores, provendo uma co
       \caption{Principais trabalhos acadêmicos sobre esquemas de assinatura digital baseados em funções de resumo criptográfico de 1998 até 2018.}
       \label{fig:11}
 \end{figure}
+
+Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizadas por esquemas considerados como o estado da arte. 
+
 \todo[inline]{paragrafo de conclusao com a timeline dos slides, falando de outros esquemas e mencionando tambem os resultados teoricos \\
 modificar e construir uma timeline legal, pontos sem legenda sao resultados nao tao legais}
 
