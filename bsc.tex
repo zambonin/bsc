@@ -21,6 +21,22 @@
 \newcommand{\length}[1]{\vert #1 \vert}
 \newcommand{\fhash}[1]{\hh{} : \binwds{*} \longrightarrow \binwds{#1}}
 
+\newcommand{\lots}{\textsc{LD-Ots}}
+\newcommand{\wots}{\textsc{Wots}}
+\newcommand{\wotsprf}{\textsc{Wots-prf}}
+\newcommand{\wotsplus}{\textsc{Wots+}}
+\newcommand{\wotslm}{\textsc{Wots-lm}}
+\newcommand{\hors}{\textsc{Hors}}
+\newcommand{\horst}{\textsc{Horst}}
+\newcommand{\mss}{\textsc{Mss}}
+\newcommand{\cmss}{\textsc{Cmss}}
+\newcommand{\gmss}{\textsc{Gmss}}
+\newcommand{\sprmss}{\textsc{Spr-Mss}}
+\newcommand{\xmss}{\textsc{Xmss}}
+\newcommand{\xmsst}{\textsc{Xmss-t}}
+\newcommand{\xmssmt}{\textsc{Xmss-mt}}
+\newcommand{\sphincs}{\textsc{Sphincs}}
+
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
 \def\colcircle{(1.75, 0) circle (0.75cm)}
@@ -88,7 +104,7 @@ generation or verification.
 \chapter*{Lista de Abreviaturas e Siglas}
 \begin{abbrv}
     \item[BiBa]                 \emph{Bins and Balls one-time signature scheme}
-    \item[\textsc{Cmss}]        \emph{Coronado--Merkle Signature Scheme}
+    \item[\cmss{}]        \emph{Coronado--Merkle Signature Scheme}
     \item[\textsc{Gmss}]        \emph{Generalized Merkle Signature Scheme}
     \item[\textsc{Hors}]        \emph{Hash to Obtain Random Subset}
     \item[\textsc{Horst}]       \emph{Hash to Obtain Random Subset with Trees}
@@ -210,7 +226,10 @@ otimização proposta, que afeta o tempo de execução da criação ou
 verificação de uma assinatura.
 
 \subsection{Objetivos específicos}
-\emph{Objetivos específicos.} Descrever os esquemas de assinatura digital única
+\begin{enumerate}
+    \item Descrever os esquemas de assinatura digital única
+\end{enumerate}
+Descrever os esquemas de assinatura digital única
 Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever os esquemas de
 assinatura digital baseados em árvores de Merkle: \emph{Merkle Signature
 Scheme}, XMSS e XMSS$^{MT}$. Discutir as consequências da modificação
