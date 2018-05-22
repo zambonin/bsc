@@ -1176,7 +1176,7 @@ Para tal, a ideia de esquemas de ``poucas assinaturas'' (\emph{few-time signatur
 schemes}) foi introduzida originalmente em~\cite{Perrig:2001:BOS:501983.501988}
 com o esquema \emph{Bins and Balls}, uma aplicação do problema homônimo em
 probabilidade. Este trabalho é subsequentemente generalizado e otimizado
-em~\cite{Reyzin:2002:BBS:646039.678322} na forma do esquema HORS,
+em~\cite{Reyzin:2002:BBS:646039.678322} na forma do esquema \hors{},
 onde o conteúdo da mensagem controla a
 seleção de elementos em uma lista de inteiros trivial, construindo subconjuntos
 distintos, distribuídos como assinaturas.
@@ -1255,11 +1255,11 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
         \draw[-latex] (x5) -- (s3);
         \draw[-latex] (x5) -- (s5);
     \end{tikzpicture}
-    \caption{Processo de assinatura no HORS, para $0 \leq i \leq k - 1, \; 0 \leq j, l \leq t - 1$.}
+    \caption{Processo de assinatura no \hors{}, para $0 \leq i \leq k - 1, \; 0 \leq j, l \leq t - 1$.}
     \label{fig:7}
 \end{figure}
 
-É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo HORST (\emph{HORS with trees}) é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na seção a seguir, a fim de reduzir substancialmente o tamanho de $\pk{}$.
+É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo \horst{} é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na seção a seguir, a fim de reduzir substancialmente o tamanho de $\pk{}$.
 
 \section{Esquemas baseados em árvores de Merkle}
 
@@ -1646,18 +1646,18 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
     
 \end{enumerate}
 
-Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
+Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
 \section{Visão temporal}
 
-Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais LD-OTS e MSS, e no meio deste período, o esquema WOTS é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema LD-OTS também fazem parte de publicações com destaque, e.g.~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
+Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema de Lamport também fazem parte de publicações com destaque, e.g.~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
 
 \begin{figure}[ht]
   \centering
   \begin{chronology}[4]{1978}{1997}{\textwidth}
-    \event{1979}{LD-OTS, MSS}
+    \event{1979}{\lots{}, \mss{}}
     \event{1987}{}
-    \event{1989}{WOTS}
+    \event{1989}{\wots{}}
     \event{1992}{}
     \event[1996]{1994}{}
   \end{chronology}
@@ -1668,25 +1668,25 @@ Vários esquemas foram citados ao longo das seções anteriores, provendo uma co
 \begin{figure}[ht]
     \centering
       \begin{chronology}[4]{1998}{2018}{\textwidth}
-        \event{2001}{BiBa}
-        \event{2002}{HORS}
-        \event{2006}{CMSS}
-        \event{2007}{GMSS}
-        \event{2008}{SPR-MSS}
-        \event{2011}{WOTS-PRF, XMSS}
-        \event{2012}{XMSS+}
-        \event{2013}{XMSS$^{MT}$, WOTS+, WOTS-LM}
-        \event{2015}{HORST, SPHINCS}
-        \event{2016}{XMSS-T}
-        \event{2017}{SPHINCS+}
+        \event{2001}{\emph{Bins and Balls}}
+        \event{2002}{\hors{}}
+        \event{2006}{\cmss{}}
+        \event{2007}{\gmss{}}
+        \event{2008}{\sprmss{}}
+        \event{2011}{\wotsprf{}, \xmss{}}
+        \event{2012}{\xmss{}+}
+        \event{2013}{\xmssmt{}, \wotsplus{}, \wotslm{}}
+        \event{2015}{\horst{}, \sphincs{}}
+        \event{2016}{\xmsst{}}
+        \event{2017}{\sphincs{}+}
       \end{chronology}
       \caption{Principais trabalhos acadêmicos sobre esquemas de assinatura digital baseados em funções de resumo criptográfico de 1998 até 2018.}
       \label{fig:11}
 \end{figure}
 
-Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizadas por esquemas considerados como o estado da arte. Os conceitos de esquemas de poucas assinaturas, redução de requisitos de segurança para resistência à segunda pré-imagem, hiper-árvores e resistência a ataques multi-usuário, todos no contexto de assinaturas digitais com funções de resumo criptográfico, podem ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11} contemplam todos os esquemas citados nas seções anteriores, à exceção da família SPHINCS~\cite{Bernstein2015,sphincsplus}, que renuncia o gerenciamento de estado, característica presente em todos os esquemas baseados em árvores de Merkle aprofundados anteriormente.
+Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizadas por esquemas considerados como o estado da arte. Os conceitos de esquemas de poucas assinaturas, redução de requisitos de segurança para resistência à segunda pré-imagem, hiper-árvores e resistência a ataques multi-usuário, todos no contexto de assinaturas digitais com funções de resumo criptográfico, podem ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11} contemplam todos os esquemas citados nas seções anteriores, à exceção da família \sphincs{}~\cite{Bernstein2015,sphincsplus}, que renuncia o gerenciamento de estado, característica presente em todos os esquemas baseados em árvores de Merkle aprofundados anteriormente.
 
-Esta família utiliza várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema HORST é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winternitz, restritos ao cálculo de assinaturas entre árvores intermediárias.
+Esta família utiliza várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema \horst{} é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winternitz, restritos ao cálculo de assinaturas entre árvores intermediárias.
 
 \chapter{Otimização do esquema Winternitz}
 
