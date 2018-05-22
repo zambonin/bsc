@@ -324,7 +324,7 @@ Porém, percebe-se que, com a introdução de um computador quântico, estes
 problemas podem ser resolvidos de maneira significativamente mais rápida,
 como visto em~\cite{Shor:1997:PAP:264393.264406}.
 
-\subsection{AES --- \emph{Advanced Encryption Standard}}
+\subsection{A cifra AES}
 
 Originalmente publicado como Rijndael, o algoritmo conhecido como AES é resultado
 de um esforço de padronização para um sistema criptográfico seguro, finalizado
@@ -365,7 +365,7 @@ com uma chave de rodada. As operações e rotinas serão descritas abaixo.
         $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau
         máximo 3, apto a ser representado na coluna.
 
-  \item \textsc{AddRoundKey}: a operação \texttt{XOR} bit a bit é aplicada
+  \item \textsc{AddRoundKey}: a operação de ou exclusivo bit a bit é aplicada
       entre $A$ e o bloco da chave referente à rodada.
 
   \item \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
@@ -374,7 +374,7 @@ palavras suficientes para utilização em todas as rodadas do algoritmo, então 
 = \ell \cdot (n_r + 1)$ e $K_e = \{k_0, \dots, k_{t - 1}\}$. Também defina
 $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
 lista de constantes $RC$ com elementos em $\mathbb{F}_{2^{8}}$ é definida pela
-recursão 
+recursão
 \begin{equation}
 RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x \cdot RC_{j-1}, \; j \geq 2.
 \end{equation}
@@ -873,9 +873,9 @@ outros algoritmos com a mesma função, mas execuções distintas.
 Neste capítulo, os esquemas de assinatura digital mais reconhecidos,
 tratando-se de assinaturas únicas e esquemas convencionais, são apresentados
 de maneira cronológica a fim de contextualizar a presença do esquema alvo,
-Winternitz, neste meio. Nomeadamente, os esquemas Lamport, Winternitz,
-\textsc{Wots+} e HORS, como exemplos com número limitado de reusos de pares
-de chave, e os esquemas baseados em árvores de Merkle, como o homônimo MSS, XMSS
+Winternitz, neste meio. Nomeadamente, os esquemas \lots{}, \wots{},
+\wotsplus{} e \hors{}, como exemplos com número limitado de reusos de pares
+de chave, e os esquemas baseados em árvores de Merkle, como o \mss{}, \xmss{}
 (\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores
 XMSS$^{MT}$.
 
