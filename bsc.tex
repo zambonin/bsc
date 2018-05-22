@@ -164,7 +164,7 @@ verificação de uma assinatura.
 \emph{Objetivos específicos.} Descrever os esquemas de assinatura digital única
 Lamport e Winternitz, e sua variante \textsc{Wots+}. Descrever os esquemas de
 assinatura digital baseados em árvores de Merkle: \emph{Merkle Signature
-Scheme}, e as famílias XMSS e SPHINCS. Discutir as consequências da modificação
+Scheme}, XMSS e XMSS$^{MT}$. Discutir as consequências da modificação
 do esquema Winternitz no contexto destes, e mensurar desempenho onde aplicável.
 
 \chapter{Primitivas criptográficas}
@@ -801,9 +801,9 @@ tratando-se de assinaturas únicas e esquemas convencionais, são apresentados
 de maneira cronológica a fim de contextualizar a presença do esquema alvo,
 Winternitz, neste meio. Nomeadamente, os esquemas Lamport, Winternitz,
 \textsc{Wots+} e HORS, como exemplos com número limitado de reusos de pares
-de chave, e os esquemas baseados em árvores de Merkle, como o homônimo, XMSS
-(\emph{eXtended Merkle Signature Scheme}), sua variante multiárvores
-XMSS$^{MT}$, e SPHINCS.
+de chave, e os esquemas baseados em árvores de Merkle, como o homônimo MSS, XMSS
+(\emph{eXtended Merkle Signature Scheme}) e sua variante multiárvores
+XMSS$^{MT}$.
 
 \section{Esquemas de assinatura única}
 
@@ -1576,7 +1576,7 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema XMSS-T é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do XMSS$^{MT}$ resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
-\section{Visão geral}
+\section{Visão temporal}
 
 \begin{figure}[ht]
   \centering
