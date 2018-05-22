@@ -1069,13 +1069,12 @@ ataques multi-usuário.
 
 \subsection{\wotsplus{}}
 
-O principal esquema da família Winternitz, chamado de
-\textsc{Wots+}, tem como ideia principal a
+O principal esquema da família Winternitz tem como ideia principal a
 reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o
 processo de iterações sequenciais --- utilizando apenas uma função --- do
-esquema original~\cite{Hlsing2013}. Esta característica também permite uma prova de segurança
-mais simples, mas não menos poderosa, que desconsidera a necessidade da
-resistência à colisões de $f$ e $\hh{}$.
+esquema original~\cite{Hlsing2013}. Esta característica também permite uma
+prova de segurança mais simples, mas não menos poderosa, que desconsidera a
+necessidade da resistência à colisões de $f$ e $\hh{}$.
 
 Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem
 como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema
@@ -1481,11 +1480,11 @@ Note que uma árvore de altura razoável para utilização em aplicações prát
 
 Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a restrição implícita de ser resistente à colisões, notoriamente o requisito de segurança mais explorado no contexto de criptoanálise aplicada sobre funções de resumo criptográfico (e.g. colisões encontradas em várias funções baseadas na estrutura Merkle-D\aa{}mgard). Assim, é razoável construir esquemas com menos requisitos, tornando-os naturalmente mais seguros.
 
-Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de SPR-MSS, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
+Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de \sprmss{}, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
 
 \subsection{XMSS -- \emph{eXtended Merkle Signature Scheme}}
 
-A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema XMSS. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em SPR-MSS, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
+A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema \xmss{}. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em SPR-MSS, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
 A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de WOTS-PRF, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
 
