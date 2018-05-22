@@ -1482,7 +1482,7 @@ Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a rest
 
 Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de \sprmss{}, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
 
-\subsection{XMSS -- \emph{eXtended Merkle Signature Scheme}}
+\subsection{\xmss{}}
 
 A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema \xmss{}. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em SPR-MSS, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
