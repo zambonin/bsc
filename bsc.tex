@@ -21,8 +21,6 @@
 \newcommand{\length}[1]{\vert #1 \vert}
 \newcommand{\fhash}[1]{\hh{} : \binwds{*} \longrightarrow \binwds{#1}}
 
-\makeglossaries
-
 \def\precircle{(0.00, 0) circle (1.25cm)}
 \def\seccircle{(1.75, 0) circle (1.25cm)}
 \def\colcircle{(1.75, 0) circle (0.75cm)}
@@ -44,6 +42,9 @@
   level distance=45pt,
   sibling distance=25pt
 }
+
+\newlist{abbrv}{itemize}{1}
+\setlist[abbrv,1]{label=,labelwidth=1in,align=parleft,itemsep=0.1\baselineskip,leftmargin=!}
 
 \title{
   Otimização de desempenho do esquema de assinatura digital Winternitz
@@ -84,7 +85,14 @@ generation or verification.
 
 \listofalgorithms
 
-\printglossaries
+\chapter*{Lista de Abreviações e Siglas
+}
+\begin{abbrv}
+\item[ADL]                   Activities of Daily Life
+\item[AST]                   Alternate Step Test
+\item[BMI]                   Body Mass Index
+\item[\textsc{Xmss}] teste
+\end{abbrv}
 
 \newpage
 
@@ -101,9 +109,6 @@ generation or verification.
     % \item atualizar informações em \texttt{tcc.inf.ufsc.br};
     \item colocar tudo em 80 caracteres e utilizar \texttt{chktex -v3};
 \end{enumerate}
- 
-% Use the terms
-\gls{utc} is 3 hours behind \gls{adt} and 10 hours ahead of \gls{est}.
 }
 
 \newpage
