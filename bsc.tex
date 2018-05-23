@@ -1746,7 +1746,12 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  512  &  10  &  2   &  12                  \\
     \midrule
     \multirow{4}{*}{3}  &  128  &  9   &  0   &  9                   \\
-                        &  192  &  9   &  3   &                      \\
+                        &  192  &  9   &  3   &  \multirow{4}{*}{12} \\
+                        &  256  &  10  &  2   &                      \\
+                        &  512  &  11  &  1   &                      \\
+    \midrule              
+    \multirow{4}{*}{4}  &  128  &  9   &  3   &  \multirow{4}{*}{12} \\
+                        &  192  &  10  &  2   &                      \\
                         &  256  &  10  &  2   &                      \\
                         &  512  &  11  &  1   &                      \\
     \midrule                                                             
@@ -1754,18 +1759,18 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  192  &  11  &  1   &                      \\
                         &  256  &  12  &  0   &                      \\
                         &  512  &  13  &  5   &  18                  \\
-    \midrule                                                             
-    \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
-                        &  192  &  13  &  3   &                      \\
-                        &  256  &  13  &  3   &                      \\
-                        &  512  &  14  &  2   &                      \\
     \bottomrule
     \end{tabular}
     \quad
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
-    \toprule                                                             
+    \toprule             
+        \midrule                                                             
+    \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
+                        &  192  &  13  &  3   &                      \\
+                        &  256  &  13  &  3   &                      \\
+                        &  512  &  14  &  2   &                      \\
     \multirow{4}{*}{10} &  128  &  14  &  6   &  \multirow{4}{*}{20} \\
                         &  192  &  15  &  5   &                      \\
                         &  256  &  15  &  5   &                      \\
