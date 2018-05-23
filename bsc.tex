@@ -1851,9 +1851,7 @@ A fim de escolher o \emph{nonce} mais conveniente para que a geração de assina
 \begin{equation}
     k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r}
 \end{equation}
-e tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho $R$, visto que aplicações de funções de resumo criptográfico tornam a saída uniformemente distribuída, e portanto, 
-
-% Defina a tupla que contém as somas das representações inteiras dos elementos destas tuplas como $S = (\sum \mathcal{B}_{1}^{0}, \dots, \sum \mathcal{B}_{1}^{R - 1})$.
+e tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho $R$, visto que aplicações de funções de resumo criptográfico tornam a saída uniformemente distribuída e completamente difusa, e portanto, a relevância do conteúdo das palavras é diminuída.
 
 \section{Resultados}
 
