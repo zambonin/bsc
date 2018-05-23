@@ -1732,7 +1732,7 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
     \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w \\
 \end{split}
 \end{align}
-Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $w$ e $m$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz. 
+Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $m$ e praticáveis para $w$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz.
 
 \begin{table}[htbp]
     \centering
@@ -1755,8 +1755,8 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  256  &  10  &  2   &                      \\
                         &  512  &  11  &  1   &                      \\
     \midrule      
-    \multirow{4}{*}{5}  &  128  &  10  &  0   &  10 \\
-                        &  192  &  11  &  4   &  \multirow{3}{*}{15}                    \\
+    \multirow{4}{*}{5}  &  128  &  10  &  0   &  10                  \\
+                        &  192  &  11  &  4   &  \multirow{3}{*}{15} \\
                         &  256  &  11  &  4   &                      \\
                         &  512  &  12  &  3   &                      \\
     \midrule      
@@ -1771,6 +1771,11 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
     \toprule             
+    \multirow{4}{*}{7}  &  128  &  12  &  2   &  \multirow{4}{*}{14} \\
+                        &  192  &  12  &  2   &                      \\
+                        &  256  &  13  &  1   &                      \\
+                        &  512  &  14  &  0   &                      \\
+    \midrule                                                             
     \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
                         &  192  &  13  &  3   &                      \\
                         &  256  &  13  &  3   &                      \\
