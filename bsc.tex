@@ -1864,11 +1864,50 @@ Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme di
 \end{equation}
 Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, \emph{nonces} criptográficos de 32 bits, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.75\textwidth]{support/hist}
     \caption{Histograma normalizado de médias de $\mathcal{B}_{1}^{i}$, com 50 classes.}
     \label{fig:12}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = left,
+        xlabel = $R$,
+        ylabel = Probability,
+        legend style={at={(1,0.5)},anchor=east},
+    ]
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        densely dashed
+    ]
+    {1 - (1 - 0.1587)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + \sigma)$}
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        loosely dashdotdotted
+    ]
+    {1 - (1 - 0.0228)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 2\sigma)$}
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        dashdotted
+    ]
+    {1 - (1 - 0.0013)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 3\sigma)$}
+    \end{axis}
+    \end{tikzpicture}
+    \label{fig:rplot}
+    \caption{Thresholds for $R$.}
 \end{figure}
 
 \section{Resultados}
