@@ -63,6 +63,9 @@
 \newlist{abbrv}{itemize}{1}
 \setlist[abbrv,1]{label=,labelwidth=1in,align=parleft,itemsep=0.1\baselineskip,leftmargin=!}
 
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
 \title{
   Otimização de desempenho do esquema de assinatura digital Winternitz
 }
@@ -1846,7 +1849,7 @@ Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}
 
 A fim de escolher o $\lambda_r$ mais conveniente para que a geração de assinatura seja eficiente, calcule
 \begin{equation}
-    min()
+    
 \end{equation}
 
 Defina a tupla que contém as somas das representações inteiras dos elementos destas tuplas como $S = (\sum \mathcal{B}_{1}^{0}, \dots, \sum \mathcal{B}_{1}^{R - 1})$.
