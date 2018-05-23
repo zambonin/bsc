@@ -1710,11 +1710,16 @@ Neste capítulo, duas otimizações são apresentadas para a família de esquema
 
 A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}. Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. 
 
-De acordo com a seção do \wots{}, considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por definidos, respectivamente, por 
+De acordo com a seção do \wots{}, considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por
 \begin{equation}
-c_{max} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 0) = t_1(2^w - 1) \iff \forall b \in \mathcal{B}_1, b = 0
+c_{max} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 0) = t_1(2^w - 1) \iff \forall b \in \mathcal{B}_1, b = 0.
 \end{equation}
-Analogamente, o valor mínimo é definido como $c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0$, i.e. $\forall b \in \mathcal{B}_1, b = 2^w - 1$.
+Analogamente, o valor mínimo é definido como 
+\begin{equation}
+    
+\end{equation}
+
+$c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0$, i.e. $\forall b \in \mathcal{B}_1, b = 2^w - 1$.
 
 \section{Resultados}
 
