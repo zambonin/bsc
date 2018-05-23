@@ -1,0 +1,27 @@
+\documentclass{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+  \begin{axis}[xtick align=inside, ymin=0, /pgf/number format/.cd,
+      1000 sep={}, scaled x ticks=false, ticklabel style={font=\tiny},
+      xlabel near ticks, ylabel near ticks, ylabel=Probabilidades,
+      xlabel=$\mu(\mathcal{B}_{1}^{i})$]
+    \addplot [black,fill=gray!25,hist={density, data=x, bins=50}]
+        file {data.txt};
+  \end{axis}
+
+  \begin{axis}[ticks=none, ymin=0,
+      legend style={font=\tiny,cells={align=left}}]
+    \addplot [dashed,thick]
+        gnuplot [raw gnuplot] {plot 'data.txt' smooth kdensity};
+    \legend{$\mu' \approx 32792$ \\ $\sigma \approx 4707$}
+  \end{axis}
+
+\end{tikzpicture}
+
+\end{document}

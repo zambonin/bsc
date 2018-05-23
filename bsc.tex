@@ -1866,21 +1866,7 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
 
 \begin{figure}
     \centering
-    \begin{tikzpicture}
-    \begin{axis}[xtick align=inside, ymin=0,
-        scaled x ticks=false, ticklabel style={font=\tiny},
-        xlabel near ticks, ylabel near ticks,
-        ylabel=Probabilities, xlabel=$\mu(\mathcal{B}_{r,1})$]
-        \addplot [black,fill=gray!25,hist={density, data=x, bins=50}]
-            file {support/data.txt};
-    \end{axis}
-    \begin{axis}[ticks=none, ymin=0,
-        legend style={font=\tiny,cells={align=left}}]
-        \addplot [dashed,thick]
-            gnuplot [raw gnuplot] {plot 'support/data.txt' smooth kdensity};
-            \legend{$\mu' \approx 32774$ \\ $\sigma \approx 4738$}
-    \end{axis}
-\end{tikzpicture}
+    \includegraphics[width=\columnwidth]{support/hist}
     \caption{Caption}
     \label{fig:12}
 \end{figure}
