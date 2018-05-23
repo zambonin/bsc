@@ -6,7 +6,9 @@
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
 \usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, tikz, tikz-qtree, xfrac}
+\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, tikz, tikz-qtree, xfrac, pgfplots}
+
+\pgfplotsset{compat=1.14}
 
 \usepackage{epigraph}
 \usepackage{todonotes}
@@ -82,7 +84,7 @@ Algoritmos utilizados em assinaturas digitais atualmente --- como RSA e ECDSA --
 \emph{Palavras-chave.} criptografia pós-quântica, função de resumo criptográfico, assinatura digital, esquema de assinatura digital única Winternitz
 \end{abstract}
 
-\begin{otherlanguage}{english} 
+\begin{otherlanguage}{english}
 \begin{abstract}
 Algorithms currently used in digital signature schemes, such as RSA and ECDSA,
 feature security proofs based on the difficulty of calculating large integer
@@ -225,7 +227,7 @@ Lamport~\cite{lamport1979constructing} assina apenas um \emph{bit}
 de informação em sua forma mais simples), muitos resultados práticos demonstram
 a redução contínua do tempo de verificação da assinatura, tamanho e tempo para
 geração do par de chaves e assinatura, bem como avanços teóricos que
-possibilitam a utilização de funções com requisitos de segurança 
+possibilitam a utilização de funções com requisitos de segurança
 mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
 encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de
 uma chave não implica na segurança de mensagens que utilizaram esta chave
@@ -266,7 +268,7 @@ Neste capítulo, são explicados os conceitos necessários
 a fim de entender inteiramente um esquema de assinatura digital, bem como outros
 algoritmos discutidos ao longo do trabalho. A organização das seções assemelha-se
 à seguida em~\cite{Gathen:2015:CRY:2857293}. Os conceitos de criptografia simétrica
-e assimétrica são apresentados, e uma simples comparação entre os mesmos é realizada, 
+e assimétrica são apresentados, e uma simples comparação entre os mesmos é realizada,
 bem como exemplos apresentados na forma dos algoritmos AES e RSA, amplamente
 padronizados e implementados em diversas formas de comunicação segura. Também é
 discutida a função de resumo criptográfico, utilizada para que o processo de assinatura
@@ -348,7 +350,7 @@ Originalmente publicado como Rijndael, o algoritmo conhecido como AES é resulta
 de um esforço de padronização para um sistema criptográfico seguro, finalizado
 ao término do século XX pelo NIST~\cite{Standards2001}, a fim de substituir a cifra DES.
 Definido como uma cifra de blocos iterativa, opera
-sobre uma matriz de estado $A$, onde $A_{i,j} \in 
+sobre uma matriz de estado $A$, onde $A_{i,j} \in
 \mathbb{F}_{2^{8}}$\footnote{Definido pelo polinômio irredutível
 $m(x) = x^{8} + x^{4} + x^{3} + x + 1$. Adições e multiplicações em corpos da
 forma $\mathbb{F}_{2^n}$ são análogas a operações computacionais extremamente
@@ -399,7 +401,7 @@ RC_0 = x^0, \quad RC_1 = x^1, \quad RC_j = x \cdot RC_{j-1}, \; j \geq 2.
 Inicialmente, $K$ é dividida em $\ell$ palavras, que compõem o começo de $K_e$.
 Para os elementos restantes, ou seja, $\forall i \geq \ell$,
 \begin{equation}
-  k_{i} = k_{i - \ell} + 
+  k_{i} = k_{i - \ell} +
     \begin{cases}
       \textsc{SubBytes}(rot(k_{i - 1})) + RC_{\frac{i}{\ell}},
         \text{ se } i \equiv 0 \pmod{4} \\
@@ -414,7 +416,7 @@ Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
 $c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é primeiramente
 codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j \leq 3$.
 Note que \textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
-reversibilidade da cifra. 
+reversibilidade da cifra.
 
 \begin{algorithm}[ht]
   \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
@@ -615,7 +617,7 @@ espalhamento. Por outro lado, é imposto para uma função de mão única que
 o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, i.e. o item (iv)
 seja respeitado. Por fim, funções resistentes à segunda pré-imagem e/ou colisões
 são definidas como \emph{funções de resumo criptográfico}, adequadas para
-utilização no contexto de segurança da informação. 
+utilização no contexto de segurança da informação.
 
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados em
 um dispositivo inseguro. Intuitivamente, mostra-se desejável que não ocorra
@@ -1243,8 +1245,8 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of d3] (d4) {$\dots$};
         \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d4] (d5) {$d_{k - 1}$};
         \draw[-latex] (hm) -- (dbox) node[midway, above = 1pt] {$\hh{}$};
-        
-        \node (sk) at (7.75, -2.4) {$\sk{}$}; 
+
+        \node (sk) at (7.75, -2.4) {$\sk{}$};
         \node[draw,dashed,minimum width=23em,minimum height=2.5em] (skbox) at (3.5, -3.25) {};
         \node[draw, minimum width=3em, minimum height=1.75em] (x0) at (-0.3, -3.25) {$x_0$};
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of x0] (x1) {$\dots$};
@@ -1259,7 +1261,7 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
         \draw[-latex, dash dot] (d5) -- (x0);
         \draw[-latex, dash dot] (d3) -- (x2);
 
-        \node (sig) at (7.25, -4.7) {$\sigma$}; 
+        \node (sig) at (7.25, -4.7) {$\sigma$};
     	\node[draw,dashed,minimum width=20em,minimum height=2.5em] (sigbox) at (3.5, -5.5) {};
         \node[draw, minimum width=3em, minimum height=1.75em] (s0) at (0.5, -5.5) {$\sigma_0$};
         \node[minimum width=1.5em, minimum height=1.75em, right = 2pt of s0] (s1) {$\dots$};
@@ -1349,7 +1351,7 @@ descaracterizando a validade dos dados atrelados a esta.
       $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
     }
     $\mathbf{S}.push(\textsc{Leaf})$\;
-\vspace{2mm}  
+\vspace{2mm}
   \caption{Funcionamento de $\textsc{Treehash}_h$.}
   \label{alg:3}
 \end{algorithm}
@@ -1466,8 +1468,8 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         every tree node/.style={draw,circle,minimum size=0.75cm},
         level distance=1cm,
         level 1/.style={sibling distance=1.5cm},
-        level 2/.style={sibling distance=1.25cm}, 
-        level 3/.style={sibling distance=1cm}, 
+        level 2/.style={sibling distance=1.25cm},
+        level 3/.style={sibling distance=1cm},
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
     ]
     \Tree
@@ -1479,7 +1481,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
                 \node[name=orig,label=below:{$i = 3$},thick]{$\sigma$};
             ]
         ]
-        [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{}; 
+        [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{};
             [.{} {} {} ]
             [.{} {} {} ]
         ]
@@ -1520,15 +1522,15 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
-  
+
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
   não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
-  
+
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante $T$, assegure que $\textsc{Ots}_{\mathcal{V}}(\textsc{Ots}_{\pk{}}^{j}, \textsc{Ots}_{\sigma}^{j}) = 1$, e utilize esta chave para reconstruir a árvore-$l$ com as máscaras $\mathbf{r}$, obtendo a raiz desta. Junto a \textsc{Auth}, compute o caminho de nodos $(a_0, \dots, a_h)$. Finalmente, se $\pk{} = a_{h}$, a assinatura está válida.
 
 \end{enumerate}
 
-O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \wotsplus{} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema. 
+O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \wotsplus{} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema.
 
 \subsection{\xmssmt{}}
 
@@ -1545,11 +1547,11 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
     ]
     \begin{scope}[yshift=4.5cm,xshift=0.59cm]
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
-        [. \node[name=p4]{}; 
+        [. \node[name=p4]{};
             [. \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{1}$}]{}; {} {} ]
             [. \node[name=p3]{}; \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{1}$}]{}; \node[name=leaf,thick]{$\sigma_1$}; ]
         ]
-        [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{}; 
+        [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{};
             [.{} {} {} ]
             [.{} {} {} ]
         ]
@@ -1579,18 +1581,18 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
 
 Naturalmente, este recurso é aplicado ao esquema \xmss{} a fim de produzir a variante \xmss{}+~\cite{xmssplus}, com uma árvore superior e inferior, e posteriormente, a versão \xmssmt{}~\cite{xmssmt}, generalizada para qualquer número de camadas de árvores, abordada abaixo. Para descrevê-la completamente, é necessário apontar que algoritmos de travessia mostram-se essenciais no funcionamento prático de esquemas com hiper-árvores, visto que estas estruturas existirão apenas parcialmente em qualquer dispositivo, embora nodos em várias partes da hiper-árvore são necessários para construir caminhos de autenticação. Deste modo, o algoritmo BDS~\cite{Buchmann:2008:MTT:1473109.1473114} é exposto junto ao esquema, a fim de demonstrar a complexidade real do gerenciamento de estado atrelado a este tipo de construção.
 
-O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas: 
+O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas:
 
 \begin{enumerate}[label=(\roman*)]
 
     \item $\textsc{Auth}$, lista de tamanho $H$ que armazena o caminho de autenticação atual;
 
     \item $\textsc{Keep}$, lista de tamanho $H - 1$ que armazena nodos úteis para o cálculo de nodos de autenticação à esquerda;
-    
+
     \item $\{\textsc{Retain}_{h} : h \in H - K, \dots, H - 2\}$, pilhas com nodos à direita perto da raiz;
-    
+
     \item \textbf{S}, pilha munida das operações usuais;
-    
+
     \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, i.e. várias instâncias do algoritmo~\ref{alg:3}.
 \end{enumerate}
 
@@ -1649,18 +1651,18 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de bits aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Sementes para cada camada da hiper-árvore também são escolhidas desta maneira: $\textbf{s} = (s_0, \dots, s_{d - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, e estados do algoritmo BDS são inicializados: $\textsc{State} = (\textsc{State}_{\textsc{BDS}}^{0}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 1})$. Utilizando instâncias do algoritmo \textsc{Treehash} e a tupla $\textbf{s}$ a fim de criar os pares de chaves de \textsc{Wots+}, os valores $T_{h_{i}, 0}, \; 0 \leq i \leq d - 2$ são calculados e assinados pela primeira folha da árvore superior. Estas assinaturas são então extraídas como $\Sigma = (\sigma_{1}^{T}, \dots, \sigma_{d - 1}^{T})$.
-  
-  Note que apenas as assinaturas das primeiras raízes à esquerda são armazenadas, visto que será a primeira árvore a ser utilizada para assinar mensagens. Para facilitar a construção de futuros caminhos de autenticação e árvores intermediárias, sementes pseudoaleatórias, estados do algoritmo BDS e instâncias do algoritmo \textsc{Treehash} são também armazenados em uma estrutura 
+
+  Note que apenas as assinaturas das primeiras raízes à esquerda são armazenadas, visto que será a primeira árvore a ser utilizada para assinar mensagens. Para facilitar a construção de futuros caminhos de autenticação e árvores intermediárias, sementes pseudoaleatórias, estados do algoritmo BDS e instâncias do algoritmo \textsc{Treehash} são também armazenados em uma estrutura
   \begin{multline}
   \textsc{Next} = \big(s^{n}_{0}, \dots, s^{n}_{d - 2}, \textsc{Treehash}^{n}_{0}, \dots, \textsc{Treehash}^{n}_{d - 2}, \\
   \textsc{State}_{\textsc{BDS}}^{0, n}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 2, n}\big),
   \end{multline}
   onde $n$ denota a próxima árvore a ser utilizada na camada $i$. Finalmente, $\sk{} = (\textbf{s}, \textsc{State}, \Sigma, \textsc{Next})$ e $\pk{} = (T_{h_{d - 1}, 0}, \mathbf{r})$.
-  
+
   \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d = \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a assinatura é composta de $\sigma = (j, \textsc{Ots}_{\sigma}^{j}, \Sigma, \textsc{Auth}^{0}, \dots, \textsc{Auth}^{d - 1})$. A árvore deve ser então inteiramente atualizada através dos algoritmos \textsc{Treehash} e BDS, modificando os estados e tornando a próxima folha disponível para uso. Em especial, caso a última folha de uma árvore for utilizada, isto significa que uma nova árvore deve ser criada. Assim, a chave privada deve ser atualizada com novos elementos $\textbf{s}', \textsc{State}', \Sigma', \textsc{Next}'$. Mais detalhes sobre este processo podem ser encontrados em~\cite[2]{xmssmt}.
-  
+
   \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura perante a hiper-árvore, $\textsc{Ots}_{\sigma}^{j}$ é aferida a fim de construir $\textsc{Ots}_{\pk{}}$. Com este nodo e $\textsc{Auth}^{0}$, a raiz da árvore é construída, a fim de verificar a primeira assinatura em $\Sigma$. Este processo é  repetido $d - 1$ vezes, utilizando todos os caminhos de autenticação e assinaturas em $\Sigma$ fornecidos por $\sigma$, e a saída da última iteração é comparada com $T_{h_{d - 1}, 0}$. A assinatura é válida se e somente se estes valores forem iguais. Este processo pode ser visualizado na Figura~\ref{fig:8}.
-    
+
 \end{enumerate}
 
 Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
@@ -1717,11 +1719,11 @@ Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de v
 \begin{equation}
 c_{max} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 0) = t_1(2^w - 1) \iff \forall b \in \mathcal{B}_1, \; b = 0.
 \end{equation}
-Analogamente, o valor mínimo é definido como 
+Analogamente, o valor mínimo é definido como
 \begin{equation}
 c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0 \iff \forall b \in \mathcal{B}_1, \; b = 2^w - 1.
 \end{equation}
-A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$. 
+A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$.
 \begin{align}
 \begin{split}
     n_c &\leq t_2 w \\
@@ -1752,17 +1754,17 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  192  &  9   &  3   &  \multirow{4}{*}{12} \\
                         &  256  &  10  &  2   &                      \\
                         &  512  &  11  &  1   &                      \\
-    \midrule              
+    \midrule
     \multirow{4}{*}{4}  &  128  &  9   &  3   &  \multirow{4}{*}{12} \\
                         &  192  &  10  &  2   &                      \\
                         &  256  &  10  &  2   &                      \\
                         &  512  &  11  &  1   &                      \\
-    \midrule      
+    \midrule
     \multirow{4}{*}{5}  &  128  &  10  &  0   &  10                  \\
                         &  192  &  11  &  4   &  \multirow{3}{*}{15} \\
                         &  256  &  11  &  4   &                      \\
                         &  512  &  12  &  3   &                      \\
-    \midrule      
+    \midrule
     \multirow{4}{*}{6}  &  128  &  11  &  1   &  \multirow{3}{*}{12} \\
                         &  192  &  11  &  1   &                      \\
                         &  256  &  12  &  0   &                      \\
@@ -1773,22 +1775,22 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
-    \toprule             
+    \toprule
     \multirow{4}{*}{7}  &  128  &  12  &  2   &  \multirow{4}{*}{14} \\
                         &  192  &  12  &  2   &                      \\
                         &  256  &  13  &  1   &                      \\
                         &  512  &  14  &  0   &                      \\
-    \midrule                                                             
+    \midrule
     \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
                         &  192  &  13  &  3   &                      \\
                         &  256  &  13  &  3   &                      \\
                         &  512  &  14  &  2   &                      \\
-    \midrule          
+    \midrule
     \multirow{4}{*}{9}  &  128  &  13  &  5   &  \multirow{4}{*}{18} \\
                         &  192  &  14  &  4   &                      \\
                         &  256  &  14  &  4   &                      \\
                         &  512  &  15  &  3   &                      \\
-    \midrule      
+    \midrule
     \multirow{4}{*}{10} &  128  &  14  &  6   &  \multirow{4}{*}{20} \\
                         &  192  &  15  &  5   &                      \\
                         &  256  &  15  &  5   &                      \\
@@ -1804,27 +1806,27 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
-    \toprule                                                             
+    \toprule
     \multirow{4}{*}{12} &  128  &  16  &  8   &  \multirow{4}{*}{24} \\
                         &  192  &  16  &  8   &                      \\
                         &  256  &  17  &  7   &                      \\
                         &  512  &  18  &  6   &                      \\
-    \midrule                                                             
+    \midrule
     \multirow{4}{*}{13} &  128  &  17  &  9   &  \multirow{4}{*}{26} \\
                         &  192  &  17  &  9   &                      \\
                         &  256  &  18  &  8   &                      \\
                         &  512  &  19  &  7   &                      \\
-    \midrule         
+    \midrule
     \multirow{4}{*}{14} &  128  &  18  &  10  &  \multirow{4}{*}{28} \\
                         &  192  &  18  &  10  &                      \\
                         &  256  &  19  &  9   &                      \\
                         &  512  &  20  &  8   &                      \\
-    \midrule                
+    \midrule
     \multirow{4}{*}{15} &  128  &  19  &  11  &  \multirow{4}{*}{30} \\
                         &  192  &  19  &  11  &                      \\
                         &  256  &  20  &  10  &                      \\
                         &  512  &  21  &  9   &                      \\
-    \midrule         
+    \midrule
     \multirow{4}{*}{16} &  128  &  19  &  13  &  \multirow{4}{*}{32} \\
                         &  192  &  20  &  12  &                      \\
                         &  256  &  20  &  12  &                      \\
@@ -1843,7 +1845,7 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 
 \section{\textsc{Wots-r}}
 
-A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo, é apresentada em~\cite{Steinwandt2008}.
+A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo criptográfico, é apresentada em~\cite{Steinwandt2008}.
 
 Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\Lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na seção do \wots{}.
 
@@ -1862,7 +1864,26 @@ Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme di
 \end{equation}
 Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, \emph{nonces} criptográficos de 32 bits, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
 
-
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[xtick align=inside, ymin=0,
+        scaled x ticks=false, ticklabel style={font=\tiny},
+        xlabel near ticks, ylabel near ticks,
+        ylabel=Probabilities, xlabel=$\mu(\mathcal{B}_{r,1})$]
+        \addplot [black,fill=gray!25,hist={density, data=x, bins=50}]
+            file {support/data.txt};
+    \end{axis}
+    \begin{axis}[ticks=none, ymin=0,
+        legend style={font=\tiny,cells={align=left}}]
+        \addplot [dashed,thick]
+            gnuplot [raw gnuplot] {plot 'support/data.txt' smooth kdensity};
+            \legend{$\mu' \approx 32774$ \\ $\sigma \approx 4738$}
+    \end{axis}
+\end{tikzpicture}
+    \caption{Caption}
+    \label{fig:12}
+\end{figure}
 
 \section{Resultados}
 

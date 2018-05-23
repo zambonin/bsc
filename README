@@ -2,6 +2,7 @@ Revision control for my undergraduate thesis.
 
 The LaTeX document may be compiled after installing the `abntex` [1]
 package. Files inside `bureau/` are nowhere nearly as important and
-may fail to compile correctly.
+may fail to compile correctly. Files inside `support/` are used for
+reproducibility.
 
 [1] https://aur.archlinux.org/packages/abntex/
