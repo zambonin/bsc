@@ -6,7 +6,7 @@
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
 \usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, chronology, enumitem, parskip, tikz, tikz-qtree, xfrac}
+\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, tikz, tikz-qtree, xfrac}
 
 \usepackage{epigraph}
 \usepackage{todonotes}
@@ -1732,6 +1732,64 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
     \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w \\
 \end{split}
 \end{align}
+Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $w$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz. 
+
+\begin{table}[htbp]
+    \centering
+    \caption{Unused bits on $\mathcal{B}_2$ for various combinations of $w$ and $m$.}
+    \begin{tabular}{*{5}{c}}
+    \toprule
+    $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
+    \toprule
+    \multirow{4}{*}{2}  &  128  &  8   &  2   &  \multirow{3}{*}{10} \\
+                        &  192  &  9   &  1   &                      \\
+                        &  256  &  9   &  1   &                      \\
+                        &  512  &  10  &  2   &  12                  \\
+    \midrule
+    \multirow{4}{*}{4}  &  128  &  9   &  3   &  \multirow{4}{*}{12} \\
+                        &  192  &  10  &  2   &                      \\
+                        &  256  &  10  &  2   &                      \\
+                        &  512  &  11  &  1   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{6}  &  128  &  11  &  1   &  \multirow{3}{*}{12} \\
+                        &  192  &  11  &  1   &                      \\
+                        &  256  &  12  &  0   &                      \\
+                        &  512  &  13  &  5   &  18                  \\
+    \midrule                                                             
+    \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
+                        &  192  &  13  &  3   &                      \\
+                        &  256  &  13  &  3   &                      \\
+                        &  512  &  14  &  2   &                      \\
+    \bottomrule
+    \end{tabular}
+    \quad
+    \begin{tabular}{*{5}{c}}
+    \toprule
+    $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
+    \toprule                                                             
+    \multirow{4}{*}{10} &  128  &  14  &  6   &  \multirow{4}{*}{20} \\
+                        &  192  &  15  &  5   &                      \\
+                        &  256  &  15  &  5   &                      \\
+                        &  512  &  16  &  4   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{12} &  128  &  16  &  8   &  \multirow{4}{*}{24} \\
+                        &  192  &  16  &  8   &                      \\
+                        &  256  &  17  &  7   &                      \\
+                        &  512  &  18  &  6   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{14} &  128  &  18  &  10  &  \multirow{4}{*}{28} \\
+                        &  192  &  18  &  10  &                      \\
+                        &  256  &  19  &  9   &                      \\
+                        &  512  &  20  &  8   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{16} &  128  &  19  &  13  &  \multirow{4}{*}{32} \\
+                        &  192  &  20  &  12  &                      \\
+                        &  256  &  20  &  12  &                      \\
+                        &  512  &  21  &  11  &                      \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:1}
+\end{table}
 
 \section{Resultados}
 
