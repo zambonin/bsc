@@ -1867,18 +1867,21 @@ Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo c
 
 Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme discreta, pelo teorema central do limite, computações repetidas de $\mu(\mathcal{B}_{1})$ tomarão a forma de uma distribuição Gaussiana. Além disso, espera-se que
 \begin{equation}
-    \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}.
+    \mu' = \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}.
 \end{equation}
 Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, \emph{nonces} criptográficos de 32 bits, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
 
-Assim, é possível utilizar este resultado para fornecer valores razoáveis para $R$. Utilizando a tabela da distribuição normal padrão com desvio padrão $\sigma$, identificam-se as probabilidades de $\mu(\mathcal{B}_{1}^{i})$ estar localizada após a média esperada de acordo com alguns múltiplos de $\sigma$:
+Assim, é possível utilizar este resultado para fornecer valores razoáveis para $R$. Aplicando a tabela da distribuição normal padrão com desvio padrão $\sigma$, identificam-se as probabilidades de $\mu(\mathcal{B}_{1}^{i})$ estar localizada após $\mu'$ de acordo com alguns múltiplos de $\sigma$:
 \begin{align}
     \begin{split}
-        P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 1\sigma) &= 0.1587, \\
-        P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 2\sigma) &= 0.0228, \\
-        P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 3\sigma) &= 0.0013.
+        P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 1\sigma) &= 0.1587, \\
+        P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 2\sigma) &= 0.0228, \\
+        P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma) &= 0.0013.
     \end{split}
 \end{align}
+Então, para assegurar que a probabilidade destes eventos seja altíssima, i.e. 99.9\%, 
+
+observando a Figura~\ref{fig:13}, 
 
 \begin{figure}[ht]
     \centering
@@ -1896,7 +1899,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         densely dashed
     ]
     {1 - (1 - 0.1587)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 1\sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 1\sigma)$}
     \addplot [
         domain=0:200,
         samples=100,
@@ -1904,7 +1907,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         loosely dashdotdotted
     ]
     {1 - (1 - 0.0228)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 2\sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 2\sigma)$}
     \addplot [
         domain=0:200,
         samples=100,
@@ -1912,10 +1915,10 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         dashdotted
     ]
     {1 - (1 - 0.0013)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > 2^{w - 1} + 3\sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma)$}
     \end{axis}
     \end{tikzpicture}
-    \label{fig:rplot}
+    \label{fig:13}
     \caption{Limites para $R$.}
 \end{figure}
 
