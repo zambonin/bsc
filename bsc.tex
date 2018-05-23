@@ -1501,22 +1501,22 @@ Um esquema baseado em árvores de Merkle que necessita apenas de resistência à
 
 A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema \xmss{}. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em \sprmss{}, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
-A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de \wotsprf{}, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
+A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de \wotsprf{}, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança n£o contÃ©m erros conhecidos.
 
-Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
-\mathcal{K}_m\}$, uma árvore de Merkle $T$ com altura $H$ e uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
-\mathcal{K}_m\}$. Um gerador de números pseudoaleatórios \textsc{Gen} é construído a partir de $f$ a fim de assegurar sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura única \textsc{Ots} é definido como \textsc{Wots+}.
+Assim, tome um parÃ¢metro de seguranÃ§a $m$ e o parÃ¢metro de Winternitz $w$, a famÃ­lia de funÃ§Ãµes $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
+\mathcal{K}_m\}$, uma Ã¡rvore de Merkle $T$ com altura $H$ e uma famÃ­lia de funÃ§Ãµes de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
+\mathcal{K}_m\}$. Um gerador de nÃºmeros pseudoaleatÃ³rios \textsc{Gen} Ã© construÃ­do a partir de $f$ a fim de assegurar sigilo encaminhado, com parÃ¢metros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura Ãºnica \textsc{Ots} Ã© definido como \textsc{Wots+}.
 
-Observe que, por conta de sua semelhança com o esquema \sprmss{}, a estrutura da árvore de Merkle é modificada. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
+Observe que, por conta de sua semelhanÃ§a com o esquema \sprmss{}, a estrutura da Ã¡rvore de Merkle Ã© modificada. A funÃ§Ã£o de construÃ§Ã£o da Ã¡rvore Ã© remodelada a fim de utilizar mÃ¡scaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nÃ­vel da Ã¡rvore, ou seja,
 \begin{equation}
     T_{h, j} = h_k(r_i \oplus (T_{h - 1, 2j} \concat T_{h - 1, 2j + 1})),
       \; 1 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1.
 \end{equation}
-O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma estrutura chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à $T$, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a altura total é de $\lceil \log_{2} t \rceil$, mas não considerada no contexto de $T$.
+O conteÃºdo das folhas, originalmente o resumo criptogrÃ¡fico simples de $\textsc{Ots}_{\pk{}}$, Ã© substituÃ­do por uma estrutura chamada de \emph{Ã¡rvore-l}, construÃ­da a partir dos elementos desta chave de forma similar Ã  $T$, mas com mÃ¡scaras iguais para todas as Ã¡rvores referentes aos esquemas de assinatura Ãºnica. Note que o nÃºmero de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode nÃ£o ser uma potÃªncia de 2, e portanto a Ã¡rvore-$l$ deve ser balanceada tal que qualquer nodo sem irmÃ£o Ã  direita Ã© movido para um nÃ­vel mais alto, de forma a tornar-se um irmÃ£o Ã  direita de outro nodo. Assim, a altura total Ã© de $\lceil \log_{2} t \rceil$, mas nÃ£o considerada no contexto de $T$.
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
+  \item[] \emph{GeraÃ§Ã£o de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma funÃ§Ã£o de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
   
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
   não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
@@ -1840,7 +1840,7 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 
 \section{\textsc{Wots-r}}
 
-
+A segunda proposta consiste na busca por conjuntos $\mathcal{B}_1$
 
 \section{Resultados}
 
@@ -1848,7 +1848,6 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 
 \section{Trabalhos futuros}
 
-\nocite{*}
 \bibliographystyle{apalike}
 \bibliography{ref}
 
