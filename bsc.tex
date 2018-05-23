@@ -1869,7 +1869,7 @@ Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme di
 \begin{equation}
     \mu' = \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}.
 \end{equation}
-Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, \emph{nonces} criptográficos de 32 bits, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
+Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$, $\hh{} =$ SHA-256, $\{\lambda_i : 0 \leq i \leq 2^{16} - 1\} \stackrel{\$}{\longleftarrow} \binwds{32}$, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1 \land \lambda_i \stackrel{\$}{\longleftarrow} \binwds{32}\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
 
 Assim, é possível utilizar este resultado para fornecer valores razoáveis para $R$. Aplicando a tabela da distribuição normal padrão com desvio padrão $\sigma$, identificam-se as probabilidades de $\mu(\mathcal{B}_{1}^{i})$ estar localizada após $\mu'$ de acordo com alguns múltiplos de $\sigma$:
 \begin{align}
