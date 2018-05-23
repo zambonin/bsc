@@ -1866,9 +1866,7 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
 
 \begin{figure}[ht]
     \centering
-        \begin{minipage}{0.45\textwidth}
-    \includegraphics{support/hist}
-    \end{minipage}
+    \includegraphics[width=0.75\textwidth]{support/hist}
     \caption{Histograma normalizado de médias de $\mathcal{B}_{1}^{i}$, com 50 classes.}
     \label{fig:12}
 \end{figure}
@@ -1879,7 +1877,7 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
     \begin{axis}[
         axis lines = left,
         xlabel = $R$,
-        ylabel = Probability,
+        ylabel = Probabilidades,
         legend style={at={(1,0.5)},anchor=east},
     ]
     \addplot [
@@ -1889,7 +1887,7 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
         densely dashed
     ]
     {1 - (1 - 0.1587)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + \sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + \sigma)$}
     \addplot [
         domain=0:200,
         samples=100,
@@ -1897,7 +1895,7 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
         loosely dashdotdotted
     ]
     {1 - (1 - 0.0228)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 2\sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 2\sigma)$}
     \addplot [
         domain=0:200,
         samples=100,
@@ -1905,11 +1903,11 @@ Para assegurar este comportamento, uma instância de \wots{} foi produzida com o
         dashdotted
     ]
     {1 - (1 - 0.0013)^x};
-    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 3\sigma)$}
+    \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma)$}
     \end{axis}
     \end{tikzpicture}
     \label{fig:rplot}
-    \caption{Thresholds for $R$.}
+    \caption{Limites para $R$.}
 \end{figure}
 
 \section{Resultados}
