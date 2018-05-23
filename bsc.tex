@@ -1704,6 +1704,386 @@ Esta família utiliza várias estratégias combinadas a fim de evitar esta carac
 
 \chapter{Otimização do esquema Winternitz}
 
+\section{Checksum Padding}
+\label{sec:checksum}
+
+In this section, we propose to pad unused bits, reserved for $c$, with $1$. 
+Recall that $c = \sum_{i=t-t_1}^{t-1} (2^w-1 - b_i)$.
+Define $c_{max}$ and $c_{min}$ as the greatest and smallest possible values of $c$.
+These situations happen when, $\forall b \in \mathcal{B}_1$, $b = 0$ or $b = 2^w - 1$, respectively. Hence,
+$c_{max} = \sum_{i=t-t_1}^{t-1} (2^w - 1 - 0) = t_1(2^w - 1)$ and
+$c_{min} = \sum_{i=t-t_1}^{t-1} (2^w - 1 - 2^w - 1) = 0$. Additionally, the number of
+bits needed to represent all possible values of $c$ is given by
+$n_c = \left\lceil \log_2 c_{max} \right\rceil = \left\lceil \log_2 t_{1}(2^w-1) \right\rceil$
+and the number of blocks to accommodate $c$ is given by $t_2$,
+defined in Section~\ref{sec:classical}.
+
+In general, the number of bits reserved for $c$, that is, $t_2w$ bits,
+is greater than the number of bits actually required for their representation.
+This difference occurs because an integer number of blocks of size $w$ is used
+to accommodate $c$. The number of unused bits is defined as $n_u = t_2w - n_c$.
+
+We note that $w$ and $n_u$ grow together, as seen in Table~\ref{tab:cbits}. It groups several parameters for \textsc{Wots}, how they affect $n_u$, and presents how these parameter groups benefit from this optimization. Odd values for $w$ show no abnormal behavior and are suppressed for simplicity, although there are some combinations where no padding is needed, such as $w = 3, m = 128$ and $w = 7, m = 512$. Finally, we redefine $c$ to $$c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2 w} - 2^{n_c}.$$ In other words, during the signature generation step, we fill the unused $n_u$ bits with ones. We call the modified scheme \textsc{Wots-b}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Unused bits on $\mathcal{B}_2$ for various combinations of $w$ and $m$.}
+    \begin{tabular}{*{5}{c}}
+    \toprule
+    $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
+    \toprule
+    \multirow{4}{*}{2}  &  128  &  8   &  2   &  \multirow{3}{*}{10} \\
+                        &  192  &  9   &  1   &                      \\
+                        &  256  &  9   &  1   &                      \\
+                        &  512  &  10  &  2   &  12                  \\
+    \midrule
+    \multirow{4}{*}{4}  &  128  &  9   &  3   &  \multirow{4}{*}{12} \\
+                        &  192  &  10  &  2   &                      \\
+                        &  256  &  10  &  2   &                      \\
+                        &  512  &  11  &  1   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{6}  &  128  &  11  &  1   &  \multirow{3}{*}{12} \\
+                        &  192  &  11  &  1   &                      \\
+                        &  256  &  12  &  0   &                      \\
+                        &  512  &  13  &  5   &  18                  \\
+    \midrule                                                             
+    \multirow{4}{*}{8}  &  128  &  12  &  4   &  \multirow{4}{*}{16} \\
+                        &  192  &  13  &  3   &                      \\
+                        &  256  &  13  &  3   &                      \\
+                        &  512  &  14  &  2   &                      \\
+    \bottomrule
+    \end{tabular}
+    \quad
+    \begin{tabular}{*{5}{c}}
+    \toprule
+    $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
+    \toprule                                                             
+    \multirow{4}{*}{10} &  128  &  14  &  6   &  \multirow{4}{*}{20} \\
+                        &  192  &  15  &  5   &                      \\
+                        &  256  &  15  &  5   &                      \\
+                        &  512  &  16  &  4   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{12} &  128  &  16  &  8   &  \multirow{4}{*}{24} \\
+                        &  192  &  16  &  8   &                      \\
+                        &  256  &  17  &  7   &                      \\
+                        &  512  &  18  &  6   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{14} &  128  &  18  &  10  &  \multirow{4}{*}{28} \\
+                        &  192  &  18  &  10  &                      \\
+                        &  256  &  19  &  9   &                      \\
+                        &  512  &  20  &  8   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{16} &  128  &  19  &  13  &  \multirow{4}{*}{32} \\
+                        &  192  &  20  &  12  &                      \\
+                        &  256  &  20  &  12  &                      \\
+                        &  512  &  21  &  11  &                      \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:cbits}
+\end{table}
+
+\subsection{Security Considerations}
+We recall that, in Section~\ref{sec:classical}, the classical \textsc{Wots} implementation already uses a padding of zeroes in the signature generation algorithm. Our proposal based on flipping the padding bits from zeroes to ones moves this fixed amount of iterations of $f$ from the verification process to the signature generation. These computations have no impact in security, since they have no checksum purpose, but must be evaluated nevertheless.
+
+\section{Tuning $\mathcal{B}_1$}
+\label{sec:counter}
+
+We propose a method to speed up the \textsc{Wots} signature generation
+or verification without any modification to the original scheme.
+Our idea is to append a cryptographic nonce to the signed message, before
+generating a signature. We show in Section~\ref{sec:experiments} that, by 
+repeating this process and searching
+for a suitable nonce, we can significantly reduce the cost of the signature
+verification, in exchange of an increased cost of the signature generation, or
+vice-versa. In the following, we explain the method and give statistical
+thresholds for the searching process.
+
+Let $M$ be any message, $R \in \mathbb{N}^{*}$ and $\lambda = (\lambda_0, \dots, \lambda_{R - 1})$ an $R$-tuple of nonces.
+We compute all $d_r$ such that $d_r = \mathcal{H}(M \mid\mid \lambda_r)$ with $0 \le r \le R$.
+Recall that $d_r$ may be split into a $t_1$-tuple, now defined by
+$\mathcal{B}_{r,1} = (b_{r,t-1}, \dots, b_{r,t-t_1})$, and let the set of
+summations of the integer representations of the elements in these tuples
+be defined by $S = \{\sum_{b \in \mathcal{B}_{r,1}} : 0 \leq r \leq R\}$.
+
+Finally, we choose $\lambda_r$ from $min(S)$ to obtain a faster signature generation 
+or from $max(S)$ for a faster signature verification. Then, we proceed with the classical
+\textsc{Wots} signature generation by letting $\mathcal{B}_1 = d_r$ or, simply by appending
+$\lambda_r$ to the initial message before running the signature algorithm.
+
+We call the method \textsc{Wots-r}. Furthermore, this proposal is inspired 
+by~\cite{Steinwandt2008}, and therefore
+we observe that $\lambda$ could be replaced by the trivial set $\{0, \dots, R\}$.
+
+\subsection{Finding a threshold for $R$}
+\label{sub:threshold}
+
+In this proposal, $R$ is a statistical parameter that represents the sufficient number of hashes
+needed to find an adequate summation in $S$. Intuitively, larger $R$ should 
+produce better results. However, this choice translates to a higher cost for signature
+generation. We show that there is a suitable threshold for $R$, depending on the
+required optimization. 
+
+Consider $\mu$ as the function that calculates the arithmetic mean of a set
+of integers. If we assume that
+$\forall b \in \mathcal{B}_{r,1}, 0 \le b \le 2^w-1$ follows a uniform distribution, 
+then by repeatedly calculating $\mu(\mathcal{B}_{r,1})$, we expect the average 
+$\mu' = \mu(\mu(\mathcal{B}_{r,1})) = 2^{w-1}$, for $ 0 \le r \le R$. 
+Hence, the distribution of the averages $\mu(\mathcal{B}_{r,1})$
+should follow a normal distribution. 
+
+We experiment with $w = 16$, $m = 256$
+and $\mathcal{H} =$ SHA-256, by computing $\mu(\mathcal{B}_{r,1})$ with $0 \le r < 2^{16}$,
+and indeed verify that the distribution of the averages follows a normal 
+distribution. Figure~\ref{fig:dist} is a graphical representation of this behavior.
+Then, by using the standard normal table (Z-table) with standard deviation $\sigma$, we have
+\begin{align*}
+P(\mu(\mathcal{B}_{r,1}) > \mu' + \sigma) &= 0.1587, \\
+P(\mu(\mathcal{B}_{r,1}) > \mu' +2\sigma) &= 0.0228, \\
+P(\mu(\mathcal{B}_{r,1}) > \mu' +3\sigma) &= 0.0013.  
+\end{align*}
+
+In Figure 3, we plot the chance of finding $\mu(\mathcal{B}_{r,1})$ inside
+these three intervals, with respect to $R$. We use the binomial distribution
+and distinguish three thresholds as suggestions for values of R: \{25, 200, 3500\}. Each 
+value yields a probability of $99.9\%$ of finding $\mu(\mathcal{B}_{r,1})$ in the intervals
+previously mentioned, respectively.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\columnwidth]{charts/hist}
+    \caption{Normalized histogram of $\mu(\mathcal{B}_{r,1})$, with $50$ bins.}
+    \label{fig:dist}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = left,
+        xlabel = $R$,
+        ylabel = Probability,
+        legend style={at={(1,0.5)},anchor=east},
+    ]
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        densely dashed
+    ]
+    {1 - (1 - 0.1587)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + \sigma)$}
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        loosely dashdotdotted
+    ]
+    {1 - (1 - 0.0228)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 2\sigma)$}
+    \addplot [
+        domain=0:200,
+        samples=100,
+        thick,
+        dashdotted
+    ]
+    {1 - (1 - 0.0013)^x};
+    \addlegendentry{$P(\mu(\mathcal{B}_{r,1}) > \mu' + 3\sigma)$}
+    \end{axis}
+    \end{tikzpicture}
+    \label{fig:rplot}
+    \caption{Thresholds for $R$.}
+\end{figure}
+
+
+\subsection{Security Considerations}
+
+Our proposal makes no attempt to modify the underlying classical \textsc{Wots} mechanisms.
+Hence, we discuss the impact of appending a cryptographic nonce $\lambda_r$ to a message $M$ before hashing it.
+Recall that we must find a suitable hash $d_r = \mathcal{H}(M \mid\mid \lambda_r)$ such that it
+produces a maximized or minimized sum of $\mathcal{B}_{r,1}$. In other words, high-order bits of 
+various blocks in $\mathcal{B}_{r,1}$ have high probability of being fixed, making partial hash 
+collision attacks more susceptible.
+
+This behavior may be exploited through differential cryptanalysis on the fixed bits for the
+Merkle-Damg\r{a}rd construction, recently put in practice to generate the first practical collision
+for SHA-1~\cite{Stevens2017}. Such an attack could present a threat to our proposal, thus requiring the use of cryptographic hash functions which are second preimage resilient, such as SHA-256. We leave the remaining security considerations  for the scheme to be taken from~\cite{Hlsing2013}.
+
+\section{Experiments}
+\label{sec:experiments}
+
+As a proof-of-concept, we compare the number of iterations of a function $f$ throughout
+the entire execution of the digital signature schemes. Again,
+we denote the four variants tested as \textsc{Wots} for the classical
+scheme described on Section~\ref{sec:classical}, \textsc{Wots-b}
+for the variant described on Section~\ref{sec:checksum},
+\textsc{Wots-r} is the scheme described on Section~\ref{sec:counter}
+and \textsc{Wots-br} merges the characteristics of the latter two.
+Considering the discussion on Subsection~\ref{sub:threshold},
+sufficient values of $R$ were chosen according to the usual values
+of the Winternitz parameter $w$.
+
+In Table~\ref{table:1} we give the average number of iterations
+of $f$ needed to verify a signature. We experiment with $2^{14}$
+executions of the verification step for the proposed schemes,
+with $\mathcal{H}= $ SHA-256,
+$m = 256$ and base-16 messages of $2^{10}$ length generated
+through \texttt{/dev/urandom}. To better understand the effect of
+each proposal individually, we also compute the average of
+$\mathcal{B}_1$ and $\mathcal{B}_2$ separately. 
+
+Note that $\mu(\mathcal{B}_2)$ is affected negatively by
+\textsc{Wots-r}, since maximizing the sum of elements
+in $\mathcal{B}_1$ has a direct impact on the calculation of the checksum.
+However, this difference does not heavily impact the overall gains 
+achieved in $\mu(\mathcal{B}_1)$. Furthermore, by using \textsc{Wots-br}, this 
+behavior is greatly mitigated and may speed up the signature generation or 
+verification steps up to a factor of half in a best-case scenario.
+
+\begin{table}[htbp]
+    \setlength{\tabcolsep}{7pt}
+    \centering
+    \caption{Number of iterations of $f$ on the verification step for
+    the proposed schemes when $max(S)$ is chosen.}
+    \begin{tabular}{cclccc}
+    \toprule
+    $w$ & $R$ & \textsc{Scheme} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
+    \toprule
+    \multirow{8}{*}{4} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &     \multirow{2}{*}{479.93} &      25.88 &     505.80 \\
+     & &  \textsc{Wots-b} &      &      12.25 &     492.18 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{407.81} &      27.49 &     435.29 \\
+     & & \textsc{Wots-br} &      &      13.49 &     421.29 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{379.08} &      29.23 &     408.31 \\
+     & & \textsc{Wots-br} &      &      15.23 &     394.31 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{348.88} &      31.14 &     380.02 \\
+     & & \textsc{Wots-br} &      &      17.14 &     366.02 \\ \hline
+    \multirow{8}{*}{8} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &    \multirow{2}{*}{4081.84} &     368.43 &    4450.27 \\
+     & &  \textsc{Wots-b} &      &     136.25 &    4218.08 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{3262.39} &     370.56 &    3632.95 \\
+     & & \textsc{Wots-br} &      &     130.56 &    3392.95 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{2940.63} &     372.13 &    3312.76 \\
+     & & \textsc{Wots-br} &      &     132.13 &    3072.76 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{2604.49} &     374.75 &    2979.24 \\
+     & & \textsc{Wots-br} &      &     134.75 &    2739.24 \\ \hline
+    \multirow{8}{*}{16} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &  \multirow{2}{*}{525120.63} &   98231.81 &  623352.44 \\
+     & &  \textsc{Wots-b} &      &   32707.82 &  557828.45 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{376550.24} &   98225.54 &  474775.78 \\
+     & & \textsc{Wots-br} &      &   32697.52 &  409247.76 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{319490.02} &   98850.06 &  418340.08 \\
+     & & \textsc{Wots-br} &      &   33321.91 &  352811.94 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{262301.92} &  101022.36 &  363324.28 \\
+     & & \textsc{Wots-br} &      &   35492.57 &  297794.48 \\
+    \bottomrule
+    \end{tabular}
+    \label{table:1}
+\end{table}
+
+In general, we observe a reduction of roughly $2^w$ iterations of $f$ with \textsc{Wots-b} alone. In the case of \textsc{Wots-r}, we obtain a reduction of up to $25\%$ for $w = 4$, $33\%$ for $w = 8$ and $42\%$ for $w = 16$. By merging both schemes together, we improve these results to $28\%, 39\%\text{ and }52\%$, respectively.
+
+The aforementioned reductions translate to an increase of similar magnitude on the signature generation. For example, according to Section~\ref{sec:classical} and by letting $w = 4$, then $t = 67$ and the total number of iterations of $f$ for signature generation and verification is equal to $t \times 2^w = 1072$. Our results show that, when $R = 25$ with \textsc{Wots-br}, we can decrease the number of iterations of $f$ during the signature verification from approximately $506$ to $421$, in average.
+
+Avoiding these $85$ iterations of $f$ during the signature verification means that we must now calculate these on the signature generation. In other words, this amounts to a $16.8\%$ speedup for the verification step at the cost of a $15\%$ slowdown during the signature generation, without taking the computation of $R$ into account.
+
+We can substantially increase this trade-off by letting $R = 200$ or $R = 3500$, when signature generation time is not constrained. Otherwise, for small values of $w$, the number of hashes used for \textsc{Wots-r} might not be an attractive choice. Hence, such values can be better used with greater values of $w$, where computing hundreds of hash functions is negligible compared to $t \times 2^w$.
+
+\subsection{Impact on Merkle signature schemes}
+
+Our proposal has significant results for hash-based schemes that make
+use of Merkle tree structures. We test \textsc{Wots-b}, \textsc{Wots-r} and \textsc{Wots-br} with the public
+domain\footnote{\texttt{\url{https://github.com/joostrijneveld/xmss-reference/}}} reference
+implementation of \textsc{Xmss} for the IETF Internet Draft
+\cite{irtf-cfrg-xmss-hash-based-signatures-12}. 
+
+We patch the reference implementation by modifying the padding process inside the \textsc{Wots+} signing algorithm, according to Section~\ref{sec:checksum}, denoting this modification as \textsc{Xmss-b}. Furthermore, by choosing $R$ with the method described in Section~\ref{sec:counter}, we achieve up to $32\%$ of speedup when benchmarking the verification step for \textsc{Xmss}. We call this variant \textsc{Xmss-r}. Additionally, when these optimizations are used together, we call the resulting scheme \textsc{Xmss-br}. 
+
+Table~\ref{table:2} shows the average run time of $2^{14}$ signatures for each scheme, including the computation of $R$ for \textsc{Xmss-r}. We use the recommended value of $w = 4$, and additionally, $w = 8$. For greater values of $w$ (e.g. $16$), it is widely known that the \textsc{Xmss} key generation algorithm is too slow and unpractical. Hence, this value is omitted from the results. Furthermore, we experiment with both $max(S)$ and $min(S)$ to demonstrate the impact of our schemes when choosing to optimize signature verification or generation, respectively. In the case of $min(S)$, \textsc{Xmss-b} and \textsc{Xmss-br} are not considered, since \textsc{Wots}' default padding already optimizes signature generation.
+
+\begin{table}[htbp]
+    \setlength{\tabcolsep}{8pt}
+    \centering
+    \caption{Signature generation and verification run times (in ms)
+    for the proposed schemes.}
+    \begin{tabular}{ccclcc}
+    \toprule
+    & $w$ & $R$ & \textsc{Scheme} & \textsc{Sig. time} & \textsc{Ver. time} \\
+    \toprule
+    \multirow{16}{*}{\rotatebox[origin=c]{90}{$max(S)$}}
+    & \multirow{8}{*}{4} & \multirow{2}{*}{-}  
+    &    \textsc{Xmss}                  & 0.953  & 0.734 \\
+    &&&  \textsc{Xmss-b}                & 0.975  & 0.724 \\ 
+    \cline{3-6} && \multirow{2}{*}{25}   
+    &   \textsc{Xmss-r}                 & 1.059  & 0.652 \\
+    &&& \textsc{Xmss-br}                & 1.073  & 0.637 \\ 
+    \cline{3-6} && \multirow{2}{*}{200}  
+    &   \textsc{Xmss-r}                 & 1.222  & 0.620 \\
+    &&&  \textsc{Xmss-br}               & 1.240  & 0.616 \\ 
+    \cline{3-6} && \multirow{2}{*}{3500} 
+    &   \textsc{Xmss-r}                 & 3.724  & 0.588 \\
+    &&& \textsc{Xmss-br}                & 3.730  & 0.573 \\ 
+    \cline{2-6} & \multirow{8}{*}{8} & \multirow{2}{*}{-} 
+    &   \textsc{Xmss}                   & 7.709  & 5.676 \\
+    &&& \textsc{Xmss-b}                 & 7.908  & 5.361 \\ 
+    \cline{3-6} && \multirow{2}{*}{25} 
+    & \textsc{Xmss-r}                   & 8.597  & 4.637 \\
+    &&&  \textsc{Xmss-br}               & 8.992  & 4.415 \\ 
+    \cline{3-6} && \multirow{2}{*}{200} 
+    &   \textsc{Xmss-r}                 & 9.045  & 4.245 \\
+    &&& \textsc{Xmss-br}                & 9.460  & 4.052 \\ 
+    \cline{3-6} && \multirow{2}{*}{3500} 
+    &   \textsc{Xmss-r}                 & 11.760 & 3.861 \\
+    &&& \textsc{Xmss-br}                & 12.193 & 3.664 \\
+    \midrule
+    \multirow{8}{*}{\rotatebox[origin=c]{90}{$min(S)$}}
+    & \multirow{4}{*}{4} & -
+    &    \textsc{Xmss}                  & 0.971 & 0.746 \\
+    && 25
+    & \multirow{3}{*}{\textsc{Xmss-r}}  & 0.879 & 0.832 \\
+    && 200  
+    &                                   & 1.006 & 0.885 \\
+    && 3500
+    &                                   & 3.393 & 0.898 \\
+    \cline{2-6} & \multirow{4}{*}{8} & - 
+    &   \textsc{Xmss}                   & 7.819 & 5.731 \\
+    && 25 
+    & \multirow{3}{*}{\textsc{Xmss-r}}  & 6.672 & 6.553 \\
+    && 200
+    &                                   & 6.472 & 6.982 \\
+    && 3500
+    &                                   & 8.488 & 7.435 \\
+    \bottomrule
+    \end{tabular}
+    \label{table:2}
+    \medskip
+    
+    Relevant computer specifications are as follows:
+    8 GB of DDR3 RAM @ 1333MHz, Intel Core i5-4570 @ 3.2GHz
+    and \texttt{gcc} 7.3.0. Base commit for the modifications:
+    05dac989c40349ad5f4dfee3b563b85131b95332.
+\end{table}
+
+Our results in Table~\ref{table:2} show that, for $max(S)$, any value of $R$ improves the signature verification run time, with the associated cost on signature generation. Evidently, this behavior is suppressed with greater values of $w$. However, for $min(S)$, not every value of $R$ may be chosen. In the case of $w = 4$ and $R = 25$, we obtain a speedup of $9.4\%$ for the signature generation process, while when $R = 200$ or $R = 3500$, both processes present a slower run time. The same reasoning applies to $w = 8$, where one should only choose $R = 25$ or $R = 200$.
+
+\section{Final Remarks}
+
+In this paper, we propose methods to adjust \textsc{Wots} for faster signature verification at the cost of a slower signature generation, or vice-versa. Our first proposal, \textsc{Wots-b}, consists of flipping the checksum padding bits, thus improving signature verification run time. In our second proposal, \textsc{Wots-r}, we present a choice to to maximize or minimize the base-$w$ blocks constructed from the message digest. The former is used to speed up signature verification, whereas the latter speeds up signature generation or verification.
+
+We experiment with the classical Winternitz scheme and a state-of-the-art Merkle-based signature scheme, \textsc{Xmss}. We obtain an improvement factor of up to two when $w = 16$, for the \textsc{Wots} signature verification process, with regards to the number of iterations of $f$. Also, by applying our proposals to \textsc{Xmss}, we reduce the run time for the verification step by $22\%$ when $w = 4$ and $36\%$ when $w = 8$. Finally, when improving signature generation, for $w = 4$ and $w = 8$, we obtain speedups of $9.4\%$ and $17.2\%$, respectively.
+
+\subsection{Future Works}
+Throughout our work, we consider using $min(S)$ and $max(S)$ to find cryptographic nonces that speed up the \textsc{Wots} scheme. However, this may not be the best approach. We believe that the criteria for choosing $\lambda_r$ can be improved, by searching for $\mathcal{B}_{r,1}$ with elements of similar magnitude, in addition to the original proposal of $\mu(\mathcal{B}_{r,1}) > \mu'$. Parallel implementations can exploit this trait and allow faster computations of $f$.
+
+
 \section{Descrição das abordagens}
 
 \todo[inline]{focus on the $R$ parameter, not the padding stuff that probably
