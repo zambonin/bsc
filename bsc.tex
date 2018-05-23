@@ -1719,18 +1719,21 @@ Analogamente, o valor mínimo é definido como
 c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0 \iff \forall b \in \mathcal{B}_1, \; b = 2^w - 1.
 \end{equation}
 A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$.
-
 \begin{align}
 \begin{split}
     n_c &\leq t_2 w \\
     \lceil \log_2 (t_1 \times 2^w - 1) \rceil &\leq t_2w \\
     \lceil \log_2 t_1 + \log_2 2^w - 1 \rceil &\leq t_2w \\
     \lceil \log_2 t_1 + w \rceil &\leq t_2w \\
-    \lceil \log_2 t_1 + w \rceil &\leq 
+    \lceil \log_2 t_1 \rceil + w &\leq t_2w \\
+    \lceil \log_2 t_1 \rceil + w &\leq \left\lceil \sfrac{\lfloor \log_2 t_1 \rfloor + 1 + w}{w} \right\rceil \times w \\
+    \lceil \log_2 t_1 \rceil + w &\leq \lceil \lfloor \log_2 t_1 \rfloor + 1 + w \rceil \\
+    \lceil \log_2 t_1 \rceil + w &\leq \lfloor \log_2 t_1 \rfloor + 1 + w \\
+    \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w \\
 \end{split}
 \end{align}
 
-$$ \lceil \log_2 (t_1 \times 2^w - 1) \rceil \stackrel{?}{\leq} \left\lceil \frac{\lfloor \log_2 t_1 \rfloor + 1 + w}{w} \right\rceil \times w$$
+$$ \lceil \log_2 (t_1 \times 2^w - 1) \rceil \stackrel{?}{\leq} $$
 
 $$ \lceil \log_2 (t_1 \times 2^w - 1) \rceil \stackrel{?}{\leq} \left\lceil \lfloor \log_2 t_1 \rfloor + 1 + w \right\rceil$$
 
