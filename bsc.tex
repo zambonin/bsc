@@ -1847,7 +1847,7 @@ A segunda proposta consiste na busca por resumos criptográficos com caracterís
 
 Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\Lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na seção do \wots{}.
 
-A fim de escolher o \emph{nonce} mais conveniente para que a geração de assinatura seja eficiente, calcule
+A fim de escolher o \emph{nonce} mais conveniente para que a geração ou verificação de assinaturas seja eficiente, respectivamente, calcule
 \begin{equation}
     k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r} \quad \text{ou} \quad
     k = \argmax_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r}.
