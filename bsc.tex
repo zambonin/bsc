@@ -1854,7 +1854,12 @@ A fim de escolher o \emph{nonce} mais conveniente para que a geração ou verifi
 \end{equation}
 e tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho $R$, visto que aplicações de funções de resumo criptográfico tornam a saída completamente difusa, e portanto, a relevância do conteúdo das palavras é diminuída.
 
-Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo computacional ampliado na geração da assinatura. Portanto, é desejável que exista um limite para este parâmetro, visto que para alguns parâmetros $w$, este cálculo pode representar uma parte considerável do processamento total nesta etapa. Uma abordagem estatística é aplicada para este fim. Considerando que uma função de resumo criptográfico deve produzir saídas uniformemente distribuídas e aparentemente aleatórias, então frações destas saídas também devem o ser. Portanto, se os valores em $\mathcal{B}_1$ seguem a distribuição uniforme discreta, pelo teorema central do limite, para 
+Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo computacional ampliado na geração da assinatura. Portanto, é desejável que exista um limite para este parâmetro, visto que para alguns parâmetros $w$, este cálculo pode representar uma parte considerável do processamento total nesta etapa. Uma abordagem estatística é aplicada para este fim. Considerando que uma função de resumo criptográfico deve produzir saídas uniformemente distribuídas e aparentemente aleatórias, então frações destas saídas também devem o ser.
+
+Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme discreta, pelo teorema central do limite, computações repetidas de $\mu(\mathcal{B}_{1})$ tomarão a forma de uma distribuição Gaussiana. Além disso, espera-se que
+\begin{equation}
+    \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}
+\end{equation}
 
 \section{Resultados}
 
