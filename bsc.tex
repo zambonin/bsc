@@ -1842,10 +1842,9 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 
 A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a divisão deste resumo através da interpretação de uma codificação \emph{run-length}, é apresentada em~\cite{Steinwandt2008}.
 
-Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$-tuplas de palavras de base-$w$, ou seja, $\mathcal{B}_{1}^{r}$
+Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $\forall d_r \in D, d_r = b_{r}^{t - 1} \concat \dots  \concat b_{r}^{t - t_1}$.
 
-
-, interpretando cada $d_r$ como palavras de base-$w$ e computando as $t_1$-tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$.
+$\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$.
 
 \section{Resultados}
 
