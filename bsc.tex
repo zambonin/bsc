@@ -1832,7 +1832,10 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \caption{\emph{Bits} inutilizados em $\mathcal{B}_2$ para vários valores de $w$ e $m$.}
 \end{table}
 
-Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. 
+Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (i.e. \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
+\begin{equation}
+    c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2w} - 2^{n_c}.
+\end{equation}
 
 \section{Resultados}
 
