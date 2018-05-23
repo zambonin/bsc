@@ -1871,7 +1871,7 @@ Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme di
 \end{equation}
 Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, e os resumos $\{\hash{\lambda_i} : 0 \leq i \leq 2^{16} - 1, \lambda_i \stackrel{\$}{\longleftarrow} \binwds{32}\}$ foram calculados. As médias das tuplas $\mathcal{B}_{1}^{i}$ são apresentadas na Figura~\ref{fig:12}, concretizando os fatos acima.
 
-Assim, é possível utilizar este resultado para fornecer valores razoáveis para $R$. Aplicando a tabela da distribuição normal padrão com desvio padrão $\sigma$, identificam-se as probabilidades de $\mu(\mathcal{B}_{1}^{i})$ estar localizada após $\mu'$ de acordo com alguns múltiplos de $\sigma$:
+Assim, é possível utilizar este resultado para fornecer valores razoáveis para $R$. Aplicando a tabela da distribuição normal padrão com desvio padrão $\sigma$, identificam-se as probabilidades de $\mu(\mathcal{B}_{1}^{i})$ estar localizada após $\mu'$, e em especial, após intervalos de desvio padrão de acordo com alguns múltiplos de $\sigma$:
 \begin{align}
     \begin{split}
         P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 1\sigma) &= 0.1587, \\
@@ -1879,7 +1879,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma) &= 0.0013.
     \end{split}
 \end{align}
-Então, para assegurar que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com valores sugeridos de $\{25, 200, 3500\}$, respectivamente.
+Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com valores sugeridos de $\{25, 200, 3500\}$, respectivamente. Note que a escolha de valores 
 
 \begin{figure}[ht]
     \centering
@@ -1920,7 +1920,7 @@ Então, para assegurar que estes eventos aconteçam com altíssima probabilidade
     \caption{Limites para $R$.}
 \end{figure}
 
-A modificação 
+Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado.
 
 \section{Resultados}
 
