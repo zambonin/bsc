@@ -1732,11 +1732,10 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
     \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w \\
 \end{split}
 \end{align}
-Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $w$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz. 
+Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $w$ e $m$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz. 
 
 \begin{table}[htbp]
     \centering
-    \caption{Unused bits on $\mathcal{B}_2$ for various combinations of $w$ and $m$.}
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
@@ -1788,7 +1787,34 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  512  &  21  &  11  &                      \\
     \bottomrule
     \end{tabular}
+    \quad
+    \begin{tabular}{*{5}{c}}
+    \toprule
+    $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
+    \toprule                                                             
+    \multirow{4}{*}{10} &  128  &  14  &  6   &  \multirow{4}{*}{20} \\
+                        &  192  &  15  &  5   &                      \\
+                        &  256  &  15  &  5   &                      \\
+                        &  512  &  16  &  4   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{12} &  128  &  16  &  8   &  \multirow{4}{*}{24} \\
+                        &  192  &  16  &  8   &                      \\
+                        &  256  &  17  &  7   &                      \\
+                        &  512  &  18  &  6   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{14} &  128  &  18  &  10  &  \multirow{4}{*}{28} \\
+                        &  192  &  18  &  10  &                      \\
+                        &  256  &  19  &  9   &                      \\
+                        &  512  &  20  &  8   &                      \\
+    \midrule                                                             
+    \multirow{4}{*}{16} &  128  &  19  &  13  &  \multirow{4}{*}{32} \\
+                        &  192  &  20  &  12  &                      \\
+                        &  256  &  20  &  12  &                      \\
+                        &  512  &  21  &  11  &                      \\
+    \bottomrule
+    \end{tabular}
     \label{tab:1}
+    \caption{Unused bits on $\mathcal{B}_2$ for various combinations of $w$ and $m$.}
 \end{table}
 
 \section{Resultados}
