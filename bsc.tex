@@ -1858,8 +1858,9 @@ Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo c
 
 Portanto, se os valores em $\mathcal{B}_{1}$ seguem a distribuição uniforme discreta, pelo teorema central do limite, computações repetidas de $\mu(\mathcal{B}_{1})$ tomarão a forma de uma distribuição Gaussiana. Além disso, espera-se que
 \begin{equation}
-    \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}
+    \lim_{n \to \infty} \mu(\{\mu(\mathcal{B}_{1}^{i}) : 0 \leq i \leq n\}) = 2^{w - 1}.
 \end{equation}
+Para assegurar este comportamento, uma instância de \wots{} foi produzida com os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, e os resumos $\{\hash{i} : 0 \leq i \leq 2^{16} - 1\}$ foram calculados
 
 \section{Resultados}
 
