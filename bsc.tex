@@ -1832,21 +1832,28 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \caption{\emph{Bits} inutilizados em $\mathcal{B}_2$ para vários valores de $w$ e $m$.}
 \end{table}
 
-Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (i.e. \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
+Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenaç£o de \emph{bytes} Ã© incomum (i.e. \emph{big-endian}), esta estratÃ©gia trarÃ¡ retornos reduzidos. Em conclusÃ£o, a etapa de geraÃ§Ã£o de assinatura Ã© modificada a fim de alterar o cÃ¡lculo de $c$. Defina a nova soma de verificaÃ§Ã£o como
 \begin{equation}
     c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2w} - 2^{n_c}.
 \end{equation}
-A modificação na estrutura da soma de verificação não afeta a segurança do esquema de assinatura digital, visto que o espaço inutilizado na $t_2$-tupla $\mathcal{B}_2$ não possui qualquer aplicação. Assim, este cômputo de iterações de $f$ é deslocado da etapa de verificação de assinaturas para a geração destas, de maneira diretamente proporcional.
+A modificaÃ§Ã£o na estrutura da soma de verificaÃ§Ã£o nÃ£o afeta a seguranÃ§a do esquema de assinatura digital, visto que o espaÃ§o inutilizado na $t_2$-tupla $\mathcal{B}_2$ nÃ£o possui qualquer aplicaÃ§Ã£o. Assim, este cÃ´mputo de iteraÃ§Ãµes de $f$ Ã© deslocado da etapa de verificaÃ§Ã£o de assinaturas para a geraÃ§Ã£o destas, de maneira diretamente proporcional.
 
 \section{\textsc{Wots-r}}
 
-A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a divisão deste resumo através da interpretação de uma codificação \emph{run-length}, é apresentada em~\cite{Steinwandt2008}.
+A segunda proposta consiste na busca por resumos criptogrÃ¡ficos com caracterÃ­sticas que habilitam a geraÃ§Ã£o ou verificaÃ§Ã£o de assinaturas de maneira mais eficiente. Este processo Ã© independente do esquema subjacente, consistindo do prÃ©-processamento da mensagem atravÃ©s de sua concatenaÃ§Ã£o com um \emph{nonce} criptogrÃ¡fico. Deste modo, o valor do resumo criptogrÃ¡fico resultante pode ser maximizado ou minimizado, de acordo com a compensaÃ§Ã£o desejada, consequentemente alterando a extensÃ£o das cadeias de resumos derivadas do mesmo. Uma estratÃ©gia similar, buscando a divisÃ£o deste resumo atravÃ©s da interpretaÃ§Ã£o de uma codificaÃ§Ã£o \emph{run-length}, Ã© apresentada em~\cite{Steinwandt2008}.
 
-Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na seção do \wots{}. Defina as somas das representações inteiras dos elementos destas tuplas como $S = (\sum_{b \in \mathcal{B}_{1}^{r}} : 0 \leq r \leq R)$.
+Tome $M$ como uma mensagem qualquer, o parÃ¢metro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geraÃ§Ã£o da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na seÃ§Ã£o do \wots{}.
+
+A fim de escolher o $\lambda_r$ mais conveniente para que a geraÃ§Ã£o de assinatura seja mais eficiente, calcule
+\begin{equation}
+    min()
+\end{equation}
+
+Defina a tupla que contÃ©m as somas das representaÃ§Ãµes inteiras dos elementos destas tuplas como $S = (\sum \mathcal{B}_{1}^{0}, \dots, \sum \mathcal{B}_{1}^{R - 1})$.
 
 \section{Resultados}
 
-\chapter{Conclusão}
+\chapter{ConclusÃ£o}
 
 \section{Trabalhos futuros}
 
