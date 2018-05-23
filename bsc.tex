@@ -1708,7 +1708,9 @@ Neste capítulo, duas otimizações são apresentadas para a família de esquema
 
 \section{\textsc{Wots-b}}
 
-A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite{mcgrew-hash-sigs-11}. Entretanto, é possível calcular o número de \emph{bits} não utilizados neste número de maneira exata. 
+A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}. Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de maneira menos eficaz em relação ao tempo de execução.
+
+é possível calcular o número de \emph{bits} não utilizados neste número de maneira exata. 
 
 \todo[inline]{focus on the $R$ parameter, not the padding stuff that probably
 was already proposed in LM-OTS}
