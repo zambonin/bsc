@@ -1710,6 +1710,8 @@ Neste capítulo, duas otimizações são apresentadas para a família de esquema
 
 A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}. Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. 
 
+De acordo com a seção do \wots{}, a soma de verificação pode ser calculada a partir da subtração
+
 \todo[inline]{focus on the $R$ parameter, not the padding stuff that probably
 was already proposed in LM-OTS}
 
