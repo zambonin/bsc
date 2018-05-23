@@ -1718,7 +1718,9 @@ Analogamente, o valor mínimo é definido como
 \begin{equation}
 c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0 \iff \forall b \in \mathcal{B}_1, \; b = 2^w - 1.
 \end{equation}
-A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$.
+A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 t_1(2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c < t_2w$.
+
+$$ \log_2 \ $$
 
 \section{Resultados}
 
