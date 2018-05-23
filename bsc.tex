@@ -1849,9 +1849,15 @@ Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}
 
 A fim de escolher o \emph{nonce} mais conveniente para que a geração de assinatura seja eficiente, calcule
 \begin{equation}
-    k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r}
+    k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r} \text{ ou } 
 \end{equation}
-e tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho $R$, visto que aplicações de funções de resumo criptográfico tornam a saída uniformemente distribuída e completamente difusa, e portanto, a relevância do conteúdo das palavras é diminuída.
+De modo análogo, para otimizar a verificação da assinatura, calcula-se
+\begin{equation}
+    k = \argmax_{r \in \{0, \dots, R - 1\}} \sum \mathcal{B}_{1}^{r}.
+\end{equation}
+Por fim, tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho $R$, visto que aplicações de funções de resumo criptográfico tornam a saída completamente difusa, e portanto, a relevância do conteúdo das palavras é diminuída.
+
+
 
 \section{Resultados}
 
