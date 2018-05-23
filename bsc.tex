@@ -1722,11 +1722,12 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
 
 \begin{align}
 \begin{split}
-    
-\end{split}
     n_c &\leq t_2 w \\
-    \lceil \log_2 (t_1 \times 2^w - 1) \rceil &\leq t_2w
-    \lceil \log_2 t_1 + \log_2 2^w - 1 \rceil &\leq t_2w
+    \lceil \log_2 (t_1 \times 2^w - 1) \rceil &\leq t_2w \\
+    \lceil \log_2 t_1 + \log_2 2^w - 1 \rceil &\leq t_2w \\
+    \lceil \log_2 t_1 + w \rceil &\leq t_2w \\
+    \lceil \log_2 t_1 + w \rceil &\leq 
+\end{split}
 \end{align}
 
 $$ \lceil \log_2 (t_1 \times 2^w - 1) \rceil \stackrel{?}{\leq} \left\lceil \frac{\lfloor \log_2 t_1 \rfloor + 1 + w}{w} \right\rceil \times w$$
