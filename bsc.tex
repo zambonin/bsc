@@ -1688,7 +1688,7 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 \end{enumerate}
 
-Adicionalmente, como mencionado na Seção\ do \textsc{Wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
+Adicionalmente, como mencionado na Seção~\ref{subsection:wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
 \section{Visão temporal}
 \label{section:timeline}
@@ -1729,7 +1729,7 @@ Vários esquemas foram citados ao longo das seções anteriores, provendo uma co
 
 Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizadas por esquemas considerados como o estado da arte. Os conceitos de esquemas de poucas assinaturas, redução de requisitos de segurança para resistência à segunda pré-imagem, hiper-árvores e resistência a ataques multi-usuário, todos no contexto de assinaturas digitais com funções de resumo criptográfico, podem ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11} contemplam todos os esquemas citados nas seções anteriores, à exceção da família \sphincs{}~\cite{Bernstein2015,sphincsplus}, que renuncia o gerenciamento de estado, característica presente em todos os esquemas baseados em árvores de Merkle aprofundados anteriormente.
 
-Esta família utiliza várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema \horst{} é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winternitz, restritos ao cálculo de assinaturas entre árvores intermediárias.
+Esta família utiliza várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema \horst{} é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas no Capítulo~\ref{chapter:tuning} têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winternitz, restritos ao cálculo de assinaturas entre árvores intermediárias.
 
 \chapter{Otimização do esquema Winternitz}
 \label{chapter:tuning}
@@ -1739,9 +1739,9 @@ Neste capítulo, duas otimizações são apresentadas para a família de esquema
 \section{\textsc{Wots-b}}
 \label{section:wotsb}
 
-A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
+A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na Seção~\ref{subsection:wots}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
 
-Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. De acordo com a seção do \wots{}, considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por
+Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. De acordo com a Seção~\ref{subsection:wots} considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por
 \begin{equation}
 c_{max} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 0) = t_1(2^w - 1) \iff \forall b \in \mathcal{B}_1, \; b = 0.
 \end{equation}
