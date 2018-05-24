@@ -167,6 +167,7 @@ digital signature, Winternitz one time signature scheme
 \newpage
 
 \chapter{Introdução}
+\label{chapter:intro}
 
 A aplicação de protocolos criptográficos é essencial no contexto da validação e
 proteção de quaisquer comunicações realizadas por um conjunto de entidades,
@@ -243,8 +244,11 @@ baseados em árvores de Merkle. Este trabalho é uma versão expandida,
 e portanto didática, do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
 \section{Objetivos}
+\label{section:objectives}
 
 \subsection{Objetivo geral}
+\label{subsection:general}
+
 Apresentar um estudo detalhado sobre o esquema de
 assinatura digital única Winternitz, contextualizando-o junto ao estado da
 arte, observando o refinamento e utilização deste em vários outros esquemas a
@@ -253,6 +257,8 @@ otimização proposta, que afeta o tempo de execução da criação ou
 verificação de uma assinatura.
 
 \subsection{Objetivos específicos}
+\label{subsection:specific}
+
 \begin{enumerate}
     \item Descrever os esquemas de assinatura digital única \lots{} e \wots{},
     sua variante \wotsplus{}, e o esquema de poucas assinaturas \hors{};
@@ -263,6 +269,7 @@ verificação de uma assinatura.
 \end{enumerate}
 
 \chapter{Primitivas criptográficas}
+\label{chapter:primitives}
 
 Neste capítulo, são explicados os conceitos necessários
 a fim de entender inteiramente um esquema de assinatura digital, bem como outros
@@ -277,6 +284,7 @@ deste tipo de função; e, por fim, a definição formal de um esquema de assina
 digital agregando estas noções.
 
 \section{Criptografia simétrica e assimétrica}
+\label{section:crypto}
 
 Define-se criptografia como a criação e análise de protocolos
 matemáticos que habilitam comunicação segura, através de um canal
@@ -345,6 +353,7 @@ problemas podem ser resolvidos de maneira significativamente mais rápida,
 como visto em~\cite{Shor:1997:PAP:264393.264406}.
 
 \subsection{A cifra AES}
+\label{subsection:aes}
 
 Originalmente publicado como Rijndael, o algoritmo conhecido como AES é resultado
 de um esforço de padronização para um sistema criptográfico seguro, finalizado
@@ -506,6 +515,7 @@ relacionada e outros tópicos avançados, mostra-se razoável consultar
 o livro original de descrição do Rijndael~\cite{Daemen:2002:DR:560131}.
 
 \subsection{O criptossistema RSA}
+\label{subsection:rsa}
 
 O algoritmo conhecido como RSA~\cite{Rivest:1978:MOD:359340.359342} é uma
 implementação de criptografia assimétrica amplamente utilizada. É baseado na
@@ -570,6 +580,7 @@ inseguro. Este e outros ataques~\cite{Boneh99twentyyears} são mitigados com
 a aplicação de uma função de preenchimento à mensagem~\cite{Bellare1995}.
 
 \section{Funções de resumo criptográfico}
+\label{section:hashfunc}
 
 Funções criadas com o intuito de resumir dados, ou seja, reduzir uma mensagem
 de tamanho arbitrário para uma palavra pequena e identificável,
@@ -684,6 +695,7 @@ comumente empregados como identificadores únicos para um arquivo (e.g.
 como a geração de números pseudoaleatórios.
 
 \subsection{Construção esponja}
+\label{subsection:sponge}
 
 A construção esponja \cite{SpongeReference}, de característica iterativa,
 permite a generalização de funções de resumo, naturalmente com saídas de
@@ -824,6 +836,7 @@ são definições de \textsc{Keccak} com parâmetros fixos, e.g.
 \end{equation}
 
 \section{Esquemas de assinatura digital}
+\label{section:digitalsig}
 
 Um esquema de assinatura digital é uma construção matemática que habilita a
 demonstração de certas propriedades sobre mensagens assinadas: nomeadamente, a
@@ -889,6 +902,7 @@ embora teoricamente similares, habilitam o entendimento conceitual de vários
 outros algoritmos com a mesma função, mas execuções distintas.
 
 \chapter{Assinatura digital baseada em funções de resumo criptográfico}
+\label{chapter:hashsig}
 
 Neste capítulo, os esquemas de assinatura digital mais reconhecidos,
 tratando-se de assinaturas únicas e esquemas convencionais, são apresentados
@@ -899,6 +913,7 @@ de chave, e os esquemas baseados em árvores de Merkle, como o \mss{}, \xmss{}
 e sua variante \xmssmt{}.
 
 \section{Esquemas de assinatura única}
+\label{section:onetime}
 
 Esquemas de assinatura única (\emph{one-time signature schemes}) possibilitam a
 assinatura de apenas uma mensagem, facilitando a falsificação deste processo no
@@ -908,6 +923,7 @@ vários esquemas continuam utilizando assinatura única e compõem o estado da
 arte da literatura~\cite{sphincsplus,irtf-cfrg-xmss-hash-based-signatures-12}.
 
 \subsection{\lots{}}
+\label{subsection:ldots}
 
 A utilização de funções de resumo criptográfico para a criação de esquemas de
 assinatura digital foi iniciada por Lamport~\cite{lamport1979constructing}
@@ -969,6 +985,7 @@ concatenados. Reduzir o tamanho das assinaturas mostra-se mais difícil;
 entretanto, a generalização deste esquema permite esta otimização.
 
 \subsection{\wots{}}
+\label{subsection:wots}
 
 A introdução de um parâmetro que habilita compensar a criação de chaves e
 assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
@@ -1088,6 +1105,7 @@ esquema, modificando essencialmente a estrutura da função $f$, assim combatend
 ataques multi-usuário.
 
 \subsection{\wotsplus{}}
+\label{subsection:wotsplus}
 
 O principal esquema da família Winternitz tem como ideia principal a
 reposição de $f$ por uma família de funções $\mathcal{F}_k$, substituindo o
@@ -1183,6 +1201,7 @@ hardware de rotinas relacionadas,
 habilitando um grande ganho de desempenho no cômputo desta cifra.
 
 \subsection{\hors{}}
+\label{subsection:hors}
 
 Os esquemas discutidos até agora sofrem da mesma limitação: a exposição
 considerável de elementos relacionados diretamente com $\sk{}$, habilitando
@@ -1278,9 +1297,10 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
     \label{fig:7}
 \end{figure}
 
-É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo \horst{} é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na seção a seguir, a fim de reduzir substancialmente o tamanho de $\pk{}$.
+É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo \horst{} é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na Seção~\ref{section:merkle}, a fim de reduzir substancialmente o tamanho de $\pk{}$.
 
 \section{Esquemas baseados em árvores de Merkle}
+\label{section:merkle}
 
 A criação de um par de chaves para cada mensagem, bem como a infraestrutura
 necessária para relacionar múltiplas chaves a uma entidade, podem tornar-se
@@ -1371,7 +1391,7 @@ final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
 Note que é possível executar \textsc{Treehash} repetidamente, como visto no
 algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
 Estas estratégias serão necessárias para a travessia em árvores de dimensões
-extensas, como será abordado na seção do XMSS.
+extensas, abordada na Seção~\ref{subsection:xmss}.
 
 \begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
@@ -1387,6 +1407,7 @@ extensas, como será abordado na seção do XMSS.
 \end{algorithm}
 
 \subsection{\mss{}}
+\label{subsection:mss}
 
 O primeiro esquema de assinatura digital baseado em árvores de Merkle
 \cite{Merkle:1989:CDS:118209.118230} recomenda a assinatura de até $2^{20}$
@@ -1503,6 +1524,7 @@ Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a rest
 Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de \sprmss{}, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
 
 \subsection{\xmss{}}
+\label{subsection:xmss}
 
 A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema \xmss{}. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em \sprmss{}, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
@@ -1533,6 +1555,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \wotsplus{} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema.
 
 \subsection{\xmssmt{}}
+\label{subsection:xmssmt}
 
 Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de \emph{hiper-árvores} é proposto em diversos trabalhos, com o intuito de encadear camadas de árvores de Merkle, conectadas por uma instância de esquema de assinatura única, de tal forma que a folha da árvore superior assina a raiz da árvore inferior.
 
@@ -1665,9 +1688,10 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 \end{enumerate}
 
-Adicionalmente, como mencionado na seção do \textsc{Wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
+Adicionalmente, como mencionado na Seção\ do \textsc{Wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
 \section{Visão temporal}
+\label{section:timeline}
 
 Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema de Lamport também fazem parte de publicações com destaque, e.g.~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
 
@@ -1708,10 +1732,12 @@ Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizada
 Esta família utiliza várias estratégias combinadas a fim de evitar esta característica: a altura da hiper-árvore é aumentada substancialmente, para que o número de assinaturas que podem ser feitas com apenas um par de chaves seja maior; nos nodos folha mais inferiores, o esquema \horst{} é utilizado para evitar colisões entre assinaturas; o índice de folha escolhido depende de um valor pseudoaleatório; entre outros recursos. Entretanto, as otimizações descritas na próxima seção têm aplicação reduzida a estes esquemas, visto que o cerne do processamento total destes esquemas não encontra-se na utilização de esquemas Winternitz, restritos ao cálculo de assinaturas entre árvores intermediárias.
 
 \chapter{Otimização do esquema Winternitz}
+\label{chapter:tuning}
 
 Neste capítulo, duas otimizações são apresentadas para a família de esquemas Winternitz. A primeira consiste de uma modificação em \emph{bits} inutilizados na soma de verificação calculada ao longo do processo de assinatura, tornando a verificação desta menos onerosa. A segunda apresenta uma estratégia para modificar a entrada do algoritmo, a fim de torná-la adequada para o cômputo eficiente das etapas de geração ou verificação de uma assinatura. Consequências destas modificações são consideradas em esquemas da família \xmss{}.
 
 \section{\textsc{Wots-b}}
+\label{section:wotsb}
 
 A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na seção do \wots{}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
 
@@ -1844,6 +1870,7 @@ Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa rela
 A modificação na estrutura da soma de verificação não afeta a segurança do esquema de assinatura digital, visto que o espaço inutilizado na $t_2$-tupla $\mathcal{B}_2$ não possui qualquer aplicação. Assim, este cômputo de iterações de $f$ é deslocado da etapa de verificação de assinaturas para a geração destas, de maneira diretamente proporcional.
 
 \section{\textsc{Wots-r}}
+\label{section:wotsr}
 
 A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo criptográfico, é apresentada em~\cite{Steinwandt2008}.
 
@@ -1923,19 +1950,19 @@ Então, para garantir que estes eventos aconteçam com altíssima probabilidade,
 Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado. A maximização ou minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável nos \emph{bits} mais significativos de cada elemento da tupla, i.e. torna-se mais comum que estes possuam valores antecipáveis. Isto é possivelmente explorável através de criptoanálise diferencial aplicada sobre \emph{bits} fixos na construção Merkle-Damgård, posta em prática recentemente através da primeira colisão de resumos criptográficos produzidos pelo algoritmo SHA-1~\cite{Stevens2017}. Portanto, recomenda-se a utilização de funções seguras na escolha de $\hh{}$, como demonstrado em~\cite{Hlsing2013}.
 
 \section{Resultados}
+\label{section:results}
 
-Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres geradas através de \texttt{/dev/urandom}.
+Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres, geradas através de \texttt{/dev/urandom}.
 
 Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{7pt}
     \centering
-    \begin{tabular}{ccclccc}
+    \begin{tabular}{cclccc}
     \toprule
     $w$ & $R$ & \textsc{Esquema} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
     \toprule
-    \multirow{24}{*}{\rotatebox[origin=c]{90}{$max(S)$}}
     \multirow{8}{*}{4} & \multirow{2}{*}{-}
        &    \textsc{Wots} &     \multirow{2}{*}{479.93} &      25.88 &     505.80 \\
      & &  \textsc{Wots-b} &      &      12.25 &     492.18 \\ \cline{2-6}
@@ -1971,7 +1998,20 @@ Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ con
      & & \textsc{Wots-br} &      &   33321.91 &  352811.94 \\ \cline{2-6}
     & \multirow{2}{*}{3500}
        &  \textsc{Wots-r} &  \multirow{2}{*}{262301.92} &  101022.36 &  363324.28 \\
-     & & \textsc{Wots-br} &      &   35492.57 &  297794.48 \\ \hline
+     & & \textsc{Wots-br} &      &   35492.57 &  297794.48 \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:2}
+    \caption{Iterações de $f$ na etapa de verificação de assinaturas ao maximizar $\mathcal{B}_1$.}
+\end{table}
+
+\begin{table}[htbp]
+    \setlength{\tabcolsep}{7pt}
+    \centering
+    \begin{tabular}{cclccc}
+    \toprule
+    $w$ & $R$ & \textsc{Esquema} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
+    \toprule
     \multirow{4}{*}{4} & -
        &    \textsc{Wots} &     479.93 &      25.88 &     505.80 \\
     & 25
@@ -2003,10 +2043,13 @@ Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ con
 \end{table}
 
 \subsection{Impacto em esquemas baseados em árvores de Merkle}
+\label{subsection:impact}
 
 \chapter{Conclusão}
+\label{chapter:conclusion}
 
 \section{Trabalhos futuros}
+\label{section:future}
 
 \bibliographystyle{apalike}
 \bibliography{ref}
