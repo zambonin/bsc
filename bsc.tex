@@ -6,11 +6,10 @@
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
 \usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, tikz, tikz-qtree, xfrac, pgfplots}
+\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, pgfplots, tikz, tikz-qtree, xfrac}
 
 \pgfplotsset{compat=1.14}
 
-\usepackage{epigraph}
 \usepackage{todonotes}
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
@@ -1952,7 +1951,7 @@ Como a modificação não afeta mecanismos internos do esquema, mostra-se necess
 
 Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Considere mensagens aleatórias de $2^{10}$ caracteres, geradas através de \texttt{/dev/urandom}.
 
-Os valores nas Tabelas~\ref{tab:2} e \ref{tab:3} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
+Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento. Para a Tabela~\ref{tab:3}, a otimização da soma de verificação não é recomendada, visto que atuará de maneira contraditória em relação à proposta.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{7pt}
