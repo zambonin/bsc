@@ -1906,7 +1906,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma) &= 0.0013.
     \end{split}
 \end{align}
-Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8, 16\}$, recomendados em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}, respectivamente. Note que os valores para as probabilidades acima podem ser modificados a fim de produzir tuplas $\mathcal{B}_{i}^{1}$ cujas médias são maiores, entretanto, $R$ crescerá de modo diretamente proporcional.
+Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8, 16\}$, recomendados em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}. Note que os valores para as probabilidades acima podem ser modificados a fim de produzir tuplas $\mathcal{B}_{i}^{1}$ cujas médias são maiores, entretanto, $R$ crescerá de modo diretamente proporcional.
 
 \begin{figure}[ht]
     \centering
@@ -1944,7 +1944,7 @@ Então, para garantir que estes eventos aconteçam com altíssima probabilidade,
     \end{axis}
     \end{tikzpicture}
     \label{fig:13}
-    \caption{Limites para $R$.}
+    \caption{Quantidades de experimentos para que modificações de $\mathcal{B}_{1}^{i}$ sejam efetivas.}
 \end{figure}
 
 Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado. A maximização ou minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável nos \emph{bits} mais significativos de cada elemento da tupla, i.e. torna-se mais comum que estes possuam valores antecipáveis. Isto é possivelmente explorável através de criptoanálise diferencial aplicada sobre \emph{bits} fixos na construção Merkle-Damgård, posta em prática recentemente através da primeira colisão de resumos criptográficos produzidos pelo algoritmo SHA-1~\cite{Stevens2017}. Portanto, recomenda-se a utilização de funções seguras na escolha de $\hh{}$, como demonstrado em~\cite{Hlsing2013}.
