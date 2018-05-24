@@ -1924,7 +1924,59 @@ Como a modificação não afeta mecanismos internos do esquema, mostra-se necess
 
 \section{Resultados}
 
-Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres geradas através de \texttt{/dev/urandom}. Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos de expoe
+Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres geradas através de \texttt{/dev/urandom}. Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante.
+
+Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
+
+\begin{table}[htbp]
+    \setlength{\tabcolsep}{7pt}
+    \centering
+    \begin{tabular}{cclccc}
+    \toprule
+    $w$ & $R$ & \textsc{Scheme} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
+    \toprule
+    \multirow{8}{*}{4} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &     \multirow{2}{*}{479.93} &      25.88 &     505.80 \\
+     & &  \textsc{Wots-b} &      &      12.25 &     492.18 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{407.81} &      27.49 &     435.29 \\
+     & & \textsc{Wots-br} &      &      13.49 &     421.29 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{379.08} &      29.23 &     408.31 \\
+     & & \textsc{Wots-br} &      &      15.23 &     394.31 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &     \multirow{2}{*}{348.88} &      31.14 &     380.02 \\
+     & & \textsc{Wots-br} &      &      17.14 &     366.02 \\ \hline
+    \multirow{8}{*}{8} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &    \multirow{2}{*}{4081.84} &     368.43 &    4450.27 \\
+     & &  \textsc{Wots-b} &      &     136.25 &    4218.08 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{3262.39} &     370.56 &    3632.95 \\
+     & & \textsc{Wots-br} &      &     130.56 &    3392.95 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{2940.63} &     372.13 &    3312.76 \\
+     & & \textsc{Wots-br} &      &     132.13 &    3072.76 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &    \multirow{2}{*}{2604.49} &     374.75 &    2979.24 \\
+     & & \textsc{Wots-br} &      &     134.75 &    2739.24 \\ \hline
+    \multirow{8}{*}{16} & \multirow{2}{*}{-}
+       &    \textsc{Wots} &  \multirow{2}{*}{525120.63} &   98231.81 &  623352.44 \\
+     & &  \textsc{Wots-b} &      &   32707.82 &  557828.45 \\ \cline{2-6}
+    & \multirow{2}{*}{25}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{376550.24} &   98225.54 &  474775.78 \\
+     & & \textsc{Wots-br} &      &   32697.52 &  409247.76 \\ \cline{2-6}
+    & \multirow{2}{*}{200}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{319490.02} &   98850.06 &  418340.08 \\
+     & & \textsc{Wots-br} &      &   33321.91 &  352811.94 \\ \cline{2-6}
+    & \multirow{2}{*}{3500}
+       &  \textsc{Wots-r} &  \multirow{2}{*}{262301.92} &  101022.36 &  363324.28 \\
+     & & \textsc{Wots-br} &      &   35492.57 &  297794.48 \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:2}
+    \caption{Number of iterations of $f$ on the verification step for
+    the proposed schemes when $max(S)$ is chosen.}
+\end{table}
 
 \chapter{Conclusão}
 
