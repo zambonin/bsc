@@ -2040,13 +2040,11 @@ Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc
 \begin{table}[htbp]
     \setlength{\tabcolsep}{8pt}
     \centering
-    \caption{Signature generation and verification run times (in ms)
-    for the proposed schemes.}
     \begin{tabular}{ccclcc}
     \toprule
     & $w$ & $R$ & \textsc{Scheme} & \textsc{Sig. time} & \textsc{Ver. time} \\
     \toprule
-    \multirow{16}{*}{\rotatebox[origin=c]{90}{$max(S)$}}
+    \multirow{16}{*}{\rotatebox[origin=c]{90}{$\argmax$}}
     & \multirow{8}{*}{4} & \multirow{2}{*}{-}  
     &    \textsc{Xmss}                  & 0.953  & 0.734 \\
     &&&  \textsc{Xmss-b}                & 0.975  & 0.724 \\ 
@@ -2072,7 +2070,7 @@ Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc
     &   \textsc{Xmss-r}                 & 11.760 & 3.861 \\
     &&& \textsc{Xmss-br}                & 12.193 & 3.664 \\
     \midrule
-    \multirow{8}{*}{\rotatebox[origin=c]{90}{$min(S)$}}
+    \multirow{8}{*}{\rotatebox[origin=c]{90}{$\argmin$}}
     & \multirow{4}{*}{4} & -
     &    \textsc{Xmss}                  & 0.971 & 0.746 \\
     && 25
@@ -2092,7 +2090,9 @@ Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc
     \bottomrule
     \end{tabular}
     \label{tab:4}
-    
+    \caption{Tempo de execução em ms para as otimizações integradas no \xmss{}.}
+    \caption{Signature generation and verification run times (in ms)
+    for the proposed schemes.}
     % Relevant computer specifications are as follows:
     % 8 GB of DDR3 RAM @ 1333MHz, Intel Core i5-4570 @ 3.2GHz
     % and \texttt{gcc} 7.3.0. Base commit for the modifications:
