@@ -6,11 +6,9 @@
 \usepackage[a4paper, margin=2.75cm]{geometry}
 \usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
 \usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, pgfplots, tikz, tikz-qtree, xfrac}
+\usepackage{amsmath, amsfonts, booktabs, chronology, enumitem, multirow, parskip, pgfplots, tikz, tikz-qtree, todonotes, xfrac}
 
 \pgfplotsset{compat=1.14}
-
-\usepackage{todonotes}
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
 
@@ -2030,9 +2028,9 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
     \caption{Iterações de $f$ na etapa de geração de assinaturas ao minimizar $\mathcal{B}_1$.}
 \end{table}
 
-Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, tem-se o esquema \textsc{Wots-br} com melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, tem-se aperfeiçoamentos de $28\%$, $35\%$ e $47\%$.
+Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, o esquema \textsc{Wots-br} resulta em melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, têm-se refinamentos de $28\%$, $35\%$ e $47\%$.
 
-Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, e.g. com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores sobressalentes para $R$.
+Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, e.g. com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores excedentes para $R$.
 
 \subsection{Impacto em esquemas baseados em árvores de Merkle}
 \label{subsection:impact}
