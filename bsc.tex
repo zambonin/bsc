@@ -1924,9 +1924,9 @@ Como a modificação não afeta mecanismos internos do esquema, mostra-se necess
 
 \section{Resultados}
 
-Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres geradas através de \texttt{/dev/urandom}. Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante.
+Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a seção anterior. Considere mensagens aleatórias de $2^{10}$ caracteres geradas através de \texttt{/dev/urandom}.
 
-Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
+Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{7pt}
@@ -2011,10 +2011,10 @@ Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em
     \bottomrule
     \end{tabular}
     \label{tab:3}
-    \caption{Number of iterations of $f$ on the signature step for
-    the proposed schemes when $min(S)$ is chosen.}
+    \caption{Iterações de $f$ na etapa de geração de assinaturas ao minimizar $\mathcal{B}_1$.}
 \end{table}
 
+\subsection{Impacto em esquemas baseados em árvores de Merkle}
 
 \chapter{Conclusão}
 
