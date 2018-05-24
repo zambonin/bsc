@@ -2032,7 +2032,7 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
 
 Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, tem-se o esquema \textsc{Wots-br} com melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, tem-se aperfeiçoamentos de $28\%$, $35\%$ e $47\%$.
 
-Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. 
+Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\ambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, e.g. com $w = 4$
 
 \todo[inline]{discuss numbers here}
 
