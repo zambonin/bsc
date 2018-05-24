@@ -1954,7 +1954,7 @@ Como a modificação não afeta mecanismos internos do esquema, mostra-se necess
 
 Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Considere mensagens aleatórias de $2^{10}$ caracteres, geradas através de \texttt{/dev/urandom}.
 
-Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
+Os valores nas Tabelas~\ref{tab:2} e \ref{tab:3} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{7pt}
@@ -2012,24 +2012,21 @@ Os valores na Tabela~\ref{tab:2} consistem da média aritmética de $2^{14}$ con
     \toprule
     $w$ & $R$ & \textsc{Esquema} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
     \toprule
-\multirow{8}{*}{4}
+\multirow{4}{*}{4}
    & - &    \textsc{Wots} &     480.07 &      19.12 &     499.20 \\
   & 25 &  \multirow{3}{*}{\textsc{Wots-r}} &     407.59 &      11.60 &     419.20 \\
  & 200 &  &     379.04 &      13.31 &     392.35 \\
-& 3500 &  &     348.57 &      15.29 &     363.85 \\
-\multirow{8}{*}{8}
+& 3500 &  &     348.57 &      15.29 &     363.85 \\ \hline
+\multirow{4}{*}{8}
  & - &    \textsc{Wots} &    4078.16 &     141.57 &    4219.73 \\
-& 25 &  \textsc{Wots-r} &    3259.31 &     145.36 &    3404.67 \\
-& 200 &  \textsc{Wots-r} &    2939.62 &     148.36 &    3087.98 \\
- & 3500 &  \textsc{Wots-r} &    2605.05 &     145.21 &    2750.26 \\
-\multirow{8}{*}{16}
+& 25 &  \multirow{3}{*}{\textsc{Wots-r}} &    3259.31 &     145.36 &    3404.67 \\
+& 200 &  &    2939.62 &     148.36 &    3087.98 \\
+ & 3500 &  &    2605.05 &     145.21 &    2750.26 \\ \hline
+\multirow{4}{*}{16}
 & - &    \textsc{Wots} &  523438.00 &   32839.56 &  556277.56 \\
- & 25 &  \textsc{Wots-r} &  376093.98 &   32646.83 &  408740.82 \\
- & 200 &  \textsc{Wots-r} &  319762.87 &   33590.17 &  353353.04 \\
-& \multirow{2}{*}{3500}
-   &    \textsc{Wots} &  523437.52 &   32840.04 &  556277.56 \\
- & &  \textsc{Wots-r} &  261912.93 &   35384.39 &  297297.32 \\
-
+ & 25 &  \multirow{3}{*}{\textsc{Wots-r}} &  376093.98 &   32646.83 &  408740.82 \\
+ & 200 &  &  319762.87 &   33590.17 &  353353.04 \\
+ & 3500 &   &  261912.93 &   35384.39 &  297297.32 \\
     \bottomrule
     \end{tabular}
     \label{tab:3}
