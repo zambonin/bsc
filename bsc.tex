@@ -1219,7 +1219,7 @@ onde o conteúdo da mensagem controla a
 seleção de elementos em uma lista de inteiros trivial, construindo subconjuntos
 distintos, distribuídos como assinaturas.
 
-De acordo com a definição de~\cite{Reyzin:2002:BBS:646039.678322}, tome
+De acordo com a definição original, tome
 os parâmetros $t, k \in \mathbb{N}, t \gg k$, e $t$ como uma potência de 2.
 O tamanho dos pares de chaves e das assinaturas são fortemente relacionados
 com, respectivamente, $t$ e $k$. O parâmetro de segurança
@@ -1391,7 +1391,7 @@ final, \textbf{S} conterá apenas o nodo desejado na altura $h$.
 Note que é possível executar \textsc{Treehash} repetidamente, como visto no
 algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
 Estas estratégias serão necessárias para a travessia em árvores de dimensões
-extensas, abordada na Seção~\ref{subsection:xmss}.
+extensas, abordada na Subseção~\ref{subsection:xmss}.
 
 \begin{algorithm}[ht]
   \KwData{$H$, a altura da árvore $T$}
@@ -1619,11 +1619,11 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
     \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, i.e. várias instâncias do algoritmo~\ref{alg:3}.
 \end{enumerate}
 
-As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
+As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no Algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
 O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
 
-O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do algoritmo BDS, em~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
+O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do  BDS, no Algoritmo~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
 \begin{algorithm}[ht]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
@@ -1688,7 +1688,7 @@ Finalmente, é possível descrever o esquema. Tome o parâmetro de segurança $m
 
 \end{enumerate}
 
-Adicionalmente, como mencionado na Seção~\ref{subsection:wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
+Adicionalmente, como mencionado na Subseção~\ref{subsection:wots}, o esquema \xmsst{} é definido em~\cite{Hulsing:2016:MMA:3081852.3081871}, como uma variante do \xmssmt{} resistente à ataques multiusuário. Isto é realizado através da atribuição de um endereço único à cada nodo na árvore, e derivando deste um resumo criptográfico calculado por funções com novas noções de resistência à pré-imagem, segunda pré-imagem e colisões, a fim de reduzir as ameaças ocasionadas por este tipo de ataque.
 
 \section{Visão temporal}
 \label{section:timeline}
@@ -1739,9 +1739,9 @@ Neste capítulo, duas otimizações são apresentadas para a família de esquema
 \section{\textsc{Wots-b}}
 \label{section:wotsb}
 
-A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na Seção~\ref{subsection:wots}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
+A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na Subseção~\ref{subsection:wots}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
 
-Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. De acordo com a Seção~\ref{subsection:wots}, considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por
+Entretanto, caso este parâmetro seja escolhido de maneira inábil, a etapa de verificação será executada de forma menos eficaz em relação ao tempo de execução. Ademais, é possível calcular o número de \emph{bits} não utilizados na soma de verificação de maneira exata. De acordo com a Subseção~\ref{subsection:wots}, considere a $t_1$-tupla $\mathcal{B}_1$ como os valores do resumo da mensagem divididos em palavras de base-$w$, e a soma de verificação $c = \sum_{b \in \mathcal{B}_1} 2^w - 1 - b$. Seu valor máximo é definido por
 \begin{equation}
 c_{max} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 0) = t_1(2^w - 1) \iff \forall b \in \mathcal{B}_1, \; b = 0.
 \end{equation}
@@ -1874,7 +1874,7 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 
 A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo criptográfico, é apresentada em~\cite{Steinwandt2008}.
 
-Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\Lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na Seção~\ref{subsection:wots}.
+Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\Lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na Subseção~\ref{subsection:wots}.
 
 A fim de escolher o \emph{nonce} mais conveniente para que a geração ou verificação de assinaturas seja eficiente, respectivamente, calcule
 \begin{equation}
@@ -1906,7 +1906,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
         P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma) &= 0.0013.
     \end{split}
 \end{align}
-Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades sugeridas de $\{25, 200, 3500\}$ para parâmetros $w = \{4, 8, 16\}$ recomendados em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}, respectivamente. Note que os valores para as probabilidades acima podem ser modificados a fim de produzir tuplas $\mathcal{B}_{i}^{1}$ cujas médias são maiores, entretanto, $R$ crescerá de modo diretamente proporcional.
+Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8, 16\}$, recomendados em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}, respectivamente. Note que os valores para as probabilidades acima podem ser modificados a fim de produzir tuplas $\mathcal{B}_{i}^{1}$ cujas médias são maiores, entretanto, $R$ crescerá de modo diretamente proporcional.
 
 \begin{figure}[ht]
     \centering
