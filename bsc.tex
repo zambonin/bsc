@@ -278,13 +278,8 @@ algoritmos discutidos ao longo do trabalho. A organização das seções assemel
 à seguida em~\cite{Gathen:2015:CRY:2857293}. Os conceitos de criptografia simétrica
 e assimétrica são apresentados na Seção~\ref{section:crypto}, e uma simples comparação entre os mesmos é realizada,
 bem como exemplos apresentados na forma dos algoritmos AES e RSA, amplamente
-padronizados e implementados em diversas formas de comunicação segura, nas Subseções~\ref{subsection:aes} e~\ref{subsection:rsa}. Funções de resumo criptográfico, utilizadas
-
-Também é
-discutida a função de resumo criptográfico, utilizada para que o processo de assinatura
-seja menos custoso e mais seguro, e um exemplo de construção teórica por trás
-deste tipo de função; e, por fim, a definição formal de um esquema de assinatura
-digital agregando estas noções.
+padronizados e implementados em diversas formas de comunicação segura, nas Subseções~\ref{subsection:aes} e~\ref{subsection:rsa}. Funções de resumo criptográfico, utilizadas para que o processo de assinatura
+seja menos custoso e mais seguro, são discutidas na Seção~\ref{section:hashfunc}, e um exemplo de construção teórica por trás deste tipo de função na Subseção~\ref{subsection:sponge}; por fim, a definição formal de um esquema de assinatura digital é apresentada na Seção~\ref{section:digitalsig}, agregando estas noções.
 
 \section{Criptografia simétrica e assimétrica}
 \label{section:crypto}
@@ -691,8 +686,8 @@ armazenamento de senhas em texto plano, é possível manter apenas o resumo
 criptográfico destas, e no momento da autenticação do usuário perante o
 serviço, comparar apenas estes resumos\footnote{É possível armazenar tabelas de
 resumos pré-computados a fim de atacar serviços que não empregam uma maneira
-mais elaborada de autenticação (\emph{i.e.} um valor pseudoaleatório concatenado ao
-resumo criptográfico da senha do usuário).}; resumos criptográficos são
+mais elaborada de autenticação, \emph{e.g.} um valor pseudoaleatório concatenado ao
+resumo criptográfico da senha do usuário.}; resumos criptográficos são
 comumente empregados como identificadores únicos para um arquivo (\emph{e.g.}
 \emph{commits} em um sistema de controle de versões); entre outras aplicações,
 como a geração de números pseudoaleatórios.
@@ -814,7 +809,7 @@ de cinco etapas: $R = \iota \circ \chi \circ \pi \circ \rho \circ \theta$.
         caixa-S.
 
   \item[Etapa $\iota$:] Calcula o ou exclusivo entre o estado $a$ e uma
-      sequência gerada por um \emph{linear-feedback shift register}
+      sequência gerada por um \emph{linear-feedback shift register}\footnote{Conjunto de registradores que deslocam \emph{bits} a partir de funções lineares. Uma aplicação desta estrutura é a geração de números pseudoaleatórios.}
       (gerador de números pseudoaleatórios) alimentado
         pelo índice da rodada atual, tornando a rodada assimétrica.
 
