@@ -1744,7 +1744,7 @@ Analogamente, o valor mínimo é definido como
 \begin{equation}
 c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0 \iff \forall b \in \mathcal{B}_1, \; b = 2^w - 1.
 \end{equation}
-A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$.
+A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$:
 \begin{align}
 \begin{split}
     n_c &\leq t_2 w \\
@@ -1755,7 +1755,7 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
     \lceil \log_2 t_1 \rceil + w &\leq \left\lceil \sfrac{\lfloor \log_2 t_1 \rfloor + 1 + w}{w} \right\rceil \times w \\
     \lceil \log_2 t_1 \rceil + w &\leq \lceil \lfloor \log_2 t_1 \rfloor + 1 + w \rceil \\
     \lceil \log_2 t_1 \rceil + w &\leq \lfloor \log_2 t_1 \rfloor + 1 + w \\
-    \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w \\
+    \lceil \log_2 t_1 \rceil + w &\leq \lceil \log_2 (t_1 + 1) \rceil + w.
 \end{split}
 \end{align}
 Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $m$ e praticáveis para $w$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz.
@@ -2039,38 +2039,38 @@ Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc
 
 A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \textsc{Xmss-b}, \textsc{Xmss-r} e \textsc{Xmss-br}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
 
-Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação ao aplicar a maximização de $\mu(\mathcal{B}_1)$ e otimização da soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da minimização de $\mu(\mathcal{B}_1)$ torna o passo de geração de assinatura mais lento. Assim, recomenda-se a escolha 
+Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação ao aplicar a maximização de $\mu(\mathcal{B}_1)$ e otimização da soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da minimização de $\mu(\mathcal{B}_1)$ torna o passo de geração de assinatura mais lento. Assim, recomenda-se $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{8pt}
     \centering
     \begin{tabular}{ccclcc}
     \toprule
-    & $w$ & $R$ & \textsc{Esquema} & Tempo para $\mathcal{S}$ & Tempo para $\mathcal{V}$ \\
+    & $w$ & $R$ & \textsc{Esquema} & \textsc{Tempo para $\mathcal{S}$} & \textsc{Tempo para $\mathcal{V}$} \\
     \toprule
     \multirow{16}{*}{\rotatebox[origin=c]{90}{$\argmax$}}
-    & \multirow{8}{*}{4} & \multirow{2}{*}{-}  
+    & \multirow{8}{*}{4} & \multirow{2}{*}{-}
     &    \textsc{Xmss}                  & 0.953  & 0.734 \\
-    &&&  \textsc{Xmss-b}                & 0.975  & 0.724 \\ 
-    \cline{3-6} && \multirow{2}{*}{25}   
+    &&&  \textsc{Xmss-b}                & 0.975  & 0.724 \\
+    \cline{3-6} && \multirow{2}{*}{25}
     &   \textsc{Xmss-r}                 & 1.059  & 0.652 \\
-    &&& \textsc{Xmss-br}                & 1.073  & 0.637 \\ 
-    \cline{3-6} && \multirow{2}{*}{200}  
+    &&& \textsc{Xmss-br}                & 1.073  & 0.637 \\
+    \cline{3-6} && \multirow{2}{*}{200}
     &   \textsc{Xmss-r}                 & 1.222  & 0.620 \\
-    &&&  \textsc{Xmss-br}               & 1.240  & 0.616 \\ 
-    \cline{3-6} && \multirow{2}{*}{3500} 
+    &&&  \textsc{Xmss-br}               & 1.240  & 0.616 \\
+    \cline{3-6} && \multirow{2}{*}{3500}
     &   \textsc{Xmss-r}                 & 3.724  & 0.588 \\
-    &&& \textsc{Xmss-br}                & 3.730  & 0.573 \\ 
-    \cline{2-6} & \multirow{8}{*}{8} & \multirow{2}{*}{-} 
+    &&& \textsc{Xmss-br}                & 3.730  & 0.573 \\
+    \cline{2-6} & \multirow{8}{*}{8} & \multirow{2}{*}{-}
     &   \textsc{Xmss}                   & 7.709  & 5.676 \\
-    &&& \textsc{Xmss-b}                 & 7.908  & 5.361 \\ 
-    \cline{3-6} && \multirow{2}{*}{25} 
+    &&& \textsc{Xmss-b}                 & 7.908  & 5.361 \\
+    \cline{3-6} && \multirow{2}{*}{25}
     & \textsc{Xmss-r}                   & 8.597  & 4.637 \\
-    &&&  \textsc{Xmss-br}               & 8.992  & 4.415 \\ 
-    \cline{3-6} && \multirow{2}{*}{200} 
+    &&&  \textsc{Xmss-br}               & 8.992  & 4.415 \\
+    \cline{3-6} && \multirow{2}{*}{200}
     &   \textsc{Xmss-r}                 & 9.045  & 4.245 \\
-    &&& \textsc{Xmss-br}                & 9.460  & 4.052 \\ 
-    \cline{3-6} && \multirow{2}{*}{3500} 
+    &&& \textsc{Xmss-br}                & 9.460  & 4.052 \\
+    \cline{3-6} && \multirow{2}{*}{3500}
     &   \textsc{Xmss-r}                 & 11.760 & 3.861 \\
     &&& \textsc{Xmss-br}                & 12.193 & 3.664 \\
     \midrule
@@ -2079,13 +2079,13 @@ Os experimentos foram realizados utilizando um computador com as seguintes espec
     &    \textsc{Xmss}                  & 0.971 & 0.746 \\
     && 25
     & \multirow{3}{*}{\textsc{Xmss-r}}  & 0.879 & 0.832 \\
-    && 200  
+    && 200
     &                                   & 1.006 & 0.885 \\
     && 3500
     &                                   & 3.393 & 0.898 \\
-    \cline{2-6} & \multirow{4}{*}{8} & - 
+    \cline{2-6} & \multirow{4}{*}{8} & -
     &   \textsc{Xmss}                   & 7.819 & 5.731 \\
-    && 25 
+    && 25
     & \multirow{3}{*}{\textsc{Xmss-r}}  & 6.672 & 6.553 \\
     && 200
     &                                   & 6.472 & 6.982 \\
