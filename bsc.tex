@@ -289,7 +289,7 @@ em~\cite{cruz2016constant} torna a complexidade deste passo previsível
 através de uma função que mapeia a mensagem para uma tupla com propriedades
 especiais; em~\cite{Steinwandt2008}, a mensagem é modificada a fim de gerar
 um resumo criptográfico cuja codificação \emph{run-length} é otimizada;
-e~\cite{Pereira:2016:SHS:2929115.2929248}
+e em~\cite{mcgrew-hash-sigs-11}
 
 \chapter{Primitivas criptográficas}
 \label{chapter:primitives}
@@ -2051,21 +2051,21 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
     \bottomrule
     \end{tabular}
     \label{tab:3}
-    \caption{Iterações de $f$ na etapa de geração de assinaturas ao minimizar $\mathcal{B}_1$.}
+    \caption{Iterações de $f$ na etapa de geraç£o de assinaturas ao minimizar $\mathcal{B}_1$.}
 \end{table}
 
-Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, o esquema \textsc{Wots-br} resulta em melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, têm-se refinamentos de $28\%$, $35\%$ e $47\%$.
+Considerando a maximizaÃ§Ã£o de $\mu(\mathcal{B}_1)$, Ã© possÃ­vel perceber uma reduÃ§Ã£o de aproximadamente $2^w$ iteraÃ§Ãµes de $f$ para o esquema \textsc{Wots-b}, condizente com o nÃºmero de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduÃ§Ãµes de atÃ© $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizaÃ§Ãµes, o esquema \textsc{Wots-br} resulta em melhorias de atÃ© $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimizaÃ§Ã£o, tÃªm-se refinamentos de $28\%$, $35\%$ e $47\%$.
 
-Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, \emph{e.g.} com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores excedentes para $R$.
+Note que a reduÃ§Ã£o no cÃ´mputo destas iteraÃ§Ãµes Ã© diretamente traduzida na etapa complementar, ou seja, na maximizaÃ§Ã£o de $\mu(\mathcal{B}_1)$, existirÃ¡ um aumento do nÃºmero de iteraÃ§Ãµes na geraÃ§Ã£o da assinatura, proporcional Ã  otimizaÃ§Ã£o obtida no passo de verificaÃ§Ã£o. O mesmo conceito aplica-se para a minimizaÃ§Ã£o. Ademais, Ã© preciso considerar a busca de $\lambda_k$ junto aos custos da geraÃ§Ã£o da assinatura. Em vista disso, valores de $R$ muito altos em relaÃ§Ã£o ao parÃ¢metro $w$ sÃ£o indesejÃ¡veis quando este Ã© reduzido, \emph{e.g.} com $w = 4$, o valor $R = 200$ torna-se uma fraÃ§Ã£o substancial do custo total para a geraÃ§Ã£o da assinatura. Ainda assim, casos de uso onde mostra-se necessÃ¡rio otimizar completamente o passo de verificaÃ§Ã£o podem fazer uso de valores excedentes para $R$.
 
-\subsection{Impacto em esquemas baseados em árvores de Merkle}
+\subsection{Impacto em esquemas baseados em Ã¡rvores de Merkle}
 \label{subsection:impact}
 
-Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
+Evidentemente, as otimizaÃ§Ãµes propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da famÃ­lia Winternitz. Consequentemente, qualquer esquema baseado em Ã¡rvores de Merkle pode fazer uso de instÃ¢ncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmaÃ§Ã£o, a implementaÃ§Ã£o\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura Ãºnica escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na SubseÃ§Ã£o~\ref{subsection:wotsplus}, Ã© modificada de acordo.
 
-A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
+A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da mÃ©dia do tempo de execuÃ§Ã£o de $2^{14}$ instÃ¢ncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notaÃ§Ã£o fixada nas seÃ§Ãµes~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ nÃ£o Ã© considerado visto que, para este parÃ¢metro, a etapa de geraÃ§Ã£o de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizaÃ§Ãµes da soma de verificaÃ§Ã£o nÃ£o sÃ£o consideradas quando deseja-se otimizar a geraÃ§Ã£o de assinaturas.
 
-Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação ao aplicar a maximização de $\mu(\mathcal{B}_1)$ e otimização da soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da minimização de $\mu(\mathcal{B}_1)$ torna o passo de geração de assinatura mais lento. Assim, recomenda-se $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
+Os experimentos foram realizados utilizando um computador com as seguintes especificaÃ§Ãµes: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, Ã© possÃ­vel observar que qualquer valor de $R$ melhora o tempo de verificaÃ§Ã£o ao aplicar a maximizaÃ§Ã£o de $\mu(\mathcal{B}_1)$ e otimizaÃ§Ã£o da soma de verificaÃ§Ã£o, obtendo melhoras de atÃ© $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicaÃ§Ã£o da minimizaÃ§Ã£o de $\mu(\mathcal{B}_1)$ torna o passo de geraÃ§Ã£o de assinatura mais lento. Assim, recomenda-se $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{8pt}
@@ -2120,22 +2120,22 @@ Os experimentos foram realizados utilizando um computador com as seguintes espec
     \bottomrule
     \end{tabular}
     \label{tab:4}
-    \caption{Tempo de execução, em ms, para as otimizações integradas no \xmss{}.}
+    \caption{Tempo de execuÃ§Ã£o, em ms, para as otimizaÃ§Ãµes integradas no \xmss{}.}
 \end{table}
 
-\chapter{Conclusão}
+\chapter{ConclusÃ£o}
 \label{chapter:conclusion}
 
-Neste trabalho, esquemas de assinatura digital baseados em funções de resumo criptográfico foram discutidos, a fim de prover um embasamento teórico para o desenvolvimento de otimizações sobre estes esquemas. Vários conceitos relevantes para a área são apresentados, como a estrutura de dados chamada de árvore de Merkle, que habilita a criação de esquemas de assinatura digital convencionais com múltiplas instâncias de assinaturas únicas, o encadeamento de árvores a fim de aumentar o número de mensagens passíveis de assinatura, e o gerenciamento sobre estas árvores quando seu armazenamento total torna-se impraticável.
+Neste trabalho, esquemas de assinatura digital baseados em funÃ§Ãµes de resumo criptogrÃ¡fico foram discutidos, a fim de prover um embasamento teÃ³rico para o desenvolvimento de otimizaÃ§Ãµes sobre estes esquemas. VÃ¡rios conceitos relevantes para a Ã¡rea sÃ£o apresentados, como a estrutura de dados chamada de Ã¡rvore de Merkle, que habilita a criaÃ§Ã£o de esquemas de assinatura digital convencionais com mÃºltiplas instÃ¢ncias de assinaturas Ãºnicas, o encadeamento de Ã¡rvores a fim de aumentar o nÃºmero de mensagens passÃ­veis de assinatura, e o gerenciamento sobre estas Ã¡rvores quando seu armazenamento total torna-se impraticÃ¡vel.
 
-O resultado principal, consistindo na otimização da família de esquemas de assinatura digital única Winternitz, introduz um parâmetro de compensação que habilita o deslocamento do cômputo de iterações de $f$ da geração da assinatura para a verificação, e vice-versa. Para fundamentar este trabalho, experimentos foram realizados em esquemas do estado da arte, com resultados positivos.
+O resultado principal, consistindo na otimizaÃ§Ã£o da famÃ­lia de esquemas de assinatura digital Ãºnica Winternitz, introduz um parÃ¢metro de compensaÃ§Ã£o que habilita o deslocamento do cÃ´mputo de iteraÃ§Ãµes de $f$ da geraÃ§Ã£o da assinatura para a verificaÃ§Ã£o, e vice-versa. Para fundamentar este trabalho, experimentos foram realizados em esquemas do estado da arte, com resultados positivos.
 
 \section{Trabalhos futuros}
 \label{section:future}
 
-A otimização apresentada na Seção~\ref{section:wotsr} pode considerar a modificação da tupla $\mathcal{B}_1$ de acordo com outros critérios, adicionais à maximização ou minimização de seus elementos, ou substituindo este processo completamente. Por exemplo, visto que o cômputo de iterações de $f$ é feito sequencialmente, a busca de um critério a fim de obter elementos $b \in \mathcal{B}_1$ próximos em magnitude habilita o processamento paralelo destas iterações, e portanto um tempo de execução reduzido para a geração e verificação de assinaturas.
+A otimizaÃ§Ã£o apresentada na SeÃ§Ã£o~\ref{section:wotsr} pode considerar a modificaÃ§Ã£o da tupla $\mathcal{B}_1$ de acordo com outros critÃ©rios, adicionais Ã  maximizaÃ§Ã£o ou minimizaÃ§Ã£o de seus elementos, ou substituindo este processo completamente. Por exemplo, visto que o cÃ´mputo de iteraÃ§Ãµes de $f$ Ã© feito sequencialmente, a busca de um critÃ©rio a fim de obter elementos $b \in \mathcal{B}_1$ prÃ³ximos em magnitude habilita o processamento paralelo destas iteraÃ§Ãµes, e portanto um tempo de execuÃ§Ã£o reduzido para a geraÃ§Ã£o e verificaÃ§Ã£o de assinaturas.
 
-Experimentos que exploram as propostas do Capítulo~\ref{chapter:tuning} podem ser realizados em variantes diferentes da família Winternitz, como \wotsprf{} e \wotst{}, bem como em outros esquemas baseados em árvores de Merkle. Ademais, para variantes que necessitam apenas de resistência à segunda pré-imagem, a segurança do esquema \wotsr{} deve ser formalizada, visto que a modificação de $\mathcal{B}_{1}$ pode introduzir imperfeições nas cadeias de resumos subsequentes.
+Experimentos que exploram as propostas do CapÃ­tulo~\ref{chapter:tuning} podem ser realizados em variantes diferentes da famÃ­lia Winternitz, como \wotsprf{} e \wotst{}, bem como em outros esquemas baseados em Ã¡rvores de Merkle. Ademais, para variantes que necessitam apenas de resistÃªncia Ã  segunda prÃ©-imagem, a seguranÃ§a do esquema \wotsr{} deve ser formalizada, visto que a modificaÃ§Ã£o de $\mathcal{B}_{1}$ pode introduzir imperfeiÃ§Ãµes nas cadeias de resumos subsequentes.
 
 \bibliographystyle{apalike}
 \bibliography{ref}
