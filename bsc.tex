@@ -159,7 +159,7 @@ Neal Stephenson (\textit{Cryptonomicon}, 1999)
     % \item adicionar elementos pré-textuais (capa, dedicatória, agradecimentos, epígrafe, resumo);
     % \item adicionar seção de organização do texto na introdução;
     \item cruzar e citar referências intratextuais;
-    \item frisar termos mais importantes;
+    % \item frisar termos mais importantes;
     \item adicionar entrada de cada algoritmo de geração de chaves, geração e verificação de assinatura;
     \item slides pra defesa;
     % \item atualizar informações em \texttt{tcc.inf.ufsc.br};
@@ -236,7 +236,7 @@ mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
 encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011}
 e da ausência do gerenciamento de estado~\cite{Bernstein2015}.
 
-Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, 
+Neste trabalho, foca-se no esquema de assinatura digital única Winternitz,
 no qual o resumo criptográfico da mensagem a ser assinada define diretamente
 a complexidade dos passos de geração e verificação da assinatura. De acordo
 com este comportamento, apresenta-se uma customização para o esquema na forma
@@ -244,7 +244,7 @@ de um parâmetro adicional, que habilita a redução do cômputo de verificaçã
 assinatura em troca do aumento deste na geração da assinatura, ou vice-versa.
 
 Ambientes nos quais existem limitações de processamento para uma destas etapas,
-como redes de sensores sem fio, podem configurar instâncias do esquema 
+como redes de sensores sem fio, podem configurar instâncias do esquema
 Winternitz a fim de otimizar sua comunicação segura, aumentando o tempo de
 execução do cômputo para a geração de assinaturas, geralmente feita em
 dispositivos com poder de processamento amplificado. Ademais, as consequências
@@ -422,11 +422,11 @@ com uma chave de rodada. As operações e rotinas serão descritas abaixo.
         $x^{4} + 1$, para que o resultado ainda seja um polinômio de grau
         máximo 3, apto a ser representado na coluna.
 
-  \item \textsc{AddRoundKey}: a operação de ou exclusivo bit a bit é aplicada
+  \item \textsc{AddRoundKey}: a operação de ou exclusivo \emph{bit} a \emph{bit} é aplicada
       entre $A$ e o bloco da chave referente à rodada.
 
   \item \textsc{KeyExpansion} consiste da criação de um conjunto de palavras $K_e$ de
-32 bits.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
+32 \emph{bits}.  Tome $\ell = \frac{n}{32}$, e assumindo que é necessário criar
 palavras suficientes para utilização em todas as rodadas do algoritmo, então $t
 = \ell \cdot (n_r + 1)$ e $K_e = \{k_0, \dots, k_{t - 1}\}$. Também defina
 $rot(x)$ como o deslocamento circular à esquerda de 8 \emph{bits} da palavra $x$, e a
@@ -655,7 +655,7 @@ vários âmbitos, em especial na estrutura de dados chamada de tabela de
 espalhamento. Por outro lado, é imposto para uma função de mão única que
 o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, \emph{i.e.} o item (iv)
 seja respeitado. Por fim, funções resistentes à segunda pré-imagem e/ou colisões
-são definidas como \emph{funções de resumo criptográfico}, adequadas para
+são definidas como funções de resumo criptográfico, adequadas para
 utilização no contexto de segurança da informação.
 
 Estas possibilitam a certeza da integridade de dados, mesmo que armazenados em
@@ -668,7 +668,7 @@ mensagem $m$ deve modificar cerca de metade dos \emph{bits} do resumo, e
 vice-versa.
 
 Adicionalmente, discute-se brevemente a relação da propriedade (vii) com funções
-de resumo. \emph{Funções de compressão de mão única} não admitem o título de funções
+de resumo. Funções de compressão de mão única não admitem o título de funções
 de resumo, visto que a propriedade de compressão não é respeitada -- embora seu
 nome leve a erro. Porém, são parametrizadas por uma chave, e utilizadas para a
 construção de cifras de bloco~\cite[9.25]{Menezes:1996:HAC:548089}. Códigos de
@@ -805,7 +805,7 @@ intercalados por aplicações de $f$.
 
 Ao término do processamento dos blocos, a fase de compressão é iniciada, onde
 $n$ blocos de tamanho $r$ compõem a saída da função, novamente intercalados por
-aplicações de $f$, onde $n$ é parametrizável pelo usuário. Os últimos $c$ bits
+aplicações de $f$, onde $n$ é parametrizável pelo usuário. Os últimos $c$ \emph{bits}
 do estado nunca são diretamente afetados pelos blocos, e também nunca revelados
 durante a fase de compressão. Essencialmente, estão correlacionados com o nível
 de segurança da construção esponja. Assim, uma função esponja pode ser definida
@@ -834,7 +834,7 @@ de cinco etapas: $R = \iota \circ \chi \circ \pi \circ \rho \circ \theta$.
       $a$.
 
   \item[Etapa $\chi$:] Modifica um elemento de uma linha de $a$ de acordo com
-      uma função não-linear de dois outros bits adjacentes. Análogo a uma
+      uma função não-linear de dois outros \emph{bits} adjacentes. Análogo a uma
         caixa-S.
 
   \item[Etapa $\iota$:] Calcula o ou exclusivo entre o estado $a$ e uma
@@ -1204,7 +1204,7 @@ Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
 \end{figure}
 
 Assuma uma cifra de blocos genérica $E_{k}$ parametrizada pela chave $k$, cujo
-bloco tem um tamanho de $n$ bits. Tome um vetor de inicialização $IV$ de
+bloco tem um tamanho de $n$ \emph{bits}. Tome um vetor de inicialização $IV$ de
 tamanho $n$, e uma função $g$ que adapte sua entrada para chaves do tamanho
 necessário por $E_{k}$. Deseja-se obter um resumo $h_k$ de tamanho $n$ que
 represente uma palavra $x$, e que sua inversibilidade seja computacionalmente
@@ -1564,7 +1564,7 @@ Observe que, por conta de sua semelhança com o esquema \sprmss{}, a estrutura d
     T_{h, j} = h_k(r_i \oplus (T_{h - 1, 2j} \concat T_{h - 1, 2j + 1})),
       \; 1 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1.
 \end{equation}
-O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma estrutura chamada de \emph{árvore-l}, construída a partir dos elementos desta chave de forma similar à $T$, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a altura total é de $\lceil \log_{2} t \rceil$, mas não considerada no contexto de $T$.
+O conteúdo das folhas, originalmente o resumo criptográfico simples de $\textsc{Ots}_{\pk{}}$, é substituído por uma estrutura chamada de árvore-$l$, construída a partir dos elementos desta chave de forma similar à $T$, mas com máscaras iguais para todas as árvores referentes aos esquemas de assinatura única. Note que o número de elementos de $\textsc{Ots}_{\pk{}}$, o inteiro $t$ em esquemas baseados em Winternitz, pode não ser uma potência de 2, e portanto a árvore-$l$ deve ser balanceada tal que qualquer nodo sem irmão à direita é movido para um nível mais alto, de forma a tornar-se um irmão à direita de outro nodo. Assim, a altura total é de $\lceil \log_{2} t \rceil$, mas não considerada no contexto de $T$.
 
 \begin{enumerate}
 
@@ -1582,7 +1582,7 @@ O esquema descrito tem estrutura similar à variante em processo de padronizaç�
 \subsection{\xmssmt{}}
 \label{subsection:xmssmt}
 
-Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de \emph{hiper-árvores} é proposto em diversos trabalhos, com o intuito de encadear camadas de árvores de Merkle, conectadas por uma instância de esquema de assinatura única, de tal forma que a folha da árvore superior assina a raiz da árvore inferior.
+Uma das principais limitações dos esquemas baseados em árvores de Merkle é a quantidade de assinaturas a serem conectadas com uma árvore, ou chave pública. Para solucionar este problema, o conceito de hiper-árvores é proposto em diversos trabalhos, com o intuito de encadear camadas de árvores de Merkle, conectadas por uma instância de esquema de assinatura única, de tal forma que a folha da árvore superior assina a raiz da árvore inferior.
 
 A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na forma do esquema \cmss{}, que habilita a assinatura de até $2^{40}$ mensagens com um par de chaves, relacionado a uma estrutura virtual de duas camadas, onde apenas uma árvore na parte inferior é criada de cada vez a fim de reduzir requisitos de armazenamento. Posteriormente, este esquema é generalizado em~\cite{Buchmann:2007:MSV:1419765.1419769} como \gmss{}, que utiliza um número arbitrário de camadas de árvores, com alturas e parâmetros de esquemas de assinatura única diferentes para cada uma destas, atingindo o número de $2^{80}$ mensagens por par de chaves.
 
@@ -1702,7 +1702,7 @@ Tome o parâmetro de segurança $m$, a família de funções $\mathcal{F}_m : \{
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de bits aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Sementes para cada camada da hiper-árvore também são escolhidas desta maneira: $\textbf{s} = (s_0, \dots, s_{d - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, e estados do algoritmo BDS são inicializados: $\textsc{State} = (\textsc{State}_{\textsc{BDS}}^{0}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 1})$. Utilizando instâncias do algoritmo \textsc{Treehash} e a tupla $\textbf{s}$ a fim de criar os pares de chaves de \wotsplus{}, os valores $T_{h_{i}, 0}, \; 0 \leq i \leq d - 2$ são calculados e assinados pela primeira folha da árvore superior. Estas assinaturas são então extraídas como $\Sigma = (\sigma_{1}^{T}, \dots, \sigma_{d - 1}^{T})$.
+  \item[] \emph{Geração de chaves.} Calcule o valor $k = max(\{h_i + \lceil \log_2 t_i \rceil : 0 \leq i \leq d - 1\})$, e gere máscaras de \emph{bits} aleatórias, reutilizadas em cada camada da árvore: $\mathbf{r} = (r_0, \dots, r_{k - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Sementes para cada camada da hiper-árvore também são escolhidas desta maneira: $\textbf{s} = (s_0, \dots, s_{d - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$, e estados do algoritmo BDS são inicializados: $\textsc{State} = (\textsc{State}_{\textsc{BDS}}^{0}, \dots, \textsc{State}_{\textsc{BDS}}^{d - 1})$. Utilizando instâncias do algoritmo \textsc{Treehash} e a tupla $\textbf{s}$ a fim de criar os pares de chaves de \wotsplus{}, os valores $T_{h_{i}, 0}, \; 0 \leq i \leq d - 2$ são calculados e assinados pela primeira folha da árvore superior. Estas assinaturas são então extraídas como $\Sigma = (\sigma_{1}^{T}, \dots, \sigma_{d - 1}^{T})$.
 
   Note que apenas as assinaturas das primeiras raízes à esquerda são armazenadas, visto que será a primeira árvore a ser utilizada para assinar mensagens. Para facilitar a construção de futuros caminhos de autenticação e árvores intermediárias, sementes pseudoaleatórias, estados do algoritmo BDS e instâncias do algoritmo \textsc{Treehash} são também armazenados em uma estrutura
   \begin{multline}
@@ -1765,7 +1765,7 @@ Esta família utiliza várias estratégias combinadas a fim de evitar esta carac
 
 Neste capítulo, duas otimizações são apresentadas para a família de esquemas Winternitz. A primeira consiste de uma modificação em \emph{bits} inutilizados na soma de verificação calculada ao longo do processo de assinatura, tornando a verificação desta menos onerosa. A segunda apresenta uma estratégia para modificar a entrada do algoritmo, a fim de torná-la adequada para o cômputo eficiente das etapas de geração ou verificação de uma assinatura. Consequências destas modificações são consideradas em esquemas da família \xmss{}.
 
-\section{\textsc{Wots-b}}
+\section{\wotsb{}}
 \label{section:wotsb}
 
 A primeira variante de \wots{} proposta é baseada na alteração da estrutura da soma de verificação, explicada na Subseção~\ref{subsection:wots}, cujo cálculo é essencial para o impedimento de falsificação trivial de assinaturas por meio da aplicação de $f$ sobre cadeias de resumos pré-existentes. Esta estratégia é abordada de maneira diferente no esquema \wotslm{}, onde um de seus parâmetros comanda a quantidade de deslocamentos à esquerda realizados sobre a representação binária desta soma~\cite[4.4]{mcgrew-hash-sigs-11}.
@@ -1898,7 +1898,7 @@ Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa rela
 \end{equation}
 A modificação na estrutura da soma de verificação não afeta a segurança do esquema de assinatura digital, visto que o espaço inutilizado na $t_2$-tupla $\mathcal{B}_2$ não possui qualquer aplicação. Assim, este cômputo de iterações de $f$ é deslocado da etapa de verificação de assinaturas para a geração destas, de maneira diretamente proporcional.
 
-\section{\textsc{Wots-r}}
+\section{\wotsr{}}
 \label{section:wotsr}
 
 A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Esta estratégia é baseada no esquema publicado em~\cite{Steinwandt2008}.
@@ -1981,9 +1981,9 @@ Como a modificação não afeta mecanismos internos do esquema, mostra-se necess
 \section{Resultados}
 \label{section:results}
 
-Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \textsc{Wots-b}, \textsc{Wots-r} e o esquema \textsc{Wots-br}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Considere mensagens aleatórias de $2^{10}$ caracteres, geradas através de \texttt{/dev/urandom}.
+Para demonstrar a eficiência teórica dos esquemas propostos, o número de iterações da função interna $f$ é comparado entre \wots{}, \wotsb{}, \wotsr{} e o esquema \wotsbr{}, onde as duas otimizações são aplicadas ao mesmo tempo. Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Considere mensagens aleatórias de $2^{10}$ caracteres, geradas através de \texttt{/dev/urandom}.
 
-Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \textsc{Wots-r} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \textsc{Wots-br} mitiga este comportamento. Para a Tabela~\ref{tab:3}, a otimização da soma de verificação não é recomendada, visto que atuará de maneira contraditória em relação à proposta.
+Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\mathcal{B}_1$ e $\mathcal{B}_2$ a fim de enfatizar o efeito de cada esquema variante. Observe que $\mu(\mathcal{B}_2)$ é afetada negativamente por \wotsr{} em virtude da maximização dos elementos em $\mathcal{B}_1$. Entretanto, esta diferença não impacta negativamente os ganhos totais. A utilização de \wotsbr{} mitiga este comportamento. Para a Tabela~\ref{tab:3}, a otimização da soma de verificação não é recomendada, visto que atuará de maneira contraditória em relação à proposta.
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{7pt}
@@ -1993,41 +1993,41 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
     $w$ & $R$ & \textsc{Esquema} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
     \toprule
    \multirow{8}{*}{4} & \multirow{2}{*}{-}
-       &    \textsc{Wots} &     \multirow{2}{*}{479.92} &      25.88 &     505.80 \\
-     & &  \textsc{Wots-b} &      &      12.25 &     492.17 \\ \cline{2-6}
+       &    \wots{} &     \multirow{2}{*}{479.92} &      25.88 &     505.80 \\
+     & &  \wotsb{} &      &      12.25 &     492.17 \\ \cline{2-6}
     & \multirow{2}{*}{25}
-      &  \textsc{Wots-r} &     \multirow{2}{*}{407.80} &      27.49 &     435.29 \\
-     & & \textsc{Wots-br} &     &      13.49 &     421.29 \\ \cline{2-6}
+      &  \wotsr{} &     \multirow{2}{*}{407.80} &      27.49 &     435.29 \\
+     & & \wotsbr{} &     &      13.49 &     421.29 \\ \cline{2-6}
     & \multirow{2}{*}{200}
-      &  \textsc{Wots-r} &     \multirow{2}{*}{379.08} &      29.23 &     408.31 \\
-     & & \textsc{Wots-br} &      &      15.23 &     394.31 \\ \cline{2-6}
+      &  \wotsr{} &     \multirow{2}{*}{379.08} &      29.23 &     408.31 \\
+     & & \wotsbr{} &      &      15.23 &     394.31 \\ \cline{2-6}
     & \multirow{2}{*}{3500}
-      &  \textsc{Wots-r} &     \multirow{2}{*}{348.88} &      31.14 &     380.02 \\
-     & & \textsc{Wots-br} &     &      17.14 &     366.02 \\ \hline
+      &  \wotsr{} &     \multirow{2}{*}{348.88} &      31.14 &     380.02 \\
+     & & \wotsbr{} &     &      17.14 &     366.02 \\ \hline
     \multirow{8}{*}{8} & \multirow{2}{*}{-}
-       &    \textsc{Wots} &    \multirow{2}{*}{4081.87} &     368.42 &    4450.30 \\
-     & &  \textsc{Wots-b} &     &     136.24 &    4218.12 \\ \cline{2-6}
+       &    \wots{} &    \multirow{2}{*}{4081.87} &     368.42 &    4450.30 \\
+     & &  \wotsb{} &     &     136.24 &    4218.12 \\ \cline{2-6}
     & \multirow{2}{*}{25}
-      &  \textsc{Wots-r} &    \multirow{2}{*}{3262.38} &     370.57 &    3632.95 \\
-     & & \textsc{Wots-br} &    &     130.57 &    3392.95 \\ \cline{2-6}
+      &  \wotsr{} &    \multirow{2}{*}{3262.38} &     370.57 &    3632.95 \\
+     & & \wotsbr{} &    &     130.57 &    3392.95 \\ \cline{2-6}
     & \multirow{2}{*}{200}
-      &  \textsc{Wots-r} &    \multirow{2}{*}{2940.64} &     372.12 &    3312.76 \\
-     & & \textsc{Wots-br} &     &     132.12 &    3072.76 \\ \cline{2-6}
+      &  \wotsr{} &    \multirow{2}{*}{2940.64} &     372.12 &    3312.76 \\
+     & & \wotsbr{} &     &     132.12 &    3072.76 \\ \cline{2-6}
     & \multirow{2}{*}{3500}
-      &  \textsc{Wots-r} &    \multirow{2}{*}{2604.49} &     374.76 &    2979.24 \\
-     & & \textsc{Wots-br} &     &     134.75 &    2739.24 \\ \hline
+      &  \wotsr{} &    \multirow{2}{*}{2604.49} &     374.76 &    2979.24 \\
+     & & \wotsbr{} &     &     134.75 &    2739.24 \\ \hline
     \multirow{8}{*}{16} & \multirow{2}{*}{-}
-       &    \textsc{Wots} &  \multirow{2}{*}{525114.64} &   98229.80 &  623344.44 \\
-     & &  \textsc{Wots-b} &   &   32705.81 &  557820.45 \\ \cline{2-6}
+       &    \wots{} &  \multirow{2}{*}{525114.64} &   98229.80 &  623344.44 \\
+     & &  \wotsb{} &   &   32705.81 &  557820.45 \\ \cline{2-6}
     & \multirow{2}{*}{25}
-      &  \textsc{Wots-r} &  \multirow{2}{*}{376553.04} &   98226.74 &  474779.78 \\
-     & & \textsc{Wots-br} &   &   32698.72 &  409251.76 \\ \cline{2-6}
+      &  \wotsr{} &  \multirow{2}{*}{376553.04} &   98226.74 &  474779.78 \\
+     & & \wotsbr{} &   &   32698.72 &  409251.76 \\ \cline{2-6}
     & \multirow{2}{*}{200}
-      &  \textsc{Wots-r} &  \multirow{2}{*}{319492.19} &   98847.90 &  418340.08 \\
-     & & \textsc{Wots-br} &   &   33319.75 &  352811.94 \\ \cline{2-6}
+      &  \wotsr{} &  \multirow{2}{*}{319492.19} &   98847.90 &  418340.08 \\
+     & & \wotsbr{} &   &   33319.75 &  352811.94 \\ \cline{2-6}
     & \multirow{2}{*}{3500}
-      &  \textsc{Wots-r} &  \multirow{2}{*}{262307.28} &  101021.00 &  363328.28 \\
-     & & \textsc{Wots-br} &  &   35491.20 &  297798.48 \\
+      &  \wotsr{} &  \multirow{2}{*}{262307.28} &  101021.00 &  363328.28 \\
+     & & \wotsbr{} &  &   35491.20 &  297798.48 \\
     \bottomrule
     \end{tabular}
     \label{tab:2}
@@ -2042,18 +2042,18 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
     $w$ & $R$ & \textsc{Esquema} & $\mu(\mathcal{B}_1)$ & $\mu(\mathcal{B}_2)$ & $\mu(\mathcal{B})$ \\
     \toprule
 \multirow{4}{*}{4}
-   & - &    \textsc{Wots} &     480.07 &      19.12 &     499.20 \\
-  & 25 &  \multirow{3}{*}{\textsc{Wots-r}} &     407.59 &      11.60 &     419.20 \\
+   & - &    \wots{} &     480.07 &      19.12 &     499.20 \\
+  & 25 &  \multirow{3}{*}{\wotsr{}} &     407.59 &      11.60 &     419.20 \\
  & 200 &  &     379.04 &      13.31 &     392.35 \\
 & 3500 &  &     348.57 &      15.29 &     363.85 \\ \hline
 \multirow{4}{*}{8}
- & - &    \textsc{Wots} &    4078.16 &     141.57 &    4219.73 \\
-& 25 &  \multirow{3}{*}{\textsc{Wots-r}} &    3259.31 &     145.36 &    3404.67 \\
+ & - &    \wots{} &    4078.16 &     141.57 &    4219.73 \\
+& 25 &  \multirow{3}{*}{\wotsr{}} &    3259.31 &     145.36 &    3404.67 \\
 & 200 &  &    2939.62 &     148.36 &    3087.98 \\
  & 3500 &  &    2605.05 &     145.21 &    2750.26 \\ \hline
 \multirow{4}{*}{16}
-& - &    \textsc{Wots} &  523438.00 &   32839.56 &  556277.56 \\
- & 25 &  \multirow{3}{*}{\textsc{Wots-r}} &  376093.98 &   32646.83 &  408740.82 \\
+& - &    \wots{} &  523438.00 &   32839.56 &  556277.56 \\
+ & 25 &  \multirow{3}{*}{\wotsr{}} &  376093.98 &   32646.83 &  408740.82 \\
  & 200 &  &  319762.87 &   33590.17 &  353353.04 \\
  & 3500 &   &  261912.93 &   35384.39 &  297297.32 \\
     \bottomrule
@@ -2062,14 +2062,14 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
     \caption{Iterações de $f$ na etapa de geração de assinaturas ao minimizar $\mathcal{B}_1$.}
 \end{table}
 
-Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, o esquema \textsc{Wots-br} resulta em melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, têm-se refinamentos de $28\%$, $35\%$ e $47\%$.
+Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \wotsb{}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \wotsr{}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, o esquema \wotsbr{} resulta em melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, têm-se refinamentos de $28\%$, $35\%$ e $47\%$.
 
 Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, \emph{e.g.} com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores excedentes para $R$.
 
 \subsection{Impacto em esquemas baseados em árvores de Merkle}
 \label{subsection:impact}
 
-Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
+Evidentemente, as otimizações propostas nos esquemas \wotsb{} e \wotsr{} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
 
 A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
 
