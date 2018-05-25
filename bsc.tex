@@ -286,8 +286,9 @@ Artigos na literatura recente consistentes com o tema deste trabalho focam
 na redução do tempo de execução da verificação da assinatura, através da
 definição de novos esquemas variantes. Em especial, o esquema proposto
 em~\cite{cruz2016constant} torna a complexidade deste passo previsível
-através de uma função que mapeia a mensagem para uma tupla com propriedades especiais;
-
+através de uma função que mapeia a mensagem para uma tupla com propriedades
+especiais;
+Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo criptográfico, é apresentada em~\cite{Steinwandt2008}.
 ~\cite{Steinwandt2008},~\cite{mcgrew-hash-sigs-11}
 e~\cite{Pereira:2016:SHS:2929115.2929248}.
 
@@ -1893,7 +1894,7 @@ A modificação na estrutura da soma de verificação não afeta a segurança do
 \section{\textsc{Wots-r}}
 \label{section:wotsr}
 
-A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Uma estratégia similar, buscando a melhor interpretação de uma codificação \emph{run-length} do resumo criptográfico, é apresentada em~\cite{Steinwandt2008}.
+A segunda proposta consiste na busca por resumos criptográficos com características que habilitam a geração ou verificação de assinaturas de maneira mais eficiente. Este processo é independente do esquema subjacente, consistindo do pré-processamento da mensagem através de sua concatenação com um \emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico resultante pode ser maximizado ou minimizado, de acordo com a compensação desejada, consequentemente alterando a extensão das cadeias de resumos derivadas do mesmo. Esta estratégia é baseada no esquema publicado em~\cite{Steinwandt2008}.
 
 Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in \mathbb{N}^{*}$ e uma $R$-tupla $\Lambda = (\lambda_0, \dots, \lambda_{R - 1}) \stackrel{\$}{\longleftarrow} \binwds{m}$. Na etapa de geração da assinatura, compute todos os resumos $D = \{\hash{M \concat \lambda_r} : 0 \leq r \leq R\}$. Note que estas palavras podem ser divididas em $t_1$ palavras de base-$w$, ou seja, $D_r = b_{r}^{t_1 - 1} \concat \dots \concat b_{r}^{0}, \; 0 \leq r \leq R$, e subsequentemente interpretadas como tuplas $\mathcal{B}_{1}^{r} = (b_{r}^{t - 1}, \dots, b_{r}^{t - t_1})$, como explicado na Subseção~\ref{subsection:wots}.
 
