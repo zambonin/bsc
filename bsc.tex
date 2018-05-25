@@ -2037,12 +2037,14 @@ Note que a redução no cômputo destas iterações é diretamente traduzida na 
 
 Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}, é modificada de acordo.
 
+A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \textsc{Xmss-b}, \textsc{Xmss-r} e \textsc{Xmss-br}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}.
+
 \begin{table}[htbp]
     \setlength{\tabcolsep}{8pt}
     \centering
     \begin{tabular}{ccclcc}
     \toprule
-    & $w$ & $R$ & \textsc{Scheme} & \textsc{Sig. time} & \textsc{Ver. time} \\
+    & $w$ & $R$ & \textsc{Esquema} & Tempo para $\mathcal{S}$ & \textsc{Ver. time} \\
     \toprule
     \multirow{16}{*}{\rotatebox[origin=c]{90}{$\argmax$}}
     & \multirow{8}{*}{4} & \multirow{2}{*}{-}  
