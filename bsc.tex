@@ -243,12 +243,16 @@ com este comportamento, apresenta-se uma customização para o esquema na forma
 de um parâmetro adicional, que habilita a redução do cômputo de verificação de
 assinatura em troca do aumento deste na geração da assinatura, ou vice-versa.
 
-Em ambientes onde é desejável que a verificação de assinaturas seja acelerada,
-mas a geração destas é rara, ou realizada em um dispositivo com poder de
-processamento amplificado
+Ambientes nos quais existem limitações de processamento para uma destas etapas,
+como redes de sensores sem fio, podem configurar instâncias do esquema 
+Winternitz a fim de otimizar sua comunicação segura, aumentando o tempo de
+execução do cômputo para a geração de assinaturas, geralmente feita em
+dispositivos com poder de processamento amplificado.
 
-A aplicação de uma
-função de resumo criptográfico à mensagem desejada decide 
+Ambientes onde é desejável que a verificação de assinaturas seja acelerada,
+visto que a geração destas é rara, ou realizada em um dispositivo com poder de
+processamento amplificado, 
+
 % This becomes interesting in settings where there are hard performance
 % requirements for some steps but not for others. E.g., if you need realtime
 % verification with small signatures, but do not care about signing speed at all,
