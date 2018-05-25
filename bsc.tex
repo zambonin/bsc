@@ -239,9 +239,18 @@ e da ausência do gerenciamento de estado~\cite{Bernstein2015}.
 Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
 apresenta-se uma customização para o esquema na forma de um parâmetro extra,
 que habilita a redução da complexidade de verificação de assinatura em troca
-do aumento desta na geração da assinatura, ou vice-versa. Ademais, as
+do aumento desta na geração da assinatura, ou vice-versa. 
+% This becomes interesting in settings where there are hard performance
+% requirements for some steps but not for others. E.g., if you need realtime
+% verification with small signatures, but do not care about signing speed at all,
+% you want to set w pretty high and then use your trade-off to shift computation
+% time to the signature generation.
+
+Ademais, as
 consequências desta otimização são verificadas em esquemas mais complexos,
-baseados em árvores de Merkle. Este trabalho é uma versão expandida,
+baseados em árvores de Merkle. 
+
+Este trabalho é uma versão expandida,
 e portanto didática, do artigo a ser publicado como~\cite{Peri1806:Tuning}.
 
 \section{Objetivos}
@@ -268,6 +277,9 @@ verificação de uma assinatura.
     \item Apresentar a otimização para a família \wots{} e discutir consequências
     desta modificação no contexto de esquemas baseados em árvores de Merkle.
 \end{enumerate}
+
+\section{Trabalhos relacionados}
+\label{section:related}
 
 \chapter{Primitivas criptográficas}
 \label{chapter:primitives}
