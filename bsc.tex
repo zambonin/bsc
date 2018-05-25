@@ -455,7 +455,7 @@ codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0 \leq i, j \leq 
 Note que \textsc{MixColumns} é ignorado na última rodada, a fim de facilitar a
 reversibilidade da cifra.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htbp]
   \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
   \KwResult{$c$, o texto cifrado resultante}
 \vspace{2mm}
@@ -508,7 +508,7 @@ Por fim, o resultado é representado pelo Algoritmo~\ref{alg:2}.
 Note a mudança da ordem das etapas, e a utilização invertida de $K_e$. $c$ é
 codificado no estado de maneira análoga ao algoritmo anterior.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htbp]
   \KwData{$c$, o texto cifrado; $K$, a chave desejada}
   \KwResult{$m$, o texto claro resultante}
 \vspace{2mm}
@@ -741,7 +741,7 @@ fase de absorção de $m$ pela esponja procede da seguinte maneira: a operação
 ou exclusivo é calculada entre os blocos e os estados da construção,
 intercalados por aplicações de $f$.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}[scale=0.35]
     \begin{scope}[xshift=0cm]
@@ -872,7 +872,7 @@ certeza de que esta não foi modificada ao ser transmitida por um canal
 possivelmente inseguro; e o não-repúdio do remetente, onde não é possível negar
 que uma mensagem foi assinada e enviada, após este fato.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}
     \node (hm) at (-1.25, 0) {$m$};
@@ -1081,7 +1081,7 @@ de algum bloco $b_k \in \mathcal{B}_2$ seja calculada. Analogamente, modificar
 algum valor de $\mathcal{B}_2$ também tornará a verificação da assinatura
 impossível.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}[
     decoration={
@@ -1190,7 +1190,7 @@ restrições impostas pelo esquema. Para que isto seja feito de maneira
 a manter um nível de segurança suficiente, é possível empregar a construção
 Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}[scale=0.25]
     \draw (-2, 5) rectangle node {$g$} ++(2, 2);
@@ -1340,7 +1340,7 @@ documentos. No contexto de esquemas baseados em funções de resumo
 criptográfico, a estrutura de dados chamada de árvore de Merkle, geralmente de
 característica binária e perfeita, pode ser aproveitada para tal.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}
     \tikzset{every tree node/.style={align=center,anchor=north}}
@@ -1391,7 +1391,7 @@ visto que qualquer mudança em um nó da
 árvore produzirá um valor distinto na raiz quando calculado novamente,
 descaracterizando a validade dos dados atrelados a esta.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htbp]
   \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
   \KwResult{\textbf{S}, pilha atualizada}
 \vspace{2mm}
@@ -1423,7 +1423,7 @@ algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
 Estas estratégias serão necessárias para a travessia em árvores de dimensões
 extensas, abordada na Subseção~\ref{subsection:xmss}.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htbp]
   \KwData{$H$, a altura da árvore $T$}
   \KwResult{$T_{H, 0}$, o nodo raiz}
 \vspace{2mm}
@@ -1522,6 +1522,7 @@ Este conceito é chamado de gerenciamento de estado, e introduz vários obstácu
         level 2/.style={sibling distance=1.25cm},
         level 3/.style={sibling distance=1cm},
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+        scale=0.7,
     ]
     \Tree
     [.\node[name=ah0,label=below:{$\pk{}$}]{};
@@ -1597,6 +1598,7 @@ A ideia original é introduzida em~\cite{Buchmann:2006:CIM:2087445.2087479} na f
         every tree node/.style={draw,circle,minimum size=0.75cm},
         edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
         level distance=1cm,
+        scale=0.8,
     ]
     \begin{scope}[yshift=4.5cm,xshift=0.59cm]
     \Tree[. \node[name=root,label={below:$\pk{}$}]{};
@@ -1657,7 +1659,7 @@ O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É 
 
 O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do  BDS, no Algoritmo~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htbp]
   \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice de folha; $\textsc{State}_{\textsc{BDS}}$, estado do algoritmo}
   \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
 \vspace{2mm}
@@ -1729,7 +1731,7 @@ Adicionalmente, como mencionado na Subseção~\ref{subsection:wots}, o esquema \
 
 Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema de Lamport também fazem parte de publicações com destaque, \emph{e.g.}~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \begin{chronology}[4]{1978}{1997}{\textwidth}
     \event{1979}{\lots{}, \mss{}}
@@ -1742,7 +1744,7 @@ Vários esquemas foram citados ao longo das seções anteriores, provendo uma co
   \label{fig:10}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
       \begin{chronology}[4]{1998}{2018}{\textwidth}
         \event{2001}{\emph{Bins and Balls}}
@@ -1919,7 +1921,7 @@ e tome $d = \hash{M \concat \lambda_k}$ para a execução do esquema. Note que a
 
 Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo computacional ampliado na geração da assinatura. Portanto, é desejável que exista um limite para este parâmetro, visto que para alguns parâmetros $w$, este cálculo pode representar uma parte considerável do processamento total nesta etapa. Uma abordagem estatística é aplicada para este fim. Considerando que uma função de resumo criptográfico deve produzir saídas uniformemente distribuídas e aparentemente aleatórias, então frações destas saídas também devem o ser.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{support/hist}
     \caption{Histograma normalizado de médias de $\mathcal{B}_{1}^{i}$, com 50 classes.}
@@ -1942,7 +1944,7 @@ Assim, é possível utilizar este resultado para fornecer valores razoáveis par
 \end{align}
 Então, para garantir que estes eventos aconteçam com altíssima probabilidade, utiliza-se a distribuição binomial a fim de procurar a quantidade mínima de experimentos em que pelo menos um destes produza o valor desejado. Este comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8, 16\}$, recomendados em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}. Note que os valores para as probabilidades acima podem ser modificados a fim de produzir tuplas $\mathcal{B}_{i}^{1}$ cujas médias são maiores, entretanto, $R$ crescerá de modo diretamente proporcional.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
     \begin{axis}[
