@@ -769,8 +769,7 @@ intercalados por aplicações de $f$.
       \draw[edge,thick] (1,8) -- ++(1.5,0) -- ++(0,2.5) node[above] {\large $z_{j}$};
     \end{scope}
   \end{tikzpicture}
-  \caption{Construção esponja, adaptado
-    de~\cite{TikZ:for:Cryptographers}, onde $i, j \in \mathbb{N}^{*}$.}
+  \caption{Estrutura da construção esponja, onde $i, j \in \mathbb{N}^{*}$.}
   \label{fig:3}
 \end{figure}
 
@@ -781,7 +780,7 @@ do estado nunca são diretamente afetados pelos blocos, e também nunca revelado
 durante a fase de compressão. Essencialmente, estão correlacionados com o nível
 de segurança da construção esponja. Assim, uma função esponja pode ser definida
 como $\textsc{Sponge}[f, \texttt{pad}, r]$, e sua representação gráfica pode
-ser consultada na Figura~\ref{fig:3}, adaptada de
+ser consultada na Figura~\ref{fig:3}, adaptada de~\cite{TikZ:for:Cryptographers}.
 
 A função esponja \textsc{Keccak}~\cite{KeccakReference} é definida a partir
 desta construção, e pode agir como uma função de resumo criptográfico. Existem
@@ -1184,7 +1183,7 @@ inviável. Deste modo, $X = (x_0, \dots, x_{k - 1}), \forall x_i \in X,
 \length{x_i} = n$, ou seja, divida $x$ em uma $t$-tupla cujos elementos têm
 tamanho $n$ --- preenchimento com zeros pode ser aplicado caso existam
 elementos que desrespeitem esta regra. O resultado deste processo, observado
-na Figura~\ref{fig:6}, é definido recursivamente como
+na Figura~\ref{fig:6}, adaptada de  é definido recursivamente como
 \begin{equation}
     \begin{split}
         h_0 &= IV, \\
