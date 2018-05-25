@@ -158,9 +158,10 @@ Neal Stephenson (\textit{Cryptonomicon}, 1999)
     % \item organizar listas de abreviaturas e siglas, figuras, algoritmos, tabelas, símbolos;
     % \item adicionar elementos pré-textuais (capa, dedicatória, agradecimentos, epígrafe, resumo);
     % \item adicionar seção de organização do texto na introdução;
-    \item cruzar e citar referências intratextuais;
+    % \item cruzar e citar referências intratextuais;
     % \item frisar termos mais importantes;
     \item colocar tudo em equation;
+    \item arrumar local e nome da editora na abnt;
     \item adicionar siglas direitinho;
     \item slides pra defesa;
     % \item atualizar informações em \texttt{tcc.inf.ufsc.br};
@@ -2078,7 +2079,7 @@ Note que a redução no cômputo destas iterações é diretamente traduzida na 
 
 Evidentemente, as otimizações propostas nos esquemas \wotsb{} e \wotsr{} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
 
-A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
+A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas Seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
 
 Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação ao aplicar a maximização de $\mu(\mathcal{B}_1)$ e otimização da soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da minimização de $\mu(\mathcal{B}_1)$ torna o passo de geração de assinatura mais lento. Assim, recomenda-se $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
 
