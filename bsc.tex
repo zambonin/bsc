@@ -2039,7 +2039,7 @@ Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc
 
 A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \textsc{Xmss-b}, \textsc{Xmss-r} e \textsc{Xmss-br}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
 
-Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação 
+Os experimentos foram realizados utilizando um computador com as seguintes especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5-4570 @ 3.2GHz e \texttt{gcc} 7.3.0. Neste ambiente, é possível observar que qualquer valor de $R$ melhora o tempo de verificação ao aplicar a maximização de $\mu(\mathcal{B}_1)$ e otimização da soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para $w = 8$. Entretanto, para a minimização, 
 
 \begin{table}[htbp]
     \setlength{\tabcolsep}{8pt}
