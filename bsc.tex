@@ -781,7 +781,7 @@ do estado nunca são diretamente afetados pelos blocos, e também nunca revelado
 durante a fase de compressão. Essencialmente, estão correlacionados com o nível
 de segurança da construção esponja. Assim, uma função esponja pode ser definida
 como $\textsc{Sponge}[f, \texttt{pad}, r]$, e sua representação gráfica pode
-ser consultada em~\ref{fig:3}.
+ser consultada na Figura~\ref{fig:3}, adaptada de
 
 A função esponja \textsc{Keccak}~\cite{KeccakReference} é definida a partir
 desta construção, e pode agir como uma função de resumo criptográfico. Existem
@@ -809,8 +809,7 @@ de cinco etapas: $R = \iota \circ \chi \circ \pi \circ \rho \circ \theta$.
         caixa-S.
 
   \item[Etapa $\iota$:] Calcula o ou exclusivo entre o estado $a$ e uma
-      sequência gerada por um \emph{linear-feedback shift register}\footnote{Conjunto de registradores que deslocam \emph{bits} a partir de funções lineares. Uma aplicação desta estrutura é a geração de números pseudoaleatórios.}
-      (gerador de números pseudoaleatórios) alimentado
+      sequência gerada por um \emph{linear-feedback shift register}\footnote{Conjunto de registradores que deslocam \emph{bits} a partir de funções lineares. Uma aplicação desta estrutura é a geração de números pseudoaleatórios.} alimentado
         pelo índice da rodada atual, tornando a rodada assimétrica.
 
 \end{enumerate}
