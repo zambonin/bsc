@@ -1943,7 +1943,7 @@ Então, para garantir que estes eventos aconteçam com altíssima probabilidade,
     \end{axis}
     \end{tikzpicture}
     \label{fig:13}
-    \caption{Quantidades de experimentos para que modificações de $\mathcal{B}_{1}^{i}$ sejam efetivas.}
+    \caption{Valores de $R$ para que modificações de $\mathcal{B}_{1}^{i}$ sejam efetivas.}
 \end{figure}
 
 Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado. A maximização ou minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável nos \emph{bits} mais significativos de cada elemento da tupla, \emph{i.e.} torna-se mais comum que estes possuam valores antecipáveis. Isto é possivelmente explorável através de criptoanálise diferencial aplicada sobre \emph{bits} fixos na construção Merkle-Damgård, posta em prática recentemente através da primeira colisão de resumos criptográficos produzidos pelo algoritmo SHA-1~\cite{Stevens2017}. Portanto, recomenda-se a utilização de funções seguras na escolha de $\hh{}$, como demonstrado em~\cite{Hlsing2013}.
