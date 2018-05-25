@@ -140,9 +140,9 @@ Neal Stephenson (\textit{Cryptonomicon}, 1999)
     \item[\wots{}]      \emph{Winternitz One-time Signature Scheme}
     \item[\wotslm{}]    \emph{Leighton--Micali--Winternitz One-time Signature Scheme}
     \item[\wotsprf{}]   \emph{Winternitz One-time Signature Scheme with Pseudorandom Functions}
+    \item[\wotst{}]     \emph{Winternitz One-time Signature Scheme with Tight security}
     \item[\xmss{}]      \emph{eXtended Merkle Signature Scheme}
     \item[\xmssmt{}]    \emph{eXtended Merkle Signature Scheme with Multi-Trees}
-    \item[\xmsst{}]     \emph{eXtended Merkle Signature Scheme with Tight security}
     \item[\xmsst{}]     \emph{eXtended Merkle Signature Scheme with Tight security}
 \end{abbrv}
 
@@ -226,16 +226,16 @@ assinatura de diversas mensagens. Como uma função específica não é necessá
 destas abordagens.
 
 Embora os esquemas iniciais tenham sido construídos sem atenção particular à
-eficiência de modo geral (e.g. o esquema de assinatura única de
+eficiência de modo geral (\emph{e.g.} o esquema de assinatura única de
 Lamport~\cite{lamport1979constructing} assina apenas um \emph{bit}
 de informação em sua forma mais simples), muitos resultados práticos demonstram
 a redução contínua do tempo de verificação da assinatura, tamanho e tempo para
 geração do par de chaves e assinatura, bem como avanços teóricos que
 possibilitam a utilização de funções com requisitos de segurança
 mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
-encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de
+encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} (\emph{i.e.} comprometimento de
 uma chave não implica na segurança de mensagens que utilizaram esta chave
-anteriormente) e da ausência de estado~\cite{Bernstein2015} (i.e. esquema não
+anteriormente) e da ausência de estado~\cite{Bernstein2015} (\emph{i.e.} esquema não
 necessita registrar quais chaves de assinatura única já foram utilizadas).
 
 Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
@@ -322,7 +322,7 @@ possibilita a busca de elementos em conjuntos em tempo reduzido.
 Por outra forma, suponha que deseja-se inverter uma função $f : A
 \longrightarrow B$, a partir de um elemento $b \in B$. Classicamente,
 como não existe informação qualquer sobre a função, é necessário
-calcular $f$ para cada um dos elementos de seu domínio (i.e. $\length{A}$
+calcular $f$ para cada um dos elementos de seu domínio (\emph{i.e.} $\length{A}$
 vezes). Entretanto, Grover permite que esta busca seja feita em
 $\length{A}^{\frac{1}{2}}$ operações. Assim, um algoritmo criptográfico simétrico
 que toma o lugar de $f$, neste exemplo, precisa de parâmetros de segurança
@@ -539,7 +539,7 @@ representa a quantidade de números relativamente primos a $x$.
       aleatoriamente, suficientemente grandes e de tamanhos similares. Compute
         $n = p q$ e $\phi(n) = (p - 1) (q - 1)$. Selecione um número aleatório
         $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
-        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), i.e.
+        estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$), \emph{i.e.}
         a inversa multiplicativa modular de $e$. Finalmente, $\mathcal{S}_k =
         d$ e $\mathcal{P}_k = (n, e)$.
 
@@ -576,7 +576,7 @@ informações quaisquer sobre seu texto plano
 correspondente~\cite{Goldwasser:1982:PEA:800070.802212}. Observe, por exemplo,
 que não existe qualquer fator aleatório na codificação da mensagem,
 caracterizando-a como determinística e habilitando uma entidade
-maliciosa a aplicar um ataque de texto plano escolhido, i.e. a codificação
+maliciosa a aplicar um ataque de texto plano escolhido, \emph{i.e.} a codificação
 de múltiplas mensagens a fim de descobrir informações sobre o algoritmo
 baseado em semelhanças entre as mensagens cifradas, portanto semanticamente
 inseguro. Este e outros ataques~\cite{Boneh99twentyyears} são mitigados com
@@ -628,7 +628,7 @@ criando funções com várias aplicabilidades distintas. Funções de
 resumo simples contêm apenas os três primeiros itens, e são utilizadas em
 vários âmbitos, em especial na estrutura de dados chamada de tabela de
 espalhamento. Por outro lado, é imposto para uma função de mão única que
-o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, i.e. o item (iv)
+o cálculo de $\hh{}^{-1}$ seja computacionalmente inviável, \emph{i.e.} o item (iv)
 seja respeitado. Por fim, funções resistentes à segunda pré-imagem e/ou colisões
 são definidas como \emph{funções de resumo criptográfico}, adequadas para
 utilização no contexto de segurança da informação.
@@ -685,15 +685,15 @@ prática, assume-se que a segunda implica a primeira resistência
 \cite[9.20]{Menezes:1996:HAC:548089}.
 
 Enumeram-se algumas aplicações comuns para estas funções: a verificação da
-integridade de um arquivo, i.e. determinar se mudanças neste foram feitas ao
+integridade de um arquivo, \emph{i.e.} determinar se mudanças neste foram feitas ao
 longo de uma transmissão, ou qualquer outro evento; a fim de evitar o
 armazenamento de senhas em texto plano, é possível manter apenas o resumo
 criptográfico destas, e no momento da autenticação do usuário perante o
 serviço, comparar apenas estes resumos\footnote{É possível armazenar tabelas de
 resumos pré-computados a fim de atacar serviços que não empregam uma maneira
-mais elaborada de autenticação (i.e. um valor pseudoaleatório concatenado ao
+mais elaborada de autenticação (\emph{i.e.} um valor pseudoaleatório concatenado ao
 resumo criptográfico da senha do usuário).}; resumos criptográficos são
-comumente empregados como identificadores únicos para um arquivo (e.g.
+comumente empregados como identificadores únicos para um arquivo (\emph{e.g.}
 \emph{commits} em um sistema de controle de versões); entre outras aplicações,
 como a geração de números pseudoaleatórios.
 
@@ -833,7 +833,7 @@ onde $r$ tem um valor padrão de $1600 - c$. Assim,
   \textsc{Keccak}[c] = \textsc{Keccak}[1600 - c, c].
 \end{equation}
 Finalmente, as funções padronizadas em~\cite{Dworkin2015} como a família SHA-3
-são definições de \textsc{Keccak} com parâmetros fixos, e.g.
+são definições de \textsc{Keccak} com parâmetros fixos, \emph{e.g.}
 \begin{equation}
   \text{SHA3-}256(m) = \textsc{Keccak}[512](m \concat 01, 256).
 \end{equation}
@@ -844,7 +844,7 @@ são definições de \textsc{Keccak} com parâmetros fixos, e.g.
 Um esquema de assinatura digital é uma construção matemática que habilita a
 demonstração de certas propriedades sobre mensagens assinadas: nomeadamente, a
 autenticação do remetente, onde esta entidade pode ser facilmente identificada
-como a emissora da assinatura digital; a integridade da mensagem, i.e. a
+como a emissora da assinatura digital; a integridade da mensagem, \emph{i.e.} a
 certeza de que esta não foi modificada ao ser transmitida por um canal
 possivelmente inseguro; e o não-repúdio do remetente, onde não é possível negar
 que uma mensagem foi assinada e enviada, após este fato.
@@ -1240,7 +1240,7 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
   \item[] \emph{Geração de chaves.} Defina $X = (x_{t - 1}, \dots, x_0)
       \stackrel{\$}{\longleftarrow} \binwds{m}$, e adicione $k$ para
       obter a chave privada. Portanto, $\sk{} = (k, x_{t - 1}, \dots, x_0)$.
-      Aplique $f$ em todos os elementos aleatórios para obter a chave pública, i.e.
+      Aplique $f$ em todos os elementos aleatórios para obter a chave pública, \emph{i.e.}
       $\pk{} = (k, f(x_{t - 1}), \dots, f(x_0))$, ou $\pk{} = (k, y_{t - 1}, \dots, y_0)$.
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$, calcule o seu
@@ -1300,7 +1300,7 @@ A escolha de $r$ não é diretamente discutida, visto que acredita-se que uma fu
     \label{fig:7}
 \end{figure}
 
-É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, e.g. $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo \horst{} é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na Seção~\ref{section:merkle}, a fim de reduzir substancialmente o tamanho de $\pk{}$.
+É possível visualizar parte deste processo na Figura~\ref{fig:7}. Note que uma conversão de palavras binárias para inteiros está implícita no diagrama, como setas com preenchimento irregular, e que elementos $d_i$ podem ter valores iguais, \emph{e.g.} $(d_{0})_{10} = (d_{i-1})_{10} = l$. Percebe-se, a partir da descrição dos algoritmos, que o tamanho do par de chaves é proibitivo para aplicações práticas. Para tal, o algoritmo \horst{} é proposto em~\cite{Bernstein2015}, cuja definição faz uso das estruturas explicadas na Seção~\ref{section:merkle}, a fim de reduzir substancialmente o tamanho de $\pk{}$.
 
 \section{Esquemas baseados em árvores de Merkle}
 \label{section:merkle}
@@ -1381,7 +1381,7 @@ descaracterizando a validade dos dados atrelados a esta.
 
 Para calcular nodos de maneira eficiente, não é necessário armazenar
 $T$ inteiramente. Considere a subrotina $\textsc{Leafcalc}(k), 0 \leq k \leq 2^{H} - 1$,
-que retorna o conteúdo da $k$-ésima folha, i.e. $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
+que retorna o conteúdo da $k$-ésima folha, \emph{i.e.} $\hash{\textsc{Ots}^{k}_{\pk{}}}$,
 e um nodo $T_{\cdot, \cdot}$ com a rotina $height()$, que retorna sua altura em $T$.
 O algoritmo $\textsc{Treehash}_h$, munido de uma pilha \textbf{S} usual
 com as operações $\mathbf{S}.pop()$, $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$
@@ -1522,7 +1522,7 @@ Outrossim, nota-se que o tamanho da chave pública é extremamente proibitivo e 
 
 Note que uma árvore de altura razoável para utilização em aplicações práticas tem seu armazenamento total impossibilitado na maioria absoluta dos dispositivos alvo, em vista da quantidade excessiva de nodos. A fim de reduzir este ônus, estruturas virtuais são empregadas, onde apenas apenas partes relevantes da árvore de Merkle em uso estão acomodadas em memória. Entretanto, é necessário que quaisquer nodos possam ser autenticados de maneira modesta, levando em conta restrições de processamento e armazenamento. Nesta fronte, um problema de travessia entre os nodos da árvore de Merkle deve ser resolvido, e a utilização de algoritmos otimizados~\cite{Buchmann:2008:MTT:1473109.1473114} é crucial na execução de alguns esquemas, visto que a extensão das árvores de assinaturas é um fator desejável na criação de novos esquemas.
 
-Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a restrição implícita de ser resistente à colisões, notoriamente o requisito de segurança mais explorado no contexto de criptoanálise aplicada sobre funções de resumo criptográfico (e.g. colisões encontradas em várias funções baseadas na estrutura Merkle-D\aa{}mgard). Assim, é razoável construir esquemas com menos requisitos, tornando-os naturalmente mais seguros.
+Finalmente, observa-se que a função $\hh{}$ utilizada neste esquema tem a restrição implícita de ser resistente à colisões, notoriamente o requisito de segurança mais explorado no contexto de criptoanálise aplicada sobre funções de resumo criptográfico (\emph{e.g.} colisões encontradas em várias funções baseadas na estrutura Merkle-D\aa{}mgard). Assim, é razoável construir esquemas com menos requisitos, tornando-os naturalmente mais seguros.
 
 Um esquema baseado em árvores de Merkle que necessita apenas de resistência à segunda pré-imagem em todos os seus componentes, chamado de \sprmss{}, é proposto em~\cite{Dahmen:2008:DSO:1473109.1473117}. Consiste na reestruturação das folhas da árvore, onde o resumo da concatenação dos elementos de cada chave pública originalmente calculado é substituído por uma reorganização destes em uma árvore possivelmente desbalanceada. Posteriormente, máscaras de \emph{bits} aleatórias são aplicadas nestes elementos, e também em cada criação de nodo na árvore de Merkle. Esta construção será descrita formalmente junto ao esquema a seguir.
 
@@ -1546,7 +1546,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 
 \begin{enumerate}
 
-  \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, i.e. $\pk{} = (T_{H,0}, \mathbf{r})$.
+  \item[] \emph{Geração de chaves.} Tome uma semente $s \stackrel{\$}{\longleftarrow} \binwds{m}$ e uma função de resumo $h_k \stackrel{\$}{\longleftarrow} \hh{}_m$. Gere o conjunto de máscaras $\mathbf{r} = (r_0, \dots, r_{H + \lceil \log_{2} t \rceil - 1}) \stackrel{\$}{\longleftarrow} \binwds{2m}$. Para gerar as chaves privadas das instâncias de esquemas de assinatura única, defina $\textsc{Ots}_{\sk{}}^{i} = \textsc{Gen}_t(f_s(i)), \forall i \in \{0, \dots, 2^H - 1\}$. A árvore $T$ é construída utilizando a compressão de $\textsc{Ots}_{\pk{}}^{i}$ supracitada, bem como o processo usual para o cálculo de resumos intermediários. Finalmente, a chave privada deve guardar o estado do esquema, que pode ser representado como o índice da primeira folha não utilizada. Portanto, $\sk{} = (s, 0)$, e naturalmente, a chave pública deve conter as máscaras utilizadas em $T$, \emph{i.e.} $\pk{} = (T_{H,0}, \mathbf{r})$.
 
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira muito similar a esquemas de Merkle clássicos. Para uma mensagem $M$, um resumo $d = h_k(M)$, e um índice $j$
   não utilizado anteriormente, calcula-se $\textsc{Ots}_\sigma^{j}$ a partir de $d$. O caminho de autenticação \textsc{Auth} é construído com o auxílio de algoritmos de travessia. Assim, $\sigma = (j, \textsc{Ots}_\sigma^{j}, \textsc{Auth})$.
@@ -1555,7 +1555,7 @@ O conteúdo das folhas, originalmente o resumo criptográfico simples de $\texts
 
 \end{enumerate}
 
-O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \wotsplus{} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, e.g. a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema.
+O esquema descrito tem estrutura similar à variante em processo de padronização pela IETF, que faz uso de \wotsplus{} em suas folhas. Este esquema também conta com outros arcabouços que permitem a resistência a ataques específicos, \emph{e.g.} a associação da assinatura com o usuário e a posição na árvore impede ataques que almejam forjar assinaturas para um grande número de instâncias de esquemas de assinatura única~\cite[9.1]{irtf-cfrg-xmss-hash-based-signatures-12}. Entretanto, seu funcionamento geral é similar a esquemas clássicos, e o gerenciamento de estado é mantido. As otimizações apresentadas futuramente são implementadas e testadas principalmente neste esquema.
 
 \subsection{\xmssmt{}}
 \label{subsection:xmssmt}
@@ -1609,7 +1609,7 @@ Naturalmente, este recurso é aplicado ao esquema \xmss{} a fim de produzir a va
 
 \subsubsection{Travessia de árvores de Merkle BDS}
 
-O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, i.e. para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas:
+O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro $K \in \mathbb{N}^{*} \setminus \{1\}, \sfrac{H - K}{2} \equiv 0 \pmod{2}$ que representa uma compensação entre armazenamento e tempo de execução do algoritmo, permitindo que uma execução completa de $\textsc{Treehash}$, \emph{i.e.} para todas as $2^H - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\textsc{BDS}}$ é composto das seguintes estruturas:
 
 \begin{enumerate}[label=(\roman*)]
 
@@ -1621,12 +1621,12 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um í
 
     \item \textbf{S}, pilha munida das operações usuais;
 
-    \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, i.e. várias instâncias do algoritmo~\ref{alg:3}.
+    \item $\{\textsc{Treehash}_{h} : h \in 0, \dots, H - 3\}$, \emph{i.e.} várias instâncias do algoritmo~\ref{alg:3}.
 \end{enumerate}
 
 As listas são munidas da operação $remove(\cdot)$, cujo argumento representa um índice válido de acordo com o tamanho da lista. As instâncias $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo \textsc{Leaf} no Algoritmo~\ref{alg:3}, e podem ser executadas totalmente por $update()$. Ademais, são munidas da função $height()$, que retorna a menor altura entre nodos localizados nesta instância. Em casos anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta instância não tiver sido inicializada ou já tiver sido terminada, $\textsc{Treehash}_{h} = \infty$.
 
-O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, i.e. $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
+O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe primeiramente o caminho de autenticação para a folha $T_{0, 0}$, \emph{i.e.} $\textsc{Auth} = (T_{0, 1}, \dots, T_{H -1, 1})$. As instâncias $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2 \leq k \leq 0$. Execuções posteriores do algoritmo mantém $\textsc{State}_{\textsc{BDS}}$ preparado anteriormente.
 
 O cálculo de nodos intermediários depende se este está à esquerda ou à direita. A descrição detalhada do  BDS, no Algoritmo~\ref{alg:4}, contempla ambos os casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos nodos. Nodos à direita são necessários para alturas até $\tau - 1$, e um nodo à esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$, e do contrário, $\tau = max(\{2^h \mid j + 1 : h \in 1, \dots, H\})$.
 
@@ -1700,7 +1700,7 @@ Adicionalmente, como mencionado na Subseção~\ref{subsection:wots}, o esquema \
 \section{Visão temporal}
 \label{section:timeline}
 
-Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema de Lamport também fazem parte de publicações com destaque, e.g.~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
+Vários esquemas foram citados ao longo das seções anteriores, provendo uma contextualização teórica para o estudo aprofundado de variantes seletas. Deste modo, é razoável visualizar de maneira cronológica a evolução do estudo de assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela pesquisa em~\cite{lamport1979constructing,Merkle:1979:SAP:909000}, definindo os esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é publicado em~\cite{Merkle:1989:CDS:118209.118230}. Resultados teóricos e otimizações para o esquema de Lamport também fazem parte de publicações com destaque, \emph{e.g.}~\cite{Bleichenbacher:1994:DAG:646759.705830}, que formaliza uma representação de esquemas de assinatura única como grafos acíclicos dirigidos.
 
 \begin{figure}[ht]
   \centering
@@ -1756,7 +1756,7 @@ Analogamente, o valor mínimo é definido como
 \begin{equation}
 c_{min} = \sum_{i = t - t_1}^{t - 1} (2^w - 1 - 2^w - 1) = 0 \iff \forall b \in \mathcal{B}_1, \; b = 2^w - 1.
 \end{equation}
-A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, i.e. $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$:
+A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessários para representar qualquer valor de $c$. Defina este valor como $n_c = \lceil \log_2 c_{max} \rceil = \lceil \log_2 (t_1 \times 2^w - 1) \rceil$. Note que o número de \emph{bits} reservados para este valor na definição do esquema é diretamente relacionado com o valor de $t_2$, \emph{i.e.} $t_2w$. Observe que, de acordo com as definições de $t_1$ e $t_2$, sempre é verdade que $n_c \leq t_2w$:
 \begin{align}
 \begin{split}
     n_c &\leq t_2 w \\
@@ -1870,7 +1870,7 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \caption{\emph{Bits} inutilizados em $\mathcal{B}_2$ para vários valores de $w$ e $m$.}
 \end{table}
 
-Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (i.e. \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
+Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (\emph{i.e.} \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
 \begin{equation}
     c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2w} - 2^{n_c}.
 \end{equation}
@@ -1954,7 +1954,7 @@ Então, para garantir que estes eventos aconteçam com altíssima probabilidade,
     \caption{Quantidades de experimentos para que modificações de $\mathcal{B}_{1}^{i}$ sejam efetivas.}
 \end{figure}
 
-Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado. A maximização ou minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável nos \emph{bits} mais significativos de cada elemento da tupla, i.e. torna-se mais comum que estes possuam valores antecipáveis. Isto é possivelmente explorável através de criptoanálise diferencial aplicada sobre \emph{bits} fixos na construção Merkle-Damgård, posta em prática recentemente através da primeira colisão de resumos criptográficos produzidos pelo algoritmo SHA-1~\cite{Stevens2017}. Portanto, recomenda-se a utilização de funções seguras na escolha de $\hh{}$, como demonstrado em~\cite{Hlsing2013}.
+Como a modificação não afeta mecanismos internos do esquema, mostra-se necessário discutir as consequências da concatenação de um dado $\lambda_k$ à mensagem original, e do processo de busca por este dado. A maximização ou minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável nos \emph{bits} mais significativos de cada elemento da tupla, \emph{i.e.} torna-se mais comum que estes possuam valores antecipáveis. Isto é possivelmente explorável através de criptoanálise diferencial aplicada sobre \emph{bits} fixos na construção Merkle-Damgård, posta em prática recentemente através da primeira colisão de resumos criptográficos produzidos pelo algoritmo SHA-1~\cite{Stevens2017}. Portanto, recomenda-se a utilização de funções seguras na escolha de $\hh{}$, como demonstrado em~\cite{Hlsing2013}.
 
 \section{Resultados}
 \label{section:results}
@@ -2042,12 +2042,12 @@ Os valores nas Tabelas~\ref{tab:2} e~\ref{tab:3} consistem da média aritmética
 
 Considerando a maximização de $\mu(\mathcal{B}_1)$, é possível perceber uma redução de aproximadamente $2^w$ iterações de $f$ para o esquema \textsc{Wots-b}, condizente com o número de \emph{bits} inutilizados apresentados na Tabela~\ref{tab:1}. No caso de \textsc{Wots-r}, observam-se reduções de até $25\%$ para $w = 4$, $33\%$ para $w = 8$ e $42\%$ para $w = 16$. Aplicando ambas as otimizações, o esquema \textsc{Wots-br} resulta em melhorias de até $28\%$, $39\%$ e $52\%$, respectivamente. No caso da minimização, têm-se refinamentos de $28\%$, $35\%$ e $47\%$.
 
-Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, e.g. com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores excedentes para $R$.
+Note que a redução no cômputo destas iterações é diretamente traduzida na etapa complementar, ou seja, na maximização de $\mu(\mathcal{B}_1)$, existirá um aumento do número de iterações na geração da assinatura, proporcional à otimização obtida no passo de verificação. O mesmo conceito aplica-se para a minimização. Ademais, é preciso considerar a busca de $\lambda_k$ junto aos custos da geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao parâmetro $w$ são indesejáveis quando este é reduzido, \emph{e.g.} com $w = 4$, o valor $R = 200$ torna-se uma fração substancial do custo total para a geração da assinatura. Ainda assim, casos de uso onde mostra-se necessário otimizar completamente o passo de verificação podem fazer uso de valores excedentes para $R$.
 
 \subsection{Impacto em esquemas baseados em árvores de Merkle}
 \label{subsection:impact}
 
-Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12}, é modificada de acordo.
+Evidentemente, as otimizações propostas nos esquemas \textsc{Wots-b} e \textsc{Wots-r} podem ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente, qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de \wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{} definida em~\cite{irtf-cfrg-xmss-hash-based-signatures-12} e explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
 
 A Tabela~\ref{tab:4} apresenta os resultados obtidos, na forma da média do tempo de execução de $2^{14}$ instâncias dos esquemas \xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é considerado visto que, para este parâmetro, a etapa de geração de chaves para o esquema \xmss{} torna-se demasiado prolongada. Novamente, as otimizações da soma de verificação não são consideradas quando deseja-se otimizar a geração de assinaturas.
 
