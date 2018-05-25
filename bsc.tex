@@ -233,9 +233,8 @@ a redução contínua do tempo de verificação da assinatura, tamanho e tempo p
 geração do par de chaves e assinatura, bem como avanços teóricos que
 possibilitam a utilização de funções com requisitos de segurança
 mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
-encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011} e da ausência do gerenciamento
-de estado~\cite{Bernstein2015} (\emph{i.e.} esquema não
-necessita registrar quais chaves de assinatura única já foram utilizadas).
+encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011}
+e da ausência do gerenciamento de estado~\cite{Bernstein2015}.
 
 Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
 apresenta-se uma customização para o esquema na forma de um parâmetro extra,
@@ -277,9 +276,11 @@ Neste capítulo, são explicados os conceitos necessários
 a fim de entender inteiramente um esquema de assinatura digital, bem como outros
 algoritmos discutidos ao longo do trabalho. A organização das seções assemelha-se
 à seguida em~\cite{Gathen:2015:CRY:2857293}. Os conceitos de criptografia simétrica
-e assimétrica são apresentados, e uma simples comparação entre os mesmos é realizada,
+e assimétrica são apresentados na Seção~\ref{section:crypto}, e uma simples comparação entre os mesmos é realizada,
 bem como exemplos apresentados na forma dos algoritmos AES e RSA, amplamente
-padronizados e implementados em diversas formas de comunicação segura. Também é
+padronizados e implementados em diversas formas de comunicação segura, nas Subseções~\ref{subsection:aes} e~\ref{subsection:rsa}. Funções de resumo criptográfico, utilizadas
+
+Também é
 discutida a função de resumo criptográfico, utilizada para que o processo de assinatura
 seja menos custoso e mais seguro, e um exemplo de construção teórica por trás
 deste tipo de função; e, por fim, a definição formal de um esquema de assinatura
