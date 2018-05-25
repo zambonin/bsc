@@ -1075,13 +1075,13 @@ impossível.
  	\path[arrowline, postaction={decorate}] (fvt1.east |- yt1)      --      (yt1);
     \path[edge] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
   \end{tikzpicture}
-  \caption{Etapas de assinatura e verificação do \textsc{Wots},
+  \caption{Etapas de assinatura e verificação do \wots{},
     para $0 \leq i \leq t - 1$.}
   \label{fig:5}
 \end{figure}
 
 Possivelmente o esquema de assinatura única mais conhecido, diversas variantes do
-\textsc{Wots} foram propostas com o intuito de reduzir requisitos de segurança,
+\wots{} foram propostas com o intuito de reduzir requisitos de segurança,
 e tamanhos de chaves e assinaturas, bem como a computação menos onerosa para os
 três algoritmos em um esquema de assinatura digital. De acordo
 com~\cite{LafrancePhilip2017}, é necessário considerar várias situações em que
@@ -1091,7 +1091,7 @@ chaves, a possibilidade de sucesso aumenta de acordo com o subconjunto de
 instâncias almejado. Um esquema que combate especificamente este problema,
 chamado de \textsc{Wots-t}, pode ser consultado em~\cite{Hulsing:2016:MMA:3081852.3081871}.
 
-Ademais, encontra-se em processo de padronização pela IETF outro esquema que combate este tipo de ataque, chamado \textsc{Wots-lm}, publicado
+Ademais, encontra-se em processo de padronização pela IETF outro esquema que combate este tipo de ataque, chamado \wotslm{}, publicado
 originalmente como uma patente estadunidense~\cite{lm-patent} --- desta maneira
 buscando trazer a assinatura digital baseada em funções de resumo criptográfico
 para aplicações práticas. Em especial, para resolver o problema supracitado, os
@@ -2104,7 +2104,9 @@ Os experimentos foram realizados utilizando um computador com as seguintes espec
 \chapter{Conclusão}
 \label{chapter:conclusion}
 
-Neste trabalho, esquemas de assinatura digital baseados em funções de resumo criptográfico foram discutidos, a fim de prover um embasamento teórico para a proposta apresentada. Vários conceitos relevantes para a área são apresentados, como a estrutura de dados chamada de árvore de Merkle, que habilita a criação de esquemas de assinatura digital convencionais com múltiplas instâncias de assinaturas únicas. O resultado principal, consistindo na otimização da família de esquemas de assinatura digital única Winternitz, Em especial, é introduzido um parâmetro de compensação que habilita o deslocamento do cômputo de iterações de $f$ da geração da assinatura para a verificação, e vice-versa.
+Neste trabalho, esquemas de assinatura digital baseados em funções de resumo criptográfico foram discutidos, a fim de prover um embasamento teórico para o desenvolvimento de otimizações sobre estes esquemas. Vários conceitos relevantes para a área são apresentados, como a estrutura de dados chamada de árvore de Merkle, que habilita a criação de esquemas de assinatura digital convencionais com múltiplas instâncias de assinaturas únicas, o encadeamento de árvores a fim de aumentar o número de mensagens passíveis de assinatura, e o gerenciamento sobre estas árvores quando seu armazenamento total torna-se impraticável.
+
+O resultado principal, consistindo na otimização da família de esquemas de assinatura digital única Winternitz, introduz um parâmetro de compensação que habilita o deslocamento do cômputo de iterações de $f$ da geração da assinatura para a verificação, e vice-versa. Para fundamentar este trabalho, experimentos foram realizados em esquemas do estado da arte, com resultados positivos.
 
 \section{Trabalhos futuros}
 \label{section:future}
