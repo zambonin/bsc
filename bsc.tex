@@ -247,21 +247,9 @@ Ambientes nos quais existem limitações de processamento para uma destas etapas
 como redes de sensores sem fio, podem configurar instâncias do esquema 
 Winternitz a fim de otimizar sua comunicação segura, aumentando o tempo de
 execução do cômputo para a geração de assinaturas, geralmente feita em
-dispositivos com poder de processamento amplificado.
-
-Ambientes onde é desejável que a verificação de assinaturas seja acelerada,
-visto que a geração destas é rara, ou realizada em um dispositivo com poder de
-processamento amplificado, 
-
-% This becomes interesting in settings where there are hard performance
-% requirements for some steps but not for others. E.g., if you need realtime
-% verification with small signatures, but do not care about signing speed at all,
-% you want to set w pretty high and then use your trade-off to shift computation
-% time to the signature generation.
-
-Ademais, as
-consequências desta otimização são verificadas em esquemas mais complexos,
-baseados em árvores de Merkle. 
+dispositivos com poder de processamento amplificado. Ademais, as consequências
+desta otimização são verificadas em esquemas mais complexos, baseados em árvores
+de Merkle, que também podem ser aplicados a meios com restrições similares.
 
 Este trabalho é uma versão expandida,
 e portanto didática, do artigo a ser publicado como~\cite{Peri1806:Tuning}.
@@ -293,6 +281,8 @@ verificação de uma assinatura.
 
 \section{Trabalhos relacionados}
 \label{section:related}
+
+
 
 \chapter{Primitivas criptográficas}
 \label{chapter:primitives}
