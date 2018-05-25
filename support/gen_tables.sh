@@ -5,7 +5,7 @@ for w in 4 8 16 ; do
   printf "\\multirow{8}{*}{%d} " "$w"
   for R in 1 25 200 3500 ; do
   printf "& \\multirow{2}{*}{%d}\n" "$R"
-    parallel -n1 python "winternitz_exp.py" $w sha256 $R :::                  \
+    parallel -n1 python "wint_exp.py" $w sha256 $R :::                  \
       $(head -c 1024 /dev/urandom | xxd -p | paste -sd '') "$(seq 1 ${1:-8})" \
       | awk '{
           b1_s += $4;    b2_s += $5;   b_s += $6;
@@ -24,3 +24,9 @@ for w in 4 8 16 ; do
         }'
   done
 done
+
+# table with signature data may be generated like this
+# * change val from 0 to 1 << 32 inside choose_h
+# * change more than to less than inside choose_h's conditional
+# * delete unneeded wots-b lines inside this script
+# * fix awk columns (Caesar cipher)
