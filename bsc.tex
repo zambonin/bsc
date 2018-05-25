@@ -236,10 +236,19 @@ mínimos~\cite{Hlsing2013}, garantem o conceito de sigilo
 encaminhado~\cite{Buchmann:2011:XPF:2184003.2184011}
 e da ausência do gerenciamento de estado~\cite{Bernstein2015}.
 
-Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, e
-apresenta-se uma customização para o esquema na forma de um parâmetro extra,
-que habilita a redução da complexidade de verificação de assinatura em troca
-do aumento desta na geração da assinatura, ou vice-versa. 
+Neste trabalho, foca-se no esquema de assinatura digital única Winternitz, 
+no qual o resumo criptográfico da mensagem a ser assinada define diretamente
+a complexidade dos passos de geração e verificação da assinatura. De acordo
+com este comportamento, apresenta-se uma customização para o esquema na forma
+de um parâmetro adicional, que habilita a redução do cômputo de verificação de
+assinatura em troca do aumento deste na geração da assinatura, ou vice-versa.
+
+Em ambientes onde é desejável que a verificação de assinaturas seja acelerada,
+mas a geração destas é rara, ou realizada em um dispositivo com poder de
+processamento amplificado
+
+A aplicação de uma
+função de resumo criptográfico à mensagem desejada decide 
 % This becomes interesting in settings where there are hard performance
 % requirements for some steps but not for others. E.g., if you need realtime
 % verification with small signatures, but do not care about signing speed at all,
