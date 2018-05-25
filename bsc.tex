@@ -191,7 +191,7 @@ Entretanto, em computadores quânticos, algoritmos dessa forma já existem -- em
 especial, o algoritmo de Shor~\cite{Shor:1997:PAP:264393.264406} --
 efetivamente tornando estes esquemas clássicos inseguros neste novo contexto.
 
-Para combater esta situação, a \emph{criptografia pós-quântica} encarrega-se de
+Para combater esta situação, a criptografia pós-quântica encarrega-se de
 buscar algoritmos criptográficos cuja segurança é considerada ``suficiente'',
 mesmo utilizando-se de um computador quântico para ataques especializados. Esta
 área conta com diversas abordagens: a criptografia baseada em reticulados,
@@ -214,7 +214,7 @@ comuns em relação a outras abordagens pós-quânticas, e tamanhos de chaves e
 assinaturas não são proibitivos.
 
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
-consistem da utilização de um esquema de assinatura digital \emph{única}, onde
+consistem da utilização de um esquema de assinatura digital única, onde
 apenas uma mensagem pode ser assinada de modo seguro, ou sua combinação com a
 estrutura de dados chamada de árvore de Merkle~\cite{Merkle:1989:CDS:118209.118230},
 que abriga pares de chaves de diversas instâncias
@@ -294,7 +294,10 @@ número de \emph{bits} inutilizados na assinatura, a fim de que estes não
 sejam verificados de maneira supérflua.
 
 Neste trabalho, a estrutura do esquema base não é modificada, e um
-pré-processamento da mensagem é feito alternativamente
+pré-processamento da mensagem é feito alternativamente, permitindo a
+escalabilidade de instâncias de esquemas Winternitz com quaisquer
+conjuntos de parâmetros, introduzindo apenas um pequeno custo no
+processo de assinatura da mensagem.
 
 \chapter{Primitivas criptográficas}
 \label{chapter:primitives}
