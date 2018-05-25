@@ -26,6 +26,7 @@
 \newcommand{\wotsprf}{\textsc{Wots-prf}}
 \newcommand{\wotsplus}{\textsc{Wots+}}
 \newcommand{\wotslm}{\textsc{Wots-lm}}
+\newcommand{\wotst}{\textsc{Wots-t}}
 \newcommand{\hors}{\textsc{Hors}}
 \newcommand{\horst}{\textsc{Horst}}
 \newcommand{\mss}{\textsc{Mss}}
@@ -1089,7 +1090,7 @@ entidades maliciosas podem atacar instâncias destes esquemas. Nomeadamente, par
 um ataque que consiste em ameaçar múltiplos usuários, cada qual com seu par de
 chaves, a possibilidade de sucesso aumenta de acordo com o subconjunto de
 instâncias almejado. Um esquema que combate especificamente este problema,
-chamado de \textsc{Wots-t}, pode ser consultado em~\cite{Hulsing:2016:MMA:3081852.3081871}.
+chamado de \wotst{}, pode ser consultado em~\cite{Hulsing:2016:MMA:3081852.3081871}.
 
 Ademais, encontra-se em processo de padronização pela IETF outro esquema que combate este tipo de ataque, chamado \wotslm{}, publicado
 originalmente como uma patente estadunidense~\cite{lm-patent} --- desta maneira
@@ -1111,7 +1112,7 @@ necessidade da resistência à colisões de $f$ e $\hh{}$.
 
 Defina os parâmetros $m, w$ e a partir destes, $t_1, t_2 \text{ e } t$, bem
 como a função de resumo criptográfico $\fhash{m}$ de maneira análoga ao esquema
-original. A família de funções que o \textsc{Wots+} utiliza é definida por
+original. A família de funções que o \wotsplus{} utiliza é definida por
 $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, ou seja, funções de mão única sem compressão, e
 $\mathcal{K}_m$ é interpretado como o espaço de chaves. A partir desta família,
@@ -1189,7 +1190,7 @@ na Figura~\ref{fig:6}, é definido recursivamente como
         h_i &= E_{g(h_{i-1})}(x_i) \oplus x_i, 1 \leq i \leq t.
     \end{split}
 \end{equation}
-Utilizando este método, é possível integrar o AES junto ao \textsc{Wots+}, como
+Utilizando este método, é possível integrar o AES junto ao \wotsplus{}, como
 forma de executar iterações para criar e verificar a assinatura, conforme
 sugerido em~\cite[4.1]{Hlsing2013}, aproveitando implementações em
 hardware de rotinas relacionadas,
@@ -1407,7 +1408,7 @@ extensas, abordada na Subseção~\ref{subsection:xmss}.
 O primeiro esquema de assinatura digital baseado em árvores de Merkle
 \cite{Merkle:1989:CDS:118209.118230} recomenda a assinatura de até $2^{20}$
 mensagens. Informalmente, os dados inseridos em suas folhas são chaves públicas
-de diferentes instâncias de um esquema de assinatura única, como \textsc{Wots}.
+de diferentes instâncias de um esquema de assinatura única, como \wots{}.
 Assim, ao construir a árvore de Merkle, a raiz será a chave pública deste
 esquema, que validará todas as folhas da árvore através de um caminho de
 autenticação. A chave privada pode ser descrita como o conjunto de chaves
@@ -1523,11 +1524,11 @@ Um esquema baseado em árvores de Merkle que necessita apenas de resistência à
 
 A redução dos requisitos de segurança, bem como a presença do sigilo encaminhado, são as principais características do esquema \xmss{}. Estes recursos foram explorados em~\cite{Buchmann:2011:XPF:2184003.2184011}, e culminam em uma forma mais eficiente de aplicar as ideias impostas em \sprmss{}, junto à utilização de um gerador de números pseudoaleatórios de funcionamento particular. De forma complementar, requisitos de armazenamento de assinaturas são diminuídos através do uso de algoritmos de travessia.
 
-A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de \wotsprf{}, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \textsc{Wots+}, cuja prova de segurança não contém erros conhecidos.
+A descrição original deste esquema utiliza instâncias de um esquema de assinatura única baseado em Winternitz chamado de \wotsprf{}, criado com o intuito de possuir requisitos de segurança mínimos a fim de manter a necessidade de uma função de resumo apenas resistente à segunda pré-imagem. Entretanto, de acordo com~\cite{LafrancePhilip2017}, a prova de segurança para este esquema apresenta erros. Portanto, a descrição a seguir tomará o esquema de assinatura única utilizado como o \wotsplus{}, cuja prova de segurança não contém erros conhecidos.
 
 Assim, tome um parâmetro de segurança $m$ e o parâmetro de Winternitz $w$, a família de funções $\mathcal{F}_m : \{f_k : \binwds{m} \longrightarrow \binwds{m} \mid k \in
 \mathcal{K}_m\}$, uma árvore de Merkle $T$ com altura $H$ e uma família de funções de resumo $\hh{}_m : \{h_k : \binwds{2m} \longrightarrow \binwds{m} \mid k \in
-\mathcal{K}_m\}$. Um gerador de números pseudoaleatórios \textsc{Gen} é construído a partir de $f$ a fim de assegurar sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura única \textsc{Ots} é definido como \textsc{Wots+}.
+\mathcal{K}_m\}$. Um gerador de números pseudoaleatórios \textsc{Gen} é construído a partir de $f$ a fim de assegurar sigilo encaminhado, com parâmetros $a \in \mathbb{N}, b \in \binwds{m}$, onde $\textsc{Gen}_{a}(b) = f_a(1) \concat \dots \concat f_a(b)$. O esquema de assinatura única \textsc{Ots} é definido como \wotsplus{}.
 
 Observe que, por conta de sua semelhança com o esquema \sprmss{}, a estrutura da árvore de Merkle é modificada. A função de construção da árvore é remodelada a fim de utilizar máscaras de \emph{bits} $r_i \stackrel{\$}{\longleftarrow} \binwds{2m}$ para cada nível da árvore, ou seja,
 \begin{equation}
