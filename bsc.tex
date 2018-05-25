@@ -1801,8 +1801,15 @@ A partir de $c_{max}$, é possível calcular o número de \emph{bits} necessári
 \end{align}
 Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para acomodar $c$. Portanto, é possível definir o número de \emph{bits} inutilizados como o número natural $n_u = t_2w - n_c$. Para os valores mais comuns de $m$ e praticáveis para $w$, a Tabela~\ref{tab:1} apresenta várias combinações de parâmetros para esquemas da família Winternitz.
 
+Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (\emph{i.e.} \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
+\begin{equation}
+    c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2w} - 2^{n_c}.
+\end{equation}
+A modificação na estrutura da soma de verificação não afeta a segurança do esquema de assinatura digital, visto que o espaço inutilizado na $t_2$-tupla $\mathcal{B}_2$ não possui qualquer aplicação. Assim, este cômputo de iterações de $f$ é deslocado da etapa de verificação de assinaturas para a geração destas, de maneira diretamente proporcional.
+
 \begin{table}[htbp]
     \centering
+    \scriptsize
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
@@ -1833,7 +1840,6 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  512  &  13  &  5   &  18                  \\
     \bottomrule
     \end{tabular}
-    \quad
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
@@ -1864,7 +1870,6 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
                         &  512  &  17  &  5   &                      \\
     \bottomrule
     \end{tabular}
-    \quad
     \begin{tabular}{*{5}{c}}
     \toprule
     $w$ & $m$ & $n_c$ & $n_u$ & $t_2 w$ \\
@@ -1898,12 +1903,6 @@ Isto ocorre pois um número inteiro de palavras em base-$w$ são utilizadas para
     \label{tab:1}
     \caption{\emph{Bits} inutilizados em $\mathcal{B}_2$ para vários valores de $w$ e $m$.}
 \end{table}
-
-Exceto alguns casos anômalos, percebe-se que $w$ e $n_u$ crescem com certa relação. Assim, para maiores valores de $w$, esta otimização trará melhores resultados. Note também que, para execuções altamente improváveis em plataformas cuja ordenação de \emph{bytes} é incomum (\emph{i.e.} \emph{big-endian}), esta estratégia trará retornos reduzidos. Em conclusão, a etapa de geração de assinatura é modificada a fim de alterar o cálculo de $c$. Defina a nova soma de verificação como
-\begin{equation}
-    c^p = c + (2^{n_u} - 1)2^{n_c} = c + 2^{t_2w} - 2^{n_c}.
-\end{equation}
-A modificação na estrutura da soma de verificação não afeta a segurança do esquema de assinatura digital, visto que o espaço inutilizado na $t_2$-tupla $\mathcal{B}_2$ não possui qualquer aplicação. Assim, este cômputo de iterações de $f$ é deslocado da etapa de verificação de assinaturas para a geração destas, de maneira diretamente proporcional.
 
 \section{\wotsr{}}
 \label{section:wotsr}
