@@ -21,9 +21,9 @@
 \grau{Bacharel em Ciência da Computação}
 \local{Florianópolis}
 \data{12}{junho}{2017}
-\orientador[Orientador]{Prof. Dr. Ricardo Felipe Custódio}
-\coorientador[Coorientador]{Prof. Dr. Daniel Panario}
-\coordenador[Coordenador]{Prof. Dr. Rafael Luiz Cancian}
+\orientador[Orientador]{Prof.\ Dr.\ Ricardo Felipe Custódio}
+\coorientador[Coorientador]{Prof.\ Dr.\ Daniel Panario}
+\coordenador[Coordenador]{Prof.\ Dr.\ Rafael Luiz Cancian}
 
 \textoResumo{
   Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
@@ -46,8 +46,8 @@
 }
 \palavrasChave{criptografia, Merkle, assinatura digital, pós-quântico}
 
-\capa
-\folhaderosto
+\capa{}
+\folhaderosto{}
 
 \clearpage
 
@@ -154,15 +154,15 @@ fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
 computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
 uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
 Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
-resolvidos em tempo polinomial \cite{shor1999polynomial}.
+resolvidos em tempo polinomial~\cite{Shor:1997:PAP:264393.264406}.
 
 A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
 criptográficos cuja complexidade independe de problemas futuramente
-solucionáveis em teoria de números. Como visto em \cite{Merkle1990}, um
-criptossistema de chaves públicas pode ser definido de forma independente da
-função de resumo criptográfica utilizada, assim possibilitando a exploração de
-diversas combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
-influenciam na segurança do esquema.
+solucionáveis em teoria de números. Como visto em
+\cite{Merkle:1989:CDS:118209.118230}, um criptossistema de chaves públicas pode
+ser definido de forma independente da função de resumo criptográfica utilizada,
+assim possibilitando a exploração de diversas combinações, cujos elementos
+essenciais (e.g. árvores de Merkle) não influenciam na segurança do esquema.
 
 Neste trabalho, utilizamos funções de resumo criptográficas para a construção
 de esquemas de assinatura digital, considerados seguros se e somente as funções
@@ -174,10 +174,11 @@ tornando os requisitos de segurança mínimos para os esquemas.
 
 \noindent \emph{Objetivo geral.} Apresentar um estudo detalhado sobre esquemas
 de assinatura digital baseados em funções de resumo criptográficas, partindo de
-esquemas de assinatura única \cite{Lamport1979}, observando o refinamento
-destes, até o estado da arte, onde não é necessário saber quantas assinaturas
-foram geradas anteriormente \cite{Bernstein2015}, bem como implementações em
-linguagem de alto nível para a fácil compreensão destes esquemas. \\
+esquemas de assinatura única~\cite{lamport1979constructing}, observando o
+refinamento destes, até o estado da arte, onde não é necessário saber quantas
+assinaturas foram geradas anteriormente~\cite{Bernstein2015}, bem como
+implementações em linguagem de alto nível para a fácil compreensão destes
+esquemas. \\
 
 \noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
 digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
@@ -197,7 +198,8 @@ de códigos etc.) ou algoritmos clássicos (RSA, DSA, ECDSA etc.). \\
 \noindent \emph{Critérios de aceitação.} Estudo e implementação de pelo menos
 dois esquemas de assinatura digital única (Lamport-Diffie, Winternitz),
 a estrutura de dados chamada de árvore de Merkle e um esquema de assinatura
-digital composto da união destes elementos, como o XMSS \cite{Buchmann2011}. \\
+digital composto da união destes elementos, como o
+XMSS~\cite{Buchmann:2011:XPF:2184003.2184011}. \\
 
 \noindent \emph{Entregas do projeto.} Relatórios referentes às disciplinas de
 Trabalho de Conclusão de Curso do INE/UFSC, incluindo monografia completa ao
@@ -371,6 +373,6 @@ distintas em implementações produzidas ou fornecidas.
 \end{figure}
 
 \bibliographystyle{abnt-alf}
-\bibliography{\jobname}
+\bibliography{ref}
 
 \end{document}
