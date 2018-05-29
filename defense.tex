@@ -1,0 +1,413 @@
+\documentclass[12pt]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz, tikz-qtree, multirow, chronology, pgfplots, booktabs}
+
+\usetheme{CambridgeUS}
+\usecolortheme{seagull}
+\setbeamertemplate{title page}[default][shadow=false]
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\usetikzlibrary{positioning, calc, matrix, arrows, decorations.markings}
+
+\title{Otimização de desempenho do esquema de assinatura digital Winternitz}
+\author{Gustavo Zambonin}
+\institute{
+  \includegraphics[scale=0.15]{support/ufsc}    \\ \vspace{-4mm}
+  Universidade Federal de Santa Catarina        \\
+  Departmento de Informática e Estatística      \\ \vspace{2mm}
+  \texttt{gustavo.zambonin@grad.ufsc.br}
+}
+\date{}
+
+\newcommand{\hh}{\mathcal{H}}
+\newcommand{\pk}{\mathcal{P}_k}
+\newcommand{\sk}{\mathcal{S}_k}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1} (#2)}
+\newcommand{\concat}{\, \vert{} \vert{} \,}
+\newcommand{\binwds}[1]{\{0, 1\}^{#1}}
+\newcommand{\length}[1]{\vert{} #1 \vert{}}
+\newcommand{\fhash}[1]{\hh{}: \binwds{*} \longrightarrow{} \binwds{#1}}
+\newcommand{\random}{\stackrel{\$}{\longleftarrow}}
+
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivação}
+  \begin{itemize}
+    \setlength\itemsep{1em}
+    \item Segurança de esquemas de assinatura digital \\
+      baseada em problemas da teoria de números
+    \begin{itemize}
+      \item Insuficiente no âmbito de algoritmos quânticos
+      \item Criptografia pós-quântica é independente destes problemas
+    \end{itemize}
+    \item Funções de mão única são necessárias \\
+      e suficientes para assinatura digital~\cite{Rompel:1990:OFN:100216.100269}
+    \begin{itemize}
+      \item Base teórica de funções de resumo criptográfico
+      \item Construção de esquemas baseados apenas nestas funçõess
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Primitivas criptográficas}
+  \framesubtitle{Função de resumo criptográfico}
+  \begin{equation*}
+    \fhash{n}
+  \end{equation*}
+
+  \begin{figure}
+    \begin{tikzpicture}
+      \node at (-6.5, 0) {entrada $\longrightarrow$};
+      \foreach \sgn in {+, -}
+        \draw plot[domain=1:5] (-\x, {\sgn 1/20*(3+\x*\x)});
+      \foreach \r in {1, 2.3333, ..., 5}
+        \draw (-\r, 0) ellipse[x radius=(\r+.5)/20, y radius=1/20*(3+\r*\r)];
+      \node at (0.25, 0) {$\longrightarrow$ resumo};
+    \end{tikzpicture}
+  \end{figure}
+
+  \begin{itemize}
+    \item SHA-2, SHA-3, BLAKE: $n \in \{224, 256, 384, 512\}$
+    \item Keccak: qualquer $n$
+    \item Resistência à pré-imagem, segunda pré-imagem, colisões
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Primitivas criptográficas}
+  \framesubtitle{Assinatura digital}
+  \begin{itemize}
+    \item Provê autenticação, integridade e não-repúdio
+    \item Baseada em criptografia de chaves públicas
+    \item Tripla de algoritmos probabilísticos
+      de tempo polinomial~\cite{Goldreich:2004:FCV:975541}
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}
+      \node (hm) at (-1.25, 0) {$M$};
+      \node (in) at (0, -2) {$1^n$};
+      \node (sk) at (0, -1) {$\sk{}$};
+      \node (pk) at (4, -1) {$\pk{}$};
+      \node (ds) at (2, 0) {$\sigma$};
+      \node (res) at (5.5, 0) {\scriptsize $\binwds{}$};
+      \node[draw] (sig) at (0, 0) {Sig};
+      \node[draw] (gen) at (2, -2) {Gen};
+      \node[draw] (ver) at (4, 0) {Ver};
+      \draw[-latex] (gen) to (1.25, -1) to (sk);
+      \draw[-latex] (gen) to (2.75, -1) to (pk);
+      \draw[-latex] (sk) -- (sig);
+      \draw[-latex] (hm) -- (sig);
+      \draw[-latex] (sig) -- (ds);
+      \draw[-latex] (ds) -- (ver);
+      \draw[-latex] (pk) -- (ver);
+      \draw[-latex] (ver) -- (res);
+      \draw[-latex] (in) -- (gen);
+    \end{tikzpicture}
+  \end{figure}
+  \begin{itemize}
+    \item Existem esquemas onde o par de chaves é de uso único
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquema de assinatura única Winternitz}
+  \framesubtitle{Etapa de geração de chaves}
+  Tome uma mensagem $M$, $w \in \mathbb{N}, w > 1$,
+  $f : \binwds{n} \longrightarrow \binwds{n}$ e $\fhash{n}$. Então,
+  \begin{align*}
+    t_1 = \left\lceil \frac{n}{w} \right\rceil,
+    t_2 = \left\lceil \frac{\lfloor log_2 t_1 \rfloor + 1 + w}{w} \right\rceil
+    \text{ e } t = t_1 + t_2.
+  \end{align*}
+  As chaves privada e pública são, respectivamente,
+  \begin{align*}
+    \sk{} &= (x_{t - 1}, \dots, x_{0}) \random{} \binwds{n} \text{ e}\\
+    \pk{} &= (f^{2^w - 1}(x_{t - 1}), \dots, f^{2^w - 1}(x_0)) \\
+          &= (y_{t - 1}, \dots, y_0).
+   \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquema de assinatura única Winternitz}
+  \framesubtitle{Etapa de geração da assinatura}
+  Os valores $\epsilon_i \in \binwds{w}$ são obtidos como a seguir:
+
+  \begin{minipage}{.45\linewidth}
+    \begin{align*}
+      \hash{M} &= \epsilon_{t - 1} \concat \dots \concat \epsilon_{t - t_1}, \\
+      \mathcal{B}_1 &= (\epsilon_{t - 1}, \dots, \epsilon_{t - t_1}),
+    \end{align*}
+  \end{minipage}
+  \begin{minipage}{.45\linewidth}
+    \begin{align*}
+      c &= \textstyle\sum_{i = t - t_1}^{t - 1} 2^w - 1 - \epsilon_i, \\
+      \mathcal{B}_2 &= (\epsilon_{t_2 - 1}, \dots, \epsilon_{0}).
+    \end{align*}
+  \end{minipage}
+  \vspace{4mm}
+
+  Finalmente, a assinatura de uso único é construída:
+  \begin{align*}
+    \sigma &= (f^{\epsilon_{t - 1}}(x_{t - 1}), \dots, f^{\epsilon_0}(x_0)).
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquema de assinatura única Winternitz}
+  \framesubtitle{Etapa de verificação da assinatura}
+  Os elementos $\epsilon_i$ são também utilizados na verificação de $\sigma$:
+  \begin{align*}
+    \forall \sigma_i \in \sigma, f^{2^w - 1 - \epsilon_{i}}(\sigma_i) = y_i.
+  \end{align*}
+  Resumidamente,
+  \begin{figure}[ht]
+    \begin{tikzpicture}[
+      decoration={
+        markings,
+        mark= at position 0.5 with {\node[font=\scriptsize] {/};},
+        mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {n};}
+      }]
+      \tikzstyle{arrowline}=[draw, -latex']
+      \tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
+
+      \matrix[matrix of nodes, column sep=35pt, row sep=30pt,
+              ampersand replacement=\&] {
+        \node [abox] (xt1) {$x_i$}; \&
+        \node (fst1) {$f(x_i)$}; \&
+        \node [abox] (st1) {$\sigma_i$}; \&
+        \node (fvt1) {$f(\sigma_i)$}; \&
+        \node [abox] (yt1) {$y_i$}; \\
+      };
+
+      \node[above = 5pt of xt1] (X) {$x_i \in \sk{}$:};
+      \node[above = 5pt of st1] (S) {$\sigma_i \in \sigma$:};
+      \node[above = 5pt of yt1] (Y) {$y_i \in \pk{}$:};
+
+      \path[arrowline, postaction={decorate}] (xt1) -- (xt1 -| fst1.west);
+      \path[arrowline, postaction={decorate}] (fst1.east |- st1) -- (st1);
+      \path[->] (fst1) edge [loop above] node {\scriptsize$\epsilon_i$} ();
+      \path[arrowline, postaction={decorate}] (st1) -- (st1 -| fvt1.west);
+      \path[arrowline, postaction={decorate}] (fvt1.east |- yt1) -- (yt1);
+      \path[->] (fvt1) edge [loop above] node
+        {\scriptsize$2^w - 1 - \epsilon_i$} ();
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Esquemas baseados em árvores de Merkle}
+  \begin{columns}[T]
+    \begin{column}{.45\textwidth}
+      \begin{itemize}
+        \item Nó construído a partir da concatenação dos resumos de seus filhos
+        \item Instância de esquema de assinatura única em cada folha da árvore
+        \item Chaves públicas iniciarão a construção da árvore
+        \item Winternitz e suas variantes disseminados em esquemas desta família
+      \end{itemize}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \begin{figure}
+        \begin{tikzpicture}[level distance=1.25cm]
+          \tikzset{every tree node/.style={align=center,font=\tiny}}
+          \Tree
+            [.\node{$T_{2, 0}$ \\ $\hash{T_{1, 0} \concat T_{1, 1}}$};
+              [.\node{$T_{1, 0}$ \\ $\hash{T_{0, 0} \concat T_{0, 1}}$};
+                [.{$T_{0, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
+                  \edge[<-, dashed] node {}; $\mathcal{D}_{0}$
+                ]
+                [.{$T_{0, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
+                  \edge[<-, dashed] node {}; $\mathcal{D}_{1}$
+                ]
+              ]
+              [.\node{$T_{1, 1}$ \\ $\hash{T_{0, 2} \concat T_{0, 3}}$};
+                [.{$T_{0, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
+                  \edge[<-, dashed] node {}; $\mathcal{D}_{2}$
+                ]
+                [.{$T_{0, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
+                  \edge[<-, dashed] node {}; $\mathcal{D}_{3}$
+                ]
+              ]
+            ]
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nossas contribuições}
+  \framesubtitle{Panorama de esquemas baseados em
+    funções de resumo criptográfico}
+  \begin{figure}
+    \scriptsize
+    \begin{chronology}[4]{1978}{2018}{80ex}
+      \event{1979}{\textcolor{gray!30}{LD-OTS,} MSS}
+      \event{1987}{}
+      \event{1989}{WOTS}
+      \event{1992}{}
+      \event[1996]{1994}{}
+      \event[2002]{2001}{\textcolor{gray!30}{HORS}}
+      \event[2008]{2006}{CMSS, GMSS, SPR-MSS}
+      \event{2011}{XMSS}
+      \event{2013}{WOTS+, XMSS$^{MT}$}
+      \event[2017]{2015}{SPHINCS}
+      \event{2018}{\rotatebox[origin=c]{315}{!}}
+    \end{chronology}
+  \end{figure}
+  \begin{itemize}
+    \item Introdução de um parâmetro de compensação no Winternitz
+    \begin{itemize}
+      \item Pode ser aplicada em qualquer variante deste esquema
+      \item Afeta todo esquema baseado em árvores de Merkle
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nossas contribuições}
+  \framesubtitle{Melhora do desempenho da geração ou verificação de $\sigma$}
+  \begin{itemize}
+    \setlength\itemsep{0.5em}
+    \item Busca de resumos cujo processamento é mais eficiente \\
+      para um dos passos
+    \item Escolher a mensagem $M' \leftarrow \lambda_i$
+      cuja $\mu(\mathcal{B}_{1}^{i})$ é afastada da média
+    \begin{itemize}
+      \item Limite de buscas codificado em $1 \leq i \leq R$
+      \item Amplitude de valores para $\mu(\mathcal{B}_{1}^{i})$ cresce com $R$
+    \end{itemize}
+    \item Minimização de $\mu(\mathcal{B}_{1}^{i})$
+      traduz-se na otimização da geração de $\sigma$
+    \item Maximização de $\mu(\mathcal{B}_{1}^{i})$
+      permite a verificação eficiente de $\sigma$
+    \begin{itemize}
+      \item Modificação de $\mathcal{B}_2$
+        para atingir ainda melhores resultados
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nossas contribuições}
+  \framesubtitle{Critérios para escolha de $R$}
+  \begin{columns}[T]
+    \begin{column}{.45\textwidth}
+      \begin{itemize}
+        \item Definição de limites para amplitude de $\mu(\mathcal{B}_{1}^{i})$
+        \begin{itemize}
+          \item Assegurar que $R$ buscas criarão um valor bem-posicionado
+          \item Utilização da distribuição binomial
+        \end{itemize}
+        \item $R \in \{25, 200, 3500\}$
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{figure}
+        \begin{tikzpicture}[scale=0.65]
+          \begin{axis}[axis lines = left, xlabel = $R$,
+              ylabel = Probabilidades, legend style={at={(1, 0.5)},
+              anchor=east},]
+            \addplot[domain=0:200, samples=100, thick, densely dashed]
+              {1 - (1 - 0.1587)^x};
+            \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 1\sigma)$}
+            \addplot[domain=0:200, samples=100, thick, loosely dashdotdotted]
+              {1 - (1 - 0.0228)^x};
+            \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 2\sigma)$}
+            \addplot[domain=0:200, samples=100, thick, dashdotted]
+              {1 - (1 - 0.0013)^x};
+            \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma)$}
+          \end{axis}
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nossas contribuições}
+  \framesubtitle{Resultados}
+  \small
+  \begin{table}
+    \begin{tabular}{c|c}
+      \multicolumn{2}{c}{Parâmetros} \\
+      \toprule
+      $w$ &                 $R$     \\
+      \midrule
+      \multirow{3}{*}{4}    & 25    \\
+                            & 200   \\
+                            & 3500  \\
+      \midrule
+      \multirow{3}{*}{8}    & 25    \\
+                            & 200   \\
+                            & 3500  \\
+      \midrule
+      \multirow{3}{*}{16}   & 25    \\
+                            & 200   \\
+                            & 3500  \\
+      \bottomrule
+    \end{tabular}
+    \begin{tabular}{c|c}
+      \multicolumn{2}{c}{Winternitz ($\# f$)} \\
+      \toprule
+      $\argmax{}$   & $\argmin{}$   \\
+      \midrule
+      16.71\%       & 16.03\%       \\
+      22.05\%       & 21.41\%       \\
+      27.64\%       & 27.12\%       \\
+      \midrule
+      23.76\%       & 19.32\%       \\
+      30.96\%       & 26.83\%       \\
+      38.45\%       & 34.83\%       \\
+      \midrule
+      34.35\%       & 26.53\%       \\
+      43.41\%       & 36.48\%       \\
+      52.23\%       & 46.56\%       \\
+      \bottomrule
+    \end{tabular}
+    \begin{tabular}{c|c}
+      \multicolumn{2}{c}{XMSS (ms)} \\
+      \toprule
+      $\argmax{}$   & $\argmin{}$   \\
+      \midrule
+      13.22\%       &  9.48\%       \\
+      16.08\%       & -3.60\%       \\
+      21.94\%       & -249.4\%     \\
+      \midrule
+      22.22\%       & 14.67\%       \\
+      28.62\%       & 17.23\%       \\
+      35.45\%       & -8.55\%       \\
+      \midrule
+      \multicolumn{2}{c}{}          \\
+      \multicolumn{2}{c}{---}       \\
+      \multicolumn{2}{c}{}          \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \begin{center}
+    Aumento de eficiência do esquema com modificações
+      em $\mu(\mathcal{B}_{1}^{i})$.
+  \end{center}
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+  \frametitle{Referências bibliográficas}
+  \bibliographystyle{alpha}
+  \bibliography{ref}
+\end{frame}
+
+\end{document}
