@@ -1,4 +1,3 @@
-
 \documentclass{ufsctex/ufsctex}
 
 \usepackage[portuguese, onelanguage]{algorithm2e}
@@ -75,7 +74,7 @@
 \instituicao[a]{Universidade Federal de Santa Catarina}
 \departamento[o]{Departamento de Informática e Estatística}
 \curso[o]{Programa de Graduação em Ciência da Computação}
-\documento[a]{Monografia}
+\documento[o]{{Trabalho de Conclusão de Curso}}
 \titulo{Otimização de desempenho do esquema de assinatura digital Winternitz}
 \autor{Gustavo Zambonin}
 \grau{Bacharel em Ciência da Computação}
@@ -89,7 +88,7 @@
 \orientadornabanca{nao}
 \coorientadornabanca{nao}
 \bancaMembroA{
-  Lucas Pandolfo Perin, M.Sc. \\
+  Lucas Pandolfo Perin, Me. \\
   Universidade Federal de Santa Catarina
 }
 
@@ -135,8 +134,8 @@ or verification.}
 signature, Winternitz one time signature scheme}
 
 \capa{}
-\folhaaprovacao{}
 \folhaderosto{}
+\folhaaprovacao{}
 \paginadedicatoria{}
 \paginaagradecimento{}
 \paginaepigrafe{}
@@ -536,13 +535,13 @@ o livro original de descrição do Rijndael~\cite{Daemen:2002:DR:560131}.
 
 \subsection{O criptossistema RSA}\label{subsection:rsa}
 
-O algoritmo conhecido como RSA~\cite{Rivest:1978:MOD:359340.359342}
-\sigla{RSA}{\emph{Rivest---Shamir---Adleman}} é uma implementação de
-criptografia assimétrica amplamente utilizada. É baseado na dificuldade de
-fatorar o produto de dois números primos suficientemente grandes\footnote{O
-algoritmo é baseado no problema RSA, definido como realizar uma operação de
-chave privada no algoritmo RSA utilizando apenas $\pk{}$.  Acredita-se que este
-problema seja equivalente à fatoração de
+O algoritmo conhecido como
+RSA~\cite{Rivest:1978:MOD:359340.359342}\sigla{RSA}{\emph{Rivest---Shamir---Adleman}}
+é uma implementação de criptografia assimétrica amplamente utilizada. É baseado
+na dificuldade de fatorar o produto de dois números primos suficientemente
+grandes\footnote{O algoritmo é baseado no problema RSA, definido como realizar
+uma operação de chave privada no algoritmo RSA utilizando apenas $\pk{}$.
+Acredita-se que este problema seja equivalente à fatoração de
 inteiros~\cite[3.30]{Menezes:1996:HAC:548089}.}. Em virtude de seu baixo
 desempenho computacional, geralmente apenas um resumo criptográfico da mensagem
 desejada é codificado por este algoritmo, e sua transmissão é realizada junto à
@@ -945,9 +944,9 @@ presença do esquema alvo, Winternitz, neste meio. Nomeadamente, a
 Seção~\ref{section:onetime} introduz o conceito de assinaturas únicas e fornece
 discussões sobre os esquemas \lots{}\sigla{\lots{}}{\emph{Lamport---Diffie
 One-time Signature Scheme}}, \wots{}\sigla{\wots{}}{\emph{Winternitz One-time
-Signature Scheme}}, \wotsplus{} nas
+Signature Scheme}} e \wotsplus{}, respectivamente nas
 Subseções~\ref{subsection:ldots},~\ref{subsection:wots}
-e~\ref{subsection:wotsplus}, respectivamente. Adicionalmente, o esquema de
+e~\ref{subsection:wotsplus}. Adicionalmente, o esquema de
 poucas assinaturas \hors{} é explorado na Subseção~\ref{subsection:hors}. Por
 fim, os esquemas baseados em árvores de Merkle são definidos na
 Seção~\ref{section:merkle}, e os exemplos \mss{}\sigla{\mss{}}{\emph{Merkle
@@ -1933,7 +1932,7 @@ abordada abaixo. Para descrevê-la completamente, é necessário apontar que
 algoritmos de travessia mostram-se essenciais no funcionamento prático de
 esquemas com hiper-árvores, visto que estas estruturas existirão apenas
 parcialmente em qualquer dispositivo, embora nodos em várias partes da
-hiper-árvore são necessários para construir caminhos de autenticação.  Deste
+hiper-árvore são necessários para construir caminhos de autenticação. Deste
 modo, o algoritmo \bds{}~\cite{Buchmann:2008:MTT:1473109.1473114}
 \sigla{\bds{}}{\emph{Buchmann---Dahmen---Schneider}} é exposto junto ao
 esquema, a fim de demonstrar a complexidade real do gerenciamento de estado
@@ -2209,7 +2208,7 @@ no contexto de assinaturas digitais com funções de resumo criptográfico, pode
 ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11}
 contemplam todos os esquemas citados nas Seções~\ref{section:onetime}
 e~\ref{section:merkle}, à exceção da família
-\sphincs{}~\cite{Bernstein2015,sphincsplus} \sigla{\sphincs{}}{\emph{Stateless
+\sphincs{}~\cite{Bernstein2015,sphincsplus}\sigla{\sphincs{}}{\emph{Stateless
 Practical Hash-based Incredibly Nice Cryptographic Signatures}}, que renuncia
 o gerenciamento de estado, característica presente em todos os esquemas
 baseados em árvores de Merkle aprofundados anteriormente.
