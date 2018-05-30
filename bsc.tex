@@ -42,26 +42,11 @@
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
 
-\def\precircle{(0.00, 0) circle (1.25cm)}
-\def\seccircle{(1.75, 0) circle (1.25cm)}
-\def\colcircle{(1.75, 0) circle (0.75cm)}
-
-\colorlet{circle edge}{black!50}
-\colorlet{circle area}{black!35}
-
 \tikzset{
-  filled/.style={fill=circle area, draw=circle edge, thick},
-  outline/.style={draw=circle edge, thick},
-  SpongePerm/.style={rounded corners=4pt},
-  XOR/.style={draw,circle,append after command={
+  XOR/.style={draw, circle, append after command={
     [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
     (\tikzlastnode.north) edge (\tikzlastnode.south)
     (\tikzlastnode.east) edge (\tikzlastnode.west)}},
-  edge/.style={->},
-  edgee/.style={<->},
-  tedge/.style={dashed, <-},
-  level distance=45pt,
-  sibling distance=25pt
 }
 
 \DeclareMathOperator*{\argmin}{argmin}
@@ -369,7 +354,7 @@ de padronização para um sistema criptográfico seguro, finalizado ao término 
 século XX pelo NIST~\cite{Standards2001}\sigla{NIST}{\emph{National Institute
 of Standards and Technology}}, a fim de substituir a cifra
 DES\sigla{DES}{\emph{Data Encryption Standard}}. Definido como uma cifra de
-blocos iterativa, opera sobre uma matriz de estado $A$, onde $A_{i,j} \in
+blocos iterativa, opera sobre uma matriz de estado $A$, onde $A_{i, j} \in
 \mathbb{F}_{2^{8}}$\simbolo{$\mathbb{F}_{n}$}{Corpo de Galois de ordem
 $n$}\footnote{Definido pelo polinômio irredutível $m(x) = x^{8} + x^{4} + x^{3}
 + x + 1$. Adições e multiplicações em corpos da forma $\mathbb{F}_{2^n}$ são
@@ -390,9 +375,9 @@ rotinas serão descritas abaixo.
 
 \begin{enumerate}[label=\roman*.]
 
-  \item \textsc{SubBytes}: realiza-se a reposição de $A_{i,j}$ pelo seu valor
+  \item \textsc{SubBytes}: realiza-se a reposição de $A_{i, j}$ pelo seu valor
       correspondente em uma \emph{substitution-box} (\emph{S-box}, construída a
-        partir de uma transformação afim em $A_{i,j}^{-1}$), onde os
+        partir de uma transformação afim em $A_{i, j}^{-1}$), onde os
         \emph{nibbles} mais e menos significativos, respectivamente,
         representam a linha e a coluna do elemento na \emph{S-box}.
 
@@ -480,7 +465,7 @@ modificadas de acordo.
       circularmente à direita $i$ vezes.
 
   \item \textsc{InvSubBytes}: é necessário computar a transformação afim
-      inversa para cada elemento $A_{i,j}$, e depois calcular sua inversa
+      inversa para cada elemento $A_{i, j}$, e depois calcular sua inversa
         multiplicativa.
 
   \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
@@ -686,13 +671,13 @@ fornecida.
   \centering
   \begin{tikzpicture}
     \begin{scope}[fill opacity=0.5]
-      \clip \precircle;
-      \fill[filled] \seccircle;
-      \fill[filled] \colcircle;
+      \clip (0, 0) circle (1.25cm);
+      \fill[black!35] (1.75, 0) circle (1.25cm);
+      \fill[black!35] (1.75, 0) circle (0.75cm);
     \end{scope}
-    \draw[outline] \precircle node {\textsc{Pre}};
-    \draw[outline] \seccircle node {};
-    \draw[outline] \colcircle node {\textsc{Col}};
+    \draw[black!50, thick] (0, 0) circle (1.25cm) node {\textsc{Pre}};
+    \draw[black!50, thick] (1.75, 0) circle (1.25cm) node {};
+    \draw[black!50, thick] (1.75, 0) circle (0.75cm) node {\textsc{Col}};
     \draw node at (1.75, 1) {\textsc{Sec}};
   \end{tikzpicture}
   \caption{Diagrama de Venn das resistências desejáveis para uma função de
@@ -748,59 +733,59 @@ intercalados por aplicações de $f$.
   \centering
   \begin{tikzpicture}[scale=0.35]
     \begin{scope}[xshift=0cm]
-      \draw[thick] (0,0) rectangle ++(1,10);
-      \draw[thick] (0,3) -- ++(1,0);
-      \node[XOR,thick] (xm0) at (1+1.5,8) {};
-      \draw[edge,thick] (1,8) -- (xm0);
-      \draw[edge,thick] (1,2) -- ++(3,0);
-      \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{0}$} -- (xm0);
-      \draw[edge,thick] (xm0) -- ++(1.5,0);
-      \draw[edgee,anchor=east] (-1,3) -- node[left] {$r$} ++(0,7);
-      \draw[edgee,anchor=east] (-1,0) -- node[left] {$c$} ++(0,3);
+      \draw (0, 0) rectangle ++(1, 10);
+      \draw (0, 3) -- ++(1, 0);
+      \node[XOR] (xm0) at (2.5, 8) {};
+      \draw[->] (1, 8) -- (xm0);
+      \draw[->] (1, 2) -- ++(3, 0);
+      \draw[->] (2.5, 10.5) node[above] {\large $m_{0}$} -- (xm0);
+      \draw[->] (xm0) -- ++(1.5, 0);
+      \draw[<->, anchor=east] (-1, 3) -- node[left] {$r$} ++(0, 7);
+      \draw[<->, anchor=east] (-1, 0) -- node[left] {$c$} ++(0, 3);
     \end{scope}
     \begin{scope}[xshift=4cm]
-      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-      \node[thick] (xm1) at (1+1.5,8) {$\dots$};
-      \draw[edge,thick] (1,8) -- (xm1);
-      \draw[edge,thick] (xm1) -- ++(1.5,0);
-      \node[thick] (xm1) at (1+1.5,2) {$\dots$};
-      \draw[edge,thick] (1,2) -- (xm1);
-      \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[rounded corners=4pt] (0, 0) rectangle node {\large$f$} ++(1, 10);
+      \node (xm1) at (2.5, 8) {$\dots$};
+      \draw[->] (1, 8) -- (xm1);
+      \draw[->] (xm1) -- ++(1.5, 0);
+      \node (xm1) at (2.5, 2) {$\dots$};
+      \draw[->] (1, 2) -- (xm1);
+      \draw[->] (xm1) -- ++(1.5, 0);
     \end{scope}
     \begin{scope}[xshift=8cm]
-      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-      \node[XOR,thick] (xm1) at (1+1.5,8) {};
-      \draw[edge,thick] (1,8) -- (xm1);
-      \draw[edge,thick] (1,2) -- ++(3,0);
-      \draw[edge,thick] (1+1.5,10.5) node[above] {\large $m_{i}$} -- (xm1);
-      \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[rounded corners=4pt] (0, 0) rectangle node {\large$f$} ++(1, 10);
+      \node[XOR] (xm1) at (2.5, 8) {};
+      \draw[->] (1, 8) -- (xm1);
+      \draw[->] (1, 2) -- ++(3, 0);
+      \draw[->] (2.5, 10.5) node[above] {\large $m_{i}$} -- (xm1);
+      \draw[->] (xm1) -- ++(1.5, 0);
     \end{scope}
     \begin{scope}[xshift=12cm]
-      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-      \draw[edge,thick] (1,2) -- ++(3,0);
-      \draw[edge,thick] (1,8) -- ++(3,0);
+      \draw[rounded corners=4pt] (0, 0) rectangle node {\large$f$} ++(1, 10);
+      \draw[->] (1, 2) -- ++(3, 0);
+      \draw[->] (1, 8) -- ++(3, 0);
     \end{scope}
     \begin{scope}[xshift=16cm]
-      \draw[thick] (0,0) rectangle ++(1,10);
-      \draw[thick] (0,3) -- ++(1,0);
-      \draw[edge,thick] (1,2) -- ++(3,0);
-      \draw[edge,thick] (1,8) -- ++(3,0);
-      \draw[edge,thick] (1+1.5,8) -- ++(0,2.5) node[above] {\large $z_{0}$};
-      \draw[dashed,thick] (-1.5,-1.5) -- ++(0,13);
+      \draw (0, 0) rectangle ++(1, 10);
+      \draw (0, 3) -- ++(1, 0);
+      \draw[->] (1, 2) -- ++(3, 0);
+      \draw[->] (1, 8) -- ++(3, 0);
+      \draw[->] (2.5, 8) -- ++(0, 2.5) node[above] {\large $z_{0}$};
+      \draw[dashed] (-1.5, -1.5) -- ++(0, 13);
     \end{scope}
     \begin{scope}[xshift=20cm]
-      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-      \node[thick] (xm1) at (1+1.5,8) {$\dots$};
-      \draw[edge,thick] (1,8) -- (xm1);
-      \draw[edge,thick] (xm1) -- ++(1.5,0);
-      \node[thick] (xm1) at (1+1.5,2) {$\dots$};
-      \draw[edge,thick] (1,2) -- (xm1);
-      \draw[edge,thick] (xm1) -- ++(1.5,0);
+      \draw[rounded corners=4pt] (0, 0) rectangle node {\large$f$} ++(1, 10);
+      \node (xm1) at (2.5, 8) {$\dots$};
+      \draw[->] (1, 8) -- (xm1);
+      \draw[->] (xm1) -- ++(1.5, 0);
+      \node (xm1) at (2.5, 2) {$\dots$};
+      \draw[->] (1, 2) -- (xm1);
+      \draw[->] (xm1) -- ++(1.5, 0);
     \end{scope}
     \begin{scope}[xshift=24cm]
-      \draw[SpongePerm] (0,0) rectangle node {\large$f$} ++(1,10);
-      \draw[edge,thick] (1,8) -- ++(1.5,0)
-        -- ++(0,2.5) node[above] {\large $z_{j}$};
+      \draw[rounded corners=4pt] (0, 0) rectangle node {\large$f$} ++(1, 10);
+      \draw[->] (1, 8) -- ++(1.5, 0)
+        -- ++(0, 2.5) node[above] {\large $z_{j}$};
     \end{scope}
   \end{tikzpicture}
   \caption{Estrutura da construção esponja,
@@ -990,14 +975,14 @@ abaixo o funcionamento do esquema e discute-se algumas de suas características.
 
   \item[] \emph{Geração de chaves.} Defina
       \begin{equation}
-        \sk{} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0,0}, x_{1,0})
+        \sk{} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0, 0}, x_{1, 0})
           \random{} \binwds{m}
       \end{equation}
         como a chave privada, informalmente uma $2m$-tupla de inteiros
         pseudoaleatórios. A chave pública $\pk{}$ é derivada de $\sk{}$,
         computando $f(x) \; \forall x \in  \sk{}$. Logo,
         \begin{equation}
-          \pk{} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0,0}), f(x_{1,0})).
+          \pk{} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0, 0}), f(x_{1, 0})).
         \end{equation}
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
@@ -1114,31 +1099,31 @@ impossível.
   \centering
   \begin{tikzpicture}[
     decoration={
-      markings,
-      mark= at position 0.5 with {\node[font=\scriptsize] {/};},
+      markings, mark= at position 0.5 with {\node[font=\scriptsize] {/};},
       mark= at position 0.5 with {\node[font=\scriptsize, yshift=10pt] {m};}
-  }]
-    \tikzstyle{arrowline}=[draw, -latex']
-    \tikzstyle{abox}=[draw, minimum width=30pt, minimum height=30pt]
-
+    }
+  ]
     \matrix[matrix of nodes, column sep=35pt, row sep=30pt] {
-      \node [abox] (xt1) {$x_i$}; &
+      \node [draw, minimum width=30pt, minimum height=30pt]
+        (xt1) {$x_i$}; &
       \node (fst1) {$f(x_i)$}; &
-      \node [abox] (st1) {$\sigma_i$}; &
+      \node [draw, minimum width=30pt, minimum height=30pt]
+        (st1) {$\sigma_i$}; &
       \node (fvt1) {$f(\sigma_i)$}; &
-      \node [abox] (yt1) {$y_i$}; \\
+      \node [draw, minimum width=30pt, minimum height=30pt]
+        (yt1) {$y_i$}; \\
     };
 
     \node[above = 5pt of xt1] (X) {$x_i \in X:$};
     \node[above = 5pt of st1] (S) {$\sigma_i \in \sigma:$};
     \node[above = 5pt of yt1] (Y) {$y_i \in Y:$};
 
-    \path[arrowline, postaction={decorate}] (xt1) -- (xt1 -| fst1.west);
-    \path[arrowline, postaction={decorate}] (fst1.east |- st1) -- (st1);
-    \path[edge] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
-    \path[arrowline, postaction={decorate}] (st1) -- (st1 -| fvt1.west);
-    \path[arrowline, postaction={decorate}] (fvt1.east |- yt1) -- (yt1);
-    \path[edge] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
+    \path[draw, -latex', postaction={decorate}] (xt1) -- (xt1 -| fst1.west);
+    \path[draw, -latex', postaction={decorate}] (fst1.east |- st1) -- (st1);
+    \path[->] (fst1) edge  [loop above] node {\scriptsize$b_i$} ();
+    \path[draw, -latex', postaction={decorate}] (st1) -- (st1 -| fvt1.west);
+    \path[draw, -latex', postaction={decorate}] (fvt1.east |- yt1) -- (yt1);
+    \path[->] (fvt1) edge  [loop above] node {\scriptsize$2^w - 1-b_i$} ();
   \end{tikzpicture}
   \caption{Etapas de assinatura e verificação do \wots{},
     para $0 \leq i \leq t - 1$.}\label{fig:5}
@@ -1235,14 +1220,14 @@ Matyas-Meyer-Oseas~\cite[9.41]{Menezes:1996:HAC:548089}.
   \begin{tikzpicture}[scale=0.25]
     \draw (-2, 5) rectangle node {$g$} ++(2, 2);
     \draw (0, 0) rectangle node {$E$} ++(4, 4);
-    \draw (1.5, 4) -- ++(0.5,-0.7) -- ++(0.5, +0.7);
-    \node[XOR] (x0) at (7,2) {};
-    \draw[edge] (-4,2) node[left] {$x_{i}$} -- ++(4,0);
-    \draw[edge] (4,2) -- (x0);
-    \draw[edge] (x0) -- ++(3,0) node[right] {$h_{i}$};
-    \draw[edge] (-2,2) -- ++(0,-3) -- ++(9,0) -- (x0);
-    \draw[edge] (-4,6) node[left] {$h_{i-1}$} -- ++(2, 0);
-    \draw[edge] (0, 6) -- ++(2, 0) -- ++(0, -2);
+    \draw (1.5, 4) -- ++(0.5, -0.7) -- ++(0.5, +0.7);
+    \node[XOR] (x0) at (7, 2) {};
+    \draw[->] (-4, 2) node[left] {$x_{i}$} -- ++(4, 0);
+    \draw[->] (4, 2) -- (x0);
+    \draw[->] (x0) -- ++(3, 0) node[right] {$h_{i}$};
+    \draw[->] (-2, 2) -- ++(0, -3) -- ++(9, 0) -- (x0);
+    \draw[->] (-4, 6) node[left] {$h_{i-1}$} -- ++(2, 0);
+    \draw[->] (0, 6) -- ++(2, 0) -- ++(0, -2);
   \end{tikzpicture}
   \caption{Construção Matyas-Meyer-Oseas.}\label{fig:6}
 \end{figure}
@@ -1348,7 +1333,7 @@ pequenos.
   \begin{tikzpicture}
     \node (hm) at (-2, -1) {$M$};
     \node (d) at (6.5, -0.15) {$d$};
-    \node[draw,dashed,minimum width=20em,minimum height=2.5em]
+    \node[draw, dashed, minimum width=20em, minimum height=2.5em]
       (dbox) at (3, -1) {};
     \node[draw, minimum width=3em, minimum height=1.75em]
       (d0) at (0.5, -1) {$d_0$};
@@ -1362,11 +1347,10 @@ pequenos.
       (d4) {$\dots$};
     \node[draw, minimum width=3em, minimum height=1.75em, right = 2pt of d4]
       (d5) {$d_{k - 1}$};
-    \draw[-latex]
-      (hm) -- (dbox) node[midway, above = 1pt] {$\hh{}$};
+    \draw[-latex] (hm) -- (dbox) node[midway, above = 1pt] {$\hh{}$};
 
     \node (sk) at (6.75, -2.4) {$\sk{}$};
-    \node[draw,dashed,minimum width=23em,minimum height=2.5em]
+    \node[draw, dashed, minimum width=23em, minimum height=2.5em]
       (skbox) at (3, -3.25) {};
     \node[draw, minimum width=3em, minimum height=1.75em]
       (x0) at (-0.3, -3.25) {$x_0$};
@@ -1394,7 +1378,7 @@ pequenos.
       (d3) -- (x2);
 
     \node (sig) at (6.25, -4.7) {$\sigma$};
-    \node[draw,dashed,minimum width=20em,minimum height=2.5em]
+    \node[draw, dashed, minimum width=20em, minimum height=2.5em]
       (sigbox) at (3, -5.5) {};
     \node[draw, minimum width=3em, minimum height=1.75em]
       (s0) at (0.5, -5.5) {$\sigma_0$};
@@ -1444,24 +1428,26 @@ característica binária e perfeita, pode ser aproveitada para tal.
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}
-    \tikzset{every tree node/.style={align=center,anchor=north}}
+    \begin{tikzpicture}[
+        every tree node/.style={align=center, anchor=north},
+        level distance=45pt, sibling distance=25pt
+    ]
     \Tree
       [.\node{$T_{2, 0}$ \\ $\hash{T_{1, 0} \concat T_{1, 1}}$};
         [.\node{$T_{1, 0}$ \\ $\hash{T_{0, 0} \concat T_{0, 1}}$};
           [.{$T_{0, 0}$ \\ $\hash{\mathcal{D}_{0}}$}
-            \edge[tedge] node {}; $\mathcal{D}_{0}$
+            \edge[<-, dashed] node {}; $\mathcal{D}_{0}$
           ]
           [.{$T_{0, 1}$ \\ $\hash{\mathcal{D}_{1}}$}
-            \edge[tedge] node {}; $\mathcal{D}_{1}$
+            \edge[<-, dashed] node {}; $\mathcal{D}_{1}$
           ]
         ]
         [.\node{$T_{1, 1}$ \\ $\hash{T_{0, 2} \concat T_{0, 3}}$};
           [.{$T_{0, 2}$ \\ $\hash{\mathcal{D}_{2}}$}
-            \edge[tedge] node {}; $\mathcal{D}_{2}$
+            \edge[<-, dashed] node {}; $\mathcal{D}_{2}$
           ]
           [.{$T_{0, 3}$ \\ $\hash{\mathcal{D}_{3}}$}
-            \edge[tedge] node {}; $\mathcal{D}_{3}$
+            \edge[<-, dashed] node {}; $\mathcal{D}_{3}$
           ]
         ]
       ]
@@ -1476,7 +1462,7 @@ filhos concatenados, repetindo este processo até que a raiz seja preenchida,
 como na Figura~\ref{fig:4}. Considere uma árvore binária perfeita $T$ de
 altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
 \begin{equation}
-  T_{h,j}, \; 0 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1,
+  T_{h, j}, \; 0 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1,
 \end{equation}
 e uma função de resumo criptográfico $\fhash{m}$. As folhas são construídas a
 partir do resumo de qualquer dado $\mathcal{D}$, e seus nós intermediários a
@@ -1524,7 +1510,7 @@ Em qualquer momento de sua execução, o número máximo de nodos armazenados em
 \textbf{S} será $h$, chamados de nodos cauda (\emph{tail nodes}). Ao seu estado
 final, \textbf{S} conterá apenas o nodo desejado na altura $h$.  Note que é
 possível executar \textsc{Treehash} repetidamente, como visto no
-Algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H,0}$.
+Algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H, 0}$.
 Estas estratégias serão necessárias para a travessia em árvores de dimensões
 extensas, abordada na Subseção~\ref{subsection:xmss}.
 
@@ -1539,7 +1525,7 @@ extensas, abordada na Subseção~\ref{subsection:xmss}.
   $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
 
   \vspace{2mm}
-  \caption{\textsc{Treehash} para o cálculo de $T_{H,0}$.}\label{alg:5}
+  \caption{\textsc{Treehash} para o cálculo de $T_{H, 0}$.}\label{alg:5}
 \end{algorithm}
 
 \subsection{\mss{}}\label{subsection:mss}
@@ -1578,7 +1564,7 @@ criptográfico $\fhash{m}$.
         \textsc{Ots}. Portanto, $T_{0, j} = \hash{\textsc{Ots}_{\pk{}}^{j}}$, e
         $T$ é construída recursivamente. Finalmente,
         \begin{equation}
-          \pk{} = T_{H,0}.
+          \pk{} = T_{H, 0}.
         \end{equation}
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
@@ -1652,31 +1638,29 @@ discutidos futuramente.
 \begin{figure}
   \centering
   \begin{tikzpicture}[
-      every tree node/.style={draw,circle,minimum size=0.75cm},
-      level distance=1cm,
-      level 1/.style={sibling distance=1.5cm},
+      every tree node/.style={draw, circle, minimum size=0.75cm},
+      level distance=1cm, level 1/.style={sibling distance=1.5cm},
       level 2/.style={sibling distance=1.25cm},
       level 3/.style={sibling distance=1cm},
-      edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-      scale=0.7,
+      edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}, scale=0.7,
   ]
   \Tree
-  [.\node[name=ah0,label=below:{$\pk{}$}]{};
+    [.\node[name=ah0, label=below:{$\pk{}$}]{};
       [.\node[name=ah1]{};
-          [.\node[dashdotted,label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
-          [.\node[name=ah2]{};
-              \node[dashdotted,label=below:{$\textsc{Auth}_0$}]{};
-              \node[name=orig,label=below:{$i = 3$},thick]{$\sigma$};
-          ]
+        [.\node[dashdotted, label=above:{$\textsc{Auth}_1$}]{}; {} {} ]
+        [.\node[name=ah2]{};
+          \node[dashdotted, label=below:{$\textsc{Auth}_0$}]{};
+          \node[name=orig, label=below:{$i = 3$}, thick]{$\sigma$};
+        ]
       ]
-      [.\node[dashdotted,label=above:{$\textsc{Auth}_2$}]{};
-          [.{} {} {} ]
-          [.{} {} {} ]
+      [.\node[dashdotted, label=above:{$\textsc{Auth}_2$}]{};
+        [.{} {} {} ]
+        [.{} {} {} ]
       ]
-  ]
-  \draw[thick,->] (orig) -- (ah2);
-  \draw[thick,->] (ah2) -- (ah1);
-  \draw[thick,->] (ah1) -- (ah0);
+    ]
+  \draw[thick, ->] (orig) -- (ah2);
+  \draw[thick, ->] (ah2) -- (ah1);
+  \draw[thick, ->] (ah1) -- (ah0);
   \end{tikzpicture}
   \caption{Caminho de autenticação para a folha de índice $i = 3$.}\label{fig:9}
 \end{figure}
@@ -1806,7 +1790,7 @@ mas não considerada no contexto de $T$.
         e naturalmente, a chave pública deve conter as máscaras utilizadas
         em $T$, \emph{i.e.}
         \begin{equation}
-          \pk{} = (T_{H,0}, \mathbf{r}).
+          \pk{} = (T_{H, 0}, \mathbf{r}).
         \end{equation}
 
   \item[] \emph{Geração da assinatura.} A assinatura é construída de maneira
@@ -1868,49 +1852,40 @@ número de $2^{80}$ mensagens por par de chaves.
 \begin{figure}
   \centering
   \begin{tikzpicture}[
-      every tree node/.style={draw,circle,minimum size=0.75cm},
+      every tree node/.style={draw, circle, minimum size=0.75cm},
       edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
-      level distance=1cm,
-      scale=0.8,
+      level distance=1cm, sibling distance=25pt, scale=0.8,
   ]
-    \begin{scope}[yshift=4.5cm,xshift=0.59cm]
-    \Tree[. \node[name=root,label={below:$\pk{}$}]{};
-        [. \node[name=p4]{};
-            [.
-                \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{1}$}]{};
-                {}
-                {}
-            ]
-            [.
-                \node[name=p3]{};
-                \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{1}$}]{};
-                \node[name=leaf,thick]{$\sigma_1$};
-            ]
+    \begin{scope}[yshift=4.5cm, xshift=0.59cm]
+    \Tree
+      [.\node[name=root, label={below:$\pk{}$}]{};
+        [.\node[name=p4]{};
+          [.\node[dashdotted, label=above:{$\textsc{Auth}_{1}^{1}$}]{}; {} {} ]
+          [.\node[name=p3]{};
+            \node[dashdotted, label=below:{$\textsc{Auth}_{0}^{1}$}]{};
+            \node[name=leaf, thick]{$\sigma_1$};
+          ]
         ]
-        [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{1}$}]{};
-            [.{} {} {} ]
-            [.{} {} {} ]
+        [.\node[dashdotted, label=above:{$\textsc{Auth}_{2}^{1}$}]{};
+          [.{} {} {} ]
+          [.{} {} {} ]
         ]
-    ]
+      ]
     \end{scope}
-    \Tree[. \node(halfroot){};
-        [. \node[dashdotted,label=above:{$\textsc{Auth}_{2}^{0}$}]{};
-            [.{} {} {} ]
-            [.{} {} {} ]
+    \Tree
+      [.\node(halfroot){};
+        [.\node[dashdotted, label=above:{$\textsc{Auth}_{2}^{0}$}]{};
+          [.{} {} {} ]
+          [.{} {} {} ]
         ]
-        [. \node[name=p2]{};
-            [.
-                \node[name=p1]{};
-                \node[name=sig0,thick]{$\sigma_0$};
-                \node[dashdotted,label=below:{$\textsc{Auth}_{0}^{0}$}]{};
-            ]
-            [.
-                \node[dashdotted,label=above:{$\textsc{Auth}_{1}^{0}$}]{};
-                {}
-                {}
-            ]
+        [.\node[name=p2]{};
+          [.\node[name=p1]{};
+            \node[name=sig0, thick]{$\sigma_0$};
+            \node[dashdotted, label=below:{$\textsc{Auth}_{0}^{0}$}]{};
+          ]
+          [.\node[dashdotted, label=above:{$\textsc{Auth}_{1}^{0}$}]{}; {} {} ]
         ]
-    ]
+      ]
     \draw[->, thick] (p4) to (root);
     \draw[->, thick] (p3) to (p4);
     \draw[->, thick] (leaf) to (p3);
@@ -2486,34 +2461,17 @@ de modo diretamente proporcional.
   \centering
   \begin{tikzpicture}
     \begin{axis}[
-        axis lines = left,
-        xlabel = $R$,
-        ylabel = Probabilidades,
-        legend style={at={(1,0.5)},anchor=east},
+        axis lines = left, xlabel = $R$, ylabel = Probabilidades,
+        legend style={at={(1, 0.5)}, anchor=east},
     ]
-    \addplot [
-        domain=0:200,
-        samples=100,
-        thick,
-        densely dashed
-    ]
-    {1 - (1 - 0.1587)^x};
+    \addplot[domain=0:200, samples=100, thick, densely dashed]
+      {1 - (1 - 0.1587)^x};
     \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 1\sigma)$}
-    \addplot [
-        domain=0:200,
-        samples=100,
-        thick,
-        loosely dashdotdotted
-    ]
-    {1 - (1 - 0.0228)^x};
+    \addplot[domain=0:200, samples=100, thick, loosely dashdotdotted]
+      {1 - (1 - 0.0228)^x};
     \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 2\sigma)$}
-    \addplot [
-        domain=0:200,
-        samples=100,
-        thick,
-        dashdotted
-    ]
-    {1 - (1 - 0.0013)^x};
+    \addplot[domain=0:200, samples=100, thick, dashdotted]
+      {1 - (1 - 0.0013)^x};
     \addlegendentry{$P(\mu(\mathcal{B}_{1}^{i}) > \mu' + 3\sigma)$}
     \end{axis}
   \end{tikzpicture}
