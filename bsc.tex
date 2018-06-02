@@ -38,7 +38,7 @@
 \newcommand{\xmssbr}{\textsc{Xmss-br}}
 \newcommand{\sphincs}{\textsc{Sphincs}}
 
-\pgfplotsset{compat=1.14}
+\pgfplotsset{compat=1.15}
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
 
@@ -470,12 +470,12 @@ modificadas de acordo.
 
   \item \textsc{InvMixColumns}: cada coluna de $A$, $A_j$, é multiplicada pela
       inversa multiplicativa $d = c^{-1}$, obtida por
-        \begin{equation}
-          \begin{align}
+        \begin{align}
+          \begin{split}
             (3 x^{3} + x^{2} + x + 2) \times d &\equiv 1 \pmod{x^{4} + 1} \\
             d &= 11 x^{3} + 13 x^{2} + 9 x + 14.
-          \end{align}
-        \end{equation}
+          \end{split}
+        \end{align}
 
 \end{enumerate}
 
@@ -542,12 +542,12 @@ quantidade de números relativamente primos a $x$.
         $e$ relativamente primo a $\phi(n)$. Então, use o algoritmo de Euclides
         estendido para computar $d$ tal que $ed \equiv 1 \pmod{\phi(n)}$,
         \emph{i.e.} a inversa multiplicativa modular de $e$. Finalmente,
-        \begin{equation}
-          \begin{align}
+        \begin{align}
+          \begin{split}
             \mathcal{S}_k &= d, \\
             \mathcal{P}_k &= (n, e).
-          \end{align}
-        \end{equation}
+          \end{split}
+        \end{align}
 
   \item[] \emph{Codificação.} Obtém-se $\pk{}$ da entidade para qual deseja-se
       criptografar uma mensagem. Transforma-se uma mensagem $m$ em um inteiro
@@ -629,8 +629,8 @@ computação excedem a validade ou utilidade da informação desejada.
 
   \item $\hh{}$ pode apresentar \emph{resistência à colisões} (\textsc{Col}),
       caracterizada pelo seguinte comportamento: é computacionalmente inviável
-        encontrar quaisquer duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq
-        m_1$, de forma que $\hash{m_0} = \hash{m_1}$;
+        encontrar duas mensagens $m_0, \; m_1 \in X$ e $m_0 \neq
+        m_1$, de tal forma que $\hash{m_0} = \hash{m_1}$;
 
   \item $\hh{}$ pode ser parametrizada por uma chave $k$. Este comportamento
       é representado por $\hh{}_k$.
@@ -667,7 +667,7 @@ funções de resumo criptográfico são utilizadas em sua construção, e a
 parametrização habilita autenticação da mensagem junto à integridade já
 fornecida.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \begin{scope}[fill opacity=0.5]
@@ -675,9 +675,9 @@ fornecida.
       \fill[black!35] (1.75, 0) circle (1.25cm);
       \fill[black!35] (1.75, 0) circle (0.75cm);
     \end{scope}
-    \draw[black!50, thick] (0, 0) circle (1.25cm) node {\textsc{Pre}};
-    \draw[black!50, thick] (1.75, 0) circle (1.25cm) node {};
-    \draw[black!50, thick] (1.75, 0) circle (0.75cm) node {\textsc{Col}};
+    \draw[draw=black!50, thick] (0, 0) circle (1.25cm) node {\textsc{Pre}};
+    \draw[draw=black!50, thick] (1.75, 0) circle (1.25cm) node {};
+    \draw[draw=black!50, thick] (1.75, 0) circle (0.75cm) node {\textsc{Col}};
     \draw node at (1.75, 1) {\textsc{Sec}};
   \end{tikzpicture}
   \caption{Diagrama de Venn das resistências desejáveis para uma função de
@@ -2089,7 +2089,7 @@ pseudoaleatórios \textsc{Prf} é construído a partir de $f$.
           \pk{} &= (T_{h_{d - 1}, 0}, \mathbf{r}).
         \end{align}
 
-  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$, um resumo $d =
+  \item[] \emph{Geração da assinatura.} Para uma mensagem $M$ e resumo $d =
       \hash{M}$, e um índice $j$ não utilizado anteriormente, calcula-se
         $\textsc{Ots}_\sigma^{j}$. Os caminhos de autenticação são retirados de
         $\textsc{State}$, e as assinaturas intermediárias em $\Sigma$. Assim, a
@@ -2107,12 +2107,12 @@ pseudoaleatórios \textsc{Prf} é construído a partir de $f$.
         sobre este processo podem ser encontrados em~\cite[2]{xmssmt}.
 
         % TODO this should really be more mathematical
-  \item[] \emph{Verificação da assinatura.} Para verificar uma assinatura
-      perante a hiper-árvore, $\textsc{Ots}_{\sigma}^{j}$ é aferida a fim de
-        construir $\textsc{Ots}_{\pk{}}$. Com este nodo e $\textsc{Auth}^{0}$,
-        a raiz da árvore é construída, a fim de verificar a primeira assinatura
-        em $\Sigma$. Este processo é  repetido $d - 1$ vezes, utilizando todos
-        os caminhos de autenticação e assinaturas em $\Sigma$ fornecidos por
+  \item[] \emph{Verificação da assinatura.} Para verificar $\sigma$ perante à
+      hiper-árvore, $\textsc{Ots}_{\sigma}^{j}$ é aferida a fim de construir
+        $\textsc{Ots}_{\pk{}}$. Com este nodo e $\textsc{Auth}^{0}$, a raiz da
+        árvore é construída, a fim de verificar a primeira assinatura em
+        $\Sigma$. Este processo é  repetido $d - 1$ vezes, utilizando todos os
+        caminhos de autenticação e assinaturas em $\Sigma$ fornecidos por
         $\sigma$, e a saída da última iteração é comparada com $T_{h_{d - 1},
         0}$. A assinatura é válida se e somente se estes valores forem iguais.
         Este processo pode ser visualizado na Figura~\ref{fig:8}.
@@ -2184,7 +2184,7 @@ ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11}
 contemplam todos os esquemas citados nas Seções~\ref{section:onetime}
 e~\ref{section:merkle}, à exceção da família
 \sphincs{}~\cite{Bernstein2015,sphincsplus}\sigla{\sphincs{}}{\emph{Stateless
-Practical Hash-based Incredibly Nice Cryptographic Signatures}}, que renuncia
+Practical Hash-based Incredibly Nice \\ Cryptographic Signatures}}, que renuncia
 o gerenciamento de estado, característica presente em todos os esquemas
 baseados em árvores de Merkle aprofundados anteriormente.
 
@@ -2479,7 +2479,7 @@ de modo diretamente proporcional.
     efetivas.}\label{fig:13}
 \end{figure}
 
-Como a modificação não afeta mecanismos internos do esquema, mostra-se
+Como a modificação não afeta mecanismos internos do esquema, é
 necessário discutir as consequências da concatenação de um dado $\lambda_k$ à
 mensagem original, e do processo de busca por este dado. A maximização ou
 minimização das tuplas $\mathcal{B}_{1}^{i}$ introduz um comportamento estável
