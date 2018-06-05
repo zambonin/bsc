@@ -1,8 +1,9 @@
 \documentclass{ufsctex/ufsctex}
 
-\usepackage[portuguese, onelanguage]{algorithm2e}
-\usepackage{amsmath, amsfonts, amssymb, booktabs, chronology, enumitem,
-            multirow, pgfplots, tikz, tikz-qtree, todonotes, xfrac}
+\usepackage{
+  algorithm, algorithmic, amsmath, amsfonts, amssymb, booktabs, chronology,
+  enumitem, multirow, pgfplots, tikz, tikz-qtree, todonotes, xfrac
+}
 
 \newcommand{\hh}{\mathcal{H}}
 \newcommand{\pk}{\mathcal{P}_k}
@@ -38,6 +39,32 @@
 \newcommand{\xmssbr}{\textsc{Xmss-br}}
 \newcommand{\sphincs}{\textsc{Sphincs}}
 
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Saída:}}
+\renewcommand{\algorithmicend}{\textbf{fim}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
+\renewcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicforall}{\textbf{para todo}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+\renewcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
+\renewcommand{\algorithmicwhile}{\textbf{enquanto}}
+\renewcommand{\algorithmicendwhile}{\algorithmicend\ \algorithmicwhile}
+\renewcommand{\algorithmicloop}{\textbf{laço}}
+\renewcommand{\algorithmicendloop}{\algorithmicend\ \algorithmicloop}
+\renewcommand{\algorithmicrepeat}{\textbf{repita}}
+\renewcommand{\algorithmicuntil}{\textbf{até}}
+\renewcommand{\algorithmicprint}{\textbf{imprima}}
+\renewcommand{\algorithmicreturn}{\textbf{retorne}}
+\renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
+\renewcommand{\algorithmicfalse}{\textbf{falso}}
+\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+\renewcommand{\algorithmiccomment}[1]{\hfill $\triangleright$ #1}
+
 \pgfplotsset{compat=1.15}
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
@@ -53,8 +80,6 @@
 \DeclareMathOperator*{\argmax}{argmax}
 
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
-
-\begin{document}
 
 \instituicao[a]{Universidade Federal de Santa Catarina}
 \departamento[o]{Departamento de Informática e Estatística}
@@ -117,6 +142,8 @@ a tradeoff parameter, enabling reduced execution time for signature generation
 or verification.}
 \keywords{post-quantum cryptography, cryptographic hash function, digital
 signature, Winternitz one time signature scheme}
+
+\begin{document}
 
 \capa{}
 \folhaderosto{}
@@ -419,45 +446,46 @@ abaixo.
               \text{ se } \ell = 8 \text { e } i \equiv 4 \pmod{8} \\
             k_{i - 1}, \text{ caso contrário.}
           \end{cases}
-        \end{equation}\simbolo{$\stackrel{\curvearrowright}{\ll{}}$}{
-            Deslocamento circular de \emph{bits}}
+        \end{equation}\simbolo{$\stackrel{\curvearrowright}{
+            \ll{}}$}{Deslocamento circular de \emph{bits}}
 
 \end{enumerate}
 
 Assim, uma função que criptografa uma mensagem $m$ e retorna um texto cifrado
-$c$ pode ser representada pelo Algoritmo~\ref{alg:1}. A mensagem é
+$c$ pode ser representada pelo Algoritmo~\ref{alg:aesencrypt}. A mensagem é
 primeiramente codificada em $A$ da seguinte maneira: $A_{i, j} = m_{i + 4j}, 0
 \leq i, j \leq 3$.  Note que \textsc{MixColumns} é ignorado na última rodada, a
 fim de facilitar a reversibilidade da cifra.
 
 \begin{algorithm}
-  \KwData{$m$, o texto a ser cifrado; $K$, a chave desejada}
-  \KwResult{$c$, o texto cifrado resultante}
-  \vspace{2mm}
+  \begin{algorithmic}
+    \REQUIRE{}  $m \in \binwds{128}, \enspace
+      K \in \cup_{n \in \{128, 192, 256\}} \binwds{n}$
+      \COMMENT{texto plano e chave}
+    \ENSURE{}  $c \in \binwds{128}$ \COMMENT{texto cifrado}
 
-  $A \leftarrow m$\;
-  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$\;
-  $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$\;
+    \STATE{}  $A \leftarrow m$
+    \STATE{}  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
+      \leftarrow \textsc{KeyExpansion}(K)$
+    \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{0}, \dots, k_{\ell - 1}\})$
 
-  \For{$i \leftarrow 1$ \KwTo{} $n_r - 1$}{
-    $A \leftarrow \textsc{SubBytes}(A)$\;
-    $A \leftarrow \textsc{ShiftRows}(A)$\;
-    $A \leftarrow \textsc{MixColumns}(A)$\;
-    $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
-  }
+    \FOR{$i \leftarrow 1$ até $n_r - 1$}
+      \STATE{}  $A \leftarrow \textsc{SubBytes}(A)$
+      \STATE{}  $A \leftarrow \textsc{ShiftRows}(A)$
+      \STATE{}  $A \leftarrow \textsc{MixColumns}(A)$
+      \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+        \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
+    \ENDFOR{}
 
-  $A \leftarrow \textsc{SubBytes}(A)$\;
-  $A \leftarrow \textsc{ShiftRows}(A)$\;
-  $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
+    \STATE{}  $A \leftarrow \textsc{SubBytes}(A)$
+    \STATE{}  $A \leftarrow \textsc{ShiftRows}(A)$
+    \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
 
-  $c \leftarrow A$\;
-
-  \vspace{2mm}
-  \caption{Codificação do AES.}\label{alg:1}
+    \STATE{}  $c \leftarrow A$
+  \end{algorithmic}
+  \caption{Codificação do AES.}\label{alg:aesencrypt}
 \end{algorithm}
 
 Para que a cifra seja caracterizada como simétrica, é preciso criar uma função
@@ -484,38 +512,39 @@ modificadas de acordo.
 
 \end{enumerate}
 
-Por fim, o resultado é representado pelo Algoritmo~\ref{alg:2}. Note a mudança
-da ordem das etapas, e a utilização invertida de $K_e$. $c$ é codificado no
-estado de maneira análoga ao algoritmo anterior.
+Por fim, o resultado é representado pelo Algoritmo~\ref{alg:aesdecrypt}. Note a
+mudança da ordem das etapas, e a utilização invertida de $K_e$. $c$ é
+codificado no estado de maneira análoga ao algoritmo anterior.
 
 \begin{algorithm}
-  \KwData{$c$, o texto cifrado; $K$, a chave desejada}
-  \KwResult{$m$, o texto claro resultante}
-  \vspace{2mm}
+  \begin{algorithmic}
+    \REQUIRE{}  $c \in \binwds{128}, \enspace
+      K \in \cup_{n \in \{128, 192, 256\}} \binwds{n}$
+      \COMMENT{texto cifrado e chave}
+    \ENSURE{}  $m \in \binwds{128}$ \COMMENT{texto plano}
 
-  $A \leftarrow c$\;
-  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
-    \leftarrow \textsc{KeyExpansion}(K)$\;
-  $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$\;
+    \STATE{}  $A \leftarrow c$
+    \STATE{}  $\{k_{0} \dots k_{(n_r + 1) \cdot \ell}\}
+      \leftarrow \textsc{KeyExpansion}(K)$
+    \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{n_r \cdot \ell}, \dots, k_{(n_r + 1) \cdot \ell - 1}\})$
 
-  \For{$i \leftarrow n_r - 1$ \KwTo{} $1$}{
-    $A \leftarrow \textsc{InvShiftRows}(A)$\;
-    $A \leftarrow \textsc{InvSubBytes}(A)$\;
-    $A \leftarrow \textsc{AddRoundKey}(A,
-      \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$\;
-    $A \leftarrow \textsc{InvMixColumns}(A)$\;
-  }
+    \FOR{$i \leftarrow n_r - 1$ até $1$}
+      \STATE{}  $A \leftarrow \textsc{InvShiftRows}(A)$
+      \STATE{}  $A \leftarrow \textsc{InvSubBytes}(A)$
+      \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+        \{k_{i \cdot \ell}, \dots, k_{(i + 1) \cdot \ell - 1}\})$
+      \STATE{}  $A \leftarrow \textsc{InvMixColumns}(A)$
+    \ENDFOR{}
 
-  $A \leftarrow \textsc{InvShiftRows}(A)$\;
-  $A \leftarrow \textsc{InvSubBytes}(A)$\;
-  $A \leftarrow \textsc{AddRoundKey}(A,
-    \{k_{0}, \dots, k_{\ell - 1}\})$\;
+    \STATE{}  $A \leftarrow \textsc{InvShiftRows}(A)$
+    \STATE{}  $A \leftarrow \textsc{InvSubBytes}(A)$
+    \STATE{}  $A \leftarrow \textsc{AddRoundKey}(A,
+      \{k_{0}, \dots, k_{\ell - 1}\})$
 
-  $m \leftarrow A$\;
-
-  \vspace{2mm}
-  \caption{Decodificação do AES.}\label{alg:2}
+    \STATE{}  $m \leftarrow A$
+  \end{algorithmic}
+  \caption{Decodificação do AES.}\label{alg:aesdecrypt}
 \end{algorithm}
 
 Para discussões detalhadas sobre as etapas do algoritmo, a fundamentação
@@ -590,17 +619,17 @@ quantidade de números relativamente primos a $x$.
 \end{enumerate}
 
 Nota-se que a descrição acima, embora funcional, apresenta sérios problemas de
-segurança se aplicada de maneira ingênua. Defina a noção de segurança
-semântica como, dado um texto cifrado, a impossibilidade de revelar informações
-quaisquer sobre seu texto plano
-correspondente~\cite{Goldwasser:inproc:1982:may}. Observe, por exemplo, que não
-existe qualquer fator aleatório na codificação da mensagem, caracterizando-a
-como determinística e habilitando uma entidade maliciosa a aplicar um ataque de
-texto plano escolhido, \emph{i.e.} a codificação de múltiplas mensagens a fim
-de descobrir informações sobre o algoritmo baseado em semelhanças entre as
-mensagens cifradas, portanto semanticamente inseguro. Este e outros
-ataques~\cite{Boneh:article:1999:feb} são mitigados com a aplicação de uma
-função de preenchimento à mensagem~\cite{Bellare:inproc:1994:may}.
+segurança se aplicada de maneira ingênua. Defina a noção de segurança semântica
+como, dado um texto cifrado, a impossibilidade de revelar informações quaisquer
+sobre seu texto plano correspondente~\cite{Goldwasser:inproc:1982:may}.
+Observe, por exemplo, que não existe qualquer fator aleatório na codificação da
+mensagem, caracterizando-a como determinística e habilitando uma entidade
+maliciosa a aplicar um ataque de texto plano escolhido, \emph{i.e.} a
+codificação de múltiplas mensagens a fim de descobrir informações sobre o
+algoritmo baseado em semelhanças entre as mensagens cifradas, portanto
+semanticamente inseguro. Este e outros ataques~\cite{Boneh:article:1999:feb}
+são mitigados com a aplicação de uma função de preenchimento à
+mensagem~\cite{Bellare:inproc:1994:may}.
 
 \section{Funções de resumo criptográfico}\label{section:hashfunc}
 
@@ -987,7 +1016,7 @@ abaixo o funcionamento do esquema e discute-se algumas de suas características.
       \begin{equation}
         \sk{} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0, 0}, x_{1, 0})
           \random{} \binwds{m}
-      \end{equation}
+      \end{equation}\simbolo{$\random{}$}{Seleção aleatória}
         como a chave privada, informalmente uma $2m$-tupla de inteiros
         pseudoaleatórios. A chave pública $\pk{}$ é derivada de $\sk{}$,
         computando $f(x) \; \forall x \in  \sk{}$. Logo,
@@ -1059,7 +1088,7 @@ $\fhash{m}$.
         como a chave privada, informalmente uma $t$-tupla de inteiros
         pseudoaleatórios. A chave pública $\pk{} = (y_{t-1}, \dots, y_0)$ pode
         ser derivada de $\sk{}$, computando $f^{2^{w}-1}(x) \; \forall x \in
-        \sk{}$\simbolo{$f^{\alpha}(\cdot)$}{Aplicação de $f$ $\alpha$ vezes}.
+        \sk{}$\simbolo{$f^{\alpha}$}{Aplicação de $f$ $\alpha$ vezes}.
         Logo,
         \begin{equation}
           \pk{} = (f^{2^{w}-1}(x_{t-1}), \dots, f^{2^{w}-1}(x_0)).
@@ -1191,8 +1220,7 @@ iteração $c^{i}_{k}(x, r)$, definida recursivamente como
 
   \item[] \emph{Geração de chaves.} Defina $\sk{}$ e $r$ como tuplas de
       inteiros pseudoaleatórios, discutidos anteriormente. O algoritmo também
-        deve escolher uma chave de função $k \stackrel{\$}\longleftarrow
-        \mathcal{K}$. Por fim,
+        deve escolher uma chave de função $k \random{} \mathcal{K}$. Por fim,
         \begin{equation}
           \pk{} = (c^{2^w-1}_{k}(x_{t-1}, r), \dots, c^{0}_{k}(x, r)).
         \end{equation}
@@ -1331,7 +1359,7 @@ pequenos.
       mensagem $M$, e assegure a corretude da assinatura $\sigma$ para cada
         bloco:
         \begin{equation}
-          y_{d_{i}} = f(\sigma_{i}), 0 \leq i \leq k - 1.
+          y_{d_{i}} = f(\sigma_{i}), \; 0 \leq i \leq k - 1.
         \end{equation}
 
 \end{enumerate}
@@ -1481,19 +1509,19 @@ quando calculado novamente, descaracterizando a validade dos dados atrelados a
 esta.
 
 \begin{algorithm}
-  \KwData{$h$, índice de folha; \textbf{S}, pilha de nodos}
-  \KwResult{\textbf{S}, pilha atualizada}
-  \vspace{2mm}
-
-  $\textsc{Leaf} \longleftarrow \textsc{Leafcalc}(i)$\;
-  \While{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}{
-    $\textsc{Top} \longleftarrow \mathbf{S}.pop()$\;
-    $\textsc{Leaf} \longleftarrow \hash{\textsc{Top} \concat \textsc{Leaf}}$\;
-  }
-  $\mathbf{S}.push(\textsc{Leaf})$\;
-
-  \vspace{2mm}
-  \caption{Funcionamento de $\textsc{Treehash}_h$.}\label{alg:3}
+  \begin{algorithmic}
+    \REQUIRE{}  $h \in \{0, \dots, 2^{H} - 1\}, \enspace \mathbf{S}$
+      \COMMENT{índice de folha, pilha de nodos}
+    \ENSURE{}  $\mathbf{S}$ \COMMENT{pilha atualizada}
+    \STATE{}  $\textsc{Leaf} \leftarrow \textsc{Leafcalc}(i)$
+    \WHILE{$\textsc{Leaf}.height() = \mathbf{S}.top().height()$}
+      \STATE{}  $\textsc{Top} \leftarrow \mathbf{S}.pop()$
+      \STATE{}  $\textsc{Leaf} \leftarrow
+        \hash{\textsc{Top} \concat \textsc{Leaf}}$
+    \ENDWHILE{}
+    \STATE{}  $\mathbf{S}.push(\textsc{Leaf})$
+  \end{algorithmic}
+  \caption{Funcionamento de $\textsc{Treehash}_h$.}\label{alg:treehash}
 \end{algorithm}
 
 Para calcular nodos de maneira eficiente, não é necessário armazenar $T$
@@ -1504,28 +1532,27 @@ $height()$, que retorna sua altura em $T$.  O algoritmo $\textsc{Treehash}_h$,
 munido de uma pilha \textbf{S} usual com as operações $\mathbf{S}.pop()$,
 $\mathbf{S}.push(\cdot)$ e $\mathbf{S}.top()$ calcula um nodo de altura $h$ em
 $2^h$ chamadas de \textsc{Leaf} e $2^{h} - 1$ cálculos de $\hh{}$.  Este
-processo pode ser visualizado no Algoritmo~\ref{alg:3}.
+processo pode ser visualizado no Algoritmo~\ref{alg:treehash}.
 
 Em qualquer momento de sua execução, o número máximo de nodos armazenados em
 \textbf{S} será $h$, chamados de nodos cauda, ou \emph{tail nodes}. Ao seu
-estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$.  Note
-que é possível executar \textsc{Treehash} repetidamente, como visto no
-Algoritmo~\ref{alg:5}, para calcular a raiz da árvore de Merkle $T_{H, 0}$.
-Estas estratégias serão necessárias para a travessia em árvores de dimensões
-extensas, abordada na Subseção~\ref{subsection:xmss}.
+estado final, \textbf{S} conterá apenas o nodo desejado na altura $h$. Note que
+é possível executar \textsc{Treehash} repetidamente, como visto no
+Algoritmo~\ref{alg:fulltreehash}, para calcular a raiz da árvore de Merkle
+$T_{H, 0}$. Estas estratégias serão necessárias para a travessia em árvores de
+dimensões extensas, abordada na Subseção~\ref{subsection:xmss}.
 
 \begin{algorithm}
-  \KwData{$H$, a altura da árvore $T$}
-  \KwResult{$T_{H, 0}$, o nodo raiz}
-  \vspace{2mm}
-
-  \For{$i \leftarrow 0$ \KwTo{} $2^{H} - 1$}{
-    $\mathbf{S} \longleftarrow \textsc{Treehash}_{i}(\mathbf{S})$\;
-  }
-  $T_{H, 0} \longleftarrow \mathbf{S}.pop()$\;
-
-  \vspace{2mm}
-  \caption{\textsc{Treehash} para o cálculo de $T_{H, 0}$.}\label{alg:5}
+  \begin{algorithmic}
+    \REQUIRE{} {$H \geq 2$} \COMMENT{altura da árvore $T$}
+    \ENSURE{} {$T_{H, 0}$} \COMMENT{nodo raiz}
+    \FOR{$i \leftarrow 0$ até $2^{H} - 1$}
+      \STATE{}  $\mathbf{S} \leftarrow \textsc{Treehash}_{i}(\mathbf{S})$
+    \ENDFOR{}
+    \STATE{}  $T_{H, 0} \leftarrow \mathbf{S}.pop()$
+  \end{algorithmic}
+  \caption{\textsc{Treehash} para o
+    cálculo de $T_{H, 0}$.}\label{alg:fulltreehash}
 \end{algorithm}
 
 \subsection{\mss{}}\label{subsection:mss}
@@ -1917,8 +1944,8 @@ atrelado a este tipo de construção.
 \subsubsection{Travessia de árvores de Merkle \bds{}}\label{subsubsection:bds}
 
 O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um
-índice de folha $s \in \{0, \dots, H - 2\}$, e um parâmetro
-\begin{equation}
+índice de folha $s \in \{0, \dots, 2^{H} - 2\}$, e um parâmetro
+\begin{equation}\label{eq:kparam}
   K \in \mathbb{N}^{*} \setminus \{1\},
     \; K < H, \; \sfrac{H - K}{2} \equiv 0 \pmod{2}
 \end{equation}
@@ -1942,7 +1969,7 @@ composto das seguintes estruturas:
   \item \textbf{S}, pilha munida das operações usuais;
 
   \item $\{\textsc{Treehash}_{h} : 0 \leq h \leq H - 3\}$, \emph{i.e.} várias
-      instâncias do Algoritmo~\ref{alg:3}.
+      instâncias do Algoritmo~\ref{alg:treehash}.
 
 \end{enumerate}
 
@@ -1950,11 +1977,11 @@ As listas são munidas da operação $remove(\cdot)$, cujo argumento representa 
 índice válido de acordo com o tamanho da lista. As instâncias
 $\textsc{Treehash}_{h}$ compartilham \textbf{S}. São inicializadas por
 $init(\cdot)$, cujo argumento é um índice de folha que criará o nodo
-\textsc{Leaf} no Algoritmo~\ref{alg:3}, e podem ser executadas totalmente por
-$update()$. Ademais, são munidas da função $height()$, que retorna a menor
-altura entre nodos localizados nesta instância. Em casos anômalos, se
-\textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e se esta
-instância não tiver sido inicializada ou já tiver sido terminada,
+\textsc{Leaf} no Algoritmo~\ref{alg:treehash}, e podem ser executadas
+totalmente por $update()$. Ademais, são munidas da função $height()$, que
+retorna a menor altura entre nodos localizados nesta instância. Em casos
+anômalos, se \textbf{S} estiver vazia, $\textsc{Treehash}_{h}.height() = h$, e
+se esta instância não tiver sido inicializada ou já tiver sido terminada,
 $\textsc{Treehash}_{h} = \infty$.
 
 O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É
@@ -1967,7 +1994,7 @@ $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2
 $\textsc{State}_{\bds{}}$ preparado anteriormente.
 
 O cálculo de nodos intermediários depende se este está à esquerda ou à direita.
-A descrição detalhada de \bds{}, no Algoritmo~\ref{alg:4}, contempla ambos os
+A descrição detalhada de \bds{}, no Algoritmo~\ref{alg:bds}, contempla ambos os
 casos, e será discutida em detalhes. Para uma folha $T_{0, j}$, $\tau$ é a
 altura do primeiro pai à esquerda de $T_{0, j}$. Este valor codifica as alturas
 nas quais o caminho de autenticação para $T_{0, j + 1}$ necessita de novos
@@ -1976,45 +2003,44 @@ esquerda na altura $\tau$. Caso este nodo esteja à esquerda, então $\tau = 0$,
 e do contrário, $\tau = \max(\{2^h \mid j + 1 : 1 \leq h \leq H\})$.
 
 \begin{algorithm}
-  \KwData{$H$, altura da árvore $T$; $K$, parâmetro de compensação; $s$, índice
-    de folha; $\textsc{State}_{\bds{}}$, estado do algoritmo}
-  \KwResult{$\textsc{Auth}$, o caminho de autenticação para a folha $s + 1$}
-  \vspace{2mm}
-
-  $\tau \longleftarrow \max(\{2^h \mid s + 1 : h \in 1, \dots, H\})$\;
-  \If{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor \equiv 0 \pmod{2}$
-    e $\tau < H - 1$}{
-    $\textsc{Keep}_{\tau} \longleftarrow \textsc{Auth}_{\tau}$\;
-  }
-  \uIf{$\tau = 0$}{
-    $\textsc{Auth}_0 \longleftarrow \textsc{Leafcalc}(s)$\;
-  }
-  \ElseIf{$\tau > 0$}{
-    $\textsc{Auth}_{\tau} \longleftarrow
-      \hash{\textsc{Auth}_{\tau - 1} \concat \textsc{Keep}_{\tau - 1}}$\;
-    $\textsc{Keep}.remove(\tau - 1)$\;
-    \For{$h = 0$ \KwTo{} $\tau - 1$}{
-      \uIf{$h < H - K$}{
-        $\textsc{Auth}_{h} \longleftarrow \textsc{Treehash}_{h}.pop()$\;
-      }
-      \Else{
-        $\textsc{Auth}_{h} \longleftarrow \textsc{Retain}_{h}.pop()$\;
-      }
-    }
-    \For{$h = 0$ \KwTo{} $\min(\tau - 1, H - K - 1)$}{
-      \If{$s + 1 + 3 \cdot 2^h < 2^H$}{
-        $\textsc{Treehash}_{h}.init(s + 1 + 3 \cdot 2^h)$\;
-      }
-    }
-  }
-  \For{$i = 0$ \KwTo{} $\sfrac{H - K}{2}$}{
-    $k \longleftarrow \min(\{
-      \textsc{Treehash}_{j}.height() : j \in 0, \dots, H - K - 1\})$\;
-    $\textsc{Treehash}_{k}.update()$\;
-  }
-
-  \vspace{2mm}
-  \caption{Travessia de árvores de Merkle \bds{}.}\label{alg:4}
+  \begin{algorithmic}
+    \REQUIRE{} {$H \geq 2, \enspace K~(\text{Eq.}~\ref{eq:kparam}), \enspace
+      s \in {0, \dots, 2^{H} - 2}, \enspace \textsc{State}_{\bds{}}$}
+      \COMMENT{altura da árvore $T$, parâmetro de compensação,
+        índice de folha, estado do algoritmo}
+    \ENSURE{} {$\textsc{Auth}^{s + 1}$}
+      \COMMENT{caminho de autenticação para a folha $s + 1$}
+    \STATE{}  $\tau \leftarrow \max(\{2^h \mid s + 1 : h \in 1, \dots, H\})$
+    \IF{$\lfloor \sfrac{s}{2^{\tau + 1}} \rfloor \equiv 0 \pmod{2}$
+      e $\tau < H - 1$}
+      \STATE{}  $\textsc{Keep}_{\tau} \leftarrow \textsc{Auth}_{\tau}$
+    \ENDIF{}
+    \IF{$\tau = 0$}
+      \STATE{}  $\textsc{Auth}_0 \leftarrow \textsc{Leafcalc}(s)$
+    \ELSIF{$\tau > 0$}
+      \STATE{}  $\textsc{Auth}_{\tau} \leftarrow
+        \hash{\textsc{Auth}_{\tau - 1} \concat \textsc{Keep}_{\tau - 1}}$
+      \STATE{}  $\textsc{Keep}.remove(\tau - 1)$
+      \FOR{$h = 0$ até $\tau - 1$}
+        \IF{$h < H - K$}
+          \STATE{}  $\textsc{Auth}_{h} \leftarrow \textsc{Treehash}_{h}.pop()$
+        \ELSE{}
+          \STATE{}  $\textsc{Auth}_{h} \leftarrow \textsc{Retain}_{h}.pop()$
+        \ENDIF{}
+      \ENDFOR{}
+      \FOR{$h = 0$ até $\min(\tau - 1, H - K - 1)$}
+        \IF{$s + 1 + 3 \cdot 2^h < 2^H$}
+          \STATE{}  $\textsc{Treehash}_{h}.init(s + 1 + 3 \cdot 2^h)$
+        \ENDIF{}
+      \ENDFOR{}
+    \ENDIF{}
+    \FOR{$i = 0$ até $\sfrac{H - K}{2}$}
+      \STATE{}  $k \leftarrow \min(\{
+        \textsc{Treehash}_{j}.height() : j \in 0, \dots, H - K - 1\})$
+      \STATE{}  $\textsc{Treehash}_{k}.update()$
+    \ENDFOR{}
+  \end{algorithmic}
+  \caption{Travessia de árvores de Merkle \bds{}.}\label{alg:bds}
 \end{algorithm}
 
 Para computar os nodos à esquerda, a utilização da lista $\textsc{Keep}$ será
