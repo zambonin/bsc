@@ -1,8 +1,8 @@
 \documentclass{ufsctex/ufsctex}
 
 \usepackage{
-  algorithm, algorithmic, amsmath, amsfonts, amssymb, booktabs, chronology,
-  enumitem, multirow, pgfplots, tikz, tikz-qtree, todonotes, xfrac
+  amsmath, amsfonts, amssymb, anyfontsize, booktabs, chronology, enumitem,
+  etoolbox, multirow, pgfplots, tikz, tikz-qtree, todonotes, xfrac
 }
 
 \newcommand{\hh}{\mathcal{H}}
@@ -39,32 +39,6 @@
 \newcommand{\xmssbr}{\textsc{Xmss-br}}
 \newcommand{\sphincs}{\textsc{Sphincs}}
 
-\floatname{algorithm}{Algoritmo}
-\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
-\renewcommand{\algorithmicensure}{\textbf{Saída:}}
-\renewcommand{\algorithmicend}{\textbf{fim}}
-\renewcommand{\algorithmicif}{\textbf{se}}
-\renewcommand{\algorithmicthen}{\textbf{então}}
-\renewcommand{\algorithmicelse}{\textbf{senão}}
-\renewcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
-\renewcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
-\renewcommand{\algorithmicfor}{\textbf{para}}
-\renewcommand{\algorithmicforall}{\textbf{para todo}}
-\renewcommand{\algorithmicdo}{\textbf{faça}}
-\renewcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
-\renewcommand{\algorithmicwhile}{\textbf{enquanto}}
-\renewcommand{\algorithmicendwhile}{\algorithmicend\ \algorithmicwhile}
-\renewcommand{\algorithmicloop}{\textbf{laço}}
-\renewcommand{\algorithmicendloop}{\algorithmicend\ \algorithmicloop}
-\renewcommand{\algorithmicrepeat}{\textbf{repita}}
-\renewcommand{\algorithmicuntil}{\textbf{até}}
-\renewcommand{\algorithmicprint}{\textbf{imprima}}
-\renewcommand{\algorithmicreturn}{\textbf{retorne}}
-\renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
-\renewcommand{\algorithmicfalse}{\textbf{falso}}
-\renewcommand{\listalgorithmname}{Lista de Algoritmos}
-\renewcommand{\algorithmiccomment}[1]{\hfill $\triangleright$ #1}
-
 \pgfplotsset{compat=1.15}
 
 \usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
@@ -80,6 +54,16 @@
 \DeclareMathOperator*{\argmax}{argmax}
 
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\vbadness=10000
+
+% https://tex.stackexchange.com/a/193370
+\makeatletter
+\patchcmd{\pdfstringdef}
+  {\csname HyPsd@babel@}
+  {\let\bbl@info\@gobble\csname HyPsd@babel@}
+  {}{}
+\makeatother
 
 \instituicao[a]{Universidade Federal de Santa Catarina}
 \departamento[o]{Departamento de Informática e Estatística}
@@ -145,21 +129,14 @@ signature, Winternitz one time signature scheme}
 
 \begin{document}
 
+\pagenumbering{roman}
 \capa{}
-\folhaderosto{}
-\folhaaprovacao{}
-\paginadedicatoria{}
-\paginaagradecimento{}
-\paginaepigrafe{}
-\paginaresumo{}
-\paginaabstract{}
-
+\pretextuais{}
 \listadefiguras{}
 \listadetabelas{}
 \listadeabreviaturas{}
 \listadesimbolos{}
-\listofalgorithms{}
-
+\listadealgoritmos{}
 \sumario{}
 
 \chapter{Introdução}\label{chapter:intro}
@@ -703,7 +680,7 @@ geralmente englobam todas as propriedades, pois funções de resumo criptográfi
 são utilizadas em sua construção, e a parametrização habilita autenticação da
 mensagem junto à integridade já fornecida.
 
-\begin{figure}[ht]
+\begin{figure}
   \centering
   \begin{tikzpicture}
     \begin{scope}[fill opacity=0.5]
@@ -1016,12 +993,14 @@ abaixo o funcionamento do esquema e discute-se algumas de suas características.
       \begin{equation}
         \sk{} = (x_{0, m-1}, x_{1, m-1}, \dots, x_{0, 0}, x_{1, 0})
           \random{} \binwds{m}
-      \end{equation}\simbolo{$\random{}$}{Seleção aleatória}
-        como a chave privada, informalmente uma $2m$-tupla de inteiros
-        pseudoaleatórios. A chave pública $\pk{}$ é derivada de $\sk{}$,
-        computando $f(x) \; \forall x \in  \sk{}$. Logo,
+      \end{equation}
+        como a chave privada\simbolo{$\random{}$}{Seleção aleatória},
+        informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave
+        pública $\pk{}$ é derivada de $\sk{}$, computando $f(x) \; \forall x
+        \in \sk{}$. Logo,
         \begin{equation}
-          \pk{} = (f(x_{0, m-1}), f(x_{1, m-1}), \dots, f(x_{0, 0}), f(x_{1, 0})).
+          \pk{} = (f(x_{0, m - 1}), f(x_{1, m - 1}),
+            \dots, f(x_{0, 0}), f(x_{1, 0})).
         \end{equation}
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule o seu
@@ -2651,10 +2630,10 @@ Evidentemente, as otimizações propostas nos esquemas \wotsb{} e \wotsr{} podem
 ser aplicadas a quaisquer variantes da família Winternitz. Consequentemente,
 qualquer esquema baseado em árvores de Merkle pode fazer uso de instâncias
 otimizadas destes em suas folhas. A fim de demonstrar esta afirmação, a
-implementação\footnote{\url{https://github.com/zambonin/xmss-reference}} de
-\wotsplus{}, esquema de assinatura única escolhido para a variante de \xmss{}
-definida em~\cite[Seção 3.1]{Huelsing:report:2018:may} e explorada na
-Subseção~\ref{subsection:wotsplus}, é modificada de acordo.
+implementação de \wotsplus{}, esquema de assinatura única escolhido para a
+variante de \xmss{}, definida em~\cite[Seção 3.1]{Huelsing:report:2018:may} e
+explorada na Subseção~\ref{subsection:wotsplus}, é modificada de acordo, e pode
+ser encontrada em \url{https://github.com/zambonin/xmss-reference}.
 
 A Tabela~\ref{table:xmss} apresenta os resultados obtidos, na forma da média do
 tempo de execução em milissegundos de $2^{14}$ instâncias dos esquemas \xmss{},
