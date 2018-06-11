@@ -54,10 +54,10 @@
       \item Criptografia pós-quântica é independente destes problemas
     \end{itemize}
     \item Funções de mão única são necessárias \\
-      e suficientes para assinatura digital~\cite{Rompel:1990:OFN:100216.100269}
+      e suficientes para assinatura digital~\cite{Rompel:inproc:1990:may}
     \begin{itemize}
       \item Base teórica de funções de resumo criptográfico
-      \item Construção de esquemas baseados apenas nestas funçõess
+      \item Construção de esquemas baseados apenas nestas funções
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -94,7 +94,7 @@
     \item Provê autenticação, integridade e não-repúdio
     \item Baseada em criptografia de chaves públicas
     \item Tripla de algoritmos probabilísticos
-      de tempo polinomial~\cite{Goldreich:2004:FCV:975541}
+      de tempo polinomial~\cite{Goldreich:book:2004}
   \end{itemize}
   \begin{figure}
     \centering
@@ -282,22 +282,20 @@
   \frametitle{Nossas contribuições}
   \framesubtitle{Melhora do desempenho da geração ou verificação de $\sigma$}
   \begin{itemize}
-    \setlength\itemsep{0.5em}
-    \item Busca de resumos cujo processamento é mais eficiente \\
-      para um dos passos
-    \item Escolher a mensagem $M' \leftarrow \lambda_i$
-      cuja $\mu(\mathcal{B}_{1}^{i})$ é afastada da média
+    \setlength\itemsep{1em}
+    \item Modificação de \emph{bits} inutilizados em $\mathcal{B}_2$
     \begin{itemize}
-      \item Limite de buscas codificado em $1 \leq i \leq R$
-      \item Amplitude de valores para $\mu(\mathcal{B}_{1}^{i})$ cresce com $R$
+      \item Resultados positivos apenas para otimização de Ver
     \end{itemize}
-    \item Minimização de $\mu(\mathcal{B}_{1}^{i})$
-      traduz-se na otimização da geração de $\sigma$
-    \item Maximização de $\mu(\mathcal{B}_{1}^{i})$
-      permite a verificação eficiente de $\sigma$
+    \item Busca de resumos mais eficientes para Sig ou Ver
     \begin{itemize}
-      \item Modificação de $\mathcal{B}_2$
-        para atingir ainda melhores resultados
+      \item Modificação da mensagem original através de um \emph{nonce}
+      \item Limite de buscas codificado em $1 \leq i \leq R$
+    \end{itemize}
+    \item $\max(\mu(\mathcal{B}_{1}^{i}))$ otimiza Ver,
+        e $\min(\mu(\mathcal{B}_{1}^{i}))$ otimiza Sig
+    \begin{itemize}
+      \item Amplitude de valores para $\mu(\mathcal{B}_{1}^{i})$ cresce com $R$
     \end{itemize}
   \end{itemize}
 \end{frame}
