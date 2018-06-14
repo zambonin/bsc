@@ -43,7 +43,9 @@
 
 \pgfplotsset{compat=1.15}
 
-\usetikzlibrary{matrix, arrows, decorations.markings, shapes.geometric}
+\usetikzlibrary{
+  matrix, arrows, decorations.markings, shapes.geometric, patterns
+}
 
 \tikzset{
   XOR/.style={draw, circle, append after command={
@@ -76,9 +78,9 @@
 \grau{Bacharel em Ciência da Computação}
 \local{Florianópolis}
 \data{11}{junho}{2018}
-\orientador[Orientador]{Prof.\ Dr.\ Ricardo Felipe Custódio}
-\coorientador[Coorientador]{Prof.\ Dr.\ Daniel Panario}
-\coordenador[Coordenador]{Prof.\ Dr.\ Rafael Luiz Cancian}
+\orientador[Orientador]{Prof.\ Ricardo Felipe Custódio, Dr.}
+\coorientador[Coorientador]{Prof.\ Daniel Panario, Dr.}
+\coordenador[Coordenador]{Prof.\ Rafael Luiz Cancian, Dr.}
 
 \numerodemembrosnabanca{1}
 \orientadornabanca{nao}
@@ -207,7 +209,7 @@ estado~\cite{Bernstein:inproc:2015:apr}.
 Neste trabalho, é enfatizado o estudo do esquema de assinatura digital única
 Winternitz, no qual o resumo criptográfico da mensagem a ser assinada define
 diretamente a complexidade dos passos de geração e verificação da assinatura.
-De acordo com este comportamento, é apresentada uma customização para o esquema
+De acordo com este comportamento, é apresentada uma adaptação para o esquema
 na forma de um parâmetro adicional, que habilita a redução do cômputo de
 verificação de assinatura em troca do aumento deste na geração da assinatura,
 ou vice-versa.
@@ -221,18 +223,16 @@ desta otimização são verificadas em esquemas mais complexos, baseados em
 árvores de Merkle, que também podem ser aplicados a meios com restrições
 similares.
 
-Este trabalho é uma versão expandida e, portanto didática, do artigo a ser
-publicado~\cite{Perin:inproc:2018:jun}.
-
 \section{Objetivos}\label{section:objectives}
 
 \subsection{Objetivo geral}\label{subsection:general}
 
-Apresentar um estudo detalhado sobre o esquema de assinatura digital única
-Winternitz, contextualizando-o junto ao estado da arte, observando o
-refinamento e utilização deste em vários outros esquemas a fim de habilitar o
-gerenciamento de múltiplas assinaturas e fundamentando a otimização proposta,
-que afeta o tempo de execução da criação ou verificação de uma assinatura.
+Apresentar um estudo detalhado sobre os principais esquemas de assinatura
+digital baseados em funções de resumo criptográfico. Em especial, um estudo
+detalhado sobre o esquema de assinatura digital única Winternitz é realizado,
+contextualizando-o junto aos algoritmos previamente descritos. Este processo
+tem o intuito de fundamentar a otimização proposta, que afeta o tempo de
+execução da criação ou verificação de uma assinatura.
 
 \subsection{Objetivos específicos}\label{subsection:specific}
 
@@ -266,6 +266,17 @@ Neste trabalho, a estrutura do esquema base não é modificada, e um
 pré-processamento da mensagem é feito alternativamente, permitindo a
 escalabilidade de instâncias de esquemas Winternitz com quaisquer parâmetros,
 introduzindo apenas um pequeno custo na etapa de assinatura da mensagem.
+
+\section{Contribuições deste trabalho}\label{section:contributions}
+
+Uma versão resumida deste trabalho~\cite{Perin:inproc:2018:jun} será publicada
+como um artigo completo em \emph{22th IEEE Symposium on Computers and
+Communications} (ISCC 2018), sob o nome \emph{Tuning the Winternitz Hash-Based
+Digital Signature Scheme}. Ainda, o artigo pode ser consultado no
+Apêndice~\ref{chapter:paper}. Este trabalho busca adicionalmente fornecer
+explicações didáticas para vários esquemas baseados em funções de resumo
+criptográfico presentes na literatura, bem como uma abordagem complementar aos
+argumentos providos pelo artigo, no Capítulo~\ref{chapter:tuning}.
 
 \chapter{Primitivas criptográficas}\label{chapter:primitives}
 
@@ -924,7 +935,6 @@ da concatenação da mensagem original com a assinatura do resumo criptográfico
 desta, embora a saída do algoritmo \textsc{Sig} consista apenas da aplicação de
 uma função interna ao resumo.
 
-% TODO relacionar com RSA
 Finalmente, a apresentação de um exemplo de esquema de assinatura digital é
 postergado para o Capítulo~\ref{chapter:hashsig}, onde serão explanados vários
 esquemas que, embora teoricamente similares, habilitam o entendimento
@@ -988,20 +998,23 @@ funcionamento e algumas de suas características são discutidas abaixo.
   \item[] \emph{Geração de chaves.} Defina
       \begin{equation}
         \sk{} = (x_{0, m - 1}, x_{1, m - 1}, \dots, x_{0, 0}, x_{1, 0})
-          \random{} \binwds{m}
+          \random{} \binwds{(m, 2m)}
       \end{equation}
-        como a chave privada\simbolo{$\random{}$}{Seleção aleatória},
-        informalmente uma $2m$-tupla de inteiros pseudoaleatórios. A chave
-        pública $\pk{}$ é derivada de $\sk{}$, computando $f(x) \; \forall x
-        \in \sk{}$. Logo,
-        \begin{equation}
-          \pk{} = (f(x_{0, m - 1}), f(x_{1, m - 1}),
-            \dots, f(x_{0, 0}), f(x_{1, 0})).
-        \end{equation}
+        como a chave privada.\simbolo{$\random{}$}{Seleção aleatória} A chave
+        pública $\pk{}$ é derivada de $\sk{}$,\simbolo{$\Sigma^{(l, t)}$}{Todas
+        as $t$-tuplas de palavras de tamanho $l$ construídas com $\Sigma$}
+        computando $f(x) \; \forall x \in \sk{}$. Logo,
+        \begin{align}
+          \pk{} &= (f(x_{0, m - 1}), f(x_{1, m - 1}),
+            \dots, f(x_{0, 0}), f(x_{1, 0})) \\
+                &= (y_{0, m - 1}, y_{1, m - 1},
+            \dots, y_{0, 0}, y_{1, 0}).
+        \end{align}
 
   \item[] \emph{Geração da assinatura.} Tome uma mensagem $M$ e calcule $d =
       \hash{M}$. O resumo $d$ pode ser representado como $d_{m - 1} \dots
-        d_{0}$. A assinatura consiste de elementos de $\sk{}$ operados por $f$:
+        d_{0}$. A assinatura consiste de elementos de $\sk{}$ operados por $f$
+        de acordo com $d$:
         \begin{equation}
           \sigma = (f(x_{d_{m - 1}, m - 1}), \dots, f(x_{d_{0}, 0})).
         \end{equation}
@@ -1058,13 +1071,12 @@ Por fim, considere as funções de mão única $f : \binwds{m} \longrightarrow
 
   \item[] \emph{Geração de chaves.} Defina
       \begin{equation}
-        \sk{} = (x_{t - 1}, \dots, x_{0}) \random{} \binwds{m}
+        \sk{} = (x_{t - 1}, \dots, x_{0}) \random{} \binwds{(m, t)}
       \end{equation}
-        como a chave privada, informalmente uma $t$-tupla de inteiros
-        pseudoaleatórios. A chave pública $\pk{} = (y_{t - 1}, \dots, y_{0})$
-        pode ser derivada de $\sk{}$, computando $f^{2^{w}-1}(x) \; \forall x
-        \in \sk{}$\simbolo{$f^{\alpha}$}{Aplicação de $f$ $\alpha$ vezes}.
-        Logo,
+        como a chave privada. A chave pública $\pk{} = (y_{t - 1}, \dots,
+        y_{0})$ pode ser derivada de $\sk{}$, computando $f^{2^{w}-1}(x) \;
+        \forall x \in \sk{}$\simbolo{$f^{\alpha}$}{Aplicação de $f$ $\alpha$
+        vezes}. Logo,
         \begin{equation}
           \pk{} = (f^{2^{w}-1}(x_{t - 1}), \dots, f^{2^{w}-1}(x_{0})).
         \end{equation}
@@ -1180,8 +1192,8 @@ original. A família de funções que o \wotsplus{} utiliza é definida por
 \mathcal{K}_{m}\},\] ou seja, funções de mão única sem compressão, e
 $\mathcal{K}_{m}$ é interpretado como o espaço de chaves. A partir desta
 família, e de uma tupla de palavras pseudoaleatórias \[r = (r_{0}, \dots,
-r_{2^{w} - 1}) \random{} \binwds{m},\] a nova função de iteração $c^{i}_{k}(x,
-r)$ é definida recursivamente como
+r_{2^{w} - 1}) \random{} \binwds{(m, 2^{w})},\] a nova função de iteração
+$c^{i}_{k}(x, r)$ é definida recursivamente como
 \begin{equation}
   \begin{split}
     c^{0}_{k}(x, r) &= x, \\
@@ -1218,7 +1230,6 @@ r)$ é definida recursivamente como
 
 \end{enumerate}
 
-% TODO mover para Merkle-Damgård
 Note que a utilização de uma função conhecida para as iterações de $f$, como o
 AES, é factível. Porém, é necessário adaptá-la para que respeite as restrições
 impostas pelo esquema. Para que isto seja feito de maneira a manter um nível de
@@ -1309,7 +1320,7 @@ A]{Reyzin:inproc:2002:jul}.
 \begin{enumerate}
 
   \item[] \emph{Geração de chaves.} Defina $X = (x_{t - 1}, \dots, x_{0})
-      \random{} \binwds{m}$, e adicione $k$ para obter a chave privada.
+      \random{} \binwds{(m, t)}$, e adicione $k$ para obter a chave privada.
         Portanto,
         \begin{equation}
           \sk{} = (k, x_{t - 1}, \dots, x_{0}).
@@ -1775,7 +1786,7 @@ mas não considerada no contexto de $T$.
         máscaras
       \begin{equation}
         \mathbf{r} = (r_{0}, \dots, r_{H + \lceil \log_{2} t \rceil - 1})
-          \random{} \binwds{2m}.
+          \random{} \binwds{(2m, H + \lceil \log_{2} t \rceil)}.
       \end{equation}
         Para gerar as chaves privadas das instâncias de esquemas de assinatura
         única, defina
@@ -1926,10 +1937,10 @@ O algoritmo admite quatro entradas, na forma da altura $H$ da árvore $T$, um
     \; K < H, \; \sfrac{H - K}{2} \equiv 0 \pmod{2}
 \end{equation}
 que representa uma compensação entre armazenamento e tempo de execução do
-algoritmo, permitindo que uma execução total de $\textsc{Treehash}$,
-\emph{i.e.} para todas as $2^{H} - 1$ folhas, seja substituída por $\sfrac{H -
-K}{2}$ instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\bds{}}$
-é composto das seguintes estruturas:
+algoritmo, permitindo que uma execução total de $\textsc{Treehash}$, ou seja,
+para todas as $2^{H} - 1$ folhas, seja substituída por $\sfrac{H - K}{2}$
+instâncias desta rotina. Finalmente, o estado $\textsc{State}_{\bds{}}$ é
+composto das seguintes estruturas:
 
 \begin{enumerate}[label= (\roman*)]
 
@@ -1962,8 +1973,8 @@ $\textsc{Treehash}_{h} = \infty$.
 
 O algoritmo retorna o caminho de autenticação para a folha $T_{0, s + 1}$. É
 inicializado na etapa de geração de chaves do esquema. \textsc{Auth} recebe
-primeiramente o caminho de autenticação para a folha $T_{0, 0}$, \emph{i.e.}
-$\textsc{Auth} = (T_{0, 1}, \dots, T_{H - 1, 1})$. As instâncias
+primeiramente o caminho de autenticação para a folha $T_{0, 0}$, representado
+por $\textsc{Auth} = (T_{0, 1}, \dots, T_{H - 1, 1})$. As instâncias
 $\textsc{Treehash}_{h}$ têm como nodos iniciais $T_{h, 3}$. As pilhas
 $\textsc{Retain}_{h}$ recebem os nodos $T_{h, 2k + 3}, \; 2^{H - h - 1} - 2
 \leq k \leq 0$. Execuções posteriores do algoritmo mantém
@@ -2149,10 +2160,8 @@ representação de esquemas de assinatura única como grafos acíclicos dirigido
   \centering
   \begin{chronology}[4]{1978}{1997}{\textwidth}
     \event{1979}{\lots{}, \mss{}}
-    \event{1987}{}
     \event{1989}{\wots{}}
-    \event{1992}{}
-    \event[1996]{1994}{}
+    \event[1996]{1994}{Bleichenbacher---Meurer}
   \end{chronology}
   \caption{Principais trabalhos acadêmicos sobre esquemas de assinatura digital
     baseados em funções de resumo criptográfico de 1979 até 1997.}\label{fig:10}
@@ -2372,39 +2381,34 @@ várias combinações de parâmetros para esquemas da família Winternitz.
 A segunda proposta consiste na busca por resumos criptográficos com
 características que habilitam a geração ou verificação de assinaturas de
 maneira mais eficiente. Este processo é independente do esquema subjacente,
-consistindo do pré-processamento da mensagem através de sua concatenação com um
-\emph{nonce} criptográfico. Deste modo, o valor do resumo criptográfico
+consistindo do pré-processamento da mensagem através de sua concatenação com
+uma palavra arbitrária. Deste modo, o valor do resumo criptográfico
 resultante pode ser maximizado ou minimizado, de acordo com a compensação
 desejada, consequentemente alterando a extensão das cadeias de resumos
 derivadas do mesmo. Esta estratégia é baseada no esquema publicado
 em~\cite{Steinwandt:article:2008:oct}.
 
-Tome $M$ como uma mensagem qualquer, o parâmetro de busca $R \in
-\mathbb{N}^{*}$ e uma $R$-tupla
+Tome $M$ como uma mensagem qualquer e o parâmetro de busca $R \in
+\mathbb{N}^{*}$. Na etapa de geração da assinatura, compute todos os resumos
 \begin{equation}
-  \Lambda = (\lambda_{0}, \dots, \lambda_{R - 1})
-    \random{} \binwds{m}.
-\end{equation}
-Na etapa de geração da assinatura, compute todos os resumos
-\begin{equation}
-  D = \{\hash{M \concat \lambda_{r}} : 0 \leq r \leq R\}
+  D = \{\hash{M \concat r} : 0 \leq r < R\}
 \end{equation}
 e interprete-os como $t_{1}$ palavras de base-$w$, formando tuplas $\bone^{r}$,
 como explicado na Subseção~\ref{subsection:wots}. A fim de escolher o
-\emph{nonce} mais conveniente para que a geração de assinaturas seja eficiente,
-calcule
+elemento mais conveniente para que a geração de assinaturas seja eficiente,
+tome $r$ de modo a produzir a menor soma entre as tuplas, representado por
 \begin{equation}
-  k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \bone^{r},
+  k = \argmin_{r \in \{0, \dots, R - 1\}} \sum \bone^{r}.
 \end{equation}
-e para melhorar a verificação de assinaturas, calcule
+De modo análogo, para melhorar a verificação de assinaturas, obtenha $r$ que
+gere a maior soma entre as tuplas, ou seja,
 \begin{equation}
   k = \argmax_{r \in \{0, \dots, R - 1\}} \sum \bone^{r}.
 \end{equation}
-Então, tome $d = \hash{M \concat \lambda_{k}}$ para a execução do esquema. Note
-que a tupla $\Lambda$ pode ser substituída por um conjunto trivial de tamanho
-$R$, visto que aplicações de funções de resumo criptográfico tornam a saída
-completamente difusa, e portanto, a relevância do conteúdo das palavras é
-diminuída.
+Então, $d = \hash{M \concat k}$ é considerado para a execução do esquema. Note
+que a concatenação de valores pseudoaleatórios pode ser realizada, entretanto
+aplicações de funções de resumo criptográfico tornam a saída completamente
+difusa, e portanto, a relevância do conteúdo das palavras é diminuída.
 
 Observe que o cálculo repetido do conjunto de resumos $D$ implica em um custo
 computacional ampliado na geração da assinatura. Portanto, é desejável que
@@ -2416,10 +2420,38 @@ distribuídas e aparentemente aleatórias, então frações destas saídas tamb�
 devem o ser.
 
 \begin{figure}
-  \centering
-  \includegraphics{support/hist}
-  \caption{Histograma normalizado de médias de $\bone^{i}$, com 50
-    classes.}\label{fig:12}
+  \begin{minipage}[t]{.5\linewidth}
+    \centering
+    % TODO do not import this
+    \includegraphics[scale=0.65]{support/hist}
+  \end{minipage}%
+  \begin{minipage}[t]{.5\linewidth}
+    \centering
+    \begin{tikzpicture}[scale=0.65]
+      \begin{axis}[
+          axis lines = left, xlabel = $R$,
+          legend style = {at = {(1, 0.5)}, anchor = east},
+        ]
+        \addplot[domain = 0:200, samples = 100, thick, densely dashed]
+          {1 - (1 - 0.1587)^x};
+        \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 1\sigma)$}
+        \addplot[domain = 0:200, samples = 100, thick, loosely dashdotdotted]
+          {1 - (1 - 0.0228)^x};
+        \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 2\sigma)$}
+        \addplot[domain = 0:200, samples = 100, thick, dashdotted]
+          {1 - (1 - 0.0013)^x};
+        \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 3\sigma)$}
+      \end{axis}
+    \end{tikzpicture}
+  \end{minipage}
+  \begin{minipage}[t]{.45\linewidth}
+    \caption{Histograma normalizado de $\mu(\bone^{i})$, com 50
+      classes.}\label{fig:12}
+  \end{minipage}\qquad
+  \begin{minipage}[t]{.45\linewidth}
+    \caption{Valores de $R$ para que modificações de $\bone^{i}$ sejam
+      efetivas.}\label{fig:13}
+  \end{minipage}
 \end{figure}
 
 Portanto, se os valores em $\bone{}$ seguem a distribuição uniforme discreta,
@@ -2449,37 +2481,15 @@ $\mu'$, e em especial, após intervalos de desvio padrão:
     P(\mu(\bone^{i}) > \mu' + 3\sigma) &= 0.0013.
   \end{split}
 \end{align}
-Então, para garantir que estes eventos aconteçam com altíssima probabilidade, a
-distribuição binomial é utilizada a fim de procurar a quantidade mínima de
+Então, para garantir que estes eventos aconteçam com probabilidade $\geq 98\%$,
+a distribuição binomial é utilizada a fim de procurar a quantidade mínima de
 experimentos em que pelo menos um destes produza o valor desejado. Este
 comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades
 sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8,
-16\}$, recomendados em~\cite[Capítulo 6]{Huelsing:report:2018:may}. Note que os
-valores para as probabilidades acima podem ser modificados a fim de produzir
-tuplas $\bone^{i}$ cujas médias são maiores, entretanto, $R$ crescerá de modo
-diretamente proporcional.
-
-\begin{figure}
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-        axis lines = left, xlabel = $R$, ylabel = Probabilidades,
-        legend style={at={(1, 0.5)}, anchor=east},
-    ]
-    \addplot[domain=0:200, samples=100, thick, densely dashed]
-      {1 - (1 - 0.1587)^x};
-    \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 1\sigma)$}
-    \addplot[domain=0:200, samples=100, thick, loosely dashdotdotted]
-      {1 - (1 - 0.0228)^x};
-    \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 2\sigma)$}
-    \addplot[domain=0:200, samples=100, thick, dashdotted]
-      {1 - (1 - 0.0013)^x};
-    \addlegendentry{$P(\mu(\bone^{i}) > \mu' + 3\sigma)$}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Valores de $R$ para que modificações de $\bone^{i}$ sejam
-    efetivas.}\label{fig:13}
-\end{figure}
+16\}$, recomendados em~\cite[Capítulo 6]{Huelsing:report:2018:may}. Note que
+os múltiplos de $\sigma$ utilizados facilitam o cálculo das probabilidades
+denotadas acima, contudo estes valores podem ser substituídos por outros
+que sejam adequados, a fim de construir novos critérios para a escolha de $R$.
 
 Como a modificação não afeta mecanismos internos do esquema, é necessário
 discutir as consequências da concatenação de um dado $\lambda_{k}$ à mensagem
@@ -2503,99 +2513,74 @@ Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Conside
 mensagens aleatórias de $2^{10}$ caracteres, geradas através de
 \texttt{/dev/urandom}.
 
-Os valores nas Tabelas~\ref{table:argmax} e~\ref{table:argmin} consistem da
-média aritmética de $2^{14}$ conjuntos $\mathcal{B}$, separados em $\bone{}$ e
-$\btwo{}$ a fim de enfatizar o efeito de cada esquema variante. Observe que
-$\mu(\btwo{})$ é afetada negativamente por \wotsr{} em virtude da maximização
-dos elementos em $\bone{}$. Entretanto, esta diferença não impacta
-negativamente os ganhos totais. A utilização de \wotsbr{} mitiga este
-comportamento. Para a Tabela~\ref{table:argmin}, a otimização da soma de
-verificação não é recomendada, visto que atuará de maneira contraditória em
-relação à proposta.
+A Figura~\ref{fig:14} considera o ganho obtido sobre a média aritmética de
+$2^{14}$ conjuntos $\mathcal{B}$, enfatizando o efeito de cada esquema
+variante. Note que $\mu(\btwo{})$ é afetada negativamente por \wotsr{} no caso
+da maximização dos elementos em $\bone{}$. Entretanto, esta diferença não
+impacta os ganhos totais de maneira abundante, e a utilização de \wotsbr{}
+mitiga esta perda. No caso da minimização de $\mu(\bone{})$, a otimização da
+soma de verificação não é aplicada, visto que atuará de maneira contraditória
+em relação à proposta.
 
-\begin{table}
-  \setlength{\tabcolsep}{8pt}
-  \footnotesize
+\begin{figure}
   \centering
-  \begin{tabular}{cclccc}
-    \toprule
-    $w$ & $R$
-      & \textsc{Esquema} & $\mu(\bone{})$
-      & $\mu(\btwo{})$ & $\mu(\mathcal{B})$ \\
-    \toprule
-    \multirow{8}{*}{4} & \multirow{2}{*}{---}
-      & \wots{} & \multirow{2}{*}{479.92} & 25.88 & 505.80 \\
-    & & \wotsb{} & & 12.25 & 492.17 \\ \cline{2-6}
-    & \multirow{2}{*}{25}
-      & \wotsr{} & \multirow{2}{*}{407.80} & 27.49 & 435.29 \\
-    & & \wotsbr{} & & 13.49 & 421.29 \\ \cline{2-6}
-    & \multirow{2}{*}{200}
-      & \wotsr{} & \multirow{2}{*}{379.08} & 29.23 & 408.31 \\
-    & & \wotsbr{} & & 15.23 & 394.31 \\ \cline{2-6}
-    & \multirow{2}{*}{3500}
-      & \wotsr{} & \multirow{2}{*}{348.88} & 31.14 & 380.02 \\
-    & & \wotsbr{} & & 17.14 & 366.02 \\
-    \midrule
-    \multirow{8}{*}{8} & \multirow{2}{*}{---}
-      & \wots{} & \multirow{2}{*}{4081.87} & 368.42 & 4450.30 \\
-    & & \wotsb{} & & 136.24 & 4218.12 \\ \cline{2-6}
-    & \multirow{2}{*}{25}
-      & \wotsr{} & \multirow{2}{*}{3262.38} & 370.57 & 3632.95 \\
-    & & \wotsbr{} & & 130.57 & 3392.95 \\ \cline{2-6}
-    & \multirow{2}{*}{200}
-      & \wotsr{} & \multirow{2}{*}{2940.64} & 372.12 & 3312.76 \\
-    & & \wotsbr{} & & 132.12 & 3072.76 \\ \cline{2-6}
-    & \multirow{2}{*}{3500}
-      & \wotsr{} & \multirow{2}{*}{2604.49} & 374.76 & 2979.24 \\
-    & & \wotsbr{} & & 134.75 & 2739.24 \\
-    \midrule
-    \multirow{8}{*}{16} & \multirow{2}{*}{---}
-      & \wots{} & \multirow{2}{*}{525114.64} & 98229.80 & 623344.44 \\
-    & & \wotsb{} & & 32705.81 & 557820.45 \\ \cline{2-6}
-    & \multirow{2}{*}{25}
-      & \wotsr{} & \multirow{2}{*}{376553.04} & 98226.74 & 474779.78 \\
-    & & \wotsbr{} & & 32698.72 & 409251.76 \\ \cline{2-6}
-    & \multirow{2}{*}{200}
-      & \wotsr{} & \multirow{2}{*}{319492.19} & 98847.90 & 418340.08 \\
-    & & \wotsbr{} & & 33319.75 & 352811.94 \\ \cline{2-6}
-    & \multirow{2}{*}{3500}
-      & \wotsr{} & \multirow{2}{*}{262307.28} & 101021.00 & 363328.28 \\
-    & & \wotsbr{} & & 35491.20 & 297798.48 \\
- \bottomrule
- \end{tabular}
-  \caption{Iterações de $f$ na verificação de assinaturas ao maximizar
-    $\bone{}$.}\label{table:argmax}
-\end{table}
-
-\begin{table}
-  \setlength{\tabcolsep}{8pt}
-  \footnotesize
-  \centering
-  \begin{tabular}{cclccc}
-    \toprule
-    $w$ & $R$
-      & \textsc{Esquema} & $\mu(\bone{})$
-      & $\mu(\btwo{})$ & $\mu(\mathcal{B})$ \\
-    \toprule
-    \multirow{4}{*}{4} & --- & \wots{} & 480.07 & 19.12 & 499.20 \\
-    & 25 & \multirow{3}{*}{\wotsr{}} & 407.59 & 11.60 & 419.20 \\
-    & 200 & & 379.04 & 13.31 & 392.35 \\
-    & 3500 & & 348.57 & 15.29 & 363.85 \\
-    \midrule
-    \multirow{4}{*}{8} & --- & \wots{} & 4078.16 & 141.57 & 4219.73 \\
-    & 25 & \multirow{3}{*}{\wotsr{}} & 3259.31 & 145.36 & 3404.67 \\
-    & 200 & & 2939.62 & 148.36 & 3087.98 \\
-    & 3500 & & 2605.05 & 145.21 & 2750.26 \\
-    \midrule
-    \multirow{4}{*}{16} & --- & \wots{} & 523438.00 & 32839.56 & 556277.56 \\
-    & 25 & \multirow{3}{*}{\wotsr{}} & 376093.98 & 32646.83 & 408740.82 \\
-    & 200 & & 319762.87 & 33590.17 & 353353.04 \\
-    & 3500 & & 261912.93 & 35384.39 & 297297.32 \\
-    \bottomrule
-  \end{tabular}
-  \caption{Iterações de $f$ na geração de assinaturas ao minimizar
-    $\bone{}$.}\label{table:argmin}
-\end{table}
+  \begin{tikzpicture}[
+      every axis/.style={
+        title=$\argmax$,
+        ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
+        symbolic x coords={4, 8, 16}, ymin=0, ymax=55, try min ticks=5,
+        xtick style={draw=none}, xlabel = $w$,
+        ylabel=Redução do \textnumero{} de iterações de $f$,
+        yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
+        scale = 0.75, legend pos = north west
+      },
+    ]
+    \begin{axis}[bar shift=-10pt,hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 14.4) (8, 19.8) (16, 25.6)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 2.3)  (8, 2.2)  (16, 2.0)};
+      \legend{\wotsr{}, \wotsb{}}
+    \end{axis}
+    \begin{axis}[hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 18.3) (8, 25.5) (16, 33.0)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 5.4)  (8, 5.4)  (16, 5.4)};
+    \end{axis}
+    \begin{axis}[bar shift=10 pt]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 23.8) (8, 32.9) (16, 41.7)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 10.5) (8, 10.5) (16, 10.5)};
+    \end{axis}
+  \end{tikzpicture}
+  \begin{tikzpicture}[
+      every axis/.style={
+        title=$\argmin$,
+        ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
+        symbolic x coords={4, 8, 16}, ymin=0, ymax=55, yticklabels={,,},
+        try min ticks = 5, xtick style={draw=none}, xlabel = $w$, scale=0.75,
+        legend pos = north west
+      },
+    ]
+    \begin{axis}[bar shift=-10pt,hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north west lines}]
+        coordinates {(4, 16.03) (8, 21.41) (16, 27.12)};
+      \legend{\wotsr{}}
+    \end{axis}
+    \begin{axis}[hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north west lines}]
+        coordinates {(4, 19.32) (8, 26.83) (16, 34.83)};
+    \end{axis}
+    \begin{axis}[bar shift=10 pt]
+      \addplot+[black, fill=white, postaction={pattern=north west lines}]
+        coordinates {(4, 26.53) (8, 36.48) (16, 46.56)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Efeitos da aplicação das otimizações propostas
+    no \wots{}.}\label{fig:14}
+\end{figure}
 
 Considerando a maximização de $\mu(\bone{})$, uma redução de aproximadamente
 $2^{w}$ iterações de $f$ para o esquema \wotsb{} é observada, condizente com o
@@ -2609,7 +2594,7 @@ Note que a redução no cômputo destas iterações é diretamente traduzida na 
 complementar, ou seja, na maximização de $\mu(\bone{})$, existirá um aumento do
 número de iterações na geração da assinatura, proporcional à otimização obtida
 no passo de verificação. O mesmo conceito é aplicado para a minimização.
-Ademais, é preciso considerar a busca de $\lambda_{k}$ junto aos custos da
+Ademais, é preciso considerar a busca de $k$ junto aos custos da
 geração da assinatura. Em vista disso, valores de $R$ muito altos em relação ao
 parâmetro $w$ são indesejáveis quando este é reduzido, \emph{e.g.} com $w = 4$,
 o valor $R = 200$ torna-se uma fração substancial do custo total para a geração
@@ -2634,8 +2619,8 @@ tempo de execução em milissegundos de $2^{14}$ instâncias dos esquemas \xmss{
 \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas
 Seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é
 considerado visto que, para este parâmetro, a etapa de geração de chaves para o
-esquema \xmss{} é demasiado prolongada. Novamente, as otimizações da soma de
-verificação não são consideradas quando é desejável otimizar a geração de
+esquema \xmss{} é demasiado prolongada. Novamente, a otimização da soma de
+verificação não é considerada quando é desejável otimizar a geração de
 assinaturas.
 
 Os experimentos foram realizados utilizando um computador com as seguintes
@@ -2716,14 +2701,16 @@ modificação da tupla $\bone{}$ de acordo com outros critérios, adicionais à
 maximização ou minimização de seus elementos, ou substituindo este processo
 completamente. Por exemplo, visto que o cômputo de iterações de $f$ é feito
 sequencialmente, a busca de um critério a fim de obter elementos $b \in
-\bone{}$ próximos em magnitude habilita o processamento paralelo destas
-iterações e, portanto, um tempo de execução reduzido para a geração e
-verificação de assinaturas.
+\bone{}$ próximos em magnitude (\emph{e.g.} a redução do desvio padrão)
+habilita o processamento paralelo destas iterações e, portanto, um tempo de
+execução reduzido para a geração e verificação de assinaturas. Ademais, este
+mesmo recurso pode ser utilizado para diminuir o custo da busca por $\bone{}$
+considerando o parâmetro $R$, também calculando estes resumos de maneira
+paralela.
 
 Experimentos que exploram as propostas do Capítulo~\ref{chapter:tuning} podem
 ser realizados em variantes diferentes da família Winternitz, como \wotsprf{} e
-\wotst{}, bem como em outros esquemas baseados em árvores de Merkle. Ademais,
-para variantes que necessitam apenas de resistência à segunda pré-imagem, a
+\wotst{}, bem como em outros esquemas baseados em árvores de Merkle. Ademais, a
 segurança do esquema \wotsr{} deve ser formalizada, visto que a modificação de
 $\bone{}$ pode introduzir imperfeições nas cadeias de resumos subsequentes.
 
