@@ -98,18 +98,18 @@
 \emph{I want them to remain secret for as long as men are capable of evil.}
 }{Neal Stephenson (\textit{Cryptonomicon}, 1999)}
 
-\textoResumo{Algoritmos utilizados em assinaturas digitais atualmente, como
-RSA e ECDSA, têm sua segurança baseada na dificuldade de se fatorar números
-muito grandes ou na obtenção de logaritmos discretos. Este tipo de cômputo pode
-ser eficientemente realizado por um computador quântico, utilizando algoritmos
-já conhecidos. Deste modo, para manter o ambiente de assinaturas digitais
-seguro, é necessário oferecer alternativas pós-quânticas. Este trabalho busca
-apresentar esquemas baseados apenas em funções de resumo criptográfico, cuja
-segurança é baseada apenas na resistência à colisões da função escolhida, com o
-intuito de discutir uma nova otimização para a família de esquemas de
-assinatura Winternitz. Particularmente, esta proposta introduz um parâmetro de
-compensação, a fim de reduzir o tempo de geração ou verificação de uma dada
-assinatura.}
+\textoResumo{Algoritmos criptográficos utilizados em assinaturas digitais
+atualmente, como RSA e ECDSA, têm sua segurança baseada na dificuldade de se
+fatorar números muito grandes ou na obtenção de logaritmos discretos. Este tipo
+de cômputo pode ser eficientemente realizado por um computador quântico,
+utilizando algoritmos já conhecidos. Deste modo, para manter o ambiente de
+assinaturas digitais seguro, é necessário oferecer alternativas pós-quânticas.
+Este trabalho busca apresentar esquemas baseados apenas em funções de resumo
+criptográfico, cuja segurança é baseada apenas na resistência à colisões da
+função escolhida, com o intuito de discutir uma nova otimização para a família
+de esquemas de assinatura Winternitz. Particularmente, esta proposta introduz
+um parâmetro de compensação, a fim de reduzir o tempo de geração ou verificação
+de uma dada assinatura.}
 \palavrasChave{criptografia pós-quântica, função de resumo criptográfico,
 assinatura digital, esquema de assinatura digital única Winternitz}
 
@@ -441,15 +441,15 @@ vice-versa.
     \draw node at (1.75, 1) {\textsc{Sec}};
   \end{tikzpicture}
   \caption{Diagrama de Venn das resistências desejáveis para uma função de
-    resumo no contexto de assinaturas digitais.}\label{fig:1}
+    resumo no contexto de assinaturas digitais.}\label{fig:venn}
 \end{figure}
 
-Na Figura~\ref{fig:1}, estão destacados os requisitos comuns para a utilização
-de funções de resumo no contexto de esquemas de assinatura digital, em vista da
-possibilidade de uma entidade maliciosa, geralmente chamada de adversário,
-desejar produzir assinaturas forjadas. Observe que, embora exista uma divisão
-estrita entre \textsc{Pre} e \textsc{Sec}, efetivamente, a segunda implica a
-primeira resistência~\cite[Nota 9.20]{Menezes:book:1996}.
+Na Figura~\ref{fig:venn}, estão destacados os requisitos comuns para a
+utilização de funções de resumo no contexto de esquemas de assinatura digital,
+em vista da possibilidade de uma entidade maliciosa, geralmente chamada de
+adversário, desejar produzir assinaturas forjadas. Observe que, embora exista
+uma divisão estrita entre \textsc{Pre} e \textsc{Sec}, efetivamente, a segunda
+implica a primeira resistência~\cite[Nota 9.20]{Menezes:book:1996}.
 
 Ademais, note que \textsc{Sec} e \textsc{Col} apresentam uma sutil diferença:
 na primeira, um adversário não pode escolher $m_{0}$, enquanto na segunda,
@@ -593,7 +593,7 @@ intercalados por aplicações de $f$.
     \end{scope}
   \end{tikzpicture}
   \caption{Estrutura da construção esponja,
-    onde $i, j \in \mathbb{N}^{*}$.}\label{fig:3}
+    onde $i, j \in \mathbb{N}^{*}$.}\label{fig:sponge}
 \end{figure}
 
 Ao término do processamento dos blocos, a fase de compressão é iniciada, onde
@@ -603,8 +603,8 @@ aplicações de $f$, onde $n$ é parametrizável pelo usuário. Os últimos $c$
 nunca revelados durante a fase de compressão. Essencialmente, estão
 correlacionados com o nível de segurança da construção esponja. Assim, uma
 função esponja pode ser definida como $\textsc{Sponge}[f, \texttt{pad}, r]$, e
-sua representação gráfica pode ser consultada na Figura~\ref{fig:3}, adaptada
-de~\cite{Jean:misc:2016:apr}.
+sua representação gráfica pode ser consultada na Figura~\ref{fig:sponge},
+adaptada de~\cite{Jean:misc:2016:apr}.
 
 A função esponja \textsc{Keccak}~\cite{Bertoni:misc:2011b:jan} é definida a
 partir desta construção, e pode agir como uma função de resumo criptográfico.
@@ -693,7 +693,7 @@ que uma mensagem foi assinada e enviada, após este fato.
     \draw[-latex] (in) -- (gen);
   \end{tikzpicture}
   \caption{Funcionamento típico de um
-    esquema de assinatura digital.}\label{fig:2}
+    esquema de assinatura digital.}\label{fig:sign}
 \end{figure}
 
 Esquemas de assinatura digital são fortemente baseados em criptografia de
@@ -713,7 +713,7 @@ chaves geradas por \textsc{Gen}. Formalmente,
 É necessário apontar que esta definição não considera a segurança do esquema,
 visto que existem algoritmos construídos trivialmente que respeitam a equação
 acima, sem qualquer tipo de codificação a fim de ocultar mensagens. Na
-Figura~\ref{fig:2}, é apresentada uma visualização do comportamento de um
+Figura~\ref{fig:sign}, é apresentada uma visualização do comportamento de um
 esquema de assinatura digital genérico. Note que $\sigma$ geralmente é composta
 da concatenação da mensagem original com a assinatura do resumo criptográfico
 desta, embora a saída do algoritmo \textsc{Sig} consista apenas da aplicação de
@@ -918,7 +918,8 @@ assinaturas menores com uma diminuição no desempenho do esquema foi sugerida
 por Winternitz e publicada por Merkle~\cite[Capítulo
 5]{Merkle:inproc:1989:aug}. Este esquema permite assinar múltiplos \emph{bits}
 em cada bloco da assinatura, generalizando a proposta de Lamport. A definição
-do esquema é elaborada abaixo.
+do esquema é elaborada abaixo e seu funcionamento é representado na
+Figura~\ref{fig:wots}.
 
 Um parâmetro de segurança $m$ é necessário, como acima. O parâmetro Winternitz,
 da forma $w \in \mathbb{N}^{*}\setminus\{1\}$, também deve ser definido, que
@@ -1016,7 +1017,7 @@ valor de $\btwo{}$ também tornará a verificação da assinatura impossível.
     \path[->] (fvt1) edge [loop above] node {\scriptsize$2^{w} - 1 - b_{i}$} ();
   \end{tikzpicture}
   \caption{Etapas de assinatura e verificação do \wots{},
-    para $0 \leq i \leq t - 1$.}\label{fig:5}
+    para $0 \leq i \leq t - 1$.}\label{fig:wots}
 \end{figure}
 
 Diversas variantes do \wots{} foram propostas com o intuito de reduzir
@@ -1245,10 +1246,10 @@ A]{Reyzin:inproc:2002:jul}.
     \draw[-latex] (x5) -- (s5);
   \end{tikzpicture}
   \caption{Assinatura no \hors{}, para $0 \leq i \leq k - 1, \; 0 \leq j, l
-    \leq t - 1$.}\label{fig:7}
+    \leq t - 1$.}\label{fig:hors}
 \end{figure}
 
-Parte deste processo é visualizado na Figura~\ref{fig:7}. Note que uma
+Parte deste processo é visualizado na Figura~\ref{fig:hors}. Note que uma
 conversão de palavras binárias para inteiros está implícita no diagrama, como
 setas com preenchimento irregular, e que elementos $d_{i}$ podem ter valores
 iguais, \emph{e.g.} ${(d_{0})}_{10} = {(d_{i - 1})}_{10} = l$. Percebe-se, a
@@ -1295,15 +1296,15 @@ característica binária e perfeita, pode ser aproveitada para tal.
         ]
       ]
   \end{tikzpicture}
-  \caption{Árvore de Merkle $T$, com altura $H = 2$.}\label{fig:4}
+  \caption{Árvore de Merkle $T$, com altura $H = 2$.}\label{fig:merkle}
 \end{figure}
 
 De modo genérico, folhas de uma árvore de Merkle são construídas a partir do
 resumo criptográfico de dados que desejam ser inseridos nesta. Então, pais
 destas folhas computarão o resumo criptográfico do valor dos resumos de seus
 filhos concatenados, repetindo este processo até que a raiz seja preenchida,
-como na Figura~\ref{fig:4}. Considere uma árvore binária perfeita $T$ de altura
-$H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
+como na Figura~\ref{fig:merkle}. Considere uma árvore binária perfeita $T$ de
+altura $H \in \mathbb{N}^{*}\setminus\{1\}$, onde um nodo é representado por
 \begin{equation}
   T_{h, j}, \; 0 \leq h \leq H, \; 0 \leq j \leq 2^{H - h} - 1,
 \end{equation}
@@ -1426,8 +1427,8 @@ criptográfico $\fhash{m}$.
           \end{cases}
         \end{equation}
         para $0 \leq h \leq H - 1$, representado visualmente na
-        Figura~\ref{fig:9}. A assinatura final leva em conta todos estes itens.
-        Portanto,
+        Figura~\ref{fig:auth}. A assinatura final leva em conta todos estes
+        itens. Portanto,
         \begin{equation}
           \sigma = (j, \textsc{Ots}_\sigma^{j},
             \textsc{Ots}_{\pk{}}^{j}, \textsc{Auth}).
@@ -1504,7 +1505,8 @@ discutidos futuramente.
     \draw[thick, ->] (ah2) -- (ah1);
     \draw[thick, ->] (ah1) -- (ah0);
   \end{tikzpicture}
-  \caption{Caminho de autenticação para a folha de índice $i = 3$.}\label{fig:9}
+  \caption{Caminho de autenticação
+    para a folha de índice $i = 3$.}\label{fig:auth}
 \end{figure}
 
 Observe que o tamanho da chave pública é extremamente proibitivo e escala com o
@@ -1743,7 +1745,7 @@ número de $2^{80}$ mensagens por par de chaves.
     \draw[->, thick] (sig0) to (p1);
   \end{tikzpicture}
   \caption{Caminho de autenticação para a folha $j = 3 \cdot 2^{h_{0}} + 5$,
-    em uma hiper-árvore com $d = 2, h_{0} = h_{1} = 3$.}\label{fig:8}
+    em uma hiper-árvore com $d = 2, h_{0} = h_{1} = 3$.}\label{fig:multiauth}
 \end{figure}
 
 Naturalmente, este recurso é aplicado ao esquema \xmss{} a fim de produzir a
@@ -1961,7 +1963,7 @@ de números pseudoaleatórios \textsc{Prf} é construído a partir de $f$.
         caminhos de autenticação e assinaturas em $\Sigma$ fornecidos por
         $\sigma$, e a saída da última iteração é comparada com $T_{h_{d - 1},
         0}$. A assinatura é válida se e somente se estes valores forem iguais.
-        Este processo pode ser visualizado na Figura~\ref{fig:8}.
+        Este processo pode ser visualizado na Figura~\ref{fig:multiauth}.
 
 \end{enumerate}
 
@@ -1980,10 +1982,11 @@ Vários esquemas foram citados ao longo das seções anteriores, provendo uma
 contextualização teórica para o estudo aprofundado de variantes seletas. Deste
 modo, é razoável visualizar de maneira cronológica a evolução do estudo de
 assinaturas digitais baseadas em funções de resumo criptográfico. De acordo com
-a Figura~\ref{fig:10}, nas duas décadas iniciais, esta área é estabelecida pela
-pesquisa em~\cite{Lamport:report:1979:oct,Merkle:phd:1979:jun}, definindo os
-esquemas seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{}
-é publicado em~\cite{Merkle:inproc:1989:aug}. Resultados teóricos e otimizações
+a Figura~\ref{fig:timebefore}, nas duas décadas iniciais, esta área é
+estabelecida pela pesquisa
+em~\cite{Lamport:report:1979:oct,Merkle:phd:1979:jun}, definindo os esquemas
+seminais \lots{} e \mss{}, e no meio deste período, o esquema \wots{} é
+publicado em~\cite{Merkle:inproc:1989:aug}. Resultados teóricos e otimizações
 para o esquema de Lamport também fazem parte de publicações com destaque,
 \emph{e.g.}~\cite{Bleichenbacher:inproc:1994:aug}, que formaliza uma
 representação de esquemas de assinatura única como grafos acíclicos dirigidos.
@@ -1996,7 +1999,8 @@ representação de esquemas de assinatura única como grafos acíclicos dirigido
     \event[1996]{1994}{Bleichenbacher---Meurer}
   \end{chronology}
   \caption{Principais trabalhos acadêmicos sobre esquemas de assinatura digital
-    baseados em funções de resumo criptográfico de 1979 até 1997.}\label{fig:10}
+    baseados em funções de resumo criptográfico de 1979 até
+    1997.}\label{fig:timebefore}
 \end{figure}
 
 \begin{figure}
@@ -2015,7 +2019,8 @@ representação de esquemas de assinatura única como grafos acíclicos dirigido
     \event{2017}{\sphincs{}+}
   \end{chronology}
   \caption{Principais trabalhos acadêmicos sobre esquemas de assinatura digital
-    baseados em funções de resumo criptográfico de 1998 até 2018.}\label{fig:11}
+    baseados em funções de resumo criptográfico de 1998 até
+    2018.}\label{fig:timeafter}
 \end{figure}
 
 Entretanto, as últimas duas décadas de pesquisa culminaram em ideias utilizadas
@@ -2023,9 +2028,9 @@ por esquemas considerados como o estado da arte. Os conceitos de esquemas de
 poucas assinaturas, redução de requisitos de segurança para resistência à
 segunda pré-imagem, hiper-árvores e resistência a ataques multiusuário, todos
 no contexto de assinaturas digitais com funções de resumo criptográfico, podem
-ser mapeados para este período. As Figuras~\ref{fig:10} e~\ref{fig:11}
-contemplam todos os esquemas citados nas Seções~\ref{section:onetime}
-e~\ref{section:merkle}, à exceção da família
+ser mapeados para este período. As Figuras~\ref{fig:timebefore}
+e~\ref{fig:timeafter} contemplam todos os esquemas citados nas
+Seções~\ref{section:onetime} e~\ref{section:merkle}, à exceção da família
 \sphincs{}~\cite{Bernstein:inproc:2015:apr,Bernstein:misc:2017:dec},
 \sigla{\sphincs{}}{\emph{Stateless Practical Hash-based Incredibly Nice \\
 Cryptographic Signatures}} que renuncia o gerenciamento de estado,
@@ -2293,11 +2298,11 @@ devem o ser.
   \end{minipage}
   \begin{minipage}[t]{.45\linewidth}
     \caption{Histograma normalizado de $\mu(\bone^{i})$, com 50
-      classes.}\label{fig:12}
+      classes.}\label{fig:hist}
   \end{minipage}\qquad
   \begin{minipage}[t]{.45\linewidth}
     \caption{Valores de $R$ para que modificações de $\bone^{i}$ sejam
-      efetivas.}\label{fig:13}
+      efetivas.}\label{fig:func}
   \end{minipage}
 \end{figure}
 
@@ -2315,7 +2320,7 @@ os parâmetros $w = 16$, $m = 256$ e $\hh{} =$ SHA-256, e os resumos
     \random{} \binwds{32}\}
 \end{equation}
 foram calculados. As médias das tuplas $\bone^{i}$ são apresentadas na
-Figura~\ref{fig:12}, concretizando os fatos acima.
+Figura~\ref{fig:hist}, concretizando os fatos acima.
 
 Assim, este resultado é utilizado a fim de fornecer valores razoáveis para $R$.
 Aplicando a tabela da distribuição normal padrão com desvio padrão $\sigma$,
@@ -2331,7 +2336,7 @@ $\mu'$, e em especial, após intervalos de desvio padrão:
 Então, para garantir que estes eventos aconteçam com probabilidade $\geq 98\%$,
 a distribuição binomial é utilizada a fim de procurar a quantidade mínima de
 experimentos em que pelo menos um destes produza o valor desejado. Este
-comportamento pode ser visualizado na Figura~\ref{fig:13}, com quantidades
+comportamento pode ser visualizado na Figura~\ref{fig:func}, com quantidades
 sugeridas de $\{25, 200, 3500\}$ para, respectivamente, parâmetros $w = \{4, 8,
 16\}$, recomendados em~\cite[Capítulo 6]{Huelsing:report:2018:may}. Note que
 os múltiplos de $\sigma$ utilizados facilitam o cálculo das probabilidades
@@ -2360,11 +2365,11 @@ Parâmetros são escolhidos de acordo com a Seção~\ref{section:wotsr}. Conside
 mensagens aleatórias de $2^{10}$ caracteres, geradas através de
 \texttt{/dev/urandom}.
 
-A Figura~\ref{fig:14} considera o ganho obtido sobre a média aritmética de
-$2^{14}$ conjuntos $\mathcal{B}$, enfatizando o efeito de cada esquema
-variante. Note que $\mu(\btwo{})$ é afetada negativamente por \wotsr{} no caso
-da maximização dos elementos em $\bone{}$. Entretanto, esta diferença não
-impacta os ganhos totais de maneira abundante, e a utilização de \wotsbr{}
+A Figura~\ref{fig:wotsresults} apresenta o ganho obtido sobre a média
+aritmética de $2^{14}$ conjuntos $\mathcal{B}$, enfatizando o efeito de cada
+esquema variante. Note que $\mu(\btwo{})$ é afetada negativamente por \wotsr{}
+no caso da maximização dos elementos em $\bone{}$. Entretanto, esta diferença
+não impacta os ganhos totais de maneira abundante, e a utilização de \wotsbr{}
 mitiga esta perda. No caso da minimização de $\mu(\bone{})$, a otimização da
 soma de verificação não é aplicada, visto que atuará de maneira contraditória
 em relação à proposta.
@@ -2473,7 +2478,7 @@ em relação à proposta.
     \end{axis}
   \end{tikzpicture}
   \caption{Efeitos da aplicação das otimizações propostas
-    no \wots{}.}\label{fig:14}
+    no \wots{}.}\label{fig:wotsresults}
 \end{figure}
 
 Considerando a maximização de $\mu(\bone{})$, uma redução de aproximadamente
@@ -2508,9 +2513,9 @@ variante de \xmss{}, definido em~\cite[Seção 3.1]{Huelsing:report:2018:may} e
 explorado na Subseção~\ref{subsection:wotsplus}, é modificada de acordo, e pode
 ser encontrada em \url{https://github.com/zambonin/xmss-reference}.
 
-A Tabela~\ref{table:xmss} apresenta os resultados obtidos, na forma da média do
-tempo de execução em milissegundos de $2^{14}$ instâncias dos esquemas \xmss{},
-\xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas
+A Figura~\ref{fig:xmssresults} apresenta os resultados obtidos, na forma da
+média do tempo de execução em milissegundos de $2^{14}$ instâncias dos esquemas
+\xmss{}, \xmssb{}, \xmssr{} e \xmssbr{}, de acordo com a notação fixada nas
 Seções~\ref{section:wotsb} e~\ref{section:wotsr}. Note que $w = 16$ não é
 considerado visto que, para este parâmetro, a etapa de geração de chaves para o
 esquema \xmss{} é demasiado prolongada. Novamente, a otimização da soma de
@@ -2524,50 +2529,121 @@ tempo de verificação ao aplicar a maximização de $\mu(\bone{})$ e otimizaç�
 soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para
 $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da
 minimização de $\mu(\bone{})$ torna o passo de geração de assinatura mais
-lento. Assim, são recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq
-200$ para $w = 8$.
+lento. Em especial, a Figura~\ref{fig:xmssresults} apresenta um valor fora da
+escala do gráfico, demonstrando uma grande perda neste aspecto. Assim, são
+recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
 
-\begin{table}
-  \setlength{\tabcolsep}{8pt}
-  \footnotesize
+\begin{figure}
   \centering
-  \begin{tabular}{ccclcc}
-    \toprule
-    & $w$ & $R$ & \textsc{Esquema}
-      & \textsc{Tempo para $\mathcal{S}$} & \textsc{Tempo para $\mathcal{V}$} \\
-    \toprule
-    \multirow{16}{*}{\rotatebox[origin=c]{90}{$\argmax$}}
-      & \multirow{8}{*}{4} & \multirow{2}{*}{---} & \xmss{} & 0.953 & 0.734 \\
-    & & & \xmssb{} & 0.975 & 0.724 \\ \cline{3-6}
-    & & \multirow{2}{*}{25} & \xmssr{} & 1.059 & 0.652 \\
-    & & & \xmssbr{} & 1.073 & 0.637 \\ \cline{3-6}
-    & & \multirow{2}{*}{200} & \xmssr{} & 1.222 & 0.620 \\
-    & & & \xmssbr{} & 1.240 & 0.616 \\ \cline{3-6}
-    & & \multirow{2}{*}{3500} & \xmssr{} & 3.724 & 0.588 \\
-    & & & \xmssbr{} & 3.730 & 0.573 \\ \cline{2-6}
-    & \multirow{8}{*}{8} & \multirow{2}{*}{---} & \xmss{} & 7.709 & 5.676 \\
-    & & & \xmssb{} & 7.908 & 5.361 \\ \cline{3-6}
-    & & \multirow{2}{*}{25} & \xmssr{} & 8.597 & 4.637 \\
-    & & & \xmssbr{} & 8.992 & 4.415 \\ \cline{3-6}
-    & & \multirow{2}{*}{200} & \xmssr{} & 9.045 & 4.245 \\
-    & & & \xmssbr{} & 9.460 & 4.052 \\ \cline{3-6}
-    & & \multirow{2}{*}{3500} & \xmssr{} & 11.760 & 3.861 \\
-    & & & \xmssbr{} & 12.193 & 3.664 \\
-    \midrule
-    \multirow{8}{*}{\rotatebox[origin=c]{90}{$\argmin$}}
-      & \multirow{4}{*}{4} & --- & \xmss{} & 0.971 & 0.746 \\
-    & & 25 & \multirow{3}{*}{\xmssr{}} & 0.879 & 0.832 \\
-    & & 200 & & 1.006 & 0.885 \\
-    & & 3500 & & 3.393 & 0.898 \\ \cline{2-6}
-    & \multirow{4}{*}{8} & --- & \xmss{} & 7.819 & 5.731 \\
-    & & 25 & \multirow{3}{*}{\xmssr{}} & 6.672 & 6.553 \\
-    & & 200 & & 6.472 & 6.982 \\
-    & & 3500 & & 8.488 & 7.435 \\
-    \bottomrule
-  \end{tabular}
-  \caption{Tempo de execução para otimizações
-    incluídas no \xmss{}.}\label{table:xmss}
-\end{table}
+  \begin{tikzpicture}[
+      every axis/.style={
+        ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
+        symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
+        xtick style={draw=none}, xlabel=$w$,
+        ylabel=Redução do tempo de execução (ms),
+        yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
+        legend pos=north west, legend style={draw=none},
+        axis x line*=top, extra y ticks={-10}, extra y tick labels={},
+        extra tick style={grid=major}, major grid style={draw=gray!90},
+        scale=0.75,
+      },
+    ]
+    \begin{axis}[
+      title=Maximização de $\mu(\bone{})$, title style={yshift=0.75cm}
+    ]
+      \addplot+[
+        black, nodes near coords={R = 25}, every node near coord/.style={
+          font=\scriptsize, yshift=-26.5pt, xshift=-10pt,
+          rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+      \addplot+[
+        black, nodes near coords={R = 200}, every node near coord/.style={
+          font=\scriptsize, yshift=-26.5pt, rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+      \addplot+[
+        black, nodes near coords={R = 3500}, every node near coord/.style={
+          font=\scriptsize, yshift=-26.5pt, xshift=10pt,
+          rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+    \end{axis}
+    \begin{axis}[bar shift=-10pt, hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 11.2) (8, 18.3)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 2.0) (8, 3.9)};
+      \legend{\xmssr{}, \xmssb{}}
+    \end{axis}
+    \begin{axis}[hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 15.5) (8, 25.2)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 0.6) (8, 3.4)};
+    \end{axis}
+    \begin{axis}[bar shift=10 pt, hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 19.9) (8, 31.9)};
+      \addplot+[black, fill=white, postaction={pattern=crosshatch dots}]
+        coordinates {(4, 2.0) (8, 3.5)};
+    \end{axis}
+  \end{tikzpicture}
+  \begin{tikzpicture}[
+      every axis/.style={
+        ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
+        symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
+        xtick style={draw=none}, xlabel=$w$, yticklabels={,,},
+        legend pos=north west, legend style={draw=none},
+        axis x line*=top, extra y ticks={-10}, extra y tick labels={},
+        extra tick style={grid=major}, major grid style={draw=gray!90},
+        scale=0.75,
+      },
+    ]
+    \begin{axis}[
+      title=Minimização de $\mu(\bone{})$, title style={yshift=0.75cm}
+    ]
+      \addplot+[
+        black, nodes near coords={R = 25}, every node near coord/.style={
+          font=\scriptsize, yshift=-26.5pt, xshift=-10pt,
+          rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+      \addplot+[
+        black, nodes near coords={R = 200}, every node near coord/.style={
+          font=\scriptsize, yshift=-26.5pt, rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+      \addplot+[
+        black, nodes near coords={R = 3500}, every node near coord/.style={
+          font=\scriptsize, xshift=10pt, yshift=-26.5pt,
+          rotate=90, anchor=east,
+        },
+      ]
+        coordinates {(4, 0.00001) (8, 0.00001)};
+    \end{axis}
+    \begin{axis}[bar shift=-10pt, hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, 9.5) (8, 14.6)};
+    \end{axis}
+    \begin{axis}[hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, -3.6) (8, 17.2)};
+    \end{axis}
+    \begin{axis}[bar shift=10 pt, hide axis]
+      \addplot+[black, fill=white, postaction={pattern=north east lines}]
+        coordinates {(4, -9.25) (8, -8.5)};
+    \end{axis}
+    \draw [ultra thick, white, decoration={snake, amplitude=1pt}, decorate]
+      (0.9, 0.2) -- (1.3, 0.2);
+  \end{tikzpicture}
+  \caption{Efeito das otimizações incluídas no \xmss{}.}\label{fig:xmssresults}
+\end{figure}
 
 \chapter{Conclusão}\label{chapter:conclusion}
 
