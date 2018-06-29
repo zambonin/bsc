@@ -2,7 +2,7 @@
 
 \usepackage{
   amsmath, amsfonts, amssymb, anyfontsize, booktabs, chronology, enumitem,
-  etoolbox, multirow, pgfplots, tikz, tikz-qtree, todonotes, xfrac
+  etoolbox, multirow, pdfpages, pgfplots, tikz, tikz-qtree, todonotes, xfrac
 }
 
 \newcommand{\hh}{\mathcal{H}}
@@ -272,7 +272,8 @@ introduzindo apenas um pequeno custo na etapa de assinatura da mensagem.
 Uma versão resumida deste trabalho~\cite{Perin:inproc:2018:jun} será publicada
 como um artigo completo em \emph{22th IEEE Symposium on Computers and
 Communications} (ISCC 2018), sob o nome \emph{Tuning the Winternitz Hash-Based
-Digital Signature Scheme}. Este trabalho busca adicionalmente fornecer
+Digital Signature Scheme}, que pode ser consultado no
+Apêndice~\ref{chapter:paper}. Este trabalho busca adicionalmente fornecer
 explicações didáticas para vários esquemas baseados em funções de resumo
 criptográfico presentes na literatura, bem como uma abordagem complementar aos
 argumentos providos pelo artigo, no Capítulo~\ref{chapter:tuning}.
@@ -2266,8 +2267,8 @@ devem o ser.
         ylabel near ticks, ylabel=Probabilidades,
         xlabel=$\mu(\mathcal{B}_{1}^{i})$
       ]
-        \addplot[black, fill=gray!25, hist={density, data=x, bins=50}]
-          file {support/data.txt};
+%        \addplot[black, fill=gray!25, hist={density, data=x, bins=50}]
+%          file {support/data.txt};
       \end{axis}
       \begin{axis}[
         ticks=none, ymin=0, legend style={font=\tiny, cells={align=left}}
@@ -2524,7 +2525,7 @@ assinaturas.
 
 Os experimentos foram realizados utilizando um computador com as seguintes
 especificações: 8 GB de RAM DDR3 @ 1333MHz, Intel Core i5 4570 @ 3.2GHz e
-\texttt{gcc} 7.3.0. Neste ambiente, observe que qualquer valor de $R$ melhora o
+\texttt{gcc} 8.1.1. Neste ambiente, observe que qualquer valor de $R$ melhora o
 tempo de verificação ao aplicar a maximização de $\mu(\bone{})$ e otimização da
 soma de verificação, obtendo melhoras de até $22\%$ com $w = 4$ e $36\%$ para
 $w = 8$. Entretanto, a escolha de valores muito altos para $R$ na aplicação da
@@ -2641,9 +2642,27 @@ recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
     \end{axis}
     \draw [ultra thick, white, decoration={snake, amplitude=1pt}, decorate]
       (0.9, 0.2) -- (1.3, 0.2);
-  \end{tikzpicture}
-  \caption{Efeito das otimizações incluídas no \xmss{}.}\label{fig:xmssresults}
-\end{figure}
+  \end{tikzpicture} \caption{Efeito das otimizações incluídas no
+  \xmss{}.}\label{fig:xmssresults} \end{figure}
+
+A compensação justa de processamento entre etapas complementares, preservada em
+esquemas da família Winternitz, apenas ocorre em esquemas baseados em árvores
+de Merkle na minimização de $\bone{}$ com $R$ de grandeza razoável. Esta
+impossibilidade do uso de valores excedentes para o parâmetro estabelece uma
+discussão sobre o impacto das estruturas de árvore sobre as otimizações
+propostas anteriormente. Isto ocorre devido à fatores necessários para o
+funcionamento prático dos esquemas, como possíveis implementações ingênuas do
+processo de busca do valor $k$, gerando considerável ônus no passo de criação
+de assinatura, consequentemente reduzindo o ganho obtido pelas propostas.
+
+Além disso, note que a implementação de \xmss{} utilizada pode apresentar como
+comportamento opcional a execução do algoritmo de travessia discutido na
+Subseção~\ref{subsubsection:bds}, a fim de habilitar um ganho de desempenho
+geral ao longo das etapas do esquema. Testes iniciais com a implementação
+ingênua demonstraram que os ganhos eram diretamente proporcionais. Assim, a
+travessia \bds{} é utilizada nos experimentos a fim de permitir testes mais
+extensivos, e demonstra a coexistência entre as otimizações propostas e este
+artifício.
 
 \chapter{Conclusão}\label{chapter:conclusion}
 
@@ -2672,8 +2691,8 @@ completamente. Por exemplo, visto que o cômputo de iterações de $f$ é feito
 sequencialmente, a busca de um critério a fim de obter elementos $b \in
 \bone{}$ próximos em magnitude (\emph{e.g.} a redução do desvio padrão)
 habilita o processamento paralelo destas iterações e, portanto, um tempo de
-execução reduzido para a geração e verificação de assinaturas. Ademais, este
-mesmo recurso pode ser utilizado para diminuir o custo da busca por $\bone{}$
+execução reduzido para a geração e verificação de assinaturas. Este mesmo
+recurso pode ser utilizado para diminuir o custo da busca por $\bone{}$
 considerando o parâmetro $R$, também calculando estes resumos de maneira
 paralela.
 
@@ -2682,6 +2701,13 @@ ser realizados em variantes diferentes da família Winternitz, como \wotsprf{} e
 \wotst{}, bem como em outros esquemas baseados em árvores de Merkle. Ademais, a
 segurança do esquema \wotsr{} deve ser formalizada, visto que a modificação de
 $\bone{}$ pode introduzir imperfeições nas cadeias de resumos subsequentes.
+
+Finalmente, vários aspectos são passíveis de discussão em se tratando da
+estrutura inerente de esquemas baseados em árvores de Merkle, como o estudo
+detalhado de parâmetros ótimos de $R$ no caso da minimização de $\bone{}$, o
+comportamento das otimizações apresentadas em esquemas com hiper-árvores, e o
+impacto detalhado destas sobre implementações que utilizem algoritmos de
+travessia distintos.
 
 \bibliographystyle{abnt-alf}
 \bibliography{ref}
@@ -2861,5 +2887,9 @@ Discussões detalhadas sobre as etapas do algoritmo, a fundamentação algébric
 por trás deste, escolhas feitas em cada etapa, criptoanálise relacionada e
 outros tópicos avançados podem ser consultados junto ao livro original de
 descrição do Rijndael~\cite{Daemen:book:2002}.
+
+\chapter{ARTIGO DO TCC}\label{chapter:paper}
+
+\includepdf[pages=-]{support/tuning-winternitz.pdf}
 
 \end{document}

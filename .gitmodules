@@ -1,6 +1,6 @@
 [submodule "ufsctex"]
 	path = ufsctex
-	url = git@github.com:royertiago/ufsctex.git
+	url = git@github.com:zambonin/ufsctex.git
 [submodule "xmss-reference"]
 	path = xmss-reference
 	url = git@github.com:zambonin/xmss-reference.git
