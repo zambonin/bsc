@@ -2258,7 +2258,7 @@ distribuídas e aparentemente aleatórias, então frações destas saídas tamb�
 devem o ser.
 
 \begin{figure}
-  \begin{minipage}[t]{.5\linewidth}
+  \begin{minipage}[t]{.495\linewidth}
     \centering
     \begin{tikzpicture}[scale=0.65]
       \begin{axis}[
@@ -2267,8 +2267,8 @@ devem o ser.
         ylabel near ticks, ylabel=Probabilidades,
         xlabel=$\mu(\mathcal{B}_{1}^{i})$
       ]
-%        \addplot[black, fill=gray!25, hist={density, data=x, bins=50}]
-%          file {support/data.txt};
+        \addplot[black, fill=gray!25, hist={density, data=x, bins=50}]
+          file {support/data.txt};
       \end{axis}
       \begin{axis}[
         ticks=none, ymin=0, legend style={font=\tiny, cells={align=left}}
@@ -2279,7 +2279,7 @@ devem o ser.
       \end{axis}
     \end{tikzpicture}
   \end{minipage}
-  \begin{minipage}[t]{.5\linewidth}
+  \begin{minipage}[t]{.495\linewidth}
     \centering
     \begin{tikzpicture}[scale=0.65]
       \begin{axis}[
@@ -2377,19 +2377,18 @@ em relação à proposta.
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}[
-      every axis/.style={
-        ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
-        symbolic x coords={4, 8, 16}, ymin=0, ymax=55, try min ticks=5,
-        xtick style={draw=none}, xlabel=$w$,
-        ylabel=Redução do \textnumero{} de iterações de $f$,
-        yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
-        legend pos=north west, legend style={draw=none},
-        axis x line*=top, extra y ticks={0}, extra y tick labels={},
-        extra tick style={grid=major}, major grid style={draw=gray!90},
-        scale=0.75,
-      },
-    ]
+  \begin{tikzpicture}
+    \pgfplotsset{every axis/.style={
+      ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
+      symbolic x coords={4, 8, 16}, ymin=0, ymax=55, try min ticks=5,
+      xtick style={draw=none}, xlabel=$w$, ylabel=Redução do
+      N\textsuperscript{\underline{\scriptsize o}} de iterações de $f$,
+      yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
+      legend pos=north west, legend style={draw=none},
+      axis x line*=top, extra y ticks={0}, extra y tick labels={},
+      extra tick style={grid=major}, major grid style={draw=gray!90},
+      scale=0.75,
+    }}
     \begin{axis}[
       title=Maximização de $\mu(\bone{})$, title style={yshift=0.75cm}
     ]
@@ -2432,17 +2431,16 @@ em relação à proposta.
         coordinates {(4, 10.5) (8, 10.5) (16, 10.5)};
     \end{axis}
   \end{tikzpicture}
-  \begin{tikzpicture}[
-      every axis/.style={
-        ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
-        symbolic x coords={4, 8, 16}, ymin=0, ymax=55, try min ticks=5,
-        xtick style={draw=none}, xlabel=$w$, yticklabels={,,},
-        legend pos=north west, legend style={draw=none},
-        axis x line*=top, extra y ticks={0}, extra y tick labels={},
-        extra tick style={grid=major}, major grid style={draw=gray!90},
-        scale=0.75,
-      },
-    ]
+  \begin{tikzpicture}
+    \pgfplotsset{every axis/.style={
+      ybar stacked, x=2cm, enlarge x limits=0.25, bar width=8pt, xtick=data,
+      symbolic x coords={4, 8, 16}, ymin=0, ymax=55, try min ticks=5,
+      xtick style={draw=none}, xlabel=$w$, yticklabels={,,},
+      legend pos=north west, legend style={draw=none},
+      axis x line*=top, extra y ticks={0}, extra y tick labels={},
+      extra tick style={grid=major}, major grid style={draw=gray!90},
+      scale=0.75,
+    }}
     \begin{axis}[
       title=Minimização de $\mu(\bone{})$, title style={yshift=0.75cm}
     ]
@@ -2536,19 +2534,18 @@ recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}[
-      every axis/.style={
-        ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
-        symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
-        xtick style={draw=none}, xlabel=$w$,
-        ylabel=Redução do tempo de execução (ms),
-        yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
-        legend pos=north west, legend style={draw=none},
-        axis x line*=top, extra y ticks={-10}, extra y tick labels={},
-        extra tick style={grid=major}, major grid style={draw=gray!90},
-        scale=0.75,
-      },
-    ]
+  \begin{tikzpicture}
+    \pgfplotsset{every axis/.style={
+      ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
+      symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
+      xtick style={draw=none}, xlabel=$w$,
+      ylabel=Redução do tempo de execução (ms),
+      yticklabel={\pgfmathparse{\tick}\pgfmathprintnumber{\pgfmathresult}\%},
+      legend pos=north west, legend style={draw=none},
+      axis x line*=top, extra y ticks={-10}, extra y tick labels={},
+      extra tick style={grid=major}, major grid style={draw=gray!90},
+      scale=0.75,
+    }}
     \begin{axis}[
       title=Maximização de $\mu(\bone{})$, title style={yshift=0.75cm}
     ]
@@ -2593,17 +2590,16 @@ recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
         coordinates {(4, 2.0) (8, 3.5)};
     \end{axis}
   \end{tikzpicture}
-  \begin{tikzpicture}[
-      every axis/.style={
-        ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
-        symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
-        xtick style={draw=none}, xlabel=$w$, yticklabels={,,},
-        legend pos=north west, legend style={draw=none},
-        axis x line*=top, extra y ticks={-10}, extra y tick labels={},
-        extra tick style={grid=major}, major grid style={draw=gray!90},
-        scale=0.75,
-      },
-    ]
+  \begin{tikzpicture}
+    \pgfplotsset{every axis/.style={
+      ybar stacked, x=2cm, enlarge x limits=0.5, bar width=8pt, xtick=data,
+      symbolic x coords={4, 8}, ymin=-10, ymax=40, try min ticks=5,
+      xtick style={draw=none}, xlabel=$w$, yticklabels={,,},
+      legend pos=north west, legend style={draw=none},
+      axis x line*=top, extra y ticks={-10}, extra y tick labels={},
+      extra tick style={grid=major}, major grid style={draw=gray!90},
+      scale=0.75,
+    }}
     \begin{axis}[
       title=Minimização de $\mu(\bone{})$, title style={yshift=0.75cm}
     ]
@@ -2642,8 +2638,10 @@ recomendados os valores $R \leq 25$ para $w = 4$, e $R \leq 200$ para $w = 8$.
     \end{axis}
     \draw [ultra thick, white, decoration={snake, amplitude=1pt}, decorate]
       (0.9, 0.2) -- (1.3, 0.2);
-  \end{tikzpicture} \caption{Efeito das otimizações incluídas no
-  \xmss{}.}\label{fig:xmssresults} \end{figure}
+  \end{tikzpicture}
+  \caption{Efeito das otimizações incluídas no
+    \xmss{}.}\label{fig:xmssresults}
+\end{figure}
 
 A compensação justa de processamento entre etapas complementares, preservada em
 esquemas da família Winternitz, apenas ocorre em esquemas baseados em árvores
@@ -2712,7 +2710,7 @@ travessia distintos.
 \bibliographystyle{abnt-alf}
 \bibliography{ref}
 
-\apendice
+\apendice{}
 
 \chapter{DESCRIÇÃO DA CIFRA AES}\label{chapter:aes}
 
