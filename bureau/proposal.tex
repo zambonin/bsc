@@ -1,7 +1,10 @@
 \documentclass{ufsctex/ufsctex}
 
+% chktex-file 36
+% chktex-file 44
+
 \usepackage[table]{xcolor}
-\usepackage{mdframed, enumitem, multirow, hhline, amssymb}
+\usepackage{amssymb, enumitem, hhline, mdframed, multirow}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}m{#1}}
 
@@ -30,7 +33,7 @@
   e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
   grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
   um computador quântico suficientemente poderoso, utilizando algoritmos já
-  conhecidos (e.g. algoritmo de Shor). Deste modo, para manter o ecossistema de
+  conhecidos (e.g.\ algoritmo de Shor). Deste modo, para manter o ecossistema de
   assinaturas digitais continuamente seguro, é necessário oferecer alternativas
   pós-quânticas, ou seja, resistentes a computadores quânticos. Este trabalho
   busca apresentar esquemas baseados apenas em funções de resumo
@@ -101,7 +104,7 @@
       o que se pretende alcançar neste trabalho?          & & & & & \\ \hline
     7. É definido o método a ser adotado no trabalho?
       O método condiz com os objetivos e é adequado
-      para um TCC?                                        & & & & & \\ \hline
+      para um TCC\@?                                      & & & & & \\ \hline
     8. Foi definido um cronograma coerente com o método
       definido (indicando todas as atividades) e com as
       datas das entregas (p.ex. Projeto I, II, Defesa)?   & & & & & \\ \hline
@@ -111,7 +114,7 @@
     10. Foram identificados todos os envolvidos neste
       trabalho?                                           & & & & & \\ \hline
     11. As formas de comunicação foram definidas
-      (ex.: horários para orientação)?                    & & & & & \\ \hline
+      (ex.\: horários para orientação)?                   & & & & & \\ \hline
     12. Riscos potenciais que podem causar desvios do
       plano foram identificados?                          & & & & & \\ \hline
     13. Caso o TCC envolva a produção de um software ou
@@ -132,15 +135,15 @@
   \end{tabular}}
 \end{table}
 
-\paginaresumo
+\paginaresumo{}
 
-\sumario
+\sumario{}
 
 \chapter{Introdução}
 
 Funções de resumo criptográficas são essenciais em diversas aplicações de
 segurança da informação, como códigos de autenticação de mensagens (MACs),
-identificação de arquivos a partir de uma `'impressão digital`' única, detecção
+identificação de arquivos a partir de uma ``impressão digital'' única, detecção
 de perda de informações em uma transmissão volátil etc., e têm uso disseminado
 em esquemas de assinatura digital, os quais são o foco deste trabalho. Uma
 característica relevante destes é a possibilidade da demonstração matemática da
@@ -149,8 +152,8 @@ confiáveis ou não, utilizando as funções citadas anteriormente, para que sej
 estabelecida uma comunicação segura.
 
 A maior parte dos esquemas de assinatura digital, na prática, utilizam
-criptossistemas de chave pública baseados em problemas de teoria de números --
-fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
+criptossistemas de chave pública baseados em problemas de teoria de números ---
+fatoração de inteiros, logaritmo discreto --- que, atualmente, não podem ser
 computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
 uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
 Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
@@ -158,11 +161,12 @@ resolvidos em tempo polinomial~\cite{Shor:1997:PAP:264393.264406}.
 
 A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
 criptográficos cuja complexidade independe de problemas futuramente
-solucionáveis em teoria de números. Como visto em
-\cite{Merkle:1989:CDS:118209.118230}, um criptossistema de chaves públicas pode
-ser definido de forma independente da função de resumo criptográfica utilizada,
-assim possibilitando a exploração de diversas combinações, cujos elementos
-essenciais (e.g. árvores de Merkle) não influenciam na segurança do esquema.
+solucionáveis em teoria de números. Como visto
+em~\cite{Merkle:1989:CDS:118209.118230}, um criptossistema de chaves públicas
+pode ser definido de forma independente da função de resumo criptográfica
+utilizada, assim possibilitando a exploração de diversas combinações, cujos
+elementos essenciais (e.g. árvores de Merkle) não influenciam na segurança do
+esquema.
 
 Neste trabalho, utilizamos funções de resumo criptográficas para a construção
 de esquemas de assinatura digital, considerados seguros se e somente as funções
@@ -182,7 +186,7 @@ esquemas. \\
 
 \noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
 digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
-digital baseado em árvores de Merkle -- \emph{Merkle Signature Scheme},
+digital baseado em árvores de Merkle --- \emph{Merkle Signature Scheme},
 \emph{eXtended Merkle Signature Scheme}; implementar os esquemas supracitados;
 comparar o desempenho destes algoritmos entre si, utilizando funções de resumo
 criptográficas e parâmetros internos aos algoritmos distintos, onde aplicável.
@@ -190,7 +194,7 @@ criptográficas e parâmetros internos aos algoritmos distintos, onde aplicável
 
 \noindent \emph{Escopo do trabalho.} Não se aplica ao conteúdo deste trabalho
 a análise profunda de provas de segurança definidas por um modelo adversarial
-teórico -- ou seja, demonstrar que um atacante deve resolver um problema muito
+teórico --- ou seja, demonstrar que um atacante deve resolver um problema muito
 difícil para tornar o algoritmo inseguro, bem como algoritmos de criptografia
 pós-quânticos baseados em outras estruturas matemáticas (reticulados, teoria
 de códigos etc.) ou algoritmos clássicos (RSA, DSA, ECDSA etc.). \\
@@ -231,7 +235,7 @@ distintas em implementações produzidas ou fornecidas.
 \begin{figure}[htbp]
   \begin{tabular}{|p{4.04cm}|*{6}{c|}}
     \hline \rowcolor{lightgray}
-      & \multicolumn{6}{c|}{\textbf{Meses -- 2017}} \\
+      & \multicolumn{6}{c|}{\textbf{Meses --- 2017}} \\
     \hhline{|>{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|
       |------>{\arrayrulecolor{lightgray}}>{\arrayrulecolor{black}}|}
     \rowcolor{lightgray}
@@ -248,7 +252,7 @@ distintas em implementações produzidas ou fornecidas.
     \hline Relatório de TCC I & & & & & \cellcolor{lightgray} & \\
     \hline
     \hline \rowcolor{lightgray}
-      & \multicolumn{6}{c|}{\textbf{Meses -- 2018}} \\
+      & \multicolumn{6}{c|}{\textbf{Meses --- 2018}} \\
     \hhline{|>{\arrayrulecolor{lightgray}}->{\arrayrulecolor{black}}|
       |------>{\arrayrulecolor{lightgray}}>{\arrayrulecolor{black}}|}
     \rowcolor{lightgray}
