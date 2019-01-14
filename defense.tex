@@ -19,7 +19,7 @@
 \institute{
   \includegraphics[scale=0.15]{support/ufsc}    \\ \vspace{-4mm}
   Universidade Federal de Santa Catarina        \\
-  Departmento de Informática e Estatística      \\ \vspace{2mm}
+  Departamento de Informática e Estatística     \\ \vspace{2mm}
   \texttt{gustavo.zambonin@grad.ufsc.br}
 }
 \date{}
@@ -40,7 +40,7 @@
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
-  \titlepage
+  \titlepage{}
 \end{frame}
 
 \begin{frame}
@@ -81,7 +81,7 @@
   \end{figure}
 
   \begin{itemize}
-    \item SHA-2, SHA-3, BLAKE: $n \in \{224, 256, 384, 512\}$
+    \item SHA-2, SHA-3, BLAKE\: $n \in \{224, 256, 384, 512\}$
     \item Keccak: qualquer $n$
     \item Resistência à pré-imagem, segunda pré-imagem, colisões
   \end{itemize}
@@ -131,7 +131,7 @@
   $f : \binwds{n} \longrightarrow \binwds{n}$ e $\fhash{n}$. Então,
   \begin{align*}
     t_1 = \left\lceil \frac{n}{w} \right\rceil,
-    t_2 = \left\lceil \frac{\lfloor log_2 t_1 \rfloor + 1 + w}{w} \right\rceil
+    t_2 = \left\lceil \frac{\lfloor \log_2 t_1 \rfloor + 1 + w}{w} \right\rceil
     \text{ e } t = t_1 + t_2.
   \end{align*}
   As chaves privada e pública são, respectivamente,
@@ -341,7 +341,7 @@
   \framesubtitle{Resultados}
   \small
   \begin{table}
-    \begin{tabular}{c|c}
+    \begin{tabular}{cc}
       \multicolumn{2}{c}{Parâmetros} \\
       \toprule
       $w$ &                 $R$     \\
@@ -359,7 +359,7 @@
                             & 3500  \\
       \bottomrule
     \end{tabular}
-    \begin{tabular}{c|c}
+    \begin{tabular}{cc}
       \multicolumn{2}{c}{Winternitz ($\# f$)} \\
       \toprule
       $\argmax{}$   & $\argmin{}$   \\
@@ -377,7 +377,7 @@
       52.23\%       & 46.56\%       \\
       \bottomrule
     \end{tabular}
-    \begin{tabular}{c|c}
+    \begin{tabular}{cc}
       \multicolumn{2}{c}{XMSS (ms)} \\
       \toprule
       $\argmax{}$   & $\argmin{}$   \\
